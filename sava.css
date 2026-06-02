@@ -1,0 +1,1117 @@
+/* ============================================================================
+   SAVA — external CSS bundle
+   Hosted: https://cdn.jsdelivr.net/gh/friendincommerce/sava-cdn@main/sava.css
+   Loaded from Webflow Site Settings → Head + carried into Shopify theme.liquid
+   ============================================================================ */
+
+:root {
+	--sava-gradient-soft-white-fade: linear-gradient(180deg, rgba(248,248,248,0) 49.52%, rgba(222,221,215,0.5) 100%);
+	--sava-gradient-light-peach-fade: linear-gradient(180deg, #FFFFFF 49.52%, #F6D7B9 100%);
+	--sava-gradient-light-peach-fade-transparent: linear-gradient(180deg, rgba(248,248,248,0) 49.52%, #F6D7B9 100%);
+	--sava-gradient-lemon-fade: linear-gradient(180deg, #FFFFFF 49.52%, #EDE087 100%);
+	--sava-gradient-blueberry-fade: linear-gradient(180deg, #FFFFFF 49.52%, #99BBE1 100%);
+	--sava-gradient-sunrise: linear-gradient(90deg, #F2CBCB 0%, #F6D7B9 100%);
+	--sava-gradient-dark: linear-gradient(0deg, #262524 0%, #545351 100%);
+}
+
+/* ===== SAVA Link Card ===== */
+
+.sava-link-card:hover .sava-link-card_button {
+	background-color: var(--_sava-color-styles---white);
+	border-color: var(--_sava-color-styles---white);
+}
+
+/* ===== SAVA Shop by Benefit ===== */
+
+.sava-shop-by-benefit_card::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: var(--sava-gradient-light-peach-fade);
+	opacity: 0;
+	transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+	border-radius: inherit;
+	pointer-events: none;
+	z-index: 0;
+}
+.sava-shop-by-benefit_card:hover::before {
+	opacity: 1;
+}
+.sava-shop-by-benefit_card-content {
+	position: relative;
+	z-index: 1;
+}
+.sava-shop-by-benefit_card:hover .sava-shop-by-benefit_card-arrow {
+	opacity: 1;
+	transform: translateX(0);
+	margin-right: 8px;
+}
+
+@media (max-width: 991px) {
+	.sava-shop-by-benefit_grid {
+	  -ms-overflow-style: none;
+	  scrollbar-width: none;
+	}
+	.sava-shop-by-benefit_grid::-webkit-scrollbar {
+	  display: none;
+	}
+}
+
+/* ===== SAVA Ingredients Promise ===== */
+
+.sava-ingredients-callouts_modal-overlay.is-open {
+	display: flex;
+}
+
+.sava-ingredients-callouts_claims::-webkit-scrollbar,
+.sava-ingredients-callouts_ingredients-grid::-webkit-scrollbar {
+	display: none;
+}
+.sava-ingredients-callouts_claims,
+.sava-ingredients-callouts_ingredients-grid {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.sava-ingredients-callouts_button:hover,
+.sava-product-card_button:hover {
+	background-color: var(--_sava-color-styles---soft-black);
+	color: var(--_sava-color-styles---white);
+}
+
+/* Hide Product Tags toggle (merchant-controlled via section setting) */
+[data-sava-hide-tags="true"] .sava-product-card_tags {
+	display: none;
+}
+
+/* ===== SAVA Footer ===== */
+
+.sava-footer_form-input::placeholder { color: rgba(248, 248, 248, 0.7); }
+.sava-footer_form-input::-webkit-input-placeholder { color: rgba(248, 248, 248, 0.7); }
+
+.sava-footer form,
+.sava-footer .w-form,
+.sava-footer .sava-footer_form,
+.sava-footer .sava-footer_form-wrapper {
+	position: relative;
+}
+
+.sava-footer .sava-footer_form-submit,
+.sava-footer input[type="submit"].sava-footer_form-submit {
+	position: absolute !important;
+	top: 50% !important;
+	right: 4px !important;
+	transform: translateY(-50%) !important;
+	width: 32px !important;
+	height: 32px !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	border: 0 !important;
+	background-color: transparent !important;
+	background-image: url('https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a001adb40613842167d0f24_sava-arrow-up-right.svg') !important;
+	background-size: 22px 22px !important;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	color: transparent !important;
+	font-size: 0 !important;
+	line-height: 0 !important;
+	text-indent: -9999px !important;
+	overflow: hidden !important;
+	cursor: pointer !important;
+	-webkit-appearance: none !important;
+	appearance: none !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+}
+
+.sava-footer .w-form-done,
+.sava-footer .w-form-fail {
+	background-color: transparent !important;
+	padding: 12px 0 !important;
+	border: 0 !important;
+}
+
+.sava-footer_col-heading::after {
+	content: '';
+	width: 10px;
+	height: 10px;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: rotate(45deg);
+	transition: transform 0.3s ease;
+	display: none;
+	margin-left: 8px;
+	flex-shrink: 0;
+}
+@media (max-width: 767px) {
+	.sava-footer_col-heading::after { display: inline-block; }
+	.sava-footer_col-heading[aria-expanded="true"]::after { transform: rotate(-135deg); }
+}
+
+/* ===== SAVA Rewards + Promotional Banner ===== */
+
+@keyframes sava-marquee {
+	from { transform: translateX(0); }
+	to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.sava-banner_track { animation: none !important; }
+}
+
+.sava-banner:hover .sava-banner_track { animation-play-state: paused; }
+
+.sava-rewards_button-primary:hover {
+	background-color: var(--_sava-color-styles---white) !important;
+	color: var(--_sava-color-styles---soft-black) !important;
+}
+
+.sava-rewards_button-secondary:hover {
+	background-color: var(--_sava-color-styles---soft-black) !important;
+	color: var(--_sava-color-styles---white) !important;
+}
+
+.sava-rewards_card:hover,
+.sava-rewards a.sava-rewards_card:hover {
+	background-color: transparent !important;
+	background-image: linear-gradient(180deg, rgba(248, 248, 248, 0) 49.52%, #F8F8F8 100%) !important;
+}
+
+/* ===== SAVA Shop by Product ===== */
+
+.sava-shop-by-product_card::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(180deg, #FFFFFF 49.52%, var(--card-hover-end, #EDE087) 100%);
+	opacity: 0;
+	transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+	border-radius: inherit;
+	pointer-events: none;
+	z-index: 0;
+}
+.sava-shop-by-product_card:hover::before {
+	opacity: 1;
+}
+
+.sava-shop-by-product_card:hover .sava-shop-by-product_logo {
+	transform: translateY(-20px);
+}
+
+.sava-shop-by-product_card:hover .sava-shop-by-product_category {
+	opacity: 1;
+	transform: translateY(0);
+}
+.sava-shop-by-product_card:hover .sava-shop-by-product_category:nth-child(1) { transition-delay: 0.3s; }
+.sava-shop-by-product_card:hover .sava-shop-by-product_category:nth-child(2) { transition-delay: 0.6s; }
+.sava-shop-by-product_card:hover .sava-shop-by-product_category:nth-child(3) { transition-delay: 0.9s; }
+.sava-shop-by-product_card:hover .sava-shop-by-product_category:nth-child(4) { transition-delay: 1.2s; }
+.sava-shop-by-product_card:hover .sava-shop-by-product_category:nth-child(5) { transition-delay: 1.5s; }
+
+.sava-shop-by-product_category {
+	transition-delay: 0s;
+}
+
+/* ===== SAVA Referral Bonus ===== */
+
+.sava-referral-bonus form,
+.sava-referral-bonus .w-form,
+.sava-referral-bonus .sava-referral-bonus_form-wrapper {
+	position: relative;
+}
+
+.sava-referral-bonus .sava-referral-bonus_form-submit,
+.sava-referral-bonus input[type="submit"].sava-referral-bonus_form-submit {
+	position: absolute !important;
+	top: 50% !important;
+	right: 4px !important;
+	transform: translateY(-50%) !important;
+	width: 28px !important;
+	height: 28px !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	border: 0 !important;
+	border-radius: 50% !important;
+	background-color: var(--_sava-color-styles---soft-black) !important;
+	background-image: url('https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a001adb40613842167d0f24_sava-arrow-up-right.svg') !important;
+	background-size: 14px 14px !important;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	color: transparent !important;
+	font-size: 0 !important;
+	line-height: 0 !important;
+	text-indent: -9999px !important;
+	overflow: hidden !important;
+	cursor: pointer !important;
+	-webkit-appearance: none !important;
+	appearance: none !important;
+	box-shadow: none !important;
+}
+
+.sava-referral-bonus_form-input::placeholder { color: rgba(38, 37, 36, 0.6); }
+.sava-referral-bonus_form-input::-webkit-input-placeholder { color: rgba(38, 37, 36, 0.6); }
+
+.sava-referral-bonus .w-form-done,
+.sava-referral-bonus .w-form-fail {
+	background-color: transparent !important;
+	padding: 12px 0 !important;
+	border: 0 !important;
+}
+
+/* ===== SAVA Best Sellers ===== */
+
+/* Card hover lift — scoped so Ingredients Promise modal cards are unaffected */
+.sava-best-sellers .sava-product-card {
+	transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sava-best-sellers .sava-product-card:hover {
+	transform: translateY(-4px);
+}
+
+/* Equal-height cards in the carousel + cart button anchored to card bottom.
+   Targets Swiper's own .swiper-wrapper / .swiper-slide classes (NOT the
+   Webflow _swiper-slide class) — avoids putting display:flex on the slide,
+   which breaks native <select> rendering in mobile WebKit. */
+.sava-best-sellers_swiper .swiper-wrapper {
+	align-items: stretch;
+}
+.sava-best-sellers_swiper .swiper-slide {
+	height: auto;
+}
+.sava-best-sellers_swiper .swiper-slide > .sava-product-card {
+	height: 100%;
+	min-height: 100%;
+}
+/* Push the form (containing variant dropdown + cart button) to the bottom of
+   each card so cart buttons align across all cards regardless of content. */
+.sava-best-sellers .sava-product-card form {
+	margin-top: auto;
+}
+
+/* Force carousel arrows visible even when Swiper applies its lock class
+   (Swiper miscalculates slide overflow at mobile during init). */
+.sava-best-sellers_carousel-btn.swiper-button-lock {
+	display: inline-flex !important;
+	opacity: 1 !important;
+}
+
+/* Cart button — default: "Add to Cart" text on the left + small black "+" circle on the right.
+   Hover: a black fill (::before pseudo) expands LEFT from the circle to engulf the text → continuous black pill with white text + white +. */
+.sava-best-sellers_card-cart-button {
+	position: relative;
+	overflow: hidden;
+}
+
+/* Expanding fill — constant border-radius (clamps to height/2 = pill always).
+   Only width transitions, so the right edge stays nicely rounded the entire animation. */
+.sava-best-sellers_card-cart-button::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	right: 0;
+	width: 1.75rem;
+	height: 1.75rem;
+	transform: translateY(-50%);
+	background-color: var(--_sava-color-styles---soft-black);
+	border-radius: 9999px;
+	transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	z-index: 0;
+	pointer-events: none;
+}
+.sava-best-sellers .sava-product-card:hover .sava-best-sellers_card-cart-button::before,
+.sava-best-sellers_card-cart-button:hover::before,
+.sava-best-sellers_card-cart-button:focus-visible::before {
+	width: 100%;
+}
+
+/* Label color flips to soft-white when the black fill expands behind it */
+.sava-best-sellers_card-cart-label {
+	transition: color 0.3s ease;
+}
+.sava-best-sellers .sava-product-card:hover .sava-best-sellers_card-cart-label,
+.sava-best-sellers_card-cart-button:hover .sava-best-sellers_card-cart-label {
+	color: var(--_sava-color-styles---soft-white);
+}
+
+/* Optical nudge — only the "+" icon needs adjustment in production.
+   Gibson positions "+" slightly below cap-letter center within its line box.
+   -1px brings it visually flush with the "Add to Cart" cap-letter baseline.
+   Label gets no transform (it aligns naturally via matching line-height). */
+.sava-best-sellers_card-cart-icon {
+	transform: translateY(-1px);
+}
+
+/* Mobile: shorten cart button label from "Add to Cart" → "Add" so it fits
+   beside the variant dropdown on a single row. Uses inline-flex + align-items
+   center for reliable vertical centering of "Add" — doesn't rely on font
+   baseline math (which gets unpredictable with font-size: 0 parent). */
+@media (max-width: 767px) {
+	.sava-best-sellers_card-cart-label {
+	  font-size: 0;
+	  line-height: 1;
+	  display: inline-flex;
+	  align-items: center;
+	  height: 1.75rem;
+	}
+	.sava-best-sellers_card-cart-label::before {
+	  content: "Add";
+	  font-size: 0.875rem;
+	  line-height: 1;
+	}
+}
+
+/* Carousel arrow buttons scale on hover */
+.sava-best-sellers_carousel-btn {
+	transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sava-best-sellers_carousel-btn:hover {
+	transform: scale(1.05);
+}
+
+/* Category card hover: image visible by default, dark overlay fades IN on hover */
+.sava-best-sellers_category-overlay {
+	transition: opacity 0.4s ease;
+}
+.sava-best-sellers_category:hover .sava-best-sellers_category-overlay {
+	opacity: 0.6;
+}
+
+/* Variant select — strip browser's native chevron. The custom chevron lives
+   on the wrap's ::after (below), not on the select, because SVG data URLs
+   get corrupted somewhere between Webflow and Shopify conversion. */
+.sava-best-sellers_card-variant-select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background-image: none;
+}
+
+.sava-best-sellers_card-variant-select::-ms-expand {
+	display: none;
+}
+
+.sava-best-sellers_card-variant-select:focus {
+	outline: 1px solid var(--_sava-color-styles---soft-black);
+	outline-offset: 2px;
+}
+
+.sava-best-sellers_card-variant-select:-moz-focusring {
+	color: transparent;
+	text-shadow: 0 0 0 var(--_sava-color-styles---soft-black);
+}
+
+/* Custom chevron via pure CSS border-trick — two borders rotated 45deg
+   form a "v" shape. No SVG, no data URLs, no font dependency, no Webflow
+   parser issues. Wrap has position: relative (set in Webflow Designer). */
+.sava-best-sellers_card-variant-wrap::after {
+	content: '';
+	position: absolute;
+	right: 0.85rem;
+	top: 50%;
+	width: 6px;
+	height: 6px;
+	border-right: 1.5px solid var(--_sava-color-styles---soft-black);
+	border-bottom: 1.5px solid var(--_sava-color-styles---soft-black);
+	transform: translateY(-65%) rotate(45deg);
+	pointer-events: none;
+}
+
+/* ====================================================================
+   SAVA MEGA MENU
+   ==================================================================== */
+
+/* --- DROPDOWN WRAPPER + TOGGLE -------------------------------------- */
+.sava-mega-menu_dropdown {
+  position: static; /* lets DropdownList span full header width */
+}
+
+.sava-mega-menu_dropdown .nav_dropdown-toggle,
+.sava-mega-menu_dropdown .nav_dropdown-toggle\ 2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1rem;
+  font-size: 16px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sava-mega-menu_dropdown .nav_dropdown-toggle p,
+.sava-mega-menu_dropdown .nav_dropdown-toggle\ 2 p {
+  margin: 0;
+  font-family: 'Gelica', serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: #000;
+}
+
+.sava-mega-menu_dropdown .dropdown-icon {
+  display: inline-flex;
+  transition: transform 0.3s ease;
+}
+
+.sava-mega-menu_dropdown.w--open .dropdown-icon {
+  transform: rotate(180deg);
+}
+
+/* --- DROPDOWN LIST POSITIONING --------------------------------------
+   position: fixed makes the dropdown-list element ITSELF span the full
+   viewport — not just the toggle/nav-menu width. This is critical for
+   hover detection: Webflow IX2 listens for hover on the dropdown-list,
+   so its bounds must match the visible content area or diagonal mouse
+   movements (toggle → right-side cards) close the dropdown prematurely.
+
+   --sava-mega-menu-top sets where the dropdown starts vertically:
+     78px = navbar only
+     126px = navbar (78px) + rotating banner (48px)                    */
+:root {
+  --sava-mega-menu-top: 78px;
+}
+
+.sava-mega-menu_dropdown-list {
+  position: fixed !important;
+  top: var(--sava-mega-menu-top, 78px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100vw !important;
+  background: var(--_sava-color-styles---soft-white, #F8F8F8) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.06) !important;
+  border-top: 1px solid rgba(0,0,0,0.06) !important;
+  overflow: visible !important;
+  z-index: 100;
+}
+
+/* Background now lives directly on the dropdown-list — no more ::before
+   pseudo trick (which only extended visual but not hover bounds).      */
+.sava-mega-menu_dropdown-list::before {
+  content: none !important;
+}
+
+/* --- INNER (matches padding-global 5 — 2.5rem horizontal padding,
+   same as all other SAVA page sections + the updated navbar)
+   max-width: 1360px + centered = same content rails as the SAVA logo /
+   body content, so the dropdown anchors visually to the page grid on
+   wide monitors instead of stretching edge-to-edge. On narrower
+   viewports the 2.5rem padding is the floor.                          */
+.sava-mega-menu_inner {
+  position: relative;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 44px 2.5rem 53px;
+  z-index: 1;
+}
+
+/* Override container-large's max-width inside the dropdown so it
+   doesn't constrain content further — the inner's 2.5rem padding is
+   now the single source of horizontal alignment.                       */
+.sava-mega-menu_inner .container-large-3 {
+  max-width: none !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+/* --- GRID PER DROPDOWN ---------------------------------------------- */
+.sava-mega-menu_grid {
+  display: grid;
+  gap: 48px;
+  position: relative;
+  align-items: start;
+}
+
+/* Shop All:  pills (158px) | col | col | col | featured img
+   minmax() forces content cols to fit longest link text on one line.  */
+.sava-mega-menu_dropdown.is-shop-all .sava-mega-menu_grid,
+.sava-mega-menu_grid.is-shop-all {
+  grid-template-columns: 158px minmax(200px, 1fr) minmax(200px, 1fr) minmax(200px, 1fr) 293px;
+}
+
+/* Shop by Benefit:  intro (220px) | benefits (2 col flex) | featured img */
+.sava-mega-menu_dropdown.is-shop-by-benefit .sava-mega-menu_grid,
+.sava-mega-menu_grid.is-shop-by-benefit,
+.sava-mega-menu_grid.is-benefits {
+  grid-template-columns: 220px minmax(280px, 1fr) 293px;
+}
+
+/* Learn:  pills (158px) | col | col | featured (293px) | featured (293px)
+   Featured card columns are fixed-width to match Shop by Benefit's
+   featured image (293×308) — keeps card sizing consistent across
+   dropdowns and gives the 1fr content cols their share of the space. */
+.sava-mega-menu_dropdown.is-learn .sava-mega-menu_grid,
+.sava-mega-menu_grid.is-learn {
+  grid-template-columns: 158px minmax(180px, 1fr) minmax(180px, 1fr) 293px 293px;
+}
+
+/* --- VERTICAL DIVIDERS BETWEEN COLUMNS ------------------------------ */
+.sava-mega-menu_grid > *:not(.sava-mega-menu_img-card-wrap):not(.sava-mega-menu_learn-card-wrap):not(:first-child) {
+  position: relative;
+}
+
+.sava-mega-menu_grid > *:not(.sava-mega-menu_img-card-wrap):not(.sava-mega-menu_learn-card-wrap):not(:first-child)::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  bottom: -14px;
+  left: -24px;
+  width: 1px;
+  background: rgba(38,37,36,0.15);
+}
+
+/* --- PILLS COLUMN --------------------------------------------------- */
+.sava-mega-menu_pills-col {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  align-items: stretch;
+}
+
+/* --- PILL (base) ---------------------------------------------------- */
+.sava-mega-menu_pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 158px;
+  height: 30px;
+  border: 0.75px solid var(--_sava-color-styles---mid-grey, #DEDDD7);
+  background: #FFFFFF;
+  color: var(--_sava-color-styles---soft-black, #262524);
+  border-radius: 10px;
+  font-family: 'Gibson', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 2.1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.sava-mega-menu_pill:hover {
+  border-color: var(--_sava-color-styles---soft-black, #262524);
+}
+
+/* --- PILL (dark variant) -------------------------------------------- */
+.sava-mega-menu_pill.is-dark {
+  background: var(--_sava-color-styles---soft-black, #262524);
+  color: #FFFFFF;
+  border-color: var(--_sava-color-styles---soft-black, #262524);
+}
+
+.sava-mega-menu_pill.is-dark:hover {
+  background: #000;
+}
+
+/* --- INTRO COL (Shop by Benefit) ----------------------------------- */
+.sava-mega-menu_intro-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.sava-mega-menu_intro-heading {
+  font-family: 'Gelica', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--_sava-color-styles---soft-black, #262524);
+  margin: 0;
+}
+
+.sava-mega-menu_intro-body {
+  font-family: 'Gibson', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--_sava-color-styles---soft-black, #262524);
+  margin: 0 0 20px 0;
+  max-width: 200px;
+}
+
+/* --- CONTENT COLUMNS (Shop All & Learn) ----------------------------- */
+.sava-mega-menu_column {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sava-mega-menu_column-heading {
+  font-family: 'Gelica', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--_sava-color-styles---soft-black, #262524);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.sava-mega-menu_column-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* --- BENEFITS LIST (Shop by Benefit) -------------------------------- */
+.sava-mega-menu_benefits-list {
+  column-count: 2;
+  column-gap: 48px;
+}
+
+.sava-mega-menu_benefits-list .sava-mega-menu_link {
+  display: block;
+  margin-bottom: 6px;
+  break-inside: avoid;
+}
+
+/* --- LINK ITEMS (shared) --------------------------------------------
+   Arrow lives in the negative space (column gap) — appears on hover
+   WITHOUT pushing the link or expanding the column.
+   CSS escape \2192 used instead of literal → to survive Webflow's
+   HTML-entity escaping in the head editor.                              */
+.sava-mega-menu_link {
+  position: relative;
+  display: inline-block;
+  font-family: 'Gibson', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--_sava-color-styles---soft-black, #262524);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.sava-mega-menu_link::before {
+  content: '';
+  position: absolute;
+  left: -22px;
+  top: 50%;
+  width: 16px;
+  height: 12px;
+  transform: translateY(-50%);
+  background-image: url("https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a1bb0637682ee1bfcf2da24_link-hover-arrow.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.sava-mega-menu_link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.sava-mega-menu_link:hover::before {
+  opacity: 1;
+}
+
+/* --- FEATURED IMAGE CARD (Shop All / Shop by Benefit) --------------- */
+.sava-mega-menu_img-card-wrap {
+  display: block !important;
+  min-height: 308px !important;
+}
+
+.sava-mega-menu_img-card,
+.sava-mega-menu_img-card.w-inline-block,
+a.sava-mega-menu_img-card {
+  display: block !important;
+  width: 293px !important;
+  height: 308px !important;
+  min-height: 308px !important;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+}
+
+.sava-mega-menu_img-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sava-mega-menu_img-card:hover .sava-mega-menu_img-card-image {
+  transform: scale(1.04);
+}
+
+/* --- LEARN FEATURED CARD (overlay + heading + arrow) ----------------
+   Fixed 293×308 dimensions to match Shop by Benefit's featured image.
+   !important overrides Webflow's w-inline-block default that would
+   otherwise collapse the card inside the grid cell.                   */
+.sava-mega-menu_learn-card-wrap {
+  display: block !important;
+  width: 293px !important;
+  min-height: 308px !important;
+}
+
+.sava-mega-menu_learn-card,
+.sava-mega-menu_learn-card.w-inline-block,
+a.sava-mega-menu_learn-card {
+  position: relative;
+  display: block !important;
+  width: 293px !important;
+  height: 308px !important;
+  min-height: 308px !important;
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--_sava-color-styles---soft-white, #F8F8F8);
+}
+
+.sava-mega-menu_learn-card-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sava-mega-menu_learn-card:hover .sava-mega-menu_learn-card-image {
+  transform: scale(1.04);
+}
+
+.sava-mega-menu_learn-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.10) 35%, rgba(0,0,0,0.70) 100%);
+  pointer-events: none;
+}
+
+.sava-mega-menu_learn-card-content {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--_sava-color-styles---soft-white, #F8F8F8);
+}
+
+.sava-mega-menu_learn-card-heading {
+  font-family: 'Gelica', serif;
+  font-weight: 300;
+  font-size: 28px;
+  line-height: 1.1;
+  color: var(--_sava-color-styles---soft-white, #F8F8F8);
+  margin: 0;
+}
+
+.sava-mega-menu_learn-card-subtitle {
+  font-family: 'Gibson', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--_sava-color-styles---soft-white, #F8F8F8);
+  margin: 0;
+}
+
+/* Arrow button = single SVG (circle + arrow combined). Rotating the
+   whole element on hover keeps perfect centering — no fiddly inner
+   positioning. -45° CCW turns the NE arrow ↗ into E →.                 */
+.sava-mega-menu_learn-card-arrow {
+  position: absolute !important;
+  top: 16px !important;
+  right: 16px !important;
+  width: 46px !important;
+  height: 46px !important;
+  background-image: url("https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a1bbd8c6d4d91ecdbd173a5_Learn-Menue-Arrow-Button.svg") !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  display: block !important;
+  pointer-events: none;
+  z-index: 2;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Remove the prior inner pseudo (no longer needed with combined SVG) */
+.sava-mega-menu_learn-card-arrow::before {
+  content: none !important;
+}
+
+/* Hover: entire button rotates +45° (CW) so ↗ becomes →, AND the
+   background SVG swaps to the filled-white-with-dark-arrow variant.
+   Uses uploaded Webflow asset (CDN URL) instead of data URI for
+   reliability through the Liquiflow conversion pipeline.               */
+.sava-mega-menu_learn-card:hover .sava-mega-menu_learn-card-arrow {
+  background-image: url("https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a1cb687b5cdd3b7b555d3f4_Learn-Menue-Arrow-Button-Hover.svg") !important;
+  transform: rotate(45deg) !important;
+}
+
+/* Hover overlay: significantly lighter so image brightens and the
+   white arrow button pops with high contrast (per Figma hover state). */
+.sava-mega-menu_learn-card:hover .sava-mega-menu_learn-card-overlay {
+  background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.20) 100%);
+}
+
+/* --- MOBILE PILLS BAR (default hidden on desktop) ------------------ */
+.sava-mega-menu_mobile-pills {
+  display: none;
+}
+
+/* ====================================================================
+   SAVA MEGA MENU — NARROW DESKTOP (992px – 1400px)
+   Scales pills col + gaps + featured-image down so the last column
+   never gets clipped before the tablet breakpoint kicks in.
+   Trigger raised from 1200px → 1400px because the Learn grid (5 cols
+   incl. two 293px featured cards + 4×48px gaps + 2×40px padding)
+   needs ~1376px to render the standard template without clipping.
+   Anything below 1400px viewport gets the narrow template,
+   which fits comfortably down to the 991px tablet breakpoint.        */
+@media (max-width: 1400px) and (min-width: 992px) {
+  .sava-mega-menu_inner {
+    padding: 32px 2.5rem 40px;
+  }
+
+  .sava-mega-menu_grid {
+    gap: 28px;
+  }
+
+  .sava-mega-menu_dropdown.is-shop-all .sava-mega-menu_grid,
+  .sava-mega-menu_grid.is-shop-all {
+    grid-template-columns: 140px 1fr 1fr 1fr 240px;
+  }
+
+  .sava-mega-menu_dropdown.is-shop-by-benefit .sava-mega-menu_grid,
+  .sava-mega-menu_grid.is-shop-by-benefit,
+  .sava-mega-menu_grid.is-benefits {
+    grid-template-columns: 200px 1fr 240px;
+  }
+
+  .sava-mega-menu_dropdown.is-learn .sava-mega-menu_grid,
+  .sava-mega-menu_grid.is-learn {
+    grid-template-columns: 140px minmax(140px, 1fr) minmax(140px, 1fr) minmax(200px, 1fr) minmax(200px, 1fr);
+  }
+
+  .sava-mega-menu_pill {
+    width: 140px;
+  }
+
+  /* !important required to override the base width: 293px !important
+     declaration on .sava-mega-menu_img-card. Without it the cards
+     overflow their 240px grid cells at 992-1400px viewport widths.    */
+  .sava-mega-menu_img-card,
+  .sava-mega-menu_img-card.w-inline-block,
+  a.sava-mega-menu_img-card {
+    width: 240px !important;
+    height: 260px !important;
+    min-height: 260px !important;
+  }
+
+  .sava-mega-menu_img-card-wrap {
+    min-height: 260px !important;
+  }
+
+  /* Learn-card height shrinks here too, but width override happens in
+     the Learn-stack block below (≤1441px) which has higher specificity. */
+  .sava-mega-menu_learn-card {
+    height: 260px !important;
+  }
+
+  .sava-mega-menu_learn-card-heading {
+    font-size: 22px;
+  }
+
+  .sava-mega-menu_benefits-list {
+    column-gap: 28px;
+  }
+}
+
+/* ====================================================================
+   SAVA MEGA MENU — LEARN STACK (992px – 1441px)
+   At mid-desktop widths the Learn dropdown switches from a 5-column
+   layout to a 4-column layout where the two 293px featured cards
+   stack vertically in column 4 (each ~175px tall, landscape ratio).
+   This reads as an intentional layout shift — not a compression —
+   and matches the pattern used by larger commerce mega menus
+   (J.Crew, Nordstrom, Sephora) when horizontal space gets tight.
+   Placed AFTER the narrow-desktop block so its rules win the cascade
+   wherever the two ranges overlap (992-1400px).                       */
+@media (max-width: 1441px) and (min-width: 992px) {
+  .sava-mega-menu_dropdown.is-learn .sava-mega-menu_grid,
+  .sava-mega-menu_grid.is-learn {
+    grid-template-columns: 140px minmax(140px, 1fr) minmax(140px, 1fr) 293px;
+    grid-template-rows: auto auto;
+    column-gap: 32px;
+    row-gap: 16px;
+  }
+
+  /* Pills col + 2 content cols span both rows so card column has
+     breathing space without the other content jumping rows.           */
+  .sava-mega-menu_grid.is-learn > .sava-mega-menu_pills-col,
+  .sava-mega-menu_grid.is-learn > .sava-mega-menu_column {
+    grid-row: 1 / span 2;
+  }
+
+  /* Both featured cards anchor to column 4 → grid auto-flow stacks
+     them on rows 1 and 2 in DOM order.                                */
+  .sava-mega-menu_grid.is-learn > .sava-mega-menu_learn-card-wrap {
+    grid-column: 4;
+  }
+
+  /* Cards shrink to landscape proportion (293×175). !important needed
+     to beat the base width: 293px / height: 308px !important rules
+     AND the narrow-desktop block's height: 260px !important.          */
+  .sava-mega-menu_grid.is-learn .sava-mega-menu_learn-card-wrap {
+    width: 293px !important;
+    min-height: 175px !important;
+  }
+  .sava-mega-menu_grid.is-learn .sava-mega-menu_learn-card,
+  .sava-mega-menu_grid.is-learn a.sava-mega-menu_learn-card,
+  .sava-mega-menu_grid.is-learn .sava-mega-menu_learn-card.w-inline-block {
+    width: 293px !important;
+    height: 175px !important;
+    min-height: 175px !important;
+  }
+
+  /* Heading scales with the smaller card to keep proportions balanced. */
+  .sava-mega-menu_grid.is-learn .sava-mega-menu_learn-card-heading {
+    font-size: 22px;
+  }
+}
+
+/* ====================================================================
+   SAVA MEGA MENU — MOBILE RESPONSIVE OVERRIDES
+   ==================================================================== */
+@media (max-width: 991px) {
+  /* NavbarMenu becomes a full drawer */
+  .nav_menu.is-page-height-tablet,
+  .nav_menu\ 2.is-page-height-tablet {
+    display: flex !important;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 0;
+    background: var(--_sava-color-styles---soft-white, #F8F8F8);
+  }
+
+  /* Accordion row — divider sits under the title (border on toggle, not
+     on the dropdown wrapper). Vertical margin produces Figma's airy
+     ~135px row-to-row spacing.                                       */
+  .sava-mega-menu_dropdown {
+    width: 100%;
+    position: static;
+    margin-bottom: 56px;
+  }
+
+  .sava-mega-menu_dropdown .nav_dropdown-toggle,
+  .sava-mega-menu_dropdown .nav_dropdown-toggle\ 2 {
+    width: 100%;
+    justify-content: space-between;
+    padding: 32px 20px 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+  }
+
+  /* Force Gelica Light on accordion titles — explicit family/weight
+     defeats any Designer mobile-breakpoint override; targets both <p>
+     and direct toggle in case text isn't wrapped.                    */
+  .sava-mega-menu_dropdown .nav_dropdown-toggle,
+  .sava-mega-menu_dropdown .nav_dropdown-toggle\ 2,
+  .sava-mega-menu_dropdown .nav_dropdown-toggle p,
+  .sava-mega-menu_dropdown .nav_dropdown-toggle\ 2 p {
+    font-family: 'Gelica', Georgia, serif !important;
+    font-weight: 300 !important;
+    font-style: normal !important;
+    font-size: 24px !important;
+    line-height: 30px !important;
+    color: var(--_sava-color-styles---soft-black, #262524) !important;
+  }
+
+  /* Dropdown list inline-flow on mobile */
+  .sava-mega-menu_dropdown-list {
+    position: static !important;
+    box-shadow: none !important;
+    border-top: none !important;
+    width: 100% !important;
+    background: transparent;
+  }
+
+  .sava-mega-menu_inner {
+    padding: 4px 24px 20px;
+  }
+
+  /* Grid collapses to single column. Aggressively null grid-template-*
+     so the hidden pills-col / intro-col / featured cards don't still
+     allocate horizontal space and push visible content right.         */
+  .sava-mega-menu_grid,
+  .sava-mega-menu_dropdown .sava-mega-menu_grid {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+    grid-template-areas: none !important;
+    gap: 20px;
+  }
+  .sava-mega-menu_grid > * {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+
+  /* Hide left pills col + intro col + featured cards on mobile (per Figma) */
+  .sava-mega-menu_dropdown .sava-mega-menu_pills-col,
+  .sava-mega-menu_dropdown .sava-mega-menu_intro-col,
+  .sava-mega-menu_dropdown .sava-mega-menu_img-card-wrap,
+  .sava-mega-menu_dropdown .sava-mega-menu_learn-card-wrap {
+    display: none !important;
+  }
+
+  /* Hide vertical dividers on mobile */
+  .sava-mega-menu_grid > *::before {
+    display: none !important;
+  }
+
+  /* Benefits list collapses to single column on mobile */
+  .sava-mega-menu_benefits-list {
+    column-count: 1 !important;
+  }
+
+  /* Mobile sticky pill bar — 5 pills (4 from linklist + Shop All-dark) */
+  .sava-mega-menu_mobile-pills {
+    display: flex !important;
+    flex-direction: column;
+    gap: 13px;
+    padding: 20px 20px 24px;
+    margin-top: auto;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    background: var(--_sava-color-styles---soft-white, #F8F8F8);
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+  }
+
+  .sava-mega-menu_mobile-pills .sava-mega-menu_pill {
+    width: 100%;
+    height: 34px;
+  }
+
+  /* DRAWER-OPEN STATE — hide SAVA logo, reflow cart+profile to top-left.
+     Uses .sava-nav-open class set by the tiny JS helper above (more
+     reliable than :has() across older Safari + iOS).                  */
+  .w-nav.sava-nav-open .nav_logo-link {
+    display: none !important;
+  }
+  .w-nav.sava-nav-open .nav_shop-icons {
+    position: absolute;
+    left: 20px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    height: 75px;
+    z-index: 102;
+  }
+}
+
+@media (min-width: 992px) {
+  .sava-mega-menu_mobile-pills {
+    display: none !important;
+  }
+}
