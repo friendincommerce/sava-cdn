@@ -1115,12 +1115,14 @@ a.sava-mega-menu_learn-card {
     display: none !important;
   }
 }
+
 /* ============================================================
    SAVA — About Hero pagination bullets
+   `justify-content` intentionally NOT set here — Webflow controls
+   alignment per breakpoint (flex-start on desktop, center on mobile)
    ============================================================ */
 .about-hero_pagination {
   display: flex;
-  justify-content: center;
   gap: 8px;
 }
 .about-hero_pagination-bullet {
@@ -1146,3 +1148,17 @@ a.sava-mega-menu_learn-card {
     background-color: #F8F8F8;
   }
 }
+
+/* ============================================================
+   SAVA — Image container loading state (Option A)
+   Adds a neutral gray fallback bg to all image containers so
+   users see a non-empty rectangle while images load, instead
+   of blank white space. The <img> covers the gray once loaded.
+   Skeleton shimmer animation is Option B — deferred post-launch.
+   ============================================================ */
+div[class$="_image-wrap"],
+div[class$="_image"],
+div[class$="_tile"] {
+  background-color: #E5E5E5;
+}
+</content>
