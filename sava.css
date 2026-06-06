@@ -1115,3 +1115,34 @@ a.sava-mega-menu_learn-card {
     display: none !important;
   }
 }
+/* ============================================================
+   SAVA — About Hero pagination bullets
+   ============================================================ */
+.about-hero_pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.about-hero_pagination-bullet {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background-color: rgba(38, 37, 36, 0.3);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.about-hero_pagination-bullet.is-active {
+  background-color: var(--_sava-color-styles---soft-black, #262524);
+  transform: scale(1.2);
+}
+/* Mobile: bullets on dark grey bg need light color */
+@media (max-width: 767px) {
+  .about-hero_pagination-bullet {
+    background-color: rgba(248, 248, 248, 0.3);
+  }
+  .about-hero_pagination-bullet.is-active {
+    background-color: #F8F8F8;
+  }
+}
