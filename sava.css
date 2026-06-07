@@ -1161,4 +1161,16 @@ div[class$="_image"],
 div[class$="_tile"] {
   background-color: #E5E5E5;
 }
-</content>
+
+/* ===========================================================
+   SV Blog image-wrap override
+   Section bg is Tea (#F3E8AD). The product images uploaded by
+   the merchant have transparent backgrounds, so the image-wrap
+   container must be transparent for the Tea section bg to show
+   through. Higher specificity (section.sv-blog .sv-blog_image-wrap)
+   beats the universal _image-wrap gray fallback above.
+   =========================================================== */
+section.sv-blog .sv-blog_image-wrap {
+  background-color: transparent;
+}
+
