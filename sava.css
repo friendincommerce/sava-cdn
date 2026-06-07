@@ -1173,4 +1173,20 @@ div[class$="_tile"] {
 section.sv-blog .sv-blog_image-wrap {
   background-color: transparent;
 }
+/* Product card price typography — forces Gibson Book across breakpoints */
+/* (Workaround for Webflow MCP silent-no-op on main breakpoint, 2026-06-07) */
+.sava-product-card_price,
+.sava-product-card_compare-at-price {
+  font-family: Gibson, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 15px !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
 
+@media (max-width: 991px) {
+  .sava-product-card_price,
+  .sava-product-card_compare-at-price {
+    font-size: 14px !important;
+  }
+}
