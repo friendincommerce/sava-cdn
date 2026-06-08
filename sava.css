@@ -1202,10 +1202,21 @@ section.sv-blog .sv-blog_image-wrap {
    - Mobile card readability: bigger tag pills + title sizing
    =========================================================== */
 
-/* Page bg: soft-white on collection template */
-body.template-collection,
-.template-collection,
-body[data-template="collection"] {
+/* Page bg: soft-white on collection pages.
+   Liquify Pro converted theme.liquid renders <body> with NO template
+   class, so we can't use body.template-collection. Instead use :has()
+   to detect the section_filter section unique to collection pages.
+   :has() is supported in all current browsers (Chrome 105+, Safari
+   15.4+, Firefox 121+). */
+body:has(section.section_filter),
+body:has([id*="collection_products"]) {
+  background-color: var(--_sava-color-styles---soft-white, #F8F8F8) !important;
+}
+
+/* Belt-and-suspenders: also tint the .main-wrapper since some browser
+   versions may treat body bg differently when html/body chain has
+   computed white. */
+main.main-wrapper:has(section.section_filter) {
   background-color: var(--_sava-color-styles---soft-white, #F8F8F8) !important;
 }
 
