@@ -1359,3 +1359,54 @@ main.main-wrapper:has(section.section_filter) {
     grid-template-columns: 1fr 1fr !important;
   }
 }
+
+/* ===========================================================
+   SAVA SV Collection Quick Filters (2026-06-08)
+   Pill row above the Collection Hero. Merchant-editable
+   Filter Pill blocks (collection picker + text label).
+   - Desktop: centered flex row (no carousel — 5 pills fit)
+   - Mobile: horizontal scroll with snap, hidden scrollbar
+   - Active state: data-active="true" set by Liquiflow Liquid
+     comparing block's picked collection to current collection.
+   - Active styling: sava-gradient-light-peach-fade gradient bg
+   - Hover: same gradient (per Figma: "Fill remains once clicked")
+   =========================================================== */
+
+/* Hover + active: gradient bg using existing :root variable */
+.sv-collection-quick-filters_pill:hover,
+.sv-collection-quick-filters_pill[data-active="true"] {
+  background-color: transparent;
+  background-image: var(--sava-gradient-light-peach-fade);
+  border-color: var(--_sava-color-styles---mid-grey, #DEDDD7);
+}
+
+/* Mobile (≤991px): horizontal scroll with snap, hide scrollbar.
+   Track is full-bleed (negate section padding) so the row can
+   scroll edge-to-edge while still snapping to the soft padding. */
+@media (max-width: 991px) {
+  .sv-collection-quick-filters {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 1.5rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+
+  .sv-collection-quick-filters_track {
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .sv-collection-quick-filters_track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sv-collection-quick-filters_block {
+    scroll-snap-align: start;
+  }
+}
