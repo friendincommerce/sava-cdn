@@ -1329,3 +1329,22 @@ body[data-template="collection"] {
     padding: 36px 0 0 0 !important;
   }
 }
+
+/* ===========================================================
+   SAVA Collections page — 2-column mobile grid (2026-06-08)
+   Figma mobile spec shows 2 columns on tiny breakpoint.
+   Converted CSS forces 1 column at ≤479px via:
+     @media (max-width: 479px) {
+       .filter_product-list, .product-header_layout {
+         grid-template-columns: 1fr;
+       }
+     }
+   Override that one rule — the layout then inherits the
+   medium-breakpoint 2-column template, which is exactly what
+   Figma wants. Confirmed via inspector live-edit.
+   =========================================================== */
+@media (max-width: 479px) {
+  .filter_product-list {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
