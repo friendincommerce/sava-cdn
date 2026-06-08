@@ -1380,6 +1380,13 @@ main.main-wrapper:has(section.section_filter) {
   border-color: var(--_sava-color-styles---mid-grey, #DEDDD7);
 }
 
+/* Balanced section padding (was 2.5rem top / 1rem bottom — Figma intent
+   is equal vertical breathing room). */
+.sv-collection-quick-filters {
+  padding-top: 1.75rem !important;
+  padding-bottom: 1.75rem !important;
+}
+
 /* Mobile (≤991px): horizontal scroll with snap, hide scrollbar.
    Track is full-bleed (negate section padding) so the row can
    scroll edge-to-edge while still snapping to the soft padding. */
@@ -1387,8 +1394,8 @@ main.main-wrapper:has(section.section_filter) {
   .sv-collection-quick-filters {
     padding-left: 0 !important;
     padding-right: 0 !important;
-    padding-top: 1.5rem !important;
-    padding-bottom: 0.75rem !important;
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.25rem !important;
   }
 
   .sv-collection-quick-filters_track {
