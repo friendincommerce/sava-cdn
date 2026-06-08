@@ -1600,3 +1600,50 @@ main.main-wrapper:has(section.section_filter) {
   cursor: pointer;
 }
 
+
+/* ===========================================================
+   SAVA SV Trust Points (2026-06-08)
+   Section-static row of 3 merchant-editable trust points
+   (icon + italic Gelica label). Vertical dividers between
+   blocks on desktop; blocks stack vertically on mobile with
+   no dividers. Sits on the product page between Liquify Pro's
+   product header and recommendation sections.
+   =========================================================== */
+
+/* Vertical divider between blocks (desktop only) */
+.sv-trust-points_block + .sv-trust-points_block::before {
+  content: '';
+  position: absolute;
+  left: -1rem;
+  top: 10%;
+  bottom: 10%;
+  width: 1px;
+  background-color: var(--_sava-color-styles---mid-grey, #DEDDD7);
+}
+
+/* Mobile (≤767px): stack blocks vertically, hide dividers */
+@media (max-width: 767px) {
+  .sv-trust-points {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .sv-trust-points_track {
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+
+  .sv-trust-points_block {
+    min-width: 0 !important;
+    width: 100% !important;
+    flex: 0 0 auto !important;
+  }
+
+  .sv-trust-points_block + .sv-trust-points_block::before {
+    display: none;
+  }
+
+  .sv-trust-points_label {
+    font-size: 16px !important;
+  }
+}
