@@ -1242,3 +1242,90 @@ body[data-template="collection"] {
     padding: 3px 7px !important;
   }
 }
+
+/* ===========================================================
+   SAVA Collections page — mobile layout defensive patch (2026-06-08)
+   Fixes diagnosed from converted CSS inspection:
+   1. .sv-collection-product-card_image-wrap has 63px margin-top
+      + 90px padding-top + aspect-ratio: 1 → creates 153px of
+      dead space at top, eating into card height on mobile.
+   2. Title (.sava-product-card_name) is rendered but visually
+      missing — .heading-style-h4 has a "backwards" mobile rule
+      from Liquify Pro (font-size: 20px on mobile vs 15px desktop,
+      documented in pattern doc as known oddity), which combined
+      with .product-item_text-link's flex layout may push title
+      out of view.
+   3. Price '$' getting clipped on left edge — overflow constraint
+      from parent flex container or padding mismatch.
+   Approach: tighten image-wrap proportions at mobile, force
+   title visibility + proper sizing, ensure price row has full
+   width + visible overflow.
+   =========================================================== */
+@media (max-width: 991px) {
+  /* Image-wrap: shrink dead space at mobile so card isn't all image */
+  .sv-collection-product-card_image-wrap {
+    margin-top: 24px !important;
+    padding: 48px 0 0 0 !important;
+  }
+
+  /* Force title visibility — defensive override against Liquify Pro
+     heading-style-h4 mobile rule + any layout shifts from wrappers */
+  .sava-product-card_name,
+  .heading-style-h4.sava-product-card_name {
+    display: block !important;
+    visibility: visible !important;
+    width: 100% !important;
+    font-size: 15px !important;
+    line-height: 1.3 !important;
+    font-weight: 400 !important;
+    color: var(--_sava-color-styles---soft-black, #262524) !important;
+    margin: 0 0 4px 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    text-overflow: clip !important;
+  }
+
+  /* Container fixes — ensure wrapper doesn't constrain content */
+  .product-item_left {
+    display: block !important;
+    width: 100% !important;
+    margin-right: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Text link must use full width + allow content to flow */
+  .product-item_text-link {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    overflow: visible !important;
+  }
+
+  /* Margin-xsmall wrapper (user's recent edit) — ensure no
+     left/right margin that would push content out of view */
+  .product-item_text-link > .margin-bottom.margin-xsmall {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Price row must use full width — fix the $ clip */
+  .sava-product-card_price-row,
+  .product-item_price {
+    width: 100% !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    overflow: visible !important;
+  }
+}
+
+/* Tiny breakpoint (≤479px): smallest cards get smaller top dead space */
+@media (max-width: 479px) {
+  .sv-collection-product-card_image-wrap {
+    margin-top: 16px !important;
+    padding: 36px 0 0 0 !important;
+  }
+}
