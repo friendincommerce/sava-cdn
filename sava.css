@@ -1678,7 +1678,7 @@ body:has(section.sv-trust-points) {
 .sv-benefits_row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 54px;
 }
@@ -1709,6 +1709,7 @@ body:has(section.sv-trust-points) {
 @media (max-width: 767px) {
   .sv-benefits_row {
     gap: 32px;
+    justify-content: center;
   }
   .sv-benefits_label {
     white-space: normal;
