@@ -1662,57 +1662,10 @@ main.main-wrapper:has(section.section_filter) {
 }
 
 /* ===========================================================
-   SAVA SV Dietary Callouts (2026-06-08)
-   Claim carousel section driven by product.metafields.custom.dietary_tags.
-   - Horizontal scroll track with snap, hidden scrollbar
-   - Prev/next arrow buttons (sava-js handler scrolls track by card width)
-   - Cards: light grey rounded squares with icon + italic Gelica label
-   - Mobile: hide arrows, finger-scroll instead
-   =========================================================== */
-
-/* Hide scrollbar on track (cross-browser) */
-.sv-dietary-callouts_track {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.sv-dietary-callouts_track::-webkit-scrollbar {
-  display: none;
-}
-
-/* Arrow glyph (SVG img inside the button) */
-.sv-dietary-callouts_arrow-glyph {
-  width: 16px !important;
-  height: 16px !important;
-  object-fit: contain !important;
-  transition: filter 0.2s ease !important;
-}
-
-/* Arrow hover — flip circle dark, invert SVG to white */
-.sv-dietary-callouts_arrow:hover {
-  background-color: var(--_sava-color-styles---soft-black, #262524) !important;
-  border-color: var(--_sava-color-styles---soft-black, #262524) !important;
-}
-.sv-dietary-callouts_arrow:hover .sv-dietary-callouts_arrow-glyph {
-  filter: brightness(0) invert(1) !important;
-}
-
-/* Mobile: hide arrow buttons, let users finger-scroll */
-@media (max-width: 991px) {
-  .sv-dietary-callouts_arrow {
-    display: none !important;
-  }
-  .sv-dietary-callouts_inner {
-    padding-left: 5% !important;
-    padding-right: 5% !important;
-  }
-}
-
-/* ===========================================================
    SAVA Product page — soft-white body background (2026-06-08)
    Match Collections page treatment so white cards/sections pop.
-   Detect product page via either of our SV sections.
+   Detect product page via Trust Points (always present on product templates).
    =========================================================== */
-body:has(section.sv-trust-points),
-body:has(section.sv-dietary-callouts) {
+body:has(section.sv-trust-points) {
   background-color: var(--_sava-color-styles---soft-white, #F8F8F8) !important;
 }
