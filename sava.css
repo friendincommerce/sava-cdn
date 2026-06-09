@@ -1794,3 +1794,214 @@ body:has(section.sv-trust-points) {
     font-size: 18px;
   }
 }
+
+/* ===========================================================
+   SAVA Product Header — Liquify Pro section restyle (2026-06-10)
+   Targets the Section / Product Header component blocks
+   (Vendor, Best Seller, Nutritional Function, Product Name,
+    Product Price, Availability, Add to Cart, Shipping Info, Description)
+   to match Figma node 38:290.
+   =========================================================== */
+
+/* ===== New blocks ===== */
+
+/* Best Seller Badge pill */
+.sv-product-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  background-color: var(--_sava-color-styles---mid-grey, #DEDDD7);
+  border-radius: 4px;
+}
+.sv-product-badge_label {
+  font-family: 'Gibson', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--_sava-color-styles---soft-black, #262524);
+  line-height: 1;
+}
+
+/* Nutritional Function dual pill */
+.sv-nutritional-function {
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.sv-nutritional-function_label,
+.sv-nutritional-function_value {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  font-family: 'Gibson', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.sv-nutritional-function_label {
+  background-color: var(--_sava-color-styles---soft-black, #262524);
+  color: var(--_sava-color-styles---white, #FFFFFF);
+  font-weight: 500;
+}
+.sv-nutritional-function_value {
+  background-color: transparent;
+  color: var(--_sava-color-styles---soft-black, #262524);
+  border: 1px solid var(--_sava-color-styles---soft-black, #262524);
+  border-left: none;
+  font-weight: 400;
+}
+
+/* Shipping Info */
+.sv-shipping-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sv-shipping-info_free-shipping,
+.sv-shipping-info_hsa-fsa-line {
+  font-family: 'Gibson', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--_sava-color-styles---soft-black, #262524);
+  margin: 0;
+}
+.sv-shipping-info_hsa-fsa-label {
+  font-weight: 600;
+}
+.sv-shipping-info_link {
+  color: var(--_sava-color-styles---soft-black, #262524);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.2s ease;
+}
+.sv-shipping-info_link:hover {
+  opacity: 0.65;
+}
+
+/* ===== Existing Liquify Pro block overrides ===== */
+
+/* Vendor — subtle small uppercase */
+.section_product-header [li-block="Vendor"] {
+  font-family: 'Gibson', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--_sava-color-styles---soft-black, #262524);
+  opacity: 0.5;
+}
+
+/* Product Name — large Gelica Light Display */
+.section_product-header [li-block="Product Name"] h1,
+.section_product-header [li-block="Product Name"] .heading-style-h2 {
+  font-family: 'Gelica', serif !important;
+  font-weight: 300 !important;
+  font-size: 60px !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--_sava-color-styles---soft-black, #262524) !important;
+  margin: 0 !important;
+}
+
+/* Product Price — SAVA typography */
+.section_product-header [li-block="Product Price"] .product-header_price-wrapper {
+  font-family: 'Gibson', sans-serif;
+}
+.section_product-header [li-block="Product Price"] .text-size-large {
+  font-size: 24px !important;
+  font-weight: 600 !important;
+}
+
+/* Availability — slim Gibson body */
+.section_product-header [li-block="Availability"] .product-header_shipping {
+  font-family: 'Gibson', sans-serif;
+  font-size: 14px;
+  color: var(--_sava-color-styles---soft-black, #262524);
+}
+
+/* Description — hide heading, style body */
+.section_product-header [li-block="Description"] .heading-style-h3 {
+  display: none !important;
+}
+.section_product-header [li-block="Description"] .text-rich-text {
+  font-family: 'Gibson', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--_sava-color-styles---soft-black, #262524);
+}
+.section_product-header [li-block="Description"] .text-rich-text p {
+  margin: 0;
+}
+
+/* Add to Cart — yellow/cream ATC button */
+.section_product-header [li-block="Add to Cart"] .button {
+  background-color: #EDE087 !important;
+  border: none !important;
+  border-radius: 4px !important;
+  color: var(--_sava-color-styles---soft-black, #262524) !important;
+  font-family: 'Gibson', sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  letter-spacing: 2.4px !important;
+  text-transform: uppercase !important;
+  padding: 18px 24px !important;
+  text-align: center !important;
+  transition: background-color 0.2s ease, color 0.2s ease !important;
+}
+.section_product-header [li-block="Add to Cart"] .button:hover {
+  background-color: var(--_sava-color-styles---soft-black, #262524) !important;
+  color: var(--_sava-color-styles---white, #FFFFFF) !important;
+}
+
+/* Hide Note field by default (the non-quantity form input inside Add to Cart) */
+.section_product-header [li-block="Add to Cart"] .form_input:not(.is-quantity) {
+  display: none !important;
+}
+
+/* Spacing rhythm between blocks in the right column */
+.product-header_product-details > [li-block="Vendor"] {
+  margin-bottom: 4px;
+}
+.product-header_product-details > [li-block="Product Badge"] {
+  margin-bottom: 12px;
+}
+.product-header_product-details > [li-block="Product Name"] {
+  margin-bottom: 16px;
+}
+.product-header_product-details > [li-block="Nutritional Function"] {
+  margin-bottom: 16px;
+}
+.product-header_product-details > [li-block="Description"] {
+  margin-bottom: 24px;
+}
+.product-header_product-details > [li-block="Product Price"] {
+  margin-bottom: 12px;
+}
+.product-header_product-details > [li-block="Availability"] {
+  margin-bottom: 12px;
+}
+.product-header_product-details > [li-block="Add to Cart"] {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.product-header_product-details > [li-block="Shipping Info"] {
+  margin-bottom: 24px;
+}
+
+/* Responsive: Product Name scales down on mobile */
+@media (max-width: 991px) {
+  .section_product-header [li-block="Product Name"] h1,
+  .section_product-header [li-block="Product Name"] .heading-style-h2 {
+    font-size: 48px !important;
+  }
+}
+@media (max-width: 479px) {
+  .section_product-header [li-block="Product Name"] h1,
+  .section_product-header [li-block="Product Name"] .heading-style-h2 {
+    font-size: 40px !important;
+  }
+}
