@@ -1601,16 +1601,23 @@ main.main-wrapper:has(section.section_filter) {
 }
 
 
+
 /* ===========================================================
-   SAVA SV Trust Points (2026-06-08)
+   SAVA SV Trust Points (2026-06-08, revised for Figma fidelity)
    Section-static row of 3 merchant-editable trust points
-   (icon + italic Gelica label). Vertical dividers between
-   blocks on desktop; blocks stack vertically on mobile with
-   no dividers. Sits on the product page between Liquify Pro's
-   product header and recommendation sections.
+   (icon + Gelica Light label, NOT italic per Figma 212:7142).
+   - Desktop: 3-across with vertical dividers between blocks
+   - Mobile (max-width 767px): stacked vertically with HORIZONTAL
+     dividers above each non-first block (per mobile Figma)
    =========================================================== */
 
-/* Vertical divider between blocks (desktop only) */
+/* Label font-style override - Webflow native style was italic
+   by mistake; Figma calls for Gelica Light upright */
+.sv-trust-points_label {
+  font-style: normal !important;
+}
+
+/* Vertical divider between blocks (desktop) */
 .sv-trust-points_block + .sv-trust-points_block::before {
   content: '';
   position: absolute;
@@ -1621,7 +1628,7 @@ main.main-wrapper:has(section.section_filter) {
   background-color: var(--_sava-color-styles---mid-grey, #DEDDD7);
 }
 
-/* Mobile (≤767px): stack blocks vertically, hide dividers */
+/* Mobile: stack blocks vertically with horizontal dividers */
 @media (max-width: 767px) {
   .sv-trust-points {
     padding-top: 2rem !important;
@@ -1639,11 +1646,17 @@ main.main-wrapper:has(section.section_filter) {
     flex: 0 0 auto !important;
   }
 
+  /* Re-position divider as horizontal line above each non-first block */
   .sv-trust-points_block + .sv-trust-points_block::before {
-    display: none;
+    top: -1rem !important;
+    bottom: auto !important;
+    left: 10% !important;
+    right: 10% !important;
+    width: auto !important;
+    height: 1px !important;
   }
 
   .sv-trust-points_label {
-    font-size: 16px !important;
+    font-size: 18px !important;
   }
 }
