@@ -299,3 +299,21 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
+
+
+/* ===== SV Product Tabs — tab click handler (2026-06-09) ===== */
+(function(){
+  document.addEventListener('click', function(e){
+    var t = e.target.closest('[data-sv-tab]');
+    if(!t) return;
+    var root = t.closest('.sv-product-tabs');
+    if(!root) return;
+    var key = t.getAttribute('data-sv-tab');
+    root.querySelectorAll('[data-sv-tab]').forEach(function(el){
+      el.classList.toggle('is-active', el === t);
+    });
+    root.querySelectorAll('[data-sv-pane]').forEach(function(el){
+      el.classList.toggle('is-active', el.getAttribute('data-sv-pane') === key);
+    });
+  });
+})();
