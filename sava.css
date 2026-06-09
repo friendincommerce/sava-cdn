@@ -1669,3 +1669,70 @@ main.main-wrapper:has(section.section_filter) {
 body:has(section.sv-trust-points) {
   background-color: var(--_sava-color-styles---soft-white, #F8F8F8) !important;
 }
+
+/* ===========================================================
+   SAVA SV Benefits (2026-06-08)
+   Per-product benefit icons + labels, row layout.
+   Bound to product.metafields.custom.benefits (list of Benefit metaobjects).
+   =========================================================== */
+.sv-benefits_row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 54px;
+}
+.sv-benefits_card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+.sv-benefits_icon {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+}
+.sv-benefits_label {
+  font-family: 'Gelica', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.1;
+  color: var(--_sava-color-styles---soft-black, #262524);
+  text-align: center;
+  margin: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .sv-benefits_row {
+    gap: 32px;
+  }
+  .sv-benefits_label {
+    white-space: normal;
+    max-width: 80px;
+  }
+}
+
+/* ===========================================================
+   SAVA SV Ingredients & SV How to Use (2026-06-08)
+   Per-product richtext fields. Shared typography.
+   =========================================================== */
+.sv-ingredients_text,
+.sv-how-to-use_text {
+  font-family: 'Gibson', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--_sava-color-styles---soft-black, #262524);
+}
+.sv-ingredients_text > *,
+.sv-how-to-use_text > * {
+  margin: 0 0 0.75em;
+}
+.sv-ingredients_text > *:last-child,
+.sv-how-to-use_text > *:last-child {
+  margin-bottom: 0;
+}
