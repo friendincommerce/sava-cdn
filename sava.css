@@ -1679,13 +1679,21 @@ main.main-wrapper:has(section.section_filter) {
   display: none;
 }
 
-/* Arrow hover */
+/* Arrow glyph (SVG img inside the button) */
+.sv-dietary-callouts_arrow-glyph {
+  width: 16px !important;
+  height: 16px !important;
+  object-fit: contain !important;
+  transition: filter 0.2s ease !important;
+}
+
+/* Arrow hover — flip circle dark, invert SVG to white */
 .sv-dietary-callouts_arrow:hover {
   background-color: var(--_sava-color-styles---soft-black, #262524) !important;
   border-color: var(--_sava-color-styles---soft-black, #262524) !important;
 }
 .sv-dietary-callouts_arrow:hover .sv-dietary-callouts_arrow-glyph {
-  color: #FFFFFF !important;
+  filter: brightness(0) invert(1) !important;
 }
 
 /* Mobile: hide arrow buttons, let users finger-scroll */
