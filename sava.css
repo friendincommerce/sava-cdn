@@ -1660,3 +1660,51 @@ main.main-wrapper:has(section.section_filter) {
     font-size: 18px !important;
   }
 }
+
+/* ===========================================================
+   SAVA SV Dietary Callouts (2026-06-08)
+   Claim carousel section driven by product.metafields.custom.dietary_tags.
+   - Horizontal scroll track with snap, hidden scrollbar
+   - Prev/next arrow buttons (sava-js handler scrolls track by card width)
+   - Cards: light grey rounded squares with icon + italic Gelica label
+   - Mobile: hide arrows, finger-scroll instead
+   =========================================================== */
+
+/* Hide scrollbar on track (cross-browser) */
+.sv-dietary-callouts_track {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.sv-dietary-callouts_track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Arrow hover */
+.sv-dietary-callouts_arrow:hover {
+  background-color: var(--_sava-color-styles---soft-black, #262524) !important;
+  border-color: var(--_sava-color-styles---soft-black, #262524) !important;
+}
+.sv-dietary-callouts_arrow:hover .sv-dietary-callouts_arrow-glyph {
+  color: #FFFFFF !important;
+}
+
+/* Mobile: hide arrow buttons, let users finger-scroll */
+@media (max-width: 991px) {
+  .sv-dietary-callouts_arrow {
+    display: none !important;
+  }
+  .sv-dietary-callouts_inner {
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+  }
+}
+
+/* ===========================================================
+   SAVA Product page — soft-white body background (2026-06-08)
+   Match Collections page treatment so white cards/sections pop.
+   Detect product page via either of our SV sections.
+   =========================================================== */
+body:has(section.sv-trust-points),
+body:has(section.sv-dietary-callouts) {
+  background-color: var(--_sava-color-styles---soft-white, #F8F8F8) !important;
+}
