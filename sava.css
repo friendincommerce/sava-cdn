@@ -1737,3 +1737,60 @@ body:has(section.sv-trust-points) {
 .sv-how-to-use_text > *:last-child {
   margin-bottom: 0;
 }
+
+/* ===========================================================
+   SAVA SV Product Tabs (2026-06-09)
+   3-tab widget: Benefits / Ingredients / How to Use
+   Tabs are static labels; pane content is metafield-driven.
+   Tab switching JS embedded inside the section (data-sv-tab + is-active).
+   =========================================================== */
+.sv-product-tabs {
+  display: flex;
+  flex-direction: column;
+}
+.sv-product-tabs_menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: flex-start;
+  margin-bottom: 32px;
+}
+.sv-product-tabs_tab {
+  font-family: 'Gibson', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--_sava-color-styles---soft-black, #262524);
+  cursor: pointer;
+  padding-bottom: 8px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, opacity 0.2s ease;
+  user-select: none;
+  opacity: 0.55;
+}
+.sv-product-tabs_tab:hover {
+  opacity: 1;
+}
+.sv-product-tabs_tab.is-active {
+  border-bottom-color: var(--_sava-color-styles---soft-black, #262524);
+  opacity: 1;
+}
+.sv-product-tabs_content {
+  position: relative;
+}
+.sv-product-tabs_pane {
+  display: none;
+}
+.sv-product-tabs_pane.is-active {
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .sv-product-tabs_menu {
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  .sv-product-tabs_tab {
+    font-size: 18px;
+  }
+}
