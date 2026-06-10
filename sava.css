@@ -1814,44 +1814,40 @@ body:has(section.sv-trust-points) {
   border-radius: 4px;
 }
 .sv-product-badge_label {
-  font-family: 'Gibson', sans-serif;
-  font-weight: 500;
+  font-family: InterstateMono, monospace;
+  font-weight: 400;
   font-size: 11px;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--_sava-color-styles---soft-black, #262524);
   line-height: 1;
 }
 
-/* Nutritional Function dual pill */
+/* Nutritional Function — black mono label box + plain mono value (no border, per Figma) */
 .sv-nutritional-function {
   display: inline-flex;
-  align-items: stretch;
-  border-radius: 4px;
-  overflow: hidden;
+  align-items: center;
+  gap: 14px;
 }
 .sv-nutritional-function_label,
 .sv-nutritional-function_value {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 12px;
-  font-family: 'Gibson', sans-serif;
-  font-size: 11px;
-  letter-spacing: 1.5px;
+  font-family: InterstateMono, monospace;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   line-height: 1;
 }
 .sv-nutritional-function_label {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 14px;
   background-color: var(--_sava-color-styles---soft-black, #262524);
   color: var(--_sava-color-styles---white, #FFFFFF);
-  font-weight: 500;
+  border-radius: 2px;
 }
 .sv-nutritional-function_value {
-  background-color: transparent;
   color: var(--_sava-color-styles---soft-black, #262524);
-  border: 1px solid var(--_sava-color-styles---soft-black, #262524);
-  border-left: none;
-  font-weight: 400;
 }
 
 /* Shipping Info */
@@ -2004,4 +2000,12 @@ body:has(section.sv-trust-points) {
   .section_product-header [li-block="Product Name"] .heading-style-h2 {
     font-size: 40px !important;
   }
+}
+
+/* Product Badges row — SALE (auto) + Badge 1 + Badge 2 side by side (2026-06-10) */
+.sv-product-badges_row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
 }
