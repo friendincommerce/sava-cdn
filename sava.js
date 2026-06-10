@@ -335,3 +335,25 @@
     input.dispatchEvent(new Event('change', { bubbles: true }));
   });
 })();
+
+/* ===== SV Variant card icons — inject pouch/stick icon by label text (2026-06-10) ===== */
+(function(){
+  var ICONS = {
+    bag: 'https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a001e09d3badd55b008a9bd_Icons_Pouch.svg',
+    stick: 'https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a001e09df8b9f5531918f77_Icons_Stick.svg'
+  };
+  function decorate(){
+    document.querySelectorAll('.product-header_radio').forEach(function(card){
+      if(card.dataset.svIcon) return;
+      card.dataset.svIcon = 'done';
+      var t = (card.textContent || '').toLowerCase();
+      var src = t.indexOf('bag') > -1 ? ICONS.bag : (t.indexOf('stick') > -1 ? ICONS.stick : null);
+      if(!src) return;
+      var img = document.createElement('img');
+      img.src = src; img.alt = ''; img.className = 'sv-variant-card_icon';
+      card.insertBefore(img, card.firstChild);
+    });
+  }
+  document.addEventListener('DOMContentLoaded', decorate);
+  setTimeout(decorate, 800); /* re-run after Alpine renders the variant loop */
+})();
