@@ -317,3 +317,21 @@
     });
   });
 })();
+
+/* ===== SV Quantity Stepper — −/+ controls around the native qty input (2026-06-10) ===== */
+(function(){
+  document.addEventListener('click', function(e){
+    var minus = e.target.closest('[data-sv-qty-minus]');
+    var plus = e.target.closest('[data-sv-qty-plus]');
+    if(!minus && !plus) return;
+    var stepper = (minus || plus).closest('.sv-qty-stepper');
+    if(!stepper) return;
+    var input = stepper.querySelector('input');
+    if(!input) return;
+    var val = parseInt(input.value, 10) || 1;
+    val = minus ? Math.max(1, val - 1) : val + 1;
+    input.value = val;
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+})();
