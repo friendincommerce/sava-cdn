@@ -357,3 +357,18 @@
   document.addEventListener('DOMContentLoaded', decorate);
   setTimeout(decorate, 800); /* re-run after Alpine renders the variant loop */
 })();
+
+/* ===== SV Marquee — clone track group once for a seamless loop (2026-06-13) ===== */
+(function(){
+  function initMarquee(){
+    document.querySelectorAll('[data-sava-marquee]').forEach(function(track){
+      if (track.dataset.marqueeReady) return;
+      var group = track.firstElementChild;
+      if (!group) return;
+      track.appendChild(group.cloneNode(true));
+      track.dataset.marqueeReady = 'true';
+    });
+  }
+  document.addEventListener('DOMContentLoaded', initMarquee);
+  setTimeout(initMarquee, 600);
+})();
