@@ -2192,3 +2192,44 @@ body:has(section.sv-trust-points) {
     margin-bottom: 18px;
   }
 }
+
+/* ===========================================================
+   SAVA SV Logo Scroller (2026-06-13)
+   Full-bleed lemon band, logos marquee right→left (Figma 219:7786).
+   Merchant adds Logo blocks via Theme Editor. Reuses @keyframes
+   sava-marquee. Seamless loop: sava.js clones _group once per track
+   ([data-sava-marquee]). Two identical groups → translateX(-50%) loops.
+   =========================================================== */
+.sv-logo-scroller {
+  background-color: #EDE087;
+  overflow: hidden;
+  width: 100%;
+}
+.sv-logo-scroller_track {
+  display: flex;
+  width: max-content;
+  animation: sava-marquee 40s linear infinite;
+}
+.sv-logo-scroller:hover .sv-logo-scroller_track {
+  animation-play-state: paused;
+}
+.sv-logo-scroller_group {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  padding: 20px 32px;
+  flex: 0 0 auto;
+}
+.sv-logo-scroller_logo {
+  height: 24px;
+  width: auto;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sv-logo-scroller_track { animation: none !important; }
+}
+@media (max-width: 767px) {
+  .sv-logo-scroller_group { gap: 40px; padding: 16px 24px; }
+  .sv-logo-scroller_logo { height: 20px; }
+}
