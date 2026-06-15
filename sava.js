@@ -258,33 +258,6 @@
 
 
 /* ============================================================
-   SAVA — Promotional Banner marquee
-   (clones track contents for seamless loop)
-   ============================================================ */
-(function() {
-  function init() {
-	document.querySelectorAll('[data-sava-marquee]').forEach(function(track) {
-	  if (track._savaMarqueeInit) return;
-	  track._savaMarqueeInit = true;
-	  var clone = track.cloneNode(true);
-	  clone.querySelectorAll('[data-sava-marquee]').forEach(function(el) {
-		el.removeAttribute('data-sava-marquee');
-	  });
-	  Array.prototype.slice.call(clone.children).forEach(function(child) {
-		child.setAttribute('aria-hidden', 'true');
-		track.appendChild(child);
-	  });
-	});
-  }
-  if (document.readyState === 'loading') {
-	document.addEventListener('DOMContentLoaded', init);
-  } else {
-	init();
-  }
-})();
-
-
-/* ============================================================
    SAVA — mobile nav open-state class
    Mirrors .w--open on .w-nav-button to .sava-nav-open on .w-nav
    ============================================================ */
@@ -358,17 +331,74 @@
   setTimeout(decorate, 800); /* re-run after Alpine renders the variant loop */
 })();
 
-/* ===== SV Marquee — clone track group once for a seamless loop (2026-06-13) ===== */
+/* ============================================================
+   SAVA — unified marquee (fill-to-width, seamless loop, constant speed)
+   Replaces the old Promotional Banner + logo-scroller marquee handlers.
+   Works for any [data-sava-marquee] track:
+     1. clones the original child set until one pass overfills the viewport
+     2. duplicates the filled strip once so translateX(-50%) never gaps
+     3. logo scroller (or any track with data-marquee-speed) scrolls at a
+        constant px/sec; other marquees keep their CSS animation-duration
+   (2026-06-14)
+   ============================================================ */
 (function(){
-  function initMarquee(){
-    document.querySelectorAll('[data-sava-marquee]').forEach(function(track){
-      if (track.dataset.marqueeReady) return;
-      var group = track.firstElementChild;
-      if (!group) return;
-      track.appendChild(group.cloneNode(true));
-      track.dataset.marqueeReady = 'true';
-    });
+  function imagesReady(track){
+    var imgs = track.querySelectorAll('img'), i;
+    for (i = 0; i < imgs.length; i++){
+      if (!imgs[i].complete || imgs[i].naturalWidth === 0) return false;
+    }
+    return true;
   }
-  document.addEventListener('DOMContentLoaded', initMarquee);
-  setTimeout(initMarquee, 600);
+
+  function build(track){
+    if (track.dataset.marqueeReady || !track.children.length) return;
+
+    var container = track.parentElement;
+    var viewport = (container && container.offsetWidth) || window.innerWidth;
+    var unit = Array.prototype.slice.call(track.children); // the original repeating set
+
+    /* 1) fill: repeat the unit until one pass is at least a full viewport wide */
+    var guard = 0;
+    while (track.scrollWidth < viewport && guard < 60){
+      unit.forEach(function(node){
+        var c = node.cloneNode(true);
+        c.setAttribute('aria-hidden', 'true');
+        track.appendChild(c);
+      });
+      guard++;
+    }
+    /* 2) duplicate the filled strip once → translateX(-50%) loops with no gap */
+    Array.prototype.slice.call(track.children).forEach(function(node){
+      var c = node.cloneNode(true);
+      c.setAttribute('aria-hidden', 'true');
+      track.appendChild(c);
+    });
+    /* 3) constant speed (px/sec) for the logo scroller or any data-marquee-speed track */
+    var speedAttr = track.getAttribute('data-marquee-speed');
+    var wantsConstant = speedAttr || track.classList.contains('sv-logo-scroller_track');
+    if (wantsConstant){
+      var pxPerSec = parseFloat(speedAttr) || 60;
+      track.style.animationDuration = ((track.scrollWidth / 2) / pxPerSec) + 's';
+    }
+    track.dataset.marqueeReady = 'true';
+  }
+
+  function tryBuild(track, attempts){
+    if (track.dataset.marqueeReady) return;
+    if (!imagesReady(track) && attempts < 20){
+      return setTimeout(function(){ tryBuild(track, attempts + 1); }, 150);
+    }
+    build(track);
+  }
+
+  function initAll(){
+    document.querySelectorAll('[data-sava-marquee]').forEach(function(t){ tryBuild(t, 0); });
+  }
+
+  window.addEventListener('load', initAll);
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(initAll, 300); });
+  } else {
+    setTimeout(initAll, 300);
+  }
 })();
