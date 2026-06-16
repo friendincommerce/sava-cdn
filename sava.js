@@ -277,55 +277,55 @@
 /* ===== SV Product Tabs — tab click handler (2026-06-09) ===== */
 (function(){
   document.addEventListener('click', function(e){
-    var t = e.target.closest('[data-sv-tab]');
-    if(!t) return;
-    var root = t.closest('.sv-product-tabs');
-    if(!root) return;
-    var key = t.getAttribute('data-sv-tab');
-    root.querySelectorAll('[data-sv-tab]').forEach(function(el){
-      el.classList.toggle('is-active', el === t);
-    });
-    root.querySelectorAll('[data-sv-pane]').forEach(function(el){
-      el.classList.toggle('is-active', el.getAttribute('data-sv-pane') === key);
-    });
+	var t = e.target.closest('[data-sv-tab]');
+	if(!t) return;
+	var root = t.closest('.sv-product-tabs');
+	if(!root) return;
+	var key = t.getAttribute('data-sv-tab');
+	root.querySelectorAll('[data-sv-tab]').forEach(function(el){
+	  el.classList.toggle('is-active', el === t);
+	});
+	root.querySelectorAll('[data-sv-pane]').forEach(function(el){
+	  el.classList.toggle('is-active', el.getAttribute('data-sv-pane') === key);
+	});
   });
 })();
 
 /* ===== SV Quantity Stepper — −/+ controls around the native qty input (2026-06-10) ===== */
 (function(){
   document.addEventListener('click', function(e){
-    var minus = e.target.closest('[data-sv-qty-minus]');
-    var plus = e.target.closest('[data-sv-qty-plus]');
-    if(!minus && !plus) return;
-    var stepper = (minus || plus).closest('.sv-qty-stepper');
-    if(!stepper) return;
-    var input = stepper.querySelector('input');
-    if(!input) return;
-    var val = parseInt(input.value, 10) || 1;
-    val = minus ? Math.max(1, val - 1) : val + 1;
-    input.value = val;
-    input.dispatchEvent(new Event('input', { bubbles: true }));
-    input.dispatchEvent(new Event('change', { bubbles: true }));
+	var minus = e.target.closest('[data-sv-qty-minus]');
+	var plus = e.target.closest('[data-sv-qty-plus]');
+	if(!minus && !plus) return;
+	var stepper = (minus || plus).closest('.sv-qty-stepper');
+	if(!stepper) return;
+	var input = stepper.querySelector('input');
+	if(!input) return;
+	var val = parseInt(input.value, 10) || 1;
+	val = minus ? Math.max(1, val - 1) : val + 1;
+	input.value = val;
+	input.dispatchEvent(new Event('input', { bubbles: true }));
+	input.dispatchEvent(new Event('change', { bubbles: true }));
   });
 })();
 
 /* ===== SV Variant card icons — inject pouch/stick icon by label text (2026-06-10) ===== */
 (function(){
   var ICONS = {
-    bag: 'https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a001e09d3badd55b008a9bd_Icons_Pouch.svg',
-    stick: 'https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a001e09df8b9f5531918f77_Icons_Stick.svg'
+	bag: 'https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a001e09d3badd55b008a9bd_Icons_Pouch.svg',
+	stick: 'https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a001e09df8b9f5531918f77_Icons_Stick.svg'
   };
   function decorate(){
-    document.querySelectorAll('.product-header_radio').forEach(function(card){
-      if(card.dataset.svIcon) return;
-      card.dataset.svIcon = 'done';
-      var t = (card.textContent || '').toLowerCase();
-      var src = t.indexOf('bag') > -1 ? ICONS.bag : (t.indexOf('stick') > -1 ? ICONS.stick : null);
-      if(!src) return;
-      var img = document.createElement('img');
-      img.src = src; img.alt = ''; img.className = 'sv-variant-card_icon';
-      card.insertBefore(img, card.firstChild);
-    });
+	document.querySelectorAll('.product-header_radio').forEach(function(card){
+	  if(card.dataset.svIcon) return;
+	  card.dataset.svIcon = 'done';
+	  var t = (card.textContent || '').toLowerCase();
+	  var src = t.indexOf('bag') > -1 ? ICONS.bag : (t.indexOf('stick') > -1 ? ICONS.stick : null);
+	  if(!src) return;
+	  var img = document.createElement('img');
+	  img.src = src; img.alt = ''; img.className = 'sv-variant-card_icon';
+	  card.insertBefore(img, card.firstChild);
+	});
   }
   document.addEventListener('DOMContentLoaded', decorate);
   setTimeout(decorate, 800); /* re-run after Alpine renders the variant loop */
@@ -335,70 +335,70 @@
    SAVA — unified marquee (fill-to-width, seamless loop, constant speed)
    Replaces the old Promotional Banner + logo-scroller marquee handlers.
    Works for any [data-sava-marquee] track:
-     1. clones the original child set until one pass overfills the viewport
-     2. duplicates the filled strip once so translateX(-50%) never gaps
-     3. logo scroller (or any track with data-marquee-speed) scrolls at a
-        constant px/sec; other marquees keep their CSS animation-duration
+	 1. clones the original child set until one pass overfills the viewport
+	 2. duplicates the filled strip once so translateX(-50%) never gaps
+	 3. logo scroller (or any track with data-marquee-speed) scrolls at a
+		constant px/sec; other marquees keep their CSS animation-duration
    (2026-06-14)
    ============================================================ */
 (function(){
   function imagesReady(track){
-    var imgs = track.querySelectorAll('img'), i;
-    for (i = 0; i < imgs.length; i++){
-      if (!imgs[i].complete || imgs[i].naturalWidth === 0) return false;
-    }
-    return true;
+	var imgs = track.querySelectorAll('img'), i;
+	for (i = 0; i < imgs.length; i++){
+	  if (!imgs[i].complete || imgs[i].naturalWidth === 0) return false;
+	}
+	return true;
   }
 
   function build(track){
-    if (track.dataset.marqueeReady || !track.children.length) return;
+	if (track.dataset.marqueeReady || !track.children.length) return;
 
-    var container = track.parentElement;
-    var viewport = (container && container.offsetWidth) || window.innerWidth;
-    var unit = Array.prototype.slice.call(track.children); // the original repeating set
+	var container = track.parentElement;
+	var viewport = (container && container.offsetWidth) || window.innerWidth;
+	var unit = Array.prototype.slice.call(track.children); // the original repeating set
 
-    /* 1) fill: repeat the unit until one pass is at least a full viewport wide */
-    var guard = 0;
-    while (track.scrollWidth < viewport && guard < 60){
-      unit.forEach(function(node){
-        var c = node.cloneNode(true);
-        c.setAttribute('aria-hidden', 'true');
-        track.appendChild(c);
-      });
-      guard++;
-    }
-    /* 2) duplicate the filled strip once → translateX(-50%) loops with no gap */
-    Array.prototype.slice.call(track.children).forEach(function(node){
-      var c = node.cloneNode(true);
-      c.setAttribute('aria-hidden', 'true');
-      track.appendChild(c);
-    });
-    /* 3) constant speed (px/sec) for the logo scroller or any data-marquee-speed track */
-    var speedAttr = track.getAttribute('data-marquee-speed');
-    var wantsConstant = speedAttr || track.classList.contains('sv-logo-scroller_track');
-    if (wantsConstant){
-      var pxPerSec = parseFloat(speedAttr) || 60;
-      track.style.animationDuration = ((track.scrollWidth / 2) / pxPerSec) + 's';
-    }
-    track.dataset.marqueeReady = 'true';
+	/* 1) fill: repeat the unit until one pass is at least a full viewport wide */
+	var guard = 0;
+	while (track.scrollWidth < viewport && guard < 60){
+	  unit.forEach(function(node){
+		var c = node.cloneNode(true);
+		c.setAttribute('aria-hidden', 'true');
+		track.appendChild(c);
+	  });
+	  guard++;
+	}
+	/* 2) duplicate the filled strip once → translateX(-50%) loops with no gap */
+	Array.prototype.slice.call(track.children).forEach(function(node){
+	  var c = node.cloneNode(true);
+	  c.setAttribute('aria-hidden', 'true');
+	  track.appendChild(c);
+	});
+	/* 3) constant speed (px/sec) for the logo scroller or any data-marquee-speed track */
+	var speedAttr = track.getAttribute('data-marquee-speed');
+	var wantsConstant = speedAttr || track.classList.contains('sv-logo-scroller_track');
+	if (wantsConstant){
+	  var pxPerSec = parseFloat(speedAttr) || 60;
+	  track.style.animationDuration = ((track.scrollWidth / 2) / pxPerSec) + 's';
+	}
+	track.dataset.marqueeReady = 'true';
   }
 
   function tryBuild(track, attempts){
-    if (track.dataset.marqueeReady) return;
-    if (!imagesReady(track) && attempts < 20){
-      return setTimeout(function(){ tryBuild(track, attempts + 1); }, 150);
-    }
-    build(track);
+	if (track.dataset.marqueeReady) return;
+	if (!imagesReady(track) && attempts < 20){
+	  return setTimeout(function(){ tryBuild(track, attempts + 1); }, 150);
+	}
+	build(track);
   }
 
   function initAll(){
-    document.querySelectorAll('[data-sava-marquee]').forEach(function(t){ tryBuild(t, 0); });
+	document.querySelectorAll('[data-sava-marquee]').forEach(function(t){ tryBuild(t, 0); });
   }
 
   window.addEventListener('load', initAll);
   if (document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', function(){ setTimeout(initAll, 300); });
+	document.addEventListener('DOMContentLoaded', function(){ setTimeout(initAll, 300); });
   } else {
-    setTimeout(initAll, 300);
+	setTimeout(initAll, 300);
   }
 })();
