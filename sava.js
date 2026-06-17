@@ -108,7 +108,8 @@
   var CAROUSELS = [
 	{ prev: 'data-sava-shop-by-benefit-prev', next: 'data-sava-shop-by-benefit-next', grid: '.sava-shop-by-benefit_grid' },
 	{ prev: 'data-sava-claims-prev',          next: 'data-sava-claims-next',          grid: '.sava-ingredients-callouts_claims' },
-	{ prev: 'data-sava-ingredients-prev',     next: 'data-sava-ingredients-next',     grid: '.sava-ingredients-callouts_ingredients-grid' }
+	{ prev: 'data-sava-ingredients-prev',     next: 'data-sava-ingredients-next',     grid: '.sava-ingredients-callouts_ingredients-grid' },
+	{ prev: 'data-sava-trusted-prev',         next: 'data-sava-trusted-next',         grid: '.sv-trusted_track' }
   ];
 
   function bindCarousel(prevAttr, nextAttr, gridSelector) {
@@ -279,7 +280,7 @@
   document.addEventListener('click', function(e){
 	var t = e.target.closest('[data-sv-tab]');
 	if(!t) return;
-	var root = t.closest('.sv-product-tabs');
+	var root = t.closest('.sv-product-tabs, [data-sv-tabs]');
 	if(!root) return;
 	var key = t.getAttribute('data-sv-tab');
 	root.querySelectorAll('[data-sv-tab]').forEach(function(el){
@@ -401,4 +402,58 @@
   } else {
 	setTimeout(initAll, 300);
   }
+})();
+
+
+/* ===== SV Key Ingredients — Supplement Facts lightbox (2026-06-17) =====
+   Intercepts the "View Supplement Facts Label" link and opens the metafield
+   file (image or PDF) in an on-page lightbox instead of a new tab.
+   No-JS fallback: the link still opens the file (target=_blank). ===== */
+(function(){
+  function onKey(e){ if (e.key === 'Escape') closeLb(); }
+  function closeLb(){
+    var ex = document.querySelector('.sv-facts-lightbox');
+    if (ex) ex.remove();
+    document.removeEventListener('keydown', onKey);
+    document.body.style.overflow = '';
+  }
+  function openLb(src){
+    closeLb();
+    var ov = document.createElement('div');
+    ov.className = 'sv-facts-lightbox';
+    ov.style.cssText = 'position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(20,19,18,.88);padding:4vmin;';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.setAttribute('aria-label', 'Close');
+    btn.innerHTML = '&times;';
+    btn.style.cssText = 'position:absolute;top:16px;right:16px;width:40px;height:40px;border:0;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:24px;line-height:40px;cursor:pointer;';
+    var media;
+    if (/\.pdf(\?|$)/i.test(src)){
+      media = document.createElement('iframe');
+      media.src = src;
+      media.style.cssText = 'width:92vw;height:88vh;border:0;border-radius:6px;background:#fff;';
+    } else {
+      media = document.createElement('img');
+      media.src = src;
+      media.alt = 'Supplement Facts';
+      media.style.cssText = 'max-width:92vw;max-height:88vh;width:auto;height:auto;display:block;border-radius:6px;background:#fff;';
+    }
+    ov.appendChild(btn);
+    ov.appendChild(media);
+    document.body.appendChild(ov);
+    document.body.style.overflow = 'hidden';
+    ov.addEventListener('click', function(e){ if (e.target === ov) closeLb(); });
+    btn.addEventListener('click', closeLb);
+    document.addEventListener('keydown', onKey);
+  }
+  document.addEventListener('click', function(e){
+    var p = e.target.closest('.sv-keying_facts');
+    if (!p) return;
+    var a = p.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href || href === '#') return;
+    e.preventDefault();
+    openLb(href);
+  });
 })();
