@@ -457,3 +457,11 @@
     openLb(href);
   });
 })();
+
+/* ===== SV All Flavors — per-flavor hover color (2026-06-16) ===== */
+(function(){
+  document.querySelectorAll('[data-sv-flavor]').forEach(function(el){
+    var c = el.getAttribute('data-sv-flavor');
+    if (c) el.style.setProperty('--sv-flavor', c);
+  });
+})();
