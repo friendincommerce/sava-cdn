@@ -2248,7 +2248,7 @@ body:has(section.sv-trust-points) {
   align-items: flex-start;
   justify-content: center;
   gap: 48px;
-  background-image: none;
+  background: transparent !important;
 }
 @media (max-width: 991px) {
   .sv-keying .sv-keying_pane.is-active {
@@ -2267,8 +2267,9 @@ body:has(section.sv-trust-points) {
   object-fit: cover;
   border-radius: 10px;
 }
-@media (max-width: 479px) {
-  .sv-keying_image { width: 100%; max-width: 330px; height: auto; aspect-ratio: 1 / 1; }
+@media (max-width: 767px) {
+  .sv-keying .sv-keying_pane.is-active { align-items: stretch; }
+  .sv-keying_image { width: 100%; max-width: none; height: auto; aspect-ratio: 1 / 1; }
 }
 .sv-keying_benefits ul { list-style: none; margin: 0; padding: 0; }
 .sv-keying_benefits li {
