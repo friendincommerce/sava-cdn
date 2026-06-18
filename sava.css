@@ -2312,3 +2312,39 @@ body:has(section.sv-trust-points) {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+/* ===== SV Why Take SAVA — comparison ✗/✓ icons + mobile reflow (2026-06-18) ===== */
+.sv-why_x{
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2028%2028'%20fill='none'%3E%3Ccircle%20cx='14'%20cy='14'%20r='13'%20stroke='%23C9C8C1'%20stroke-width='1'/%3E%3Cpath%20d='M10%2010l8%208M18%2010l-8%208'%20stroke='%23A9A8A2'%20stroke-width='1.5'%20stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.sv-why_check{
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2028%2028'%20fill='none'%3E%3Ccircle%20cx='14'%20cy='14'%20r='13'%20stroke='%23262524'%20stroke-width='1'/%3E%3Cpath%20d='M8.5%2014.6l3.6%203.6%207.4-8'%20stroke='%23262524'%20stroke-width='1.6'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+@media (max-width: 767px){
+  /* product image becomes a centered hero; hide OTHERS + spacer in the header row */
+  .sv-why_head{ justify-content: center; padding-bottom: 22px; }
+  .sv-why_head .sv-why_cell-x,
+  .sv-why_head .sv-why_cell-l{ display: none; }
+  .sv-why_head .sv-why_cell-v{ width: 200px; }
+  .sv-why_imgwrap{ width: 200px; }
+  .sv-why_glow{ display: block; }
+  /* desktop gradient column off; lemon lives on the ✓ cells instead */
+  .sv-why_highlight{ display: none; }
+  /* show OTHERS / SAVA column headers */
+  .sv-why_colheads{ display: flex; }
+  /* narrow comparison columns; claims wrap */
+  .sv-why_cell-x{ width: 44px; }
+  .sv-why_cell-v{ width: 52px; }
+  .sv-why_claim{ padding-left: 16px; font-size: 15px; line-height: 21px; }
+  /* lemon highlight strip on the SAVA column (header + rows) */
+  .sv-why_colheads .sv-why_cell-v,
+  .sv-why_row .sv-why_cell-v{ background-color: #F2E9AE; }
+  .sv-why_colheads .sv-why_cell-v{ border-top-left-radius: 9px; border-top-right-radius: 9px; }
+  .sv-why_row:last-child .sv-why_cell-v{ border-bottom-left-radius: 9px; border-bottom-right-radius: 9px; }
+}
