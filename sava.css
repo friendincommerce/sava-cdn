@@ -2339,9 +2339,11 @@ body:has(section.sv-trust-points) {
   /* show OTHERS / SAVA column headers */
   .sv-why_colheads{ display: flex; }
   /* narrow comparison columns; claims wrap */
-  .sv-why_cell-x{ width: 44px; }
+  .sv-why_cell-x{ width: 52px; }
   .sv-why_cell-v{ width: 52px; }
   .sv-why_claim{ padding-left: 16px; font-size: 15px; line-height: 21px; }
+  /* keep OTHERS / SAVA headers inside their columns so they don't overlap */
+  .sv-why_colheads .sv-why_others{ font-size: 12px; letter-spacing: 0.3px; }
   /* CONTINUOUS lemon column: stretch the cells so the ✓ cell fills the full row height
      (padding moves to the ✗ + claim cells) — otherwise the lemon breaks into one box per row */
   .sv-why_row{ align-items: stretch; padding-top: 0; padding-bottom: 0; }
