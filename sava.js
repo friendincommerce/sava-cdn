@@ -465,3 +465,14 @@
     if (c) el.style.setProperty('--sv-flavor', c);
   });
 })();
+
+/* ===== SV Product Header gallery — nudge Swiper to recompute sizes after the left-rail reflow (2026-06-18) ===== */
+(function(){
+  function upd(){
+    document.querySelectorAll('.swiper.is-product-gallery, .swiper.is-product-thumbnail').forEach(function(el){
+      if (el.swiper && typeof el.swiper.update === 'function') el.swiper.update();
+    });
+  }
+  window.addEventListener('load', function(){ upd(); setTimeout(upd, 300); setTimeout(upd, 900); });
+  var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(upd, 150); });
+})();
