@@ -1617,6 +1617,13 @@ main.main-wrapper:has(section.section_filter) {
   font-style: normal !important;
 }
 
+/* Let wide icons (e.g. NSF Certified Sport) keep their natural aspect ratio
+   instead of being squashed into a 56px square — height stays 56, width auto */
+.sv-trust-points_icon {
+  width: auto !important;
+  max-width: 100%;
+}
+
 /* Vertical divider between blocks (desktop) */
 .sv-trust-points_block + .sv-trust-points_block::before {
   content: '';
@@ -2357,4 +2364,31 @@ body:has(section.sv-trust-points) {
   .sv-why_row .sv-why_cell-v{ background-color: #F2E9AE; }
   .sv-why_colheads .sv-why_cell-v{ border-top-left-radius: 9px; border-top-right-radius: 9px; }
   .sv-why_row:last-child .sv-why_cell-v{ border-bottom-left-radius: 9px; border-bottom-right-radius: 9px; }
+}
+
+/* ===== SV Product Header gallery — thumbnails as a LEFT rail + side arrows (desktop >=992) =====
+   Reflows the Liquify Pro product gallery (two Swipers). Paired with a swiper.update()
+   nudge in sava.js so the main image recomputes its width for the narrower column.
+   Desktop only — mobile gallery is left untouched. */
+@media (min-width: 992px){
+  .swiper-container.is-product-gallery{
+    display: flex !important;
+    flex-direction: row-reverse;   /* thumbnail rail on the left, main image on the right */
+    align-items: flex-start;
+    gap: 18px;
+    position: relative;
+  }
+  .swiper-container.is-product-gallery > .swiper.is-product-gallery{ flex: 1 1 auto; min-width: 0; }
+  .product-header_slider-wrapper{ flex: 0 0 84px; width: 84px; }
+  /* thumbnail swiper → vertical stack */
+  .swiper.is-product-thumbnail{ width: 84px !important; height: auto !important; margin: 0 !important; }
+  .swiper-wrapper.is-product-thumbnail{ flex-direction: column !important; transform: none !important; height: auto !important; }
+  .swiper-slide.is-product-thumbnail{ width: 84px !important; height: auto !important; margin: 0 0 12px 0 !important; }
+  .product-header_thumbnail-image{ width: 100% !important; height: auto !important; display: block; }
+  /* arrows → left & right edges of the main image */
+  .swiper_button-wrapper.is-product-slider{
+    position: absolute; top: 50%; transform: translateY(-50%);
+    left: 102px; right: 0; width: auto;
+    display: flex; justify-content: space-between; z-index: 2;
+  }
 }
