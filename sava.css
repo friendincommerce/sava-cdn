@@ -2438,7 +2438,12 @@ body:has(section.sv-trust-points) {
    left thumbnail rail + arrows overlaid on the image.) Button visuals are shared above. ===== */
 @media (max-width: 991px){
   .product-header_slider-wrapper .swiper.is-product-thumbnail{ display: none !important; }
-  .product-header_slider-wrapper{ display: flex; justify-content: flex-end; }
+  .product-header_slider-wrapper{
+    display: flex; justify-content: flex-end;
+    margin-top: -24px !important;   /* pull the arrow row up so the circles straddle the image's bottom edge (Figma) */
+    position: relative; z-index: 3; /* paint the arrows over the image */
+    pointer-events: none;           /* empty part of the row lets image swipes through; buttons re-enable below */
+  }
   .swiper_button-wrapper.is-product-slider{
     position: static !important; inset: auto !important;
     display: flex !important;            /* also un-hides the base .hide-mobile-landscape at ≤767 */
