@@ -2375,6 +2375,7 @@ body:has(section.sv-trust-points) {
     display: flex !important;
     flex-direction: row-reverse;   /* thumbnail rail on the left, main image on the right */
     align-items: flex-start;
+    align-self: start !important;  /* top-align the gallery in the product-header grid (it's a grid cell that was centering) */
     gap: 18px;
     position: relative;
   }
@@ -2392,5 +2393,10 @@ body:has(section.sv-trust-points) {
     display: flex !important; align-items: center; justify-content: space-between;
     z-index: 5; pointer-events: none;
   }
-  .swiper_button-wrapper.is-product-slider .swiper_button{ pointer-events: auto; }
+  .swiper_button-wrapper.is-product-slider .swiper_button{
+    pointer-events: auto;
+    width: 48px !important; height: 48px !important; flex: 0 0 48px;
+    display: flex !important; align-items: center; justify-content: center;
+  }
+  .swiper_button-wrapper.is-product-slider .swiper_button-icon{ width: 22px !important; height: 22px !important; }
 }
