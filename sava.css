@@ -2408,6 +2408,10 @@ body:has(section.sv-trust-points) {
     display: flex !important; align-items: center; justify-content: space-between;
     padding: 0 10px; z-index: 5; pointer-events: none;
   }
+}
+
+/* ----- Arrow buttons: visual styling shared across ALL breakpoints (positioning differs:
+   desktop overlays the image above; mobile sits in a row below it — see the ≤991 block). ----- */
   /* base nudges prev/next by ∓1.5rem which would hang them outside the gallery — zero them */
   .swiper_button-wrapper.is-product-slider .swiper_button.swiper-prev.pointer-events-on{ left: 0 !important; }
   .swiper_button-wrapper.is-product-slider .swiper_button.swiper-next.pointer-events-on{ right: 0 !important; }
@@ -2427,5 +2431,18 @@ body:has(section.sv-trust-points) {
   }
   .swiper_button-wrapper.is-product-slider .swiper_button.swiper-next{
     background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTciIGhlaWdodD0iNTciIHZpZXdCb3g9IjAgMCA1NyA1NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgZmlsdGVyPSJ1cmwoI2ZpbHRlcjBfZF8yNjg2XzI4ODEpIj4KPGNpcmNsZSBjeD0iMjguMjg0MyIgY3k9IjI4LjI4NDMiIHI9IjIwIiB0cmFuc2Zvcm09InJvdGF0ZSg0NSAyOC4yODQzIDI4LjI4NDMpIiBmaWxsPSIjRjhGOEY4Ii8+CjwvZz4KPHBhdGggZD0iTTM1Ljc4MTkgMjguNDMwNkwyMC4wMjIzIDI4LjQ1NjYiIHN0cm9rZT0iIzI2MjUyNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxwYXRoIGQ9Ik0yOS40NTYxIDM0LjkzNDhMMzUuNzkxMiAyOC40NTkxTDI5LjMxNTUgMjIuMTI0MSIgc3Ryb2tlPSIjMjYyNTI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPGRlZnM+CjxmaWx0ZXIgaWQ9ImZpbHRlcjBfZF8yNjg2XzI4ODEiIHg9IjYuMjg0MjciIHk9IjguMjg0MyIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjQ0IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiIGNvbG9yLWludGVycG9sYXRpb24tZmlsdGVycz0ic1JHQiI+CjxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAiIHJlc3VsdD0iQmFja2dyb3VuZEltYWdlRml4Ii8+CjxmZUNvbG9yTWF0cml4IGluPSJTb3VyY2VBbHBoYSIgdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDEyNyAwIiByZXN1bHQ9ImhhcmRBbHBoYSIvPgo8ZmVPZmZzZXQgZHk9IjIiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMSIvPgo8ZmVDb21wb3NpdGUgaW4yPSJoYXJkQWxwaGEiIG9wZXJhdG9yPSJvdXQiLz4KPGZlQ29sb3JNYXRyaXggdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMC44NzA1ODggMCAwIDAgMCAwLjg2NjY2NyAwIDAgMCAwIDAuODQzMTM3IDAgMCAwIDEgMCIvPgo8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9ImVmZmVjdDFfZHJvcFNoYWRvd18yNjg2XzI4ODEiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJlZmZlY3QxX2Ryb3BTaGFkb3dfMjY4Nl8yODgxIiByZXN1bHQ9InNoYXBlIi8+CjwvZmlsdGVyPgo8L2RlZnM+Cjwvc3ZnPgo=");
+  }
+
+/* ===== SV Product Header gallery — MOBILE (≤991): match Figma — no thumbnail preview;
+   the two circle-arrows sit in a row below the main image, right-aligned. (Desktop keeps the
+   left thumbnail rail + arrows overlaid on the image.) Button visuals are shared above. ===== */
+@media (max-width: 991px){
+  .product-header_slider-wrapper .swiper.is-product-thumbnail{ display: none !important; }
+  .product-header_slider-wrapper{ display: flex; justify-content: flex-end; }
+  .swiper_button-wrapper.is-product-slider{
+    position: static !important; inset: auto !important;
+    display: flex !important;            /* also un-hides the base .hide-mobile-landscape at ≤767 */
+    width: auto !important; height: auto !important;
+    gap: 12px; justify-content: flex-end;
   }
 }
