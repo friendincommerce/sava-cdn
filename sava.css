@@ -2397,11 +2397,17 @@ body:has(section.sv-trust-points) {
   .swiper-wrapper.is-product-thumbnail{ flex-direction: column !important; transform: none !important; height: auto !important; }
   .swiper-slide.is-product-thumbnail{ width: 84px !important; height: auto !important; margin: 0 0 12px 0 !important; }
   .product-header_thumbnail-image{ width: 100% !important; height: auto !important; display: block; }
-  /* Main image: base uses object-fit:cover on a fixed 640px-tall box, so narrowing the column
-     (the rail makes it narrow sooner) turns the box portrait and crops the pouch's sides.
-     `contain` keeps the whole pouch visible at its true aspect — letterboxed with the grey bg
-     (same --base-color-neutral--neutral-lightest the image already uses) instead of cropped. */
-  .product-header_gallery-image{ object-fit: contain !important; }
+  /* Main image: base uses object-fit:cover on a FIXED 640px-tall box, so narrowing the column
+     (the rail makes it narrow sooner) turned the box portrait and cropped the pouch's sides.
+     Fix: keep `cover` (image fills the box → the grey background-color never shows) but replace
+     the fixed height with a SQUARE aspect-ratio that scales with the column. The product images
+     are ~square (hero 284×299 ≈ 0.95, others 1600×1600), so a 1:1 box fills them with no crop
+     AND no grey letterbox at every width. */
+  .product-header_gallery-image{
+    object-fit: cover !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+  }
   /* Arrows → overlay the main image (starts at 84px rail + 18px gap = 102px from gallery left).
      Anchored to the gallery container now that the rail is static. */
   .swiper-container.is-product-gallery .swiper_button-wrapper.is-product-slider{
