@@ -2480,7 +2480,8 @@ body:has(section.sv-trust-points) {
 [id*="blog_hero"] .heading-style-h1{ color: #262524; }
 /* soft-white page background for the blog collection content (white cards pop against it) */
 [id*="blog_articles"]{ background-color: var(--_sava-color-styles---soft-white, #f8f8f8); }
-.sv-blog-hero_subhead{
+/* hero subhead/description — the only <p> in the blog hero (editable li-settings:textarea) */
+[id*="blog_hero"] p{
   font-family: "Gibson", sans-serif; font-weight: 300;
   font-size: 16px; line-height: 24px; color: #262524;
   max-width: 56rem; margin: 0.75rem auto 0;
