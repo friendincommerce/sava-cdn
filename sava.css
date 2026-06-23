@@ -2462,3 +2462,81 @@ body:has(section.sv-trust-points) {
     gap: 12px; justify-content: flex-end;
   }
 }
+
+/* ============================================================
+   SV Blog — Collection (listing) page
+   Restyles the Liquify blog_hero + blog_articles foundation to the SAVA
+   Figma (235-6285): peach hero, white rounded article cards with light-grey
+   tag pills ABOVE a rounded ~3:2 image, Gelica title, and a circular ↗ arrow.
+   CSS-only — no Webflow restructure: tags are moved above the image with
+   column-reverse, and the arrow is a ::after pseudo-element.
+   ============================================================ */
+
+/* ----- Hero: peach band ([data-sava-blog-hero] attribute is added to the Blog Hero section root) ----- */
+[data-sava-blog-hero]{ background-color: #F6D7B9; }
+[data-sava-blog-hero] .heading-style-h1{ color: #262524; }
+.sv-blog-hero_subhead{
+  font-family: "Gibson", sans-serif; font-weight: 300;
+  font-size: 16px; line-height: 24px; color: #262524;
+  max-width: 56rem; margin: 0.75rem auto 0;
+}
+
+/* ----- Article grid → 2 columns (base 3-col → 2-col) ----- */
+.blog_list{
+  grid-template-columns: 1fr 1fr !important;
+  grid-column-gap: 42px !important; grid-row-gap: 40px !important;
+  align-items: stretch;
+}
+
+/* ----- Card: white, rounded, padded; the whole card is the article link ----- */
+.blog_item-grid{
+  display: flex !important; flex-direction: column;
+  background-color: #fff; border-radius: 10px; padding: 22px;
+  position: relative; text-decoration: none; color: inherit;
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+.blog_item-grid:hover{ transform: translateY(-3px); box-shadow: 0 10px 28px rgba(38,37,36,.08); }
+
+/* tags ABOVE the image: reverse the wrapper, un-absolute the tag row */
+.blog_tags-wrapper{ display: flex; flex-direction: column-reverse; gap: 14px; position: relative; }
+.blog_tag-row{ position: static !important; inset: auto !important; margin: 0 !important; flex-wrap: wrap; gap: 11px; }
+
+/* image → rounded ≈3:2 */
+.blog_img{
+  width: 100% !important; height: auto !important; aspect-ratio: 50 / 34;
+  object-fit: cover; border: none !important; border-radius: 10px;
+  background-color: #EEEEED;
+}
+
+/* tags → light-grey callout pills */
+.blog_tag{
+  display: inline-block; color: #262524; background-color: #EEEEED;
+  margin: 0; padding: 5px 13px; border-radius: 60px;
+  font-family: "InterstateMono", monospace; font-weight: 300;
+  font-size: 14px; line-height: 1.1; letter-spacing: 0.7px;
+  text-transform: uppercase; white-space: nowrap;
+}
+
+/* title → Gelica Light 36/40 */
+.blog_info-wrapper{ text-align: left; margin-top: 18px; }
+.blog_info-wrapper .heading-style-h3{
+  font-family: "Gelica", serif; font-weight: 300;
+  font-size: 36px; line-height: 40px; color: #262524; margin: 0;
+}
+
+/* circular ↗ arrow — pure CSS, pinned to the card's bottom-right (card is a flex column) */
+.blog_item-grid::after{
+  content: ""; align-self: flex-end; margin-top: auto;
+  flex: 0 0 auto; width: 36px; height: 36px; border-radius: 100vw;
+  border: 1px solid #DEDDD7; background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23262524'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M7%2017L17%207M7%207H17V17'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: center; background-size: 18px;
+  transition: background-color .2s ease, border-color .2s ease;
+}
+.blog_item-grid:hover::after{ border-color: #262524; }
+
+/* mobile → single column */
+@media (max-width: 767px){
+  .blog_list{ grid-template-columns: 1fr !important; grid-row-gap: 28px !important; }
+  .blog_info-wrapper .heading-style-h3{ font-size: 28px; line-height: 32px; }
+}
