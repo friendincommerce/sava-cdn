@@ -2473,13 +2473,13 @@ body:has(section.sv-trust-points) {
    ============================================================ */
 
 /* ----- Hero: peach band. Liquiflow strips custom attributes from li-section roots (only the
-   tag + class reach the generated schema), so scope by the Shopify section wrapper id instead:
-   Shopify renders this section as <header id="shopify-section-blog_hero" class="shopify-section
-   section_small-hero">. The id is stable from templates/blog.json. ----- */
-#shopify-section-blog_hero{ background-color: #F6D7B9; }
-#shopify-section-blog_hero .heading-style-h1{ color: #262524; }
+   tag + class reach the schema). Sections in a JSON template are wrapped by Shopify with the
+   LONG id form id="shopify-section-template--<number>__blog_hero" (not #shopify-section-blog_hero),
+   so the exact-id selector never matched — match the section key by id SUBSTRING instead. ----- */
+[id*="blog_hero"]{ background-color: #F6D7B9; }
+[id*="blog_hero"] .heading-style-h1{ color: #262524; }
 /* soft-white page background for the blog collection content (white cards pop against it) */
-#shopify-section-blog_articles{ background-color: var(--_sava-color-styles---soft-white, #f8f8f8); }
+[id*="blog_articles"]{ background-color: var(--_sava-color-styles---soft-white, #f8f8f8); }
 .sv-blog-hero_subhead{
   font-family: "Gibson", sans-serif; font-weight: 300;
   font-size: 16px; line-height: 24px; color: #262524;
