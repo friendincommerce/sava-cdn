@@ -2478,6 +2478,8 @@ body:has(section.sv-trust-points) {
    section_small-hero">. The id is stable from templates/blog.json. ----- */
 #shopify-section-blog_hero{ background-color: #F6D7B9; }
 #shopify-section-blog_hero .heading-style-h1{ color: #262524; }
+/* soft-white page background for the blog collection content (white cards pop against it) */
+#shopify-section-blog_articles{ background-color: var(--_sava-color-styles---soft-white, #f8f8f8); }
 .sv-blog-hero_subhead{
   font-family: "Gibson", sans-serif; font-weight: 300;
   font-size: 16px; line-height: 24px; color: #262524;
