@@ -2491,8 +2491,12 @@ body:has(section.sv-trust-points) {
   align-items: stretch;
 }
 
-/* ----- Card: white, rounded, padded; the whole card is the article link ----- */
+/* ----- Card: white, rounded, padded; the whole card is the article link.
+   .blog_cms-item is the grid cell; making it a column flex + flex:1 on the card lets every
+   card stretch to the row's (equal) height regardless of title length or tag count. ----- */
+.blog_cms-item{ display: flex; flex-direction: column; }
 .blog_item-grid{
+  flex: 1;
   display: flex !important; flex-direction: column;
   background-color: #fff; border-radius: 10px; padding: 22px;
   position: relative; text-decoration: none; color: inherit;
@@ -2502,7 +2506,9 @@ body:has(section.sv-trust-points) {
 
 /* tags ABOVE the image: reverse the wrapper, un-absolute the tag row */
 .blog_tags-wrapper{ display: flex; flex-direction: column-reverse; gap: 14px; position: relative; }
-.blog_tag-row{ position: static !important; inset: auto !important; margin: 0 !important; flex-wrap: wrap; gap: 11px; }
+/* reserve the pill-row height even when an article has no tags, so every card's image + title
+   line up across the grid (a no-tag card no longer shifts up to fill the gap) */
+.blog_tag-row{ position: static !important; inset: auto !important; margin: 0 !important; flex-wrap: wrap; gap: 11px; min-height: 27px; }
 
 /* image → rounded ≈3:2 */
 .blog_img{
