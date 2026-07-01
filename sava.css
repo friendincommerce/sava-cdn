@@ -2556,3 +2556,17 @@ body:has(section.sv-trust-points) {
   .blog_list{ grid-template-columns: 1fr !important; grid-row-gap: 28px !important; }
   .blog_info-wrapper .heading-style-h3{ font-size: 28px; line-height: 32px; }
 }
+
+/* ----- Quick-filter bar refinements (override the inline whtml CSS that shipped with the markup) ----- */
+/* break the pill + title bands out of container-large so they span the full viewport width */
+.sv-blog-filterbar, .sv-blog-titlebar{ width: 100vw; margin-left: calc(50% - 50vw); }
+.sv-blog-filterbar{ background-color: #fff !important; }   /* white pill band */
+/* pills: SAVA peach gradient on hover AND for the active/selected pill (replaces the inset underline) */
+.sv-blog-pill{ transition: background .2s ease, border-color .2s ease, color .2s ease; }
+.sv-blog-pill:hover,
+.sv-blog-pill.is-active{
+  background: var(--sava-gradient-sunrise, linear-gradient(90deg,#F2CBCB 0%,#F6D7B9 100%)) !important;
+  border-color: transparent !important; box-shadow: none !important; color: #262524;
+}
+/* breathing room between the sticky Recent bar and the first row of cards */
+.blog_cms-wrapper{ padding-top: 40px; }
