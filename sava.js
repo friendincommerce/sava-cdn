@@ -476,3 +476,18 @@
   window.addEventListener('load', function(){ upd(); setTimeout(upd, 300); setTimeout(upd, 900); });
   var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(upd, 150); });
 })();
+
+/* ===== SV Blog — highlight the active quick-filter pill by current URL (2026-06-23) ===== */
+(function(){
+  function setActive(){
+    var pills = document.querySelectorAll('.sv-blog-pill');
+    if (!pills.length) return;
+    var here = location.pathname.replace(/\/+$/, '');
+    pills.forEach(function(p){
+      var a = document.createElement('a'); a.href = p.getAttribute('href') || '';
+      p.classList.toggle('is-active', a.pathname.replace(/\/+$/, '') === here);
+    });
+  }
+  document.addEventListener('DOMContentLoaded', setActive);
+  setActive();
+})();
