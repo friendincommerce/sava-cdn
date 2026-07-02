@@ -14,6 +14,20 @@
 	--sava-gradient-dark: linear-gradient(0deg, #262524 0%, #545351 100%);
 }
 
+/* ============================================================================
+   SAVA HARD WIDTH CAP (site-wide, installed 2026-07-01)
+   The Liquify template scales the root font-size fluidly with the viewport
+   (html { font-size: calc(0.8125rem + 0.20833vw) } in its global styles), so
+   85rem containers grow past 1360px on large monitors (e.g. 1540px @ 2455px).
+   This freezes rem at 16px above the 1440px design width → all 85rem
+   containers cap at exactly 1360px and type stops scaling up.
+   TO REVERT to fluid scaling: delete THIS BLOCK ONLY, commit, swap the hash.
+   Nothing else references or depends on it.
+   ============================================================================ */
+@media (min-width: 1440px) {
+	html { font-size: 16px !important; }
+}
+
 /* ===== SAVA Link Card ===== */
 
 .sava-link-card:hover .sava-link-card_button {
@@ -2561,6 +2575,13 @@ body:has(section.sv-trust-points) {
 /* break the pill + title bands out of container-large so they span the full viewport width */
 .sv-blog-filterbar, .sv-blog-titlebar{ width: 100vw; margin-left: calc(50% - 50vw); }
 .sv-blog-filterbar{ background-color: #fff !important; position: relative; }   /* white band; anchor for the arrows */
+/* kill the soft-white gap between the peach hero and the white pill band — the Blog-Articles
+   section's own padding-section-small top padding was showing through (Figma: bands sit flush) */
+[id*="blog_articles"] .padding-section-small{ padding-top: 0 !important; }
+/* sticky title bar must sit BELOW the navbar's stacking context (.section_navbar is z-index:10,
+   which caps the whole mega menu inside it) — z:9 keeps the open mega menu painting over the bar,
+   while still above the article cards and the pill-row arrows (z:2) */
+.sv-blog-titlebar{ z-index: 9 !important; }
 /* Figma button: 157×45 rectangle, 10px radius, 0.75px mid-grey border, Gibson Medium 14/2.1 uppercase.
    Long labels (FUNCTIONAL MEDICINE) wrap to 2 lines inside the fixed width, exactly like Figma. */
 .sv-blog-pill{
