@@ -491,3 +491,30 @@
   document.addEventListener('DOMContentLoaded', setActive);
   setActive();
 })();
+
+/* ===== SV Blog — inject prev/next carousel arrows into the quick-filter bar (2026-07-01)
+   Buttons are styled by sava.css (.sv-blog-pills-arrow, gallery circle-arrow data-URIs) and only
+   shown on desktop when the pill row actually overflows (.sv-has-overflow on the bar). ===== */
+(function(){
+  function init(){
+    var bar = document.querySelector('.sv-blog-filterbar');
+    var pills = bar && bar.querySelector('.sv-blog-pills');
+    if (!bar || !pills || bar.dataset.savaArrows) return;
+    bar.dataset.savaArrows = 'true';
+    ['prev','next'].forEach(function(dir){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'sv-blog-pills-arrow is-' + dir;
+      b.setAttribute('aria-label', dir === 'prev' ? 'Scroll filters left' : 'Scroll filters right');
+      b.addEventListener('click', function(){
+        pills.scrollBy({ left: (dir === 'prev' ? -1 : 1) * Math.round(pills.clientWidth * 0.7), behavior: 'smooth' });
+      });
+      bar.appendChild(b);
+    });
+    function upd(){ bar.classList.toggle('sv-has-overflow', pills.scrollWidth > pills.clientWidth + 4); }
+    upd();
+    var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(upd, 150); });
+  }
+  document.addEventListener('DOMContentLoaded', init);
+  init();
+})();
