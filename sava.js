@@ -1,2713 +1,558 @@
 /* ============================================================================
-   SAVA — external CSS bundle
-   Hosted: https://cdn.jsdelivr.net/gh/friendincommerce/sava-cdn@main/sava.css
+   SAVA — external JS bundle
+   Hosted: https://cdn.jsdelivr.net/gh/friendincommerce/sava-cdn@main/sava.js
    Loaded from Webflow Site Settings → Head + carried into Shopify theme.liquid
    ============================================================================ */
 
-:root {
-	--sava-gradient-soft-white-fade: linear-gradient(180deg, rgba(248,248,248,0) 49.52%, rgba(222,221,215,0.5) 100%);
-	--sava-gradient-light-peach-fade: linear-gradient(180deg, #FFFFFF 49.52%, #F6D7B9 100%);
-	--sava-gradient-light-peach-fade-transparent: linear-gradient(180deg, rgba(248,248,248,0) 49.52%, #F6D7B9 100%);
-	--sava-gradient-lemon-fade: linear-gradient(180deg, #FFFFFF 49.52%, #EDE087 100%);
-	--sava-gradient-blueberry-fade: linear-gradient(180deg, #FFFFFF 49.52%, #99BBE1 100%);
-	--sava-gradient-sunrise: linear-gradient(90deg, #F2CBCB 0%, #F6D7B9 100%);
-	--sava-gradient-dark: linear-gradient(0deg, #262524 0%, #545351 100%);
-}
-
-/* ============================================================================
-   SAVA HARD WIDTH CAP (site-wide, installed 2026-07-01)
-   The Liquify template scales the root font-size fluidly with the viewport
-   (html { font-size: calc(0.8125rem + 0.20833vw) } in its global styles), so
-   85rem containers grow past 1360px on large monitors (e.g. 1540px @ 2455px).
-   This freezes rem at 16px above the 1440px design width → all 85rem
-   containers cap at exactly 1360px and type stops scaling up.
-   TO REVERT to fluid scaling: delete THIS BLOCK ONLY, commit, swap the hash.
-   Nothing else references or depends on it.
-   ============================================================================ */
-@media (min-width: 1440px) {
-	html { font-size: 16px !important; }
-}
-
-/* ===== SAVA Link Card ===== */
-
-.sava-link-card:hover .sava-link-card_button {
-	background-color: var(--_sava-color-styles---white);
-	border-color: var(--_sava-color-styles---white);
-}
-
-/* ===== SAVA Shop by Benefit ===== */
-
-.sava-shop-by-benefit_card::before {
-	content: '';
-	position: absolute;
-	inset: 0;
-	background: var(--sava-gradient-light-peach-fade);
-	opacity: 0;
-	transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-	border-radius: inherit;
-	pointer-events: none;
-	z-index: 0;
-}
-.sava-shop-by-benefit_card:hover::before {
-	opacity: 1;
-}
-.sava-shop-by-benefit_card-content {
-	position: relative;
-	z-index: 1;
-}
-.sava-shop-by-benefit_card:hover .sava-shop-by-benefit_card-arrow {
-	opacity: 1;
-	transform: translateX(0);
-	margin-right: 8px;
-}
-
-@media (max-width: 991px) {
-	.sava-shop-by-benefit_grid {
-	  -ms-overflow-style: none;
-	  scrollbar-width: none;
-	}
-	.sava-shop-by-benefit_grid::-webkit-scrollbar {
-	  display: none;
-	}
-}
-
-/* ===== SAVA Ingredients Promise ===== */
-
-.sava-ingredients-callouts_modal-overlay.is-open {
-	display: flex;
-}
-
-.sava-ingredients-callouts_claims::-webkit-scrollbar,
-.sava-ingredients-callouts_ingredients-grid::-webkit-scrollbar {
-	display: none;
-}
-.sava-ingredients-callouts_claims,
-.sava-ingredients-callouts_ingredients-grid {
-	-ms-overflow-style: none;
-	scrollbar-width: none;
-}
-
-.sava-ingredients-callouts_button:hover,
-.sava-product-card_button:hover {
-	background-color: var(--_sava-color-styles---soft-black);
-	color: var(--_sava-color-styles---white);
-}
-
-/* Hide Product Tags toggle (merchant-controlled via section setting) */
-[data-sava-hide-tags="true"] .sava-product-card_tags {
-	display: none;
-}
-
-/* ===== SAVA Footer ===== */
-
-.sava-footer_form-input::placeholder { color: rgba(248, 248, 248, 0.7); }
-.sava-footer_form-input::-webkit-input-placeholder { color: rgba(248, 248, 248, 0.7); }
-
-.sava-footer form,
-.sava-footer .w-form,
-.sava-footer .sava-footer_form,
-.sava-footer .sava-footer_form-wrapper {
-	position: relative;
-}
-
-.sava-footer .sava-footer_form-submit,
-.sava-footer input[type="submit"].sava-footer_form-submit {
-	position: absolute !important;
-	top: 50% !important;
-	right: 4px !important;
-	transform: translateY(-50%) !important;
-	width: 32px !important;
-	height: 32px !important;
-	padding: 0 !important;
-	margin: 0 !important;
-	border: 0 !important;
-	background-color: transparent !important;
-	background-image: url('https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a001adb40613842167d0f24_sava-arrow-up-right.svg') !important;
-	background-size: 22px 22px !important;
-	background-position: center !important;
-	background-repeat: no-repeat !important;
-	color: transparent !important;
-	font-size: 0 !important;
-	line-height: 0 !important;
-	text-indent: -9999px !important;
-	overflow: hidden !important;
-	cursor: pointer !important;
-	-webkit-appearance: none !important;
-	appearance: none !important;
-	border-radius: 0 !important;
-	box-shadow: none !important;
-}
-
-.sava-footer .w-form-done,
-.sava-footer .w-form-fail {
-	background-color: transparent !important;
-	padding: 12px 0 !important;
-	border: 0 !important;
-}
-
-.sava-footer_col-heading::after {
-	content: '';
-	width: 10px;
-	height: 10px;
-	border-right: 2px solid currentColor;
-	border-bottom: 2px solid currentColor;
-	transform: rotate(45deg);
-	transition: transform 0.3s ease;
-	display: none;
-	margin-left: 8px;
-	flex-shrink: 0;
-}
-@media (max-width: 767px) {
-	.sava-footer_col-heading::after { display: inline-block; }
-	.sava-footer_col-heading[aria-expanded="true"]::after { transform: rotate(-135deg); }
-}
-
-/* ===== SAVA Rewards + Promotional Banner ===== */
-
-@keyframes sava-marquee {
-	from { transform: translateX(0); }
-	to   { transform: translateX(-50%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-	.sava-banner_track { animation: none !important; }
-}
-
-.sava-banner:hover .sava-banner_track { animation-play-state: paused; }
-
-.sava-rewards_button-primary:hover {
-	background-color: var(--_sava-color-styles---white) !important;
-	color: var(--_sava-color-styles---soft-black) !important;
-}
-
-.sava-rewards_button-secondary:hover {
-	background-color: var(--_sava-color-styles---soft-black) !important;
-	color: var(--_sava-color-styles---white) !important;
-}
-
-.sava-rewards_card:hover,
-.sava-rewards a.sava-rewards_card:hover {
-	background-color: transparent !important;
-	background-image: linear-gradient(180deg, rgba(248, 248, 248, 0) 49.52%, #F8F8F8 100%) !important;
-}
-
-/* ===== SAVA Shop by Product ===== */
-
-.sava-shop-by-product_card::before {
-	content: '';
-	position: absolute;
-	inset: 0;
-	background: linear-gradient(180deg, #FFFFFF 49.52%, var(--card-hover-end, #EDE087) 100%);
-	opacity: 0;
-	transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-	border-radius: inherit;
-	pointer-events: none;
-	z-index: 0;
-}
-.sava-shop-by-product_card:hover::before {
-	opacity: 1;
-}
-
-.sava-shop-by-product_card:hover .sava-shop-by-product_logo {
-	transform: translateY(-20px);
-}
-
-.sava-shop-by-product_card:hover .sava-shop-by-product_category {
-	opacity: 1;
-	transform: translateY(0);
-}
-.sava-shop-by-product_card:hover .sava-shop-by-product_category:nth-child(1) { transition-delay: 0.3s; }
-.sava-shop-by-product_card:hover .sava-shop-by-product_category:nth-child(2) { transition-delay: 0.6s; }
-.sava-shop-by-product_card:hover .sava-shop-by-product_category:nth-child(3) { transition-delay: 0.9s; }
-.sava-shop-by-product_card:hover .sava-shop-by-product_category:nth-child(4) { transition-delay: 1.2s; }
-.sava-shop-by-product_card:hover .sava-shop-by-product_category:nth-child(5) { transition-delay: 1.5s; }
-
-.sava-shop-by-product_category {
-	transition-delay: 0s;
-}
-
-/* ===== SAVA Referral Bonus ===== */
-
-.sava-referral-bonus form,
-.sava-referral-bonus .w-form,
-.sava-referral-bonus .sava-referral-bonus_form-wrapper {
-	position: relative;
-}
-
-.sava-referral-bonus .sava-referral-bonus_form-submit,
-.sava-referral-bonus input[type="submit"].sava-referral-bonus_form-submit {
-	position: absolute !important;
-	top: 50% !important;
-	right: 4px !important;
-	transform: translateY(-50%) !important;
-	width: 28px !important;
-	height: 28px !important;
-	padding: 0 !important;
-	margin: 0 !important;
-	border: 0 !important;
-	border-radius: 50% !important;
-	background-color: var(--_sava-color-styles---soft-black) !important;
-	background-image: url('https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a001adb40613842167d0f24_sava-arrow-up-right.svg') !important;
-	background-size: 14px 14px !important;
-	background-position: center !important;
-	background-repeat: no-repeat !important;
-	color: transparent !important;
-	font-size: 0 !important;
-	line-height: 0 !important;
-	text-indent: -9999px !important;
-	overflow: hidden !important;
-	cursor: pointer !important;
-	-webkit-appearance: none !important;
-	appearance: none !important;
-	box-shadow: none !important;
-}
-
-.sava-referral-bonus_form-input::placeholder { color: rgba(38, 37, 36, 0.6); }
-.sava-referral-bonus_form-input::-webkit-input-placeholder { color: rgba(38, 37, 36, 0.6); }
-
-.sava-referral-bonus .w-form-done,
-.sava-referral-bonus .w-form-fail {
-	background-color: transparent !important;
-	padding: 12px 0 !important;
-	border: 0 !important;
-}
-
-/* ===== SAVA Best Sellers ===== */
-
-/* Card hover lift — scoped so Ingredients Promise modal cards are unaffected */
-.sava-best-sellers .sava-product-card {
-	transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.sava-best-sellers .sava-product-card:hover {
-	transform: translateY(-4px);
-}
-
-/* Equal-height cards in the carousel + cart button anchored to card bottom.
-   Targets Swiper's own .swiper-wrapper / .swiper-slide classes (NOT the
-   Webflow _swiper-slide class) — avoids putting display:flex on the slide,
-   which breaks native <select> rendering in mobile WebKit. */
-.sava-best-sellers_swiper .swiper-wrapper {
-	align-items: stretch;
-}
-.sava-best-sellers_swiper .swiper-slide {
-	height: auto;
-}
-.sava-best-sellers_swiper .swiper-slide > .sava-product-card {
-	height: 100%;
-	min-height: 100%;
-}
-/* Push the form (containing variant dropdown + cart button) to the bottom of
-   each card so cart buttons align across all cards regardless of content. */
-.sava-best-sellers .sava-product-card form {
-	margin-top: auto;
-}
-
-/* Force carousel arrows visible even when Swiper applies its lock class
-   (Swiper miscalculates slide overflow at mobile during init). */
-.sava-best-sellers_carousel-btn.swiper-button-lock {
-	display: inline-flex !important;
-	opacity: 1 !important;
-}
-
-/* Cart button — default: "Add to Cart" text on the left + small black "+" circle on the right.
-   Hover: a black fill (::before pseudo) expands LEFT from the circle to engulf the text → continuous black pill with white text + white +. */
-.sava-best-sellers_card-cart-button {
-	position: relative;
-	overflow: hidden;
-}
-
-/* Expanding fill — constant border-radius (clamps to height/2 = pill always).
-   Only width transitions, so the right edge stays nicely rounded the entire animation. */
-.sava-best-sellers_card-cart-button::before {
-	content: '';
-	position: absolute;
-	top: 50%;
-	right: 0;
-	width: 1.75rem;
-	height: 1.75rem;
-	transform: translateY(-50%);
-	background-color: var(--_sava-color-styles---soft-black);
-	border-radius: 9999px;
-	transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-	z-index: 0;
-	pointer-events: none;
-}
-.sava-best-sellers .sava-product-card:hover .sava-best-sellers_card-cart-button::before,
-.sava-best-sellers_card-cart-button:hover::before,
-.sava-best-sellers_card-cart-button:focus-visible::before {
-	width: 100%;
-}
-
-/* Label color flips to soft-white when the black fill expands behind it */
-.sava-best-sellers_card-cart-label {
-	transition: color 0.3s ease;
-}
-.sava-best-sellers .sava-product-card:hover .sava-best-sellers_card-cart-label,
-.sava-best-sellers_card-cart-button:hover .sava-best-sellers_card-cart-label {
-	color: var(--_sava-color-styles---soft-white);
-}
-
-/* Optical nudge — only the "+" icon needs adjustment in production.
-   Gibson positions "+" slightly below cap-letter center within its line box.
-   -1px brings it visually flush with the "Add to Cart" cap-letter baseline.
-   Label gets no transform (it aligns naturally via matching line-height). */
-.sava-best-sellers_card-cart-icon {
-	transform: translateY(-1px);
-}
-
-/* Mobile: shorten cart button label from "Add to Cart" → "Add" so it fits
-   beside the variant dropdown on a single row. Uses inline-flex + align-items
-   center for reliable vertical centering of "Add" — doesn't rely on font
-   baseline math (which gets unpredictable with font-size: 0 parent). */
-@media (max-width: 767px) {
-	.sava-best-sellers_card-cart-label {
-	  font-size: 0;
-	  line-height: 1;
-	  display: inline-flex;
-	  align-items: center;
-	  height: 1.75rem;
-	}
-	.sava-best-sellers_card-cart-label::before {
-	  content: "Add";
-	  font-size: 0.875rem;
-	  line-height: 1;
-	}
-}
-
-/* Carousel arrow buttons scale on hover */
-.sava-best-sellers_carousel-btn {
-	transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.sava-best-sellers_carousel-btn:hover {
-	transform: scale(1.05);
-}
-
-/* Category card hover: image visible by default, dark overlay fades IN on hover */
-.sava-best-sellers_category-overlay {
-	transition: opacity 0.4s ease;
-}
-.sava-best-sellers_category:hover .sava-best-sellers_category-overlay {
-	opacity: 0.6;
-}
-
-/* Variant select — strip browser's native chevron. The custom chevron lives
-   on the wrap's ::after (below), not on the select, because SVG data URLs
-   get corrupted somewhere between Webflow and Shopify conversion. */
-.sava-best-sellers_card-variant-select {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	background-image: none;
-}
-
-.sava-best-sellers_card-variant-select::-ms-expand {
-	display: none;
-}
-
-.sava-best-sellers_card-variant-select:focus {
-	outline: 1px solid var(--_sava-color-styles---soft-black);
-	outline-offset: 2px;
-}
-
-.sava-best-sellers_card-variant-select:-moz-focusring {
-	color: transparent;
-	text-shadow: 0 0 0 var(--_sava-color-styles---soft-black);
-}
-
-/* Custom chevron via pure CSS border-trick — two borders rotated 45deg
-   form a "v" shape. No SVG, no data URLs, no font dependency, no Webflow
-   parser issues. Wrap has position: relative (set in Webflow Designer). */
-.sava-best-sellers_card-variant-wrap::after {
-	content: '';
-	position: absolute;
-	right: 0.85rem;
-	top: 50%;
-	width: 6px;
-	height: 6px;
-	border-right: 1.5px solid var(--_sava-color-styles---soft-black);
-	border-bottom: 1.5px solid var(--_sava-color-styles---soft-black);
-	transform: translateY(-65%) rotate(45deg);
-	pointer-events: none;
-}
-
-/* ====================================================================
-   SAVA MEGA MENU
-   ==================================================================== */
-
-/* --- DROPDOWN WRAPPER + TOGGLE -------------------------------------- */
-.sava-mega-menu_dropdown {
-  position: static; /* lets DropdownList span full header width */
-}
-
-.sava-mega-menu_dropdown .nav_dropdown-toggle,
-.sava-mega-menu_dropdown .nav_dropdown-toggle\ 2 {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.75rem 1rem;
-  font-size: 16px;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.sava-mega-menu_dropdown .nav_dropdown-toggle p,
-.sava-mega-menu_dropdown .nav_dropdown-toggle\ 2 p {
-  margin: 0;
-  font-family: 'Gelica', serif;
-  font-weight: 300;
-  font-size: 16px;
-  color: #000;
-}
-
-.sava-mega-menu_dropdown .dropdown-icon {
-  display: inline-flex;
-  transition: transform 0.3s ease;
-}
-
-.sava-mega-menu_dropdown.w--open .dropdown-icon {
-  transform: rotate(180deg);
-}
-
-/* --- DROPDOWN LIST POSITIONING --------------------------------------
-   position: fixed makes the dropdown-list element ITSELF span the full
-   viewport — not just the toggle/nav-menu width. This is critical for
-   hover detection: Webflow IX2 listens for hover on the dropdown-list,
-   so its bounds must match the visible content area or diagonal mouse
-   movements (toggle → right-side cards) close the dropdown prematurely.
-
-   --sava-mega-menu-top sets where the dropdown starts vertically:
-	 78px = navbar only
-	 126px = navbar (78px) + rotating banner (48px)                    */
-:root {
-  --sava-mega-menu-top: 78px;
-}
-
-.sava-mega-menu_dropdown-list {
-  position: fixed !important;
-  top: var(--sava-mega-menu-top, 78px) !important;
-  left: 0 !important;
-  right: 0 !important;
-  width: 100vw !important;
-  background: var(--_sava-color-styles---soft-white, #F8F8F8) !important;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.06) !important;
-  border-top: 1px solid rgba(0,0,0,0.06) !important;
-  overflow: visible !important;
-  z-index: 100;
-}
-
-/* Background now lives directly on the dropdown-list — no more ::before
-   pseudo trick (which only extended visual but not hover bounds).      */
-.sava-mega-menu_dropdown-list::before {
-  content: none !important;
-}
-
-/* --- INNER (matches padding-global 5 — 2.5rem horizontal padding,
-   same as all other SAVA page sections + the updated navbar)
-   max-width: 1360px + centered = same content rails as the SAVA logo /
-   body content, so the dropdown anchors visually to the page grid on
-   wide monitors instead of stretching edge-to-edge. On narrower
-   viewports the 2.5rem padding is the floor.                          */
-.sava-mega-menu_inner {
-  position: relative;
-  max-width: 1360px;
-  margin: 0 auto;
-  padding: 44px 2.5rem 53px;
-  z-index: 1;
-}
-
-/* Override container-large's max-width inside the dropdown so it
-   doesn't constrain content further — the inner's 2.5rem padding is
-   now the single source of horizontal alignment.                       */
-.sava-mega-menu_inner .container-large-3 {
-  max-width: none !important;
-  margin: 0 !important;
-  width: 100% !important;
-}
-
-/* --- GRID PER DROPDOWN ---------------------------------------------- */
-.sava-mega-menu_grid {
-  display: grid;
-  gap: 48px;
-  position: relative;
-  align-items: start;
-}
-
-/* Shop All:  pills (158px) | col | col | col | featured img
-   minmax() forces content cols to fit longest link text on one line.  */
-.sava-mega-menu_dropdown.is-shop-all .sava-mega-menu_grid,
-.sava-mega-menu_grid.is-shop-all {
-  grid-template-columns: 158px minmax(200px, 1fr) minmax(200px, 1fr) minmax(200px, 1fr) 293px;
-}
-
-/* Shop by Benefit:  intro (220px) | benefits (2 col flex) | featured img */
-.sava-mega-menu_dropdown.is-shop-by-benefit .sava-mega-menu_grid,
-.sava-mega-menu_grid.is-shop-by-benefit,
-.sava-mega-menu_grid.is-benefits {
-  grid-template-columns: 220px minmax(280px, 1fr) 293px;
-}
-
-/* Learn:  pills (158px) | col | col | featured (293px) | featured (293px)
-   Featured card columns are fixed-width to match Shop by Benefit's
-   featured image (293×308) — keeps card sizing consistent across
-   dropdowns and gives the 1fr content cols their share of the space. */
-.sava-mega-menu_dropdown.is-learn .sava-mega-menu_grid,
-.sava-mega-menu_grid.is-learn {
-  grid-template-columns: 158px minmax(180px, 1fr) minmax(180px, 1fr) 293px 293px;
-}
-
-/* --- VERTICAL DIVIDERS BETWEEN COLUMNS ------------------------------ */
-.sava-mega-menu_grid > *:not(.sava-mega-menu_img-card-wrap):not(.sava-mega-menu_learn-card-wrap):not(:first-child) {
-  position: relative;
-}
-
-.sava-mega-menu_grid > *:not(.sava-mega-menu_img-card-wrap):not(.sava-mega-menu_learn-card-wrap):not(:first-child)::before {
-  content: '';
-  position: absolute;
-  top: -14px;
-  bottom: -14px;
-  left: -24px;
-  width: 1px;
-  background: rgba(38,37,36,0.15);
-}
-
-/* --- PILLS COLUMN --------------------------------------------------- */
-.sava-mega-menu_pills-col {
-  display: flex;
-  flex-direction: column;
-  gap: 13px;
-  align-items: stretch;
-}
-
-/* --- PILL (base) ---------------------------------------------------- */
-.sava-mega-menu_pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 158px;
-  height: 30px;
-  border: 0.75px solid var(--_sava-color-styles---mid-grey, #DEDDD7);
-  background: #FFFFFF;
-  color: var(--_sava-color-styles---soft-black, #262524);
-  border-radius: 10px;
-  font-family: 'Gibson', sans-serif;
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: 2.1px;
-  text-transform: uppercase;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-}
-
-.sava-mega-menu_pill:hover {
-  border-color: var(--_sava-color-styles---soft-black, #262524);
-}
-
-/* --- PILL (dark variant) -------------------------------------------- */
-.sava-mega-menu_pill.is-dark {
-  background: var(--_sava-color-styles---soft-black, #262524);
-  color: #FFFFFF;
-  border-color: var(--_sava-color-styles---soft-black, #262524);
-}
-
-.sava-mega-menu_pill.is-dark:hover {
-  background: #000;
-}
-
-/* --- INTRO COL (Shop by Benefit) ----------------------------------- */
-.sava-mega-menu_intro-col {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.sava-mega-menu_intro-heading {
-  font-family: 'Gelica', serif;
-  font-style: italic;
-  font-weight: 300;
-  font-size: 20px;
-  line-height: 1.2;
-  color: var(--_sava-color-styles---soft-black, #262524);
-  margin: 0;
-}
-
-.sava-mega-menu_intro-body {
-  font-family: 'Gibson', sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--_sava-color-styles---soft-black, #262524);
-  margin: 0 0 20px 0;
-  max-width: 200px;
-}
-
-/* --- CONTENT COLUMNS (Shop All & Learn) ----------------------------- */
-.sava-mega-menu_column {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.sava-mega-menu_column-heading {
-  font-family: 'Gelica', serif;
-  font-style: italic;
-  font-weight: 300;
-  font-size: 20px;
-  line-height: 1.2;
-  color: var(--_sava-color-styles---soft-black, #262524);
-  margin: 0;
-  white-space: nowrap;
-}
-
-.sava-mega-menu_column-links {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-/* --- BENEFITS LIST (Shop by Benefit) -------------------------------- */
-.sava-mega-menu_benefits-list {
-  column-count: 2;
-  column-gap: 48px;
-}
-
-.sava-mega-menu_benefits-list .sava-mega-menu_link {
-  display: block;
-  margin-bottom: 6px;
-  break-inside: avoid;
-}
-
-/* --- LINK ITEMS (shared) --------------------------------------------
-   Arrow lives in the negative space (column gap) — appears on hover
-   WITHOUT pushing the link or expanding the column.
-   CSS escape \2192 used instead of literal → to survive Webflow's
-   HTML-entity escaping in the head editor.                              */
-.sava-mega-menu_link {
-  position: relative;
-  display: inline-block;
-  font-family: 'Gibson', sans-serif;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--_sava-color-styles---soft-black, #262524);
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.sava-mega-menu_link::before {
-  content: '';
-  position: absolute;
-  left: -22px;
-  top: 50%;
-  width: 16px;
-  height: 12px;
-  transform: translateY(-50%);
-  background-image: url("https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a1bb0637682ee1bfcf2da24_link-hover-arrow.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.sava-mega-menu_link:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-.sava-mega-menu_link:hover::before {
-  opacity: 1;
-}
-
-/* --- FEATURED IMAGE CARD (Shop All / Shop by Benefit) --------------- */
-.sava-mega-menu_img-card-wrap {
-  display: block !important;
-  min-height: 308px !important;
-}
-
-.sava-mega-menu_img-card,
-.sava-mega-menu_img-card.w-inline-block,
-a.sava-mega-menu_img-card {
-  display: block !important;
-  width: 293px !important;
-  height: 308px !important;
-  min-height: 308px !important;
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-  text-decoration: none;
-}
-
-.sava-mega-menu_img-card-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.sava-mega-menu_img-card:hover .sava-mega-menu_img-card-image {
-  transform: scale(1.04);
-}
-
-/* --- LEARN FEATURED CARD (overlay + heading + arrow) ----------------
-   Fixed 293×308 dimensions to match Shop by Benefit's featured image.
-   !important overrides Webflow's w-inline-block default that would
-   otherwise collapse the card inside the grid cell.                   */
-.sava-mega-menu_learn-card-wrap {
-  display: block !important;
-  width: 293px !important;
-  min-height: 308px !important;
-}
-
-.sava-mega-menu_learn-card,
-.sava-mega-menu_learn-card.w-inline-block,
-a.sava-mega-menu_learn-card {
-  position: relative;
-  display: block !important;
-  width: 293px !important;
-  height: 308px !important;
-  min-height: 308px !important;
-  border-radius: 10px;
-  overflow: hidden;
-  text-decoration: none;
-  color: var(--_sava-color-styles---soft-white, #F8F8F8);
-}
-
-.sava-mega-menu_learn-card-image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.sava-mega-menu_learn-card:hover .sava-mega-menu_learn-card-image {
-  transform: scale(1.04);
-}
-
-.sava-mega-menu_learn-card-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.10) 35%, rgba(0,0,0,0.70) 100%);
-  pointer-events: none;
-}
-
-.sava-mega-menu_learn-card-content {
-  position: absolute;
-  left: 20px;
-  right: 20px;
-  bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  color: var(--_sava-color-styles---soft-white, #F8F8F8);
-}
-
-.sava-mega-menu_learn-card-heading {
-  font-family: 'Gelica', serif;
-  font-weight: 300;
-  font-size: 28px;
-  line-height: 1.1;
-  color: var(--_sava-color-styles---soft-white, #F8F8F8);
-  margin: 0;
-}
-
-.sava-mega-menu_learn-card-subtitle {
-  font-family: 'Gibson', sans-serif;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 20px;
-  color: var(--_sava-color-styles---soft-white, #F8F8F8);
-  margin: 0;
-}
-
-/* Arrow button = single SVG (circle + arrow combined). Rotating the
-   whole element on hover keeps perfect centering — no fiddly inner
-   positioning. -45° CCW turns the NE arrow ↗ into E →.                 */
-.sava-mega-menu_learn-card-arrow {
-  position: absolute !important;
-  top: 16px !important;
-  right: 16px !important;
-  width: 46px !important;
-  height: 46px !important;
-  background-image: url("https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a1bbd8c6d4d91ecdbd173a5_Learn-Menue-Arrow-Button.svg") !important;
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-color: transparent !important;
-  border: none !important;
-  border-radius: 0 !important;
-  display: block !important;
-  pointer-events: none;
-  z-index: 2;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Remove the prior inner pseudo (no longer needed with combined SVG) */
-.sava-mega-menu_learn-card-arrow::before {
-  content: none !important;
-}
-
-/* Hover: entire button rotates +45° (CW) so ↗ becomes →, AND the
-   background SVG swaps to the filled-white-with-dark-arrow variant.
-   Uses uploaded Webflow asset (CDN URL) instead of data URI for
-   reliability through the Liquiflow conversion pipeline.               */
-.sava-mega-menu_learn-card:hover .sava-mega-menu_learn-card-arrow {
-  background-image: url("https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a1cb687b5cdd3b7b555d3f4_Learn-Menue-Arrow-Button-Hover.svg") !important;
-  transform: rotate(45deg) !important;
-}
-
-/* Hover overlay: significantly lighter so image brightens and the
-   white arrow button pops with high contrast (per Figma hover state). */
-.sava-mega-menu_learn-card:hover .sava-mega-menu_learn-card-overlay {
-  background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,0.20) 100%);
-}
-
-/* --- MOBILE PILLS BAR (default hidden on desktop) ------------------ */
-.sava-mega-menu_mobile-pills {
-  display: none;
-}
-
-/* ====================================================================
-   SAVA MEGA MENU — NARROW DESKTOP (992px – 1400px)
-   Scales pills col + gaps + featured-image down so the last column
-   never gets clipped before the tablet breakpoint kicks in.
-   Trigger raised from 1200px → 1400px because the Learn grid (5 cols
-   incl. two 293px featured cards + 4×48px gaps + 2×40px padding)
-   needs ~1376px to render the standard template without clipping.
-   Anything below 1400px viewport gets the narrow template,
-   which fits comfortably down to the 991px tablet breakpoint.        */
-@media (max-width: 1400px) and (min-width: 992px) {
-  .sava-mega-menu_inner {
-	padding: 32px 2.5rem 40px;
-  }
-
-  .sava-mega-menu_grid {
-	gap: 28px;
-  }
-
-  .sava-mega-menu_dropdown.is-shop-all .sava-mega-menu_grid,
-  .sava-mega-menu_grid.is-shop-all {
-	grid-template-columns: 140px 1fr 1fr 1fr 240px;
-  }
-
-  .sava-mega-menu_dropdown.is-shop-by-benefit .sava-mega-menu_grid,
-  .sava-mega-menu_grid.is-shop-by-benefit,
-  .sava-mega-menu_grid.is-benefits {
-	grid-template-columns: 200px 1fr 240px;
-  }
-
-  .sava-mega-menu_dropdown.is-learn .sava-mega-menu_grid,
-  .sava-mega-menu_grid.is-learn {
-	grid-template-columns: 140px minmax(140px, 1fr) minmax(140px, 1fr) minmax(200px, 1fr) minmax(200px, 1fr);
-  }
-
-  .sava-mega-menu_pill {
-	width: 140px;
-  }
-
-  /* !important required to override the base width: 293px !important
-	 declaration on .sava-mega-menu_img-card. Without it the cards
-	 overflow their 240px grid cells at 992-1400px viewport widths.    */
-  .sava-mega-menu_img-card,
-  .sava-mega-menu_img-card.w-inline-block,
-  a.sava-mega-menu_img-card {
-	width: 240px !important;
-	height: 260px !important;
-	min-height: 260px !important;
-  }
-
-  .sava-mega-menu_img-card-wrap {
-	min-height: 260px !important;
-  }
-
-  /* Learn-card height shrinks here too, but width override happens in
-	 the Learn-stack block below (≤1441px) which has higher specificity. */
-  .sava-mega-menu_learn-card {
-	height: 260px !important;
-  }
-
-  .sava-mega-menu_learn-card-heading {
-	font-size: 22px;
-  }
-
-  .sava-mega-menu_benefits-list {
-	column-gap: 28px;
-  }
-}
-
-/* ====================================================================
-   SAVA MEGA MENU — LEARN STACK (992px – 1441px)
-   At mid-desktop widths the Learn dropdown switches from a 5-column
-   layout to a 4-column layout where the two 293px featured cards
-   stack vertically in column 4 (each ~175px tall, landscape ratio).
-   This reads as an intentional layout shift — not a compression —
-   and matches the pattern used by larger commerce mega menus
-   (J.Crew, Nordstrom, Sephora) when horizontal space gets tight.
-   Placed AFTER the narrow-desktop block so its rules win the cascade
-   wherever the two ranges overlap (992-1400px).                       */
-@media (max-width: 1441px) and (min-width: 992px) {
-  .sava-mega-menu_dropdown.is-learn .sava-mega-menu_grid,
-  .sava-mega-menu_grid.is-learn {
-	grid-template-columns: 140px minmax(140px, 1fr) minmax(140px, 1fr) 293px;
-	grid-template-rows: auto auto;
-	column-gap: 32px;
-	row-gap: 16px;
-  }
-
-  /* Pills col + 2 content cols span both rows so card column has
-	 breathing space without the other content jumping rows.           */
-  .sava-mega-menu_grid.is-learn > .sava-mega-menu_pills-col,
-  .sava-mega-menu_grid.is-learn > .sava-mega-menu_column {
-	grid-row: 1 / span 2;
-  }
-
-  /* Both featured cards anchor to column 4 → grid auto-flow stacks
-	 them on rows 1 and 2 in DOM order.                                */
-  .sava-mega-menu_grid.is-learn > .sava-mega-menu_learn-card-wrap {
-	grid-column: 4;
-  }
-
-  /* Cards shrink to landscape proportion (293×175). !important needed
-	 to beat the base width: 293px / height: 308px !important rules
-	 AND the narrow-desktop block's height: 260px !important.          */
-  .sava-mega-menu_grid.is-learn .sava-mega-menu_learn-card-wrap {
-	width: 293px !important;
-	min-height: 175px !important;
-  }
-  .sava-mega-menu_grid.is-learn .sava-mega-menu_learn-card,
-  .sava-mega-menu_grid.is-learn a.sava-mega-menu_learn-card,
-  .sava-mega-menu_grid.is-learn .sava-mega-menu_learn-card.w-inline-block {
-	width: 293px !important;
-	height: 175px !important;
-	min-height: 175px !important;
-  }
-
-  /* Heading scales with the smaller card to keep proportions balanced. */
-  .sava-mega-menu_grid.is-learn .sava-mega-menu_learn-card-heading {
-	font-size: 22px;
-  }
-}
-
-/* ====================================================================
-   SAVA MEGA MENU — MOBILE RESPONSIVE OVERRIDES
-   ==================================================================== */
-@media (max-width: 991px) {
-  /* NavbarMenu becomes a full drawer */
-  .nav_menu.is-page-height-tablet,
-  .nav_menu\ 2.is-page-height-tablet {
-	display: flex !important;
-	flex-direction: column;
-	height: 100vh;
-	overflow-y: auto;
-	padding: 0;
-	background: var(--_sava-color-styles---soft-white, #F8F8F8);
-  }
-
-  /* Accordion row — divider sits under the title (border on toggle, not
-	 on the dropdown wrapper). Vertical margin produces Figma's airy
-	 ~135px row-to-row spacing.                                       */
-  .sava-mega-menu_dropdown {
-	width: 100%;
-	position: static;
-	margin-bottom: 56px;
-  }
-
-  .sava-mega-menu_dropdown .nav_dropdown-toggle,
-  .sava-mega-menu_dropdown .nav_dropdown-toggle\ 2 {
-	width: 100%;
-	justify-content: space-between;
-	padding: 32px 20px 10px;
-	border-bottom: 1px solid rgba(0,0,0,0.15);
-  }
-
-  /* Force Gelica Light on accordion titles — explicit family/weight
-	 defeats any Designer mobile-breakpoint override; targets both <p>
-	 and direct toggle in case text isn't wrapped.                    */
-  .sava-mega-menu_dropdown .nav_dropdown-toggle,
-  .sava-mega-menu_dropdown .nav_dropdown-toggle\ 2,
-  .sava-mega-menu_dropdown .nav_dropdown-toggle p,
-  .sava-mega-menu_dropdown .nav_dropdown-toggle\ 2 p {
-	font-family: 'Gelica', Georgia, serif !important;
-	font-weight: 300 !important;
-	font-style: normal !important;
-	font-size: 24px !important;
-	line-height: 30px !important;
-	color: var(--_sava-color-styles---soft-black, #262524) !important;
-  }
-
-  /* Dropdown list inline-flow on mobile */
-  .sava-mega-menu_dropdown-list {
-	position: static !important;
-	box-shadow: none !important;
-	border-top: none !important;
-	width: 100% !important;
-	background: transparent;
-  }
-
-  .sava-mega-menu_inner {
-	padding: 4px 24px 20px;
-  }
-
-  /* Grid collapses to single column. Aggressively null grid-template-*
-	 so the hidden pills-col / intro-col / featured cards don't still
-	 allocate horizontal space and push visible content right.         */
-  .sava-mega-menu_grid,
-  .sava-mega-menu_dropdown .sava-mega-menu_grid {
-	display: flex !important;
-	flex-direction: column !important;
-	grid-template-columns: none !important;
-	grid-template-rows: none !important;
-	grid-template-areas: none !important;
-	gap: 20px;
-  }
-  .sava-mega-menu_grid > * {
-	grid-column: auto !important;
-	grid-row: auto !important;
-  }
-
-  /* Hide left pills col + intro col + featured cards on mobile (per Figma) */
-  .sava-mega-menu_dropdown .sava-mega-menu_pills-col,
-  .sava-mega-menu_dropdown .sava-mega-menu_intro-col,
-  .sava-mega-menu_dropdown .sava-mega-menu_img-card-wrap,
-  .sava-mega-menu_dropdown .sava-mega-menu_learn-card-wrap {
-	display: none !important;
-  }
-
-  /* Hide vertical dividers on mobile */
-  .sava-mega-menu_grid > *::before {
-	display: none !important;
-  }
-
-  /* Benefits list collapses to single column on mobile */
-  .sava-mega-menu_benefits-list {
-	column-count: 1 !important;
-  }
-
-  /* Mobile sticky pill bar — 5 pills (4 from linklist + Shop All-dark) */
-  .sava-mega-menu_mobile-pills {
-	display: flex !important;
-	flex-direction: column;
-	gap: 13px;
-	padding: 20px 20px 24px;
-	margin-top: auto;
-	border-top: 1px solid rgba(0,0,0,0.08);
-	background: var(--_sava-color-styles---soft-white, #F8F8F8);
-	position: sticky;
-	bottom: 0;
-	z-index: 2;
-  }
-
-  .sava-mega-menu_mobile-pills .sava-mega-menu_pill {
-	width: 100%;
-	height: 34px;
-  }
-
-  /* DRAWER-OPEN STATE — hide SAVA logo, reflow cart+profile to top-left.
-	 Uses .sava-nav-open class set by the tiny JS helper above (more
-	 reliable than :has() across older Safari + iOS).                  */
-  .w-nav.sava-nav-open .nav_logo-link {
-	display: none !important;
-  }
-  .w-nav.sava-nav-open .nav_shop-icons {
-	position: absolute;
-	left: 20px;
-	top: 0;
-	display: flex;
-	align-items: center;
-	gap: 30px;
-	height: 75px;
-	z-index: 102;
-  }
-}
-
-@media (min-width: 992px) {
-  .sava-mega-menu_mobile-pills {
-	display: none !important;
-  }
-}
 
 /* ============================================================
-   SAVA — About Hero pagination bullets
-   `justify-content` intentionally NOT set here — Webflow controls
-   alignment per breakpoint (flex-start on desktop, center on mobile)
+   SAVA — shared GSAP animation library
    ============================================================ */
-.about-hero_pagination {
-  display: flex;
-  gap: 8px;
-}
-.about-hero_pagination-bullet {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: none;
-  padding: 0;
-  background-color: rgba(38, 37, 36, 0.3);
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-.about-hero_pagination-bullet.is-active {
-  background-color: var(--_sava-color-styles---soft-black, #262524);
-  transform: scale(1.2);
-}
-/* Mobile: bullets on dark grey bg need light color */
-@media (max-width: 767px) {
-  .about-hero_pagination-bullet {
-	background-color: rgba(248, 248, 248, 0.3);
+(function() {
+  function init() {
+	if (typeof gsap === 'undefined') return;
+
+	var D = {
+	  'fade-up':         { y: 20, opacity: 0, duration: 0.7, ease: 'expo.out' },
+	  'scale-down':      { scale: 1.05, duration: 0.7, ease: 'expo.out' },
+	  'stagger-fade-up': { y: 20, opacity: 0, duration: 0.7, ease: 'expo.out', stagger: 0.2 },
+	  'hover-scale':     { scale: 1.05, duration: 0.4, ease: 'power2.out', exitEase: 'power2.inOut' },
+	  'hover-rotate':    { rotation: 45, duration: 0.4, ease: 'power2.out', exitEase: 'power2.inOut' },
+	  'hover-lift':      { y: -6, duration: 0.4, ease: 'power2.out', exitEase: 'power2.inOut' }
+	};
+
+	function readNum(el, attr, fallback) {
+	  var v = el.dataset[attr];
+	  return v != null && v !== '' ? parseFloat(v) : fallback;
+	}
+
+	document.querySelectorAll('[data-sava-animate="fade-up"], [data-sava-animate="scale-down"]').forEach(function(el) {
+	  var anim = el.dataset.savaAnimate;
+	  var on = el.dataset.savaOn || 'scroll';
+	  var base = D[anim];
+	  var duration = readNum(el, 'savaDuration', base.duration);
+	  var delay = readNum(el, 'savaDelay', 0);
+	  var ease = el.dataset.savaEase || base.ease;
+	  var fromVars = anim === 'scale-down' ? { scale: base.scale } : { y: base.y, opacity: 0 };
+	  var toVars = anim === 'scale-down'
+		? { scale: 1, duration: duration, ease: ease, delay: delay }
+		: { y: 0, opacity: 1, duration: duration, ease: ease, delay: delay };
+	  gsap.set(el, fromVars);
+	  if (on === 'load') {
+		gsap.to(el, toVars);
+	  } else {
+		var io = new IntersectionObserver(function(entries, obs) {
+		  entries.forEach(function(e) {
+			if (e.isIntersecting) { gsap.to(el, toVars); obs.unobserve(e.target); }
+		  });
+		}, { threshold: 0.1 });
+		io.observe(el);
+	  }
+	});
+
+	document.querySelectorAll('[data-sava-stagger]').forEach(function(group) {
+	  var interval = parseFloat(group.dataset.savaStagger) || 0.2;
+	  var kids = Array.prototype.slice.call(group.children);
+	  gsap.set(kids, { y: 20, opacity: 0 });
+	  var io = new IntersectionObserver(function(entries, obs) {
+		entries.forEach(function(e) {
+		  if (e.isIntersecting) {
+			gsap.to(kids, { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out', stagger: interval });
+			obs.unobserve(e.target);
+		  }
+		});
+	  }, { threshold: 0.1 });
+	  io.observe(group);
+	});
+
+	document.querySelectorAll('[data-sava-animate^="hover-"]').forEach(function(el) {
+	  var anim = el.dataset.savaAnimate;
+	  var base = D[anim] || {};
+	  var duration = readNum(el, 'savaDuration', base.duration || 0.4);
+	  var enterEase = el.dataset.savaEase || base.ease || 'power2.out';
+	  var exitEase = el.dataset.savaExitEase || base.exitEase || 'power2.inOut';
+	  var triggerSel = el.dataset.savaTriggerOn;
+	  var trigger = triggerSel ? el.closest(triggerSel) : el;
+	  if (!trigger) return;
+
+	  var toVars = {};
+	  if (anim === 'hover-scale')  toVars.scale = readNum(el, 'savaScale', base.scale);
+	  if (anim === 'hover-rotate') { toVars.rotation = readNum(el, 'savaRotation', base.rotation); toVars.transformOrigin = '50% 50%'; }
+	  if (anim === 'hover-lift')   toVars.y = readNum(el, 'savaY', base.y);
+	  toVars.duration = duration;
+	  toVars.ease = enterEase;
+
+	  var resetVars = { duration: duration, ease: exitEase };
+	  if ('scale' in toVars)    resetVars.scale = 1;
+	  if ('rotation' in toVars) resetVars.rotation = 0;
+	  if ('y' in toVars)        resetVars.y = 0;
+
+	  gsap.set(el, { scale: 1, rotation: 0, y: 0 });
+	  trigger.addEventListener('mouseenter', function() { gsap.to(el, toVars); });
+	  trigger.addEventListener('mouseleave', function() { gsap.to(el, resetVars); });
+	});
   }
-  .about-hero_pagination-bullet.is-active {
-	background-color: #F8F8F8;
+
+  if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', init);
+  } else {
+	init();
   }
-}
+})();
+
 
 /* ============================================================
-   SAVA — Image container loading state (Option A)
-   Adds a neutral gray fallback bg to all image containers so
-   users see a non-empty rectangle while images load, instead
-   of blank white space. The <img> covers the gray once loaded.
-   Skeleton shimmer animation is Option B — deferred post-launch.
+   SAVA — generalized carousel prev/next scroll
    ============================================================ */
-div[class$="_image-wrap"],
-div[class$="_image"],
-div[class$="_tile"] {
-  background-color: #E5E5E5;
-}
+(function() {
+  var CAROUSELS = [
+	{ prev: 'data-sava-shop-by-benefit-prev', next: 'data-sava-shop-by-benefit-next', grid: '.sava-shop-by-benefit_grid' },
+	{ prev: 'data-sava-claims-prev',          next: 'data-sava-claims-next',          grid: '.sava-ingredients-callouts_claims' },
+	{ prev: 'data-sava-ingredients-prev',     next: 'data-sava-ingredients-next',     grid: '.sava-ingredients-callouts_ingredients-grid' },
+	{ prev: 'data-sava-trusted-prev',         next: 'data-sava-trusted-next',         grid: '.sv-trusted_track' }
+  ];
 
-/* ===========================================================
-   SV Blog image-wrap override
-   Section bg is Tea (#F3E8AD). The product images uploaded by
-   the merchant have transparent backgrounds, so the image-wrap
-   container must be transparent for the Tea section bg to show
-   through. Higher specificity (section.sv-blog .sv-blog_image-wrap)
-   beats the universal _image-wrap gray fallback above.
-   =========================================================== */
-section.sv-blog .sv-blog_image-wrap {
-  background-color: transparent;
-}
-
-/* ===========================================================
-   SAVA Product Card price typography (2026-06-07)
-   Forces Gibson Book across breakpoints — workaround for the
-   Webflow MCP silent-no-op bug that wouldn't accept main-
-   breakpoint writes on the .sava-product-card_price style.
-   =========================================================== */
-.sava-product-card_price,
-.sava-product-card_compare-at-price {
-  font-family: Gibson, sans-serif !important;
-  font-weight: 400 !important;
-  font-size: 15px !important;
-  letter-spacing: normal !important;
-  text-transform: none !important;
-}
-
-@media (max-width: 991px) {
-  .sava-product-card_price,
-  .sava-product-card_compare-at-price {
-	font-size: 14px !important;
-  }
-}
-
-/* ===========================================================
-   SAVA Collections page polish (2026-06-08)
-   - Soft-white page bg so white product cards pop
-   - Mobile card readability: bigger tag pills + title sizing
-   =========================================================== */
-
-/* Page bg: soft-white on collection pages.
-   Liquify Pro converted theme.liquid renders <body> with NO template
-   class, so we can't use body.template-collection. Instead use :has()
-   to detect the section_filter section unique to collection pages.
-   :has() is supported in all current browsers (Chrome 105+, Safari
-   15.4+, Firefox 121+). */
-body:has(section.section_filter),
-body:has([id*="collection_products"]) {
-  background-color: var(--_sava-color-styles---soft-white, #F8F8F8) !important;
-}
-
-/* Belt-and-suspenders: also tint the .main-wrapper since some browser
-   versions may treat body bg differently when html/body chain has
-   computed white. */
-main.main-wrapper:has(section.section_filter) {
-  background-color: var(--_sava-color-styles---soft-white, #F8F8F8) !important;
-}
-
-/* Mobile (≤991px): enlarge tag pills + tighten container offsets */
-@media (max-width: 991px) {
-  .sava-product-card_tag {
-	font-size: 10px !important;
-	padding: 4px 9px !important;
-	letter-spacing: 0.5px !important;
-	line-height: 1.4 !important;
+  function bindCarousel(prevAttr, nextAttr, gridSelector) {
+	document.querySelectorAll('[' + prevAttr + '], [' + nextAttr + ']').forEach(function(btn) {
+	  btn.addEventListener('click', function() {
+		var section = btn.closest('section');
+		if (!section) return;
+		var grid = section.querySelector(gridSelector);
+		if (!grid) return;
+		var card = grid.children[0];
+		if (!card) return;
+		var gap = parseInt(getComputedStyle(grid).columnGap || '16', 10) || 0;
+		var step = card.offsetWidth + gap;
+		var dir = btn.hasAttribute(prevAttr) ? -1 : 1;
+		grid.scrollBy({ left: step * dir, behavior: 'smooth' });
+	  });
+	});
   }
 
-  .sava-product-card_tags {
-	gap: 6px 6px !important;
-	top: 14px !important;
-	left: 14px !important;
-	right: 14px !important;
+  function init() {
+	CAROUSELS.forEach(function(c) { bindCarousel(c.prev, c.next, c.grid); });
   }
 
-  /* Title: enlarge for readability + breathing room above price */
-  .sava-product-card_name {
-	font-size: 15px !important;
-	line-height: 1.3 !important;
-	margin: 0 0 4px 0 !important;
-	overflow-wrap: break-word !important;
-	word-break: normal !important;
+  if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', init);
+  } else {
+	init();
   }
-}
+})();
 
-/* Tiny breakpoint (≤479px): pill padding nudges tighter */
-@media (max-width: 479px) {
-  .sava-product-card_tag {
-	font-size: 10px !important;
-	padding: 3px 7px !important;
-  }
-}
-
-/* ===========================================================
-   SAVA Collections page — mobile layout defensive patch (2026-06-08)
-   Fixes diagnosed from converted CSS inspection:
-   1. .sv-collection-product-card_image-wrap has 63px margin-top
-	  + 90px padding-top + aspect-ratio: 1 → creates 153px of
-	  dead space at top, eating into card height on mobile.
-   2. Title (.sava-product-card_name) is rendered but visually
-	  missing — .heading-style-h4 has a "backwards" mobile rule
-	  from Liquify Pro (font-size: 20px on mobile vs 15px desktop,
-	  documented in pattern doc as known oddity), which combined
-	  with .product-item_text-link's flex layout may push title
-	  out of view.
-   3. Price '$' getting clipped on left edge — overflow constraint
-	  from parent flex container or padding mismatch.
-   Approach: tighten image-wrap proportions at mobile, force
-   title visibility + proper sizing, ensure price row has full
-   width + visible overflow.
-   =========================================================== */
-@media (max-width: 991px) {
-  /* Image-wrap: shrink dead space at mobile so card isn't all image */
-  .sv-collection-product-card_image-wrap {
-	margin-top: 24px !important;
-	padding: 48px 0 0 0 !important;
-  }
-
-  /* Force title visibility — defensive override against Liquify Pro
-	 heading-style-h4 mobile rule + any layout shifts from wrappers */
-  .sava-product-card_name,
-  .heading-style-h4.sava-product-card_name {
-	display: block !important;
-	visibility: visible !important;
-	width: 100% !important;
-	font-size: 15px !important;
-	line-height: 1.3 !important;
-	font-weight: 400 !important;
-	color: var(--_sava-color-styles---soft-black, #262524) !important;
-	margin: 0 0 4px 0 !important;
-	padding: 0 !important;
-	overflow: visible !important;
-	white-space: normal !important;
-	text-overflow: clip !important;
-  }
-
-  /* Container fixes — ensure wrapper doesn't constrain content */
-  .product-item_left {
-	display: block !important;
-	width: 100% !important;
-	margin-right: 0 !important;
-	overflow: visible !important;
-  }
-
-  /* Text link must use full width + allow content to flow */
-  .product-item_text-link {
-	width: 100% !important;
-	display: flex !important;
-	flex-direction: column !important;
-	align-items: flex-start !important;
-	overflow: visible !important;
-  }
-
-  /* Margin-xsmall wrapper (user's recent edit) — ensure no
-	 left/right margin that would push content out of view */
-  .product-item_text-link > .margin-bottom.margin-xsmall {
-	width: 100% !important;
-	margin-left: 0 !important;
-	margin-right: 0 !important;
-	overflow: visible !important;
-  }
-
-  /* Price row must use full width — fix the $ clip */
-  .sava-product-card_price-row,
-  .product-item_price {
-	width: 100% !important;
-	padding-left: 0 !important;
-	margin-left: 0 !important;
-	overflow: visible !important;
-  }
-}
-
-/* Tiny breakpoint (≤479px): smallest cards get smaller top dead space */
-@media (max-width: 479px) {
-  .sv-collection-product-card_image-wrap {
-	margin-top: 16px !important;
-	padding: 36px 0 0 0 !important;
-  }
-}
-
-/* ===========================================================
-   SAVA Collections page — 2-column mobile grid (2026-06-08)
-   Figma mobile spec shows 2 columns on tiny breakpoint.
-   Converted CSS forces 1 column at ≤479px via:
-	 @media (max-width: 479px) {
-	   .filter_product-list, .product-header_layout {
-		 grid-template-columns: 1fr;
-	   }
-	 }
-   Override that one rule — the layout then inherits the
-   medium-breakpoint 2-column template, which is exactly what
-   Figma wants. Confirmed via inspector live-edit.
-   =========================================================== */
-@media (max-width: 479px) {
-  .filter_product-list {
-	grid-template-columns: 1fr 1fr !important;
-  }
-}
-
-/* ===========================================================
-   SAVA SV Collection Quick Filters (2026-06-08)
-   Pill row above the Collection Hero. Merchant-editable
-   Filter Pill blocks (collection picker + text label).
-   - Desktop: centered flex row (no carousel — 5 pills fit)
-   - Mobile: horizontal scroll with snap, hidden scrollbar
-   - Active state: data-active="true" set by Liquiflow Liquid
-	 comparing block's picked collection to current collection.
-   - Active styling: sava-gradient-light-peach-fade gradient bg
-   - Hover: same gradient (per Figma: "Fill remains once clicked")
-   =========================================================== */
-
-/* Hover + active: gradient bg using existing :root variable */
-.sv-collection-quick-filters_pill:hover,
-.sv-collection-quick-filters_pill[data-active="true"] {
-  background-color: transparent;
-  background-image: var(--sava-gradient-light-peach-fade);
-  border-color: var(--_sava-color-styles---mid-grey, #DEDDD7);
-}
-
-/* Balanced section padding (was 2.5rem top / 1rem bottom — Figma intent
-   is equal vertical breathing room). */
-.sv-collection-quick-filters {
-  padding-top: 1.75rem !important;
-  padding-bottom: 1.75rem !important;
-}
-
-/* Mobile (≤991px): horizontal scroll with snap, hide scrollbar.
-   Track is full-bleed (negate section padding) so the row can
-   scroll edge-to-edge while still snapping to the soft padding. */
-@media (max-width: 991px) {
-  .sv-collection-quick-filters {
-	padding-left: 0 !important;
-	padding-right: 0 !important;
-	padding-top: 1.25rem !important;
-	padding-bottom: 1.25rem !important;
-  }
-
-  .sv-collection-quick-filters_track {
-	justify-content: flex-start;
-	overflow-x: auto;
-	overflow-y: hidden;
-	scroll-snap-type: x mandatory;
-	-ms-overflow-style: none;
-	scrollbar-width: none;
-	padding-left: 5%;
-	padding-right: 5%;
-  }
-
-  .sv-collection-quick-filters_track::-webkit-scrollbar {
-	display: none;
-  }
-
-  .sv-collection-quick-filters_block {
-	scroll-snap-align: start;
-  }
-}
-
-/* ===========================================================
-   SAVA Collections page — Filter sidebar restyle (2026-06-08)
-   Phase 1: visual only. No accordion JS yet (filter groups
-   stay always-expanded). Phase 2 will add click-to-collapse.
-   Matches Figma 234:4773-adjacent frames:
-   - Uppercase InterstateMono headings + chevron + underline
-   - Circle radio icons + italic Gelica option labels
-   - Hide "Products shown" + Search (not in Figma)
-   - Subtler CLEAR ALL link, cleaner active chip + sort select
-   =========================================================== */
-
-/* Hide elements not in Figma design */
-.filter_results-wrapper,
-.filter_form-field-wrapper {
-  display: none !important;
-}
-
-/* Top header row — "Filters" + CLEAR ALL */
-.filter_form-header {
-  display: flex !important;
-  align-items: baseline !important;
-  gap: 14px !important;
-  margin-bottom: 1.5rem !important;
-  padding-bottom: 0.75rem !important;
-  border-bottom: 1px solid var(--_sava-color-styles---mid-grey, #DEDDD7) !important;
-}
-
-.filter_form-header .filter_heading {
-  font-family: Gibson, sans-serif !important;
-  font-weight: 500 !important;
-  font-size: 18px !important;
-  color: var(--_sava-color-styles---soft-black, #262524) !important;
-  margin: 0 !important;
-}
-
-.filter_form-header .button.is-link {
-  font-family: InterstateMono, monospace !important;
-  font-size: 11px !important;
-  font-weight: 400 !important;
-  letter-spacing: 1px !important;
-  text-transform: uppercase !important;
-  color: var(--_sava-color-styles---soft-black, #262524) !important;
-  text-decoration: underline !important;
-  text-underline-offset: 3px !important;
-  padding: 0 !important;
-  background: transparent !important;
-  border: 0 !important;
-  margin-left: auto !important;
-}
-
-/* Filter group container — bottom border per Figma */
-.filter_filter-group {
-  border-bottom: 1px solid var(--_sava-color-styles---mid-grey, #DEDDD7);
-  padding: 0;
-  margin: 0;
-}
-
-/* Filter group heading — uppercase InterstateMono with chevron */
-.filter_filter-group-heading {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  padding: 1.25rem 0 0.75rem 0 !important;
-  margin: 0 !important;
-  cursor: pointer;
-  position: relative;
-}
-
-.filter_filter-group-heading > div {
-  font-family: InterstateMono, monospace !important;
-  font-size: 13px !important;
-  font-weight: 400 !important;
-  letter-spacing: 1.5px !important;
-  text-transform: uppercase !important;
-  color: var(--_sava-color-styles---soft-black, #262524) !important;
-  line-height: 1 !important;
-}
-
-/* Chevron icon — pure CSS border-trick V shape */
-.filter_filter-group-heading::after {
-  content: '';
-  width: 8px;
-  height: 8px;
-  border-right: 1.5px solid var(--_sava-color-styles---soft-black, #262524);
-  border-bottom: 1.5px solid var(--_sava-color-styles---soft-black, #262524);
-  transform: rotate(45deg) translateY(-2px);
-  flex-shrink: 0;
-  margin-left: 12px;
-}
-
-/* Filter options list */
-.filter_list {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 6px !important;
-  padding: 0 0 1.25rem 0 !important;
-  margin: 0 !important;
-}
-
-/* Filter option row — restyle as radio button */
-.filter_form_checkbox {
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px !important;
-  padding: 4px 0 !important;
-  text-decoration: none !important;
-  cursor: pointer;
-  background: transparent !important;
-  border: 0 !important;
-}
-
-/* Replace square checkbox icon with circle radio dot */
-.filter_form_checkbox-icon {
-  width: 14px !important;
-  height: 14px !important;
-  border: 1px solid var(--_sava-color-styles---soft-black, #262524) !important;
-  border-radius: 50% !important;
-  background-color: transparent !important;
-  flex-shrink: 0 !important;
-  position: relative;
-  transition: background-color 0.2s ease;
-}
-
-.filter_form_checkbox-icon.is-checked {
-  background-color: var(--_sava-color-styles---soft-black, #262524) !important;
-  box-shadow: inset 0 0 0 2px #FFFFFF;
-}
-
-/* Filter option label — italic Gelica per Figma */
-.filter_form_checkbox-label {
-  font-family: Gelica, Georgia, serif !important;
-  font-style: italic !important;
-  font-weight: 300 !important;
-  font-size: 16px !important;
-  line-height: 1.4 !important;
-  color: var(--_sava-color-styles---soft-black, #262524) !important;
-  text-transform: none !important;
-  letter-spacing: 0 !important;
-}
-
-/* Disabled filter (no products match) — muted */
-.filter_form_checkbox.is-disabled .filter_form_checkbox-label {
-  opacity: 0.4;
-}
-
-/* Active filter chip — top of feed (e.g. "In stock ×") */
-.filter_tag {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  padding: 6px 14px !important;
-  border: 1px solid var(--_sava-color-styles---soft-black, #262524) !important;
-  border-radius: 999px !important;
-  background: transparent !important;
-  font-family: Gibson, sans-serif !important;
-  font-size: 13px !important;
-  color: var(--_sava-color-styles---soft-black, #262524) !important;
-}
-
-.filter_close {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 14px !important;
-  height: 14px !important;
-  color: var(--_sava-color-styles---soft-black, #262524) !important;
-}
-
-/* Sort select ("Featured" / "Most relevant" dropdown) */
-#sort-by.sort_select,
-.sort_select {
-  font-family: Gibson, sans-serif !important;
-  font-weight: 400 !important;
-  font-size: 13px !important;
-  color: var(--_sava-color-styles---soft-black, #262524) !important;
-  background-color: #FFFFFF !important;
-  border: 1px solid var(--_sava-color-styles---mid-grey, #DEDDD7) !important;
-  border-radius: 6px !important;
-  padding: 8px 32px 8px 14px !important;
-  cursor: pointer;
-}
-
-
-
-/* ===========================================================
-   SAVA SV Trust Points (2026-06-08, revised for Figma fidelity)
-   Section-static row of 3 merchant-editable trust points
-   (icon + Gelica Light label, NOT italic per Figma 212:7142).
-   - Desktop: 3-across with vertical dividers between blocks
-   - Mobile (max-width 767px): stacked vertically with HORIZONTAL
-	 dividers above each non-first block (per mobile Figma)
-   =========================================================== */
-
-/* Label font-style override - Webflow native style was italic
-   by mistake; Figma calls for Gelica Light upright */
-.sv-trust-points_label {
-  font-style: normal !important;
-}
-
-/* Let wide icons (e.g. NSF Certified Sport) keep their natural aspect ratio
-   instead of being squashed into a 56px square — height stays 56, width auto */
-.sv-trust-points_icon {
-  width: auto !important;
-  max-width: 100%;
-}
-
-/* Vertical divider between blocks (desktop) */
-.sv-trust-points_block + .sv-trust-points_block::before {
-  content: '';
-  position: absolute;
-  left: -1rem;
-  top: 10%;
-  bottom: 10%;
-  width: 1px;
-  background-color: var(--_sava-color-styles---mid-grey, #DEDDD7);
-}
-
-/* Mobile: stack blocks vertically with horizontal dividers */
-@media (max-width: 767px) {
-  .sv-trust-points {
-	padding-top: 2rem !important;
-	padding-bottom: 2rem !important;
-  }
-
-  .sv-trust-points_track {
-	flex-direction: column !important;
-	gap: 2rem !important;
-  }
-
-  .sv-trust-points_block {
-	min-width: 0 !important;
-	width: 100% !important;
-	flex: 0 0 auto !important;
-  }
-
-  /* Re-position divider as horizontal line above each non-first block */
-  .sv-trust-points_block + .sv-trust-points_block::before {
-	top: -1rem !important;
-	bottom: auto !important;
-	left: 10% !important;
-	right: 10% !important;
-	width: auto !important;
-	height: 1px !important;
-  }
-
-  .sv-trust-points_label {
-	font-size: 18px !important;
-  }
-}
-
-/* ===========================================================
-   SAVA Product page — soft-white body background (2026-06-08,
-   selector broadened 2026-06-10)
-   Match Collections page treatment so white cards/sections pop.
-   Detect via Product Header (always present on product templates)
-   OR Trust Points (was the original trigger but merchants can
-   remove that section from the template).
-   =========================================================== */
-body:has(.section_product-header),
-body:has(section.sv-trust-points) {
-  background-color: var(--_sava-color-styles---soft-white, #F8F8F8) !important;
-}
-
-/* ===========================================================
-   SAVA SV Benefits (2026-06-08)
-   Per-product benefit icons + labels, row layout.
-   Bound to product.metafields.custom.benefits (list of Benefit metaobjects).
-   =========================================================== */
-.sv-benefits_row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 54px;
-}
-.sv-benefits_card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  flex: 0 0 auto;
-}
-.sv-benefits_icon {
-  width: 65px;
-  height: 65px;
-  object-fit: contain;
-}
-.sv-benefits_label {
-  font-family: 'Gelica', serif;
-  font-style: italic;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 1.1;
-  color: var(--_sava-color-styles---soft-black, #262524);
-  text-align: center;
-  margin: 0;
-  white-space: nowrap;
-}
-
-@media (max-width: 767px) {
-  .sv-benefits_row {
-	gap: 32px;
-	justify-content: center;
-  }
-  .sv-benefits_label {
-	white-space: normal;
-	max-width: 80px;
-  }
-}
-
-/* ===========================================================
-   SAVA SV Ingredients & SV How to Use (2026-06-08)
-   Per-product richtext fields. Shared typography.
-   =========================================================== */
-.sv-ingredients_text,
-.sv-how-to-use_text {
-  font-family: 'Gibson', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--_sava-color-styles---soft-black, #262524);
-}
-.sv-ingredients_text > *,
-.sv-how-to-use_text > * {
-  margin: 0 0 0.75em;
-}
-.sv-ingredients_text > *:last-child,
-.sv-how-to-use_text > *:last-child {
-  margin-bottom: 0;
-}
-
-/* ===========================================================
-   SAVA SV Product Tabs (2026-06-09)
-   3-tab widget: Benefits / Ingredients / How to Use
-   Tabs are static labels; pane content is metafield-driven.
-   Tab switching JS embedded inside the section (data-sv-tab + is-active).
-   =========================================================== */
-.sv-product-tabs {
-  display: flex;
-  flex-direction: column;
-}
-.sv-product-tabs_menu {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  align-items: flex-start;
-  margin-bottom: 32px;
-}
-.sv-product-tabs_tab {
-  font-family: 'Gibson', sans-serif;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
-  color: var(--_sava-color-styles---soft-black, #262524);
-  cursor: pointer;
-  padding-bottom: 8px;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.2s ease, opacity 0.2s ease;
-  user-select: none;
-  opacity: 0.55;
-}
-.sv-product-tabs_tab:hover {
-  opacity: 1;
-}
-.sv-product-tabs_tab.is-active {
-  border-bottom-color: var(--_sava-color-styles---soft-black, #262524);
-  opacity: 1;
-}
-.sv-product-tabs_content {
-  position: relative;
-}
-.sv-product-tabs_pane {
-  display: none;
-}
-.sv-product-tabs_pane.is-active {
-  display: block;
-}
-
-@media (max-width: 767px) {
-  .sv-product-tabs_menu {
-	gap: 24px;
-	margin-bottom: 24px;
-  }
-  .sv-product-tabs_tab {
-	font-size: 18px;
-  }
-}
-
-/* ===========================================================
-   SAVA Product Header — Liquify Pro section restyle (2026-06-10)
-   Targets the Section / Product Header component blocks
-   (Vendor, Best Seller, Nutritional Function, Product Name,
-	Product Price, Availability, Add to Cart, Shipping Info, Description)
-   to match Figma node 38:290.
-   =========================================================== */
-
-/* ===== New blocks ===== */
-
-/* Best Seller Badge pill — Figma 192:4298 "Product Callout Tag":
-   light-grey #EEEEED, full pill (60px radius), InterstateMono Light 14 */
-.sv-product-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 5px 13px;
-  background-color: var(--_sava-color-styles---light-grey, #EEEEED);
-  border-radius: 60px;
-}
-.sv-product-badge_label {
-  font-family: InterstateMono, monospace;
-  font-weight: 300;
-  font-size: 14px;
-  letter-spacing: 0.7px;
-  text-transform: uppercase;
-  color: var(--_sava-color-styles---soft-black, #262524);
-  line-height: 1;
-  white-space: nowrap;
-}
-
-/* Nutritional Function — Figma 115:1086: square 29px black box,
-   InterstateMono Light 14, label soft-white, value plain soft-black */
-.sv-nutritional-function {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-}
-.sv-nutritional-function_label,
-.sv-nutritional-function_value {
-  font-family: InterstateMono, monospace;
-  font-weight: 300;
-  font-size: 14px;
-  letter-spacing: 0.7px;
-  text-transform: uppercase;
-  line-height: 1;
-}
-.sv-nutritional-function_label {
-  display: inline-flex;
-  align-items: center;
-  height: 29px;
-  padding: 0 8px;
-  background-color: var(--_sava-color-styles---soft-black, #262524);
-  color: var(--_sava-color-styles---soft-white, #F8F8F8);
-  border-radius: 0;
-}
-.sv-nutritional-function_value {
-  color: var(--_sava-color-styles---soft-black, #262524);
-}
-
-/* Shipping Info */
-.sv-shipping-info {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.sv-shipping-info_free-shipping,
-.sv-shipping-info_hsa-fsa-line {
-  font-family: 'Gibson', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--_sava-color-styles---soft-black, #262524);
-  margin: 0;
-}
-.sv-shipping-info_hsa-fsa-label {
-  font-weight: 600;
-}
-.sv-shipping-info_link {
-  color: var(--_sava-color-styles---soft-black, #262524);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: opacity 0.2s ease;
-}
-.sv-shipping-info_link:hover {
-  opacity: 0.65;
-}
-
-/* ===== Existing Liquify Pro block overrides ===== */
-
-/* Vendor — subtle small uppercase */
-.section_product-header [li-block="Vendor"] {
-  font-family: 'Gibson', sans-serif;
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--_sava-color-styles---soft-black, #262524);
-  opacity: 0.5;
-}
-
-/* Product Name — large Gelica Light Display */
-.section_product-header [li-block="Product Name"] h1,
-.section_product-header [li-block="Product Name"] .heading-style-h2 {
-  font-family: 'Gelica', serif !important;
-  font-weight: 300 !important;
-  font-size: 60px !important;
-  line-height: 1.05 !important;
-  letter-spacing: -0.02em !important;
-  color: var(--_sava-color-styles---soft-black, #262524) !important;
-  margin: 0 !important;
-}
-
-/* Product Price — SAVA typography */
-.section_product-header [li-block="Product Price"] .product-header_price-wrapper {
-  font-family: 'Gibson', sans-serif;
-}
-.section_product-header [li-block="Product Price"] .text-size-large {
-  font-size: 24px !important;
-  font-weight: 600 !important;
-}
-
-/* Availability — slim Gibson body */
-.section_product-header [li-block="Availability"] .product-header_shipping {
-  font-family: 'Gibson', sans-serif;
-  font-size: 14px;
-  color: var(--_sava-color-styles---soft-black, #262524);
-}
-
-/* Description — hide heading, style body */
-.section_product-header [li-block="Description"] .heading-style-h3 {
-  display: none !important;
-}
-.section_product-header [li-block="Description"] .text-rich-text {
-  font-family: 'Gibson', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.5;
-  color: var(--_sava-color-styles---soft-black, #262524);
-}
-.section_product-header [li-block="Description"] .text-rich-text p {
-  margin: 0;
-}
-
-/* Add to Cart — yellow/cream ATC button (InterstateMono Regular 21 per Figma) */
-.section_product-header [li-block="Add to Cart"] .button {
-  background-color: #EDE087 !important;
-  border: none !important;
-  border-radius: 4px !important;
-  color: var(--_sava-color-styles---soft-black, #262524) !important;
-  font-family: InterstateMono, monospace !important;
-  font-weight: 400 !important;
-  font-size: 21px !important;
-  letter-spacing: 1px !important;
-  text-transform: uppercase !important;
-  padding: 14px 24px !important;
-  text-align: center !important;
-  transition: background-color 0.2s ease, color 0.2s ease !important;
-}
-.section_product-header [li-block="Add to Cart"] .button:hover {
-  background-color: var(--_sava-color-styles---soft-black, #262524) !important;
-  color: var(--_sava-color-styles---white, #FFFFFF) !important;
-}
-
-/* Hide Note field by default (the non-quantity form input inside Add to Cart) */
-.section_product-header [li-block="Add to Cart"] .form_input:not(.is-quantity) {
-  display: none !important;
-}
-
-/* Spacing rhythm between blocks in the right column */
-.product-header_product-details > [li-block="Vendor"] {
-  margin-bottom: 4px;
-}
-.product-header_product-details > [li-block="Product Badge"] {
-  margin-bottom: 12px;
-}
-.product-header_product-details > [li-block="Product Name"] {
-  margin-bottom: 16px;
-}
-.product-header_product-details > [li-block="Nutritional Function"] {
-  margin-bottom: 16px;
-}
-.product-header_product-details > [li-block="Description"] {
-  margin-bottom: 24px;
-}
-.product-header_product-details > [li-block="Product Price"] {
-  margin-bottom: 12px;
-}
-.product-header_product-details > [li-block="Availability"] {
-  margin-bottom: 12px;
-}
-.product-header_product-details > [li-block="Add to Cart"] {
-  margin-top: 16px;
-  margin-bottom: 16px;
-}
-.product-header_product-details > [li-block="Shipping Info"] {
-  margin-bottom: 24px;
-}
-
-/* Responsive: Product Name scales down on mobile */
-@media (max-width: 991px) {
-  .section_product-header [li-block="Product Name"] h1,
-  .section_product-header [li-block="Product Name"] .heading-style-h2 {
-	font-size: 48px !important;
-  }
-}
-@media (max-width: 479px) {
-  .section_product-header [li-block="Product Name"] h1,
-  .section_product-header [li-block="Product Name"] .heading-style-h2 {
-	font-size: 40px !important;
-  }
-}
-
-/* Product Badges row — SALE (auto) + Badge 1 + Badge 2 side by side (2026-06-10) */
-.sv-product-badges_row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-}
-
-/* ===========================================================
-   SAVA Product Header — quantity stepper (2026-06-10)
-   Wraps Liquify Pro's native number input (li-element=
-   add-to-cart-quantity) with −/+ controls per Figma.
-   JS handler in sava.js: [data-sv-qty-minus]/[data-sv-qty-plus]
-   =========================================================== */
-.sv-qty-stepper {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 52px;
-  min-width: 120px;
-  border: 1px solid var(--_sava-color-styles---soft-black, #262524);
-  border-radius: 12px;
-  background-color: var(--_sava-color-styles---white, #FFFFFF);
-  overflow: hidden;
-  flex: 0 0 auto;
-}
-.sv-qty-stepper_btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 100%;
-  font-family: 'Gibson', sans-serif;
-  font-weight: 300;
-  font-size: 20px;
-  line-height: 1;
-  color: var(--_sava-color-styles---soft-black, #262524);
-  cursor: pointer;
-  user-select: none;
-  transition: opacity 0.15s ease;
-}
-.sv-qty-stepper_btn:hover {
-  opacity: 0.55;
-}
-/* The native quantity input inside the stepper — strip chrome, center digit */
-.sv-qty-stepper input.form_input.is-quantity {
-  width: 36px !important;
-  height: 100% !important;
-  border: none !important;
-  background: transparent !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  text-align: center !important;
-  font-family: 'Gibson', sans-serif !important;
-  font-weight: 600 !important;
-  font-size: 16px !important;
-  color: var(--_sava-color-styles---soft-black, #262524) !important;
-  -moz-appearance: textfield !important;
-  appearance: textfield !important;
-  box-shadow: none !important;
-}
-.sv-qty-stepper input.form_input.is-quantity::-webkit-outer-spin-button,
-.sv-qty-stepper input.form_input.is-quantity::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-.sv-qty-stepper input.form_input.is-quantity:focus {
-  outline: none !important;
-  border: none !important;
-}
-
-/* ===========================================================
-   SAVA Product Header — variant option cards (2026-06-10)
-   Restyles Liquify Pro's radio loop (.product-header_radio) as
-   the Figma 314:3032 "Bag Selection" cards: 10px-radius bordered
-   cards, lemon-fade gradient + soft-black border when selected.
-   Icons injected by sava.js (label text match: bag/stick).
-   =========================================================== */
-.section_product-header .product-header_option-list {
-  margin-bottom: 8px;
-}
-/* Option name label ("Size") hidden per Figma — cards stand alone */
-.section_product-header [li-element="product-options-name"],
-.section_product-header .product-header_option > div:first-child {
-  display: none;
-}
-.section_product-header .product-header_radio-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.section_product-header .product-header_radio {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 57px;
-  padding: 9px 18px;
-  background-color: var(--_sava-color-styles---white, #FFFFFF);
-  border: 0.75px solid var(--_sava-color-styles---mid-grey, #DEDDD7);
-  border-radius: 10px;
-  cursor: pointer;
-  margin: 0;
-  transition: border-color 0.2s ease, background 0.2s ease;
-}
-/* selected card: lemon fade + soft-black border (Figma 314:3033) */
-.section_product-header .product-header_radio:has(input:checked) {
-  border-color: var(--_sava-color-styles---soft-black, #262524);
-  background-image: var(--sava-gradient-lemon-fade, linear-gradient(180deg, #FFFFFF 49.52%, #EDE087 100%));
-}
-/* hide the native radio dot but keep it clickable/functional */
-.section_product-header .product-header_radio input.product-header_radio-button,
-.section_product-header .product-header_radio .w-form-formradioinput,
-.section_product-header .product-header_radio .w-radio-input {
-  position: absolute !important;
-  opacity: 0 !important;
-  width: 1px !important;
-  height: 1px !important;
-  margin: 0 !important;
-}
-.section_product-header .product-header_radio [li-element="product-option-name"],
-.section_product-header .product-header_radio .w-form-label {
-  font-family: 'Gibson', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  color: var(--_sava-color-styles---soft-black, #262524);
-  cursor: pointer;
-}
-/* icon injected by sava.js */
-.sv-variant-card_icon {
-  width: 38px;
-  height: 38px;
-  object-fit: contain;
-  flex: 0 0 auto;
-}
-
-/* ===========================================================
-   SAVA Product Header — breadcrumb (2026-06-10)
-   Shop All | {vendor} | {first collection} | {product type}
-   Sits above the gallery inside the Product Header section.
-   =========================================================== */
-.sv-breadcrumb {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 28px;
-}
-.sv-breadcrumb_group {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-.sv-breadcrumb_link,
-.sv-breadcrumb_sep,
-.sv-breadcrumb_current {
-  font-family: 'Gibson', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1;
-}
-.sv-breadcrumb_link {
-  color: var(--_sava-color-styles---soft-black, #262524);
-  opacity: 0.5;
-  text-decoration: none;
-  transition: opacity 0.15s ease;
-}
-.sv-breadcrumb_link:hover {
-  opacity: 1;
-}
-.sv-breadcrumb_sep {
-  color: var(--_sava-color-styles---soft-black, #262524);
-  opacity: 0.4;
-}
-.sv-breadcrumb_current {
-  color: var(--_sava-color-styles---soft-black, #262524);
-}
-
-@media (max-width: 767px) {
-  .sv-breadcrumb {
-	margin-bottom: 18px;
-  }
-}
-
-/* ===========================================================
-   SAVA SV Logo Scroller (2026-06-13)
-   Full-bleed lemon band, logos marquee right→left (Figma 219:7786).
-   Merchant adds Logo blocks via Theme Editor. Reuses @keyframes
-   sava-marquee. Seamless loop: sava.js clones _group once per track
-   ([data-sava-marquee]). Two identical groups → translateX(-50%) loops.
-   =========================================================== */
-.sv-logo-scroller {
-  background-color: #EDE087;
-  overflow: hidden;
-  width: 100%;
-}
-.sv-logo-scroller_track {
-  display: flex;
-  width: max-content;
-  animation: sava-marquee 40s linear infinite;
-}
-.sv-logo-scroller:hover .sv-logo-scroller_track {
-  animation-play-state: paused;
-}
-.sv-logo-scroller_group {
-  display: flex;
-  align-items: center;
-  gap: 64px;
-  padding: 20px 32px;
-  flex: 0 0 auto;
-}
-.sv-logo-scroller_logo {
-  height: 24px;
-  width: auto;
-  object-fit: contain;
-  flex: 0 0 auto;
-}
-@media (prefers-reduced-motion: reduce) {
-  .sv-logo-scroller_track { animation: none !important; }
-}
-@media (max-width: 767px) {
-  .sv-logo-scroller_group { gap: 40px; padding: 16px 24px; }
-  .sv-logo-scroller_logo { height: 20px; }
-}
-
-/* ===========================================================
-   SAVA SV Key Ingredients (2026-06-17)
-   Tabbed ingredient section. Tabs (data-sv-tab) swap panes
-   (data-sv-pane) via the shared tab handler in sava.js.
-   Active pane layout + benefit-list icons + killing the
-   leaked tab gradient on the pane all live here.
-   =========================================================== */
-.sv-keying_pane { display: none; }
-.sv-keying .sv-keying_pane.is-active {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 48px;
-  background: transparent !important;
-}
-@media (max-width: 991px) {
-  .sv-keying .sv-keying_pane.is-active {
-    flex-direction: column;
-    align-items: center;
-    gap: 28px;
-  }
-}
-.sv-keying_tab.is-active {
-  background-image: linear-gradient(to bottom, #FFFFFF 49.5%, #EDE087);
-}
-.sv-keying_image {
-  width: 330px;
-  height: 330px;
-  flex: 0 0 auto;
-  object-fit: cover;
-  border-radius: 10px;
-}
-@media (max-width: 767px) {
-  .sv-keying .sv-keying_pane.is-active { align-items: stretch; }
-  .sv-keying_image { width: 100%; max-width: none; height: auto; aspect-ratio: 1 / 1; }
-}
-.sv-keying_benefits ul { list-style: none; margin: 0; padding: 0; }
-.sv-keying_benefits li {
-  position: relative;
-  padding-left: 34px;
-  font-family: 'Gelica Light', Georgia, serif;
-  font-style: italic;
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--_sava-color-styles---soft-black, #262524);
-  margin: 0 0 9px;
-}
-.sv-keying_benefits li:last-child { margin-bottom: 0; }
-.sv-keying_benefits li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 3px;
-  width: 16px;
-  height: 16px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23262524' stroke-width='1.5'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M8 12.5l2.5 2.5 5-5.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
-}
-
-/* ===========================================================
-   SAVA SV Trusted by Many — mobile order (cards → arrows → button)
-   =========================================================== */
-@media (max-width: 767px) {
-  .sv-trusted_left { display: contents; }
-  .sv-trusted_heading { order: 1; }
-  .sv-trusted_body { order: 2; }
-  .sv-trusted_track { order: 3; }
-  .sv-trusted_arrows { order: 4; }
-  .sv-trusted_button { order: 5; }
-}
-
-/* ===== SV Symptoms — check icon (data-URI lives in sava.css so it survives Liquiflow conversion) ===== */
-.sv-symptoms .sv-symptoms_check{
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%3E%3Ccircle%20cx='12'%20cy='12'%20r='11'%20stroke='%23262524'%20stroke-width='1'/%3E%3Cpath%20d='M7.5%2012.4l3.1%203.1%206.4-6.9'%20stroke='%23262524'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-/* ===== SV Why Take SAVA — comparison ✗/✓ icons + mobile reflow (2026-06-18) ===== */
-.sv-why_x{
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2028%2028'%20fill='none'%3E%3Ccircle%20cx='14'%20cy='14'%20r='13'%20stroke='%23C9C8C1'%20stroke-width='1'/%3E%3Cpath%20d='M10%2010l8%208M18%2010l-8%208'%20stroke='%23A9A8A2'%20stroke-width='1.5'%20stroke-linecap='round'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.sv-why_check{
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2028%2028'%20fill='none'%3E%3Ccircle%20cx='14'%20cy='14'%20r='13'%20stroke='%23262524'%20stroke-width='1'/%3E%3Cpath%20d='M8.5%2014.6l3.6%203.6%207.4-8'%20stroke='%23262524'%20stroke-width='1.6'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-@media (max-width: 767px){
-  /* product image becomes a centered hero; hide OTHERS + spacer in the header row */
-  .sv-why_head{ justify-content: center; padding-bottom: 22px; }
-  .sv-why_head .sv-why_cell-x,
-  .sv-why_head .sv-why_cell-l{ display: none; }
-  .sv-why_head .sv-why_cell-v{ width: 200px; }
-  .sv-why_imgwrap{ width: 200px; }
-  .sv-why_glow{ display: block; }
-  /* desktop gradient column off; lemon lives on the ✓ cells instead */
-  .sv-why_highlight{ display: none; }
-  /* show OTHERS / SAVA column headers */
-  .sv-why_colheads{ display: flex; }
-  /* narrow comparison columns; claims wrap */
-  .sv-why_cell-x{ width: 52px; }
-  .sv-why_cell-v{ width: 52px; }
-  .sv-why_claim{ padding-left: 16px; font-size: 15px; line-height: 21px; }
-  /* keep OTHERS / SAVA headers inside their columns so they don't overlap */
-  .sv-why_colheads .sv-why_others{ font-size: 12px; letter-spacing: 0.3px; }
-  /* CONTINUOUS lemon column: stretch the cells so the ✓ cell fills the full row height
-     (padding moves to the ✗ + claim cells) — otherwise the lemon breaks into one box per row */
-  .sv-why_row{ align-items: stretch; padding-top: 0; padding-bottom: 0; }
-  .sv-why_row .sv-why_cell-x,
-  .sv-why_row .sv-why_cell-l{ padding-top: 16px; padding-bottom: 16px; }
-  .sv-why_colheads{ align-items: stretch; padding-bottom: 0; }
-  .sv-why_colheads .sv-why_cell-x,
-  .sv-why_colheads .sv-why_cell-v{ align-items: flex-end; padding-top: 6px; padding-bottom: 10px; }
-  /* lemon fills the ✓ column continuously (header + rows) */
-  .sv-why_colheads .sv-why_cell-v,
-  .sv-why_row .sv-why_cell-v{ background-color: #F2E9AE; }
-  .sv-why_colheads .sv-why_cell-v{ border-top-left-radius: 9px; border-top-right-radius: 9px; }
-  .sv-why_row:last-child .sv-why_cell-v{ border-bottom-left-radius: 9px; border-bottom-right-radius: 9px; }
-}
-
-/* ===== SV Product Header gallery — thumbnails as a LEFT rail + side arrows (desktop >=992) =====
-   Reflows the Liquify Pro product gallery (two Swipers). Paired with a swiper.update()
-   nudge in sava.js so the main image recomputes its width for the narrower column.
-   Desktop only — mobile gallery is left untouched. */
-@media (min-width: 992px){
-  /* Gallery container: flex row-reverse (thumbnail rail on the left, main image on the right).
-     KEEP position:sticky from the Webflow base — overriding it to `relative` made the base
-     `top:6rem` act as a 96px downward push (that was the "image sits low" bug; sticky has no
-     offset at rest, relative does). Sticky also keeps the image in view while scrolling details. */
-  .swiper-container.is-product-gallery{
-    display: flex !important;
-    flex-direction: row-reverse;
-    align-items: flex-start;
-    gap: 18px;
-    position: sticky;
-  }
-  .swiper-container.is-product-gallery > .swiper.is-product-gallery{ flex: 1 1 auto; min-width: 0; }
-  /* Left rail. position:static is the key arrows fix — the base sets this wrapper to
-     position:relative, which made it the containing block for the absolutely-positioned
-     arrows (an 84px-wide box), collapsing them. Static lets the arrows anchor to the
-     full-width gallery container above instead. margin-top:0 removes the base 1rem. */
-  .product-header_slider-wrapper{
-    flex: 0 0 84px; width: 84px;
-    margin-top: 0 !important;
-    position: static !important;
-  }
-  /* thumbnail swiper → vertical stack */
-  .swiper.is-product-thumbnail{ width: 84px !important; height: auto !important; margin: 0 !important; }
-  .swiper-wrapper.is-product-thumbnail{ flex-direction: column !important; transform: none !important; height: auto !important; }
-  .swiper-slide.is-product-thumbnail{ width: 84px !important; height: auto !important; margin: 0 0 12px 0 !important; }
-  .product-header_thumbnail-image{ width: 100% !important; height: auto !important; display: block; }
-  /* Main image: base uses object-fit:cover on a FIXED 640px-tall box, so narrowing the column
-     (the rail makes it narrow sooner) turned the box portrait and cropped the pouch's sides.
-     Fix: keep `cover` (image fills the box → the grey background-color never shows) but replace
-     the fixed height with a SQUARE aspect-ratio that scales with the column. The product images
-     are ~square (hero 284×299 ≈ 0.95, others 1600×1600), so a 1:1 box fills them with no crop
-     AND no grey letterbox at every width. */
-  .product-header_gallery-image{
-    object-fit: cover !important;
-    height: auto !important;
-    aspect-ratio: 1 / 1 !important;
-  }
-  /* Arrows → overlay the main image (starts at 84px rail + 18px gap = 102px from gallery left).
-     Anchored to the gallery container now that the rail is static. */
-  .swiper-container.is-product-gallery .swiper_button-wrapper.is-product-slider{
-    position: absolute !important;
-    top: 50% !important; bottom: auto !important;
-    left: 102px !important; right: 0 !important;
-    transform: translateY(-50%);
-    margin: 0 !important; width: auto !important; height: auto !important;
-    display: flex !important; align-items: center; justify-content: space-between;
-    padding: 0 10px; z-index: 5; pointer-events: none;
-  }
-}
-
-/* ----- Arrow buttons: visual styling shared across ALL breakpoints (positioning differs:
-   desktop overlays the image above; mobile sits in a row below it — see the ≤991 block). ----- */
-  /* base nudges prev/next by ∓1.5rem which would hang them outside the gallery — zero them */
-  .swiper_button-wrapper.is-product-slider .swiper_button.swiper-prev.pointer-events-on{ left: 0 !important; }
-  .swiper_button-wrapper.is-product-slider .swiper_button.swiper-next.pointer-events-on{ right: 0 !important; }
-  /* Figma circle-arrow buttons — white circle + arrow + drop shadow are all baked into the SVG.
-     Strip Liquify's base circle/border and hide its inline chevron; paint the Figma SVG as the
-     button background. The SVG canvas is 57px (a 40px circle plus room for the shadow), so we
-     keep the 48px button box for layout and let the 57px artwork sit centred over it. */
-  .swiper_button-wrapper.is-product-slider .swiper_button{
-    pointer-events: auto;
-    flex: 0 0 48px; width: 48px !important; height: 48px !important;
-    border: none !important; background-color: transparent !important; box-shadow: none !important;
-    background-repeat: no-repeat; background-position: center; background-size: 57px 57px;
-  }
-  .swiper_button-wrapper.is-product-slider .swiper_button .swiper_button-icon{ display: none !important; }
-  .swiper_button-wrapper.is-product-slider .swiper_button.swiper-prev{
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTciIGhlaWdodD0iNTciIHZpZXdCb3g9IjAgMCA1NyA1NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgZmlsdGVyPSJ1cmwoI2ZpbHRlcjBfZF8yNjg2XzI4NzUpIj4KPGNpcmNsZSBjeD0iMjguMjg0MyIgY3k9IjI4LjI4NDMiIHI9IjIwIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTM1IDI4LjI4NDMgMjguMjg0MykiIGZpbGw9IiNGOEY4RjgiLz4KPC9nPgo8cGF0aCBkPSJNMjAuNzg3MSAyOC4xMzc1TDM2LjU0NjcgMjguMTExNSIgc3Ryb2tlPSIjMjYyNTI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTI3LjExMjIgMjEuNjMzNkwyMC43NzcxIDI4LjEwOTNMMjcuMjUyOCAzNC40NDQ0IiBzdHJva2U9IiMyNjI1MjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8ZGVmcz4KPGZpbHRlciBpZD0iZmlsdGVyMF9kXzI2ODZfMjg3NSIgeD0iNi4yODQyNyIgeT0iOC4yODQyMyIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjQ0IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiIGNvbG9yLWludGVycG9sYXRpb24tZmlsdGVycz0ic1JHQiI+CjxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAiIHJlc3VsdD0iQmFja2dyb3VuZEltYWdlRml4Ii8+CjxmZUNvbG9yTWF0cml4IGluPSJTb3VyY2VBbHBoYSIgdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDEyNyAwIiByZXN1bHQ9ImhhcmRBbHBoYSIvPgo8ZmVPZmZzZXQgZHk9IjIiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMSIvPgo8ZmVDb21wb3NpdGUgaW4yPSJoYXJkQWxwaGEiIG9wZXJhdG9yPSJvdXQiLz4KPGZlQ29sb3JNYXRyaXggdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMC44NzA1ODggMCAwIDAgMCAwLjg2NjY2NyAwIDAgMCAwIDAuODQzMTM3IDAgMCAwIDEgMCIvPgo8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9ImVmZmVjdDFfZHJvcFNoYWRvd18yNjg2XzI4NzUiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJlZmZlY3QxX2Ryb3BTaGFkb3dfMjY4Nl8yODc1IiByZXN1bHQ9InNoYXBlIi8+CjwvZmlsdGVyPgo8L2RlZnM+Cjwvc3ZnPgo=");
-  }
-  .swiper_button-wrapper.is-product-slider .swiper_button.swiper-next{
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTciIGhlaWdodD0iNTciIHZpZXdCb3g9IjAgMCA1NyA1NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgZmlsdGVyPSJ1cmwoI2ZpbHRlcjBfZF8yNjg2XzI4ODEpIj4KPGNpcmNsZSBjeD0iMjguMjg0MyIgY3k9IjI4LjI4NDMiIHI9IjIwIiB0cmFuc2Zvcm09InJvdGF0ZSg0NSAyOC4yODQzIDI4LjI4NDMpIiBmaWxsPSIjRjhGOEY4Ii8+CjwvZz4KPHBhdGggZD0iTTM1Ljc4MTkgMjguNDMwNkwyMC4wMjIzIDI4LjQ1NjYiIHN0cm9rZT0iIzI2MjUyNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxwYXRoIGQ9Ik0yOS40NTYxIDM0LjkzNDhMMzUuNzkxMiAyOC40NTkxTDI5LjMxNTUgMjIuMTI0MSIgc3Ryb2tlPSIjMjYyNTI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPGRlZnM+CjxmaWx0ZXIgaWQ9ImZpbHRlcjBfZF8yNjg2XzI4ODEiIHg9IjYuMjg0MjciIHk9IjguMjg0MyIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjQ0IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiIGNvbG9yLWludGVycG9sYXRpb24tZmlsdGVycz0ic1JHQiI+CjxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAiIHJlc3VsdD0iQmFja2dyb3VuZEltYWdlRml4Ii8+CjxmZUNvbG9yTWF0cml4IGluPSJTb3VyY2VBbHBoYSIgdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDEyNyAwIiByZXN1bHQ9ImhhcmRBbHBoYSIvPgo8ZmVPZmZzZXQgZHk9IjIiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMSIvPgo8ZmVDb21wb3NpdGUgaW4yPSJoYXJkQWxwaGEiIG9wZXJhdG9yPSJvdXQiLz4KPGZlQ29sb3JNYXRyaXggdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMC44NzA1ODggMCAwIDAgMCAwLjg2NjY2NyAwIDAgMCAwIDAuODQzMTM3IDAgMCAwIDEgMCIvPgo8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9ImVmZmVjdDFfZHJvcFNoYWRvd18yNjg2XzI4ODEiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJlZmZlY3QxX2Ryb3BTaGFkb3dfMjY4Nl8yODgxIiByZXN1bHQ9InNoYXBlIi8+CjwvZmlsdGVyPgo8L2RlZnM+Cjwvc3ZnPgo=");
-  }
-
-/* ===== SV Product Header gallery — MOBILE (≤991): match Figma — no thumbnail preview;
-   the two circle-arrows sit in a row below the main image, right-aligned. (Desktop keeps the
-   left thumbnail rail + arrows overlaid on the image.) Button visuals are shared above. ===== */
-@media (max-width: 991px){
-  .product-header_slider-wrapper .swiper.is-product-thumbnail{ display: none !important; }
-  .product-header_slider-wrapper{
-    display: flex; justify-content: flex-end;
-    margin-top: -24px !important;   /* pull the arrow row up so the circles straddle the image's bottom edge (Figma) */
-    position: relative; z-index: 3; /* paint the arrows over the image */
-    pointer-events: none;           /* empty part of the row lets image swipes through; buttons re-enable below */
-  }
-  .swiper_button-wrapper.is-product-slider{
-    position: static !important; inset: auto !important;
-    display: flex !important;            /* also un-hides the base .hide-mobile-landscape at ≤767 */
-    width: auto !important; height: auto !important;
-    gap: 12px; justify-content: flex-end;
-  }
-}
 
 /* ============================================================
-   SV Blog — Collection (listing) page
-   Restyles the Liquify blog_hero + blog_articles foundation to the SAVA
-   Figma (235-6285): peach hero, white rounded article cards with light-grey
-   tag pills ABOVE a rounded ~3:2 image, Gelica title, and a circular ↗ arrow.
-   CSS-only — no Webflow restructure: tags are moved above the image with
-   column-reverse, and the arrow is a ::after pseudo-element.
+   SAVA — modal open/close controller (move to body to escape
+   transformed-ancestor containing-block, one open at a time)
    ============================================================ */
+(function() {
+  var currentModal = null;
 
-/* ----- Hero: peach band. Liquiflow strips custom attributes from li-section roots (only the
-   tag + class reach the schema). Sections in a JSON template are wrapped by Shopify with the
-   LONG id form id="shopify-section-template--<number>__blog_hero" (not #shopify-section-blog_hero),
-   so the exact-id selector never matched — match the section key by id SUBSTRING instead. ----- */
-[id*="blog_hero"]{ background-color: #F6D7B9; }
-[id*="blog_hero"] .heading-style-h1{ color: #262524; }
-/* soft-white page background for the blog collection content (white cards pop against it) */
-[id*="blog_articles"]{ background-color: var(--_sava-color-styles---soft-white, #f8f8f8); }
-/* hero subhead/description — the only <p> in the blog hero (editable li-settings:textarea) */
-[id*="blog_hero"] p{
-  font-family: "Gibson", sans-serif; font-weight: 300;
-  font-size: 16px; line-height: 24px; color: #262524;
-  max-width: 56rem; margin: 0.75rem auto 0;
-}
+  function openModal(modal) {
+	if (currentModal && currentModal !== modal) closeModal(currentModal);
+	modal.__savaOrigParent = modal.parentNode;
+	modal.__savaOrigNext = modal.nextSibling;
+	document.body.appendChild(modal);
+	modal.classList.add('is-open');
+	document.body.style.overflow = 'hidden';
+	currentModal = modal;
+  }
 
-/* ----- Article grid → 2 columns (base 3-col → 2-col) ----- */
-.blog_list{
-  grid-template-columns: 1fr 1fr !important;
-  grid-column-gap: 42px !important; grid-row-gap: 40px !important;
-  align-items: stretch;
-}
+  function closeModal(modal) {
+	modal.classList.remove('is-open');
+	document.body.style.overflow = '';
+	if (modal.__savaOrigParent) {
+	  modal.__savaOrigParent.insertBefore(modal, modal.__savaOrigNext);
+	  delete modal.__savaOrigParent;
+	  delete modal.__savaOrigNext;
+	}
+	if (currentModal === modal) currentModal = null;
+  }
 
-/* ----- Card: white, rounded, padded; the whole card is the article link.
-   .blog_cms-item is the grid cell; making it a column flex + flex:1 on the card lets every
-   card stretch to the row's (equal) height regardless of title length or tag count. ----- */
-.blog_cms-item{ display: flex; flex-direction: column; }
-.blog_item-grid{
-  flex: 1;
-  display: flex !important; flex-direction: column;
-  background-color: #fff; border-radius: 10px; padding: 22px;
-  position: relative; text-decoration: none; color: inherit;
-  transition: box-shadow .25s ease, transform .25s ease;
-}
-.blog_item-grid:hover{ transform: translateY(-3px); box-shadow: 0 10px 28px rgba(38,37,36,.08); }
+  function init() {
+	document.querySelectorAll('[data-sava-modal-open]').forEach(function(btn) {
+	  btn.addEventListener('click', function() {
+		var wrap = btn.closest('[data-sava-modal-wrap]');
+		if (!wrap) return;
+		var modal = wrap.querySelector('[data-sava-modal]');
+		if (modal) openModal(modal);
+	  });
+	});
 
-/* tags ABOVE the image: reverse the wrapper, un-absolute the tag row */
-.blog_tags-wrapper{ display: flex; flex-direction: column-reverse; gap: 14px; position: relative; }
-/* reserve the pill-row height even when an article has no tags, so every card's image + title
-   line up across the grid (a no-tag card no longer shifts up to fill the gap) */
-.blog_tag-row{ position: static !important; inset: auto !important; margin: 0 !important; flex-wrap: wrap; gap: 11px; min-height: 27px; }
+	document.addEventListener('click', function(e) {
+	  if (e.target.matches && e.target.matches('[data-sava-modal]')) {
+		closeModal(e.target);
+	  }
+	});
 
-/* image → rounded ≈3:2 */
-.blog_img{
-  width: 100% !important; height: auto !important; aspect-ratio: 50 / 34;
-  object-fit: cover; border: none !important; border-radius: 10px;
-  background-color: #EEEEED;
-}
+	document.querySelectorAll('[data-sava-modal-close]').forEach(function(btn) {
+	  btn.addEventListener('click', function() {
+		var modal = btn.closest('[data-sava-modal]');
+		if (modal) closeModal(modal);
+	  });
+	});
 
-/* tags → light-grey callout pills */
-.blog_tag{
-  display: inline-block; color: #262524; background-color: #EEEEED;
-  margin: 0; padding: 5px 13px; border-radius: 60px;
-  font-family: "InterstateMono", monospace; font-weight: 300;
-  font-size: 14px; line-height: 1.1; letter-spacing: 0.7px;
-  text-transform: uppercase; white-space: nowrap;
-}
+	document.addEventListener('keydown', function(e) {
+	  if (e.key === 'Escape' && currentModal) closeModal(currentModal);
+	});
+  }
 
-/* title → Gelica Light 36/40 */
-.blog_info-wrapper{ text-align: left; margin-top: 18px; }
-.blog_info-wrapper .heading-style-h3{
-  font-family: "Gelica", serif; font-weight: 300;
-  font-size: 36px; line-height: 40px; color: #262524; margin: 0;
-}
+  if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', init);
+  } else {
+	init();
+  }
+})();
 
-/* circular ↗ arrow — pure CSS, pinned to the card's bottom-right (card is a flex column) */
-.blog_item-grid::after{
-  content: ""; align-self: flex-end; margin-top: auto;
-  flex: 0 0 auto; width: 36px; height: 36px; border-radius: 100vw;
-  border: 1px solid #DEDDD7; background-color: #fff;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23262524'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M5,12H19M12,5L19,12L12,19'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: center; background-size: 18px;
-  transition: background-color .2s ease, border-color .2s ease;
-}
-/* hover → inverse: filled black circle, white arrow (Figma hover) */
-.blog_item-grid:hover::after{
-  background-color: #262524; border-color: #262524;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23ffffff'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M5,12H19M12,5L19,12L12,19'/%3E%3C/svg%3E");
-}
-
-/* mobile → single column */
-@media (max-width: 767px){
-  .blog_list{ grid-template-columns: 1fr !important; grid-row-gap: 28px !important; }
-  .blog_info-wrapper .heading-style-h3{ font-size: 28px; line-height: 32px; }
-}
-
-/* ----- Quick-filter bar refinements (Figma 235:6439 "Hero Shop Button" style) ----- */
-/* break the pill + title bands out of container-large so they span the full viewport width */
-.sv-blog-filterbar, .sv-blog-titlebar{ width: 100vw; margin-left: calc(50% - 50vw); }
-.sv-blog-filterbar{ background-color: #fff !important; position: relative; }   /* white band; anchor for the arrows */
-/* kill the soft-white gap between the peach hero and the white pill band — the Blog-Articles
-   section's own padding-section-small top padding was showing through (Figma: bands sit flush) */
-[id*="blog_articles"] .padding-section-small{ padding-top: 0 !important; }
-/* sticky title bar must sit BELOW the navbar's stacking context (.section_navbar is z-index:10,
-   which caps the whole mega menu inside it) — z:9 keeps the open mega menu painting over the bar,
-   while still above the article cards and the pill-row arrows (z:2) */
-.sv-blog-titlebar{ z-index: 9 !important; }
-/* Figma button: 157×45 rectangle, 10px radius, 0.75px mid-grey border, Gibson Medium 14/2.1 uppercase.
-   Long labels (FUNCTIONAL MEDICINE) wrap to 2 lines inside the fixed width, exactly like Figma. */
-.sv-blog-pill{
-  box-sizing: border-box; width: 157px; min-height: 45px; flex: 0 0 auto;
-  display: inline-flex; align-items: center; justify-content: center;
-  padding: 9px 10px 8px !important; border-radius: 10px !important;
-  border: 0.75px solid #DEDDD7 !important; background-color: #fff;
-  font-family: "Gibson", sans-serif !important; font-weight: 500 !important;
-  font-size: 14px !important; line-height: 1.2; letter-spacing: 2.1px !important;
-  text-transform: uppercase; color: #262524; text-align: center; white-space: normal !important;
-  transition: background .2s ease;
-}
-/* hover + active/selected fill: vertical white→peach fade; border stays (Figma "Button Fill" annotation) */
-.sv-blog-pill:hover,
-.sv-blog-pill.is-active{
-  background: var(--sava-gradient-light-peach-fade, linear-gradient(180deg,#FFFFFF 49.52%,#F6D7B9 100%)) !important;
-  border-color: #DEDDD7 !important; box-shadow: none !important; color: #262524;
-}
-/* hide the pill row's scrollbar (swipe/arrows are the affordance) */
-.sv-blog-pills{ scrollbar-width: none; scroll-behavior: smooth; }
-.sv-blog-pills::-webkit-scrollbar{ display: none; }
-/* Carousel arrows (injected by sava.js) — same Figma circle-arrows as the product gallery,
-   pinned ~3.4% from each viewport edge; desktop-only, and only when the row overflows */
-.sv-blog-pills-arrow{
-  position: absolute; top: 50%; transform: translateY(-50%);
-  width: 48px; height: 48px; padding: 0; border: none; cursor: pointer;
-  background-color: transparent; background-repeat: no-repeat; background-position: center; background-size: 57px 57px;
-  display: none; z-index: 2;
-}
-.sv-blog-pills-arrow.is-prev{
-  left: 3.4%;
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTciIGhlaWdodD0iNTciIHZpZXdCb3g9IjAgMCA1NyA1NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgZmlsdGVyPSJ1cmwoI2ZpbHRlcjBfZF8yNjg2XzI4NzUpIj4KPGNpcmNsZSBjeD0iMjguMjg0MyIgY3k9IjI4LjI4NDMiIHI9IjIwIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTM1IDI4LjI4NDMgMjguMjg0MykiIGZpbGw9IiNGOEY4RjgiLz4KPC9nPgo8cGF0aCBkPSJNMjAuNzg3MSAyOC4xMzc1TDM2LjU0NjcgMjguMTExNSIgc3Ryb2tlPSIjMjYyNTI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTI3LjExMjIgMjEuNjMzNkwyMC43NzcxIDI4LjEwOTNMMjcuMjUyOCAzNC40NDQ0IiBzdHJva2U9IiMyNjI1MjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8ZGVmcz4KPGZpbHRlciBpZD0iZmlsdGVyMF9kXzI2ODZfMjg3NSIgeD0iNi4yODQyNyIgeT0iOC4yODQyMyIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjQ0IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiIGNvbG9yLWludGVycG9sYXRpb24tZmlsdGVycz0ic1JHQiI+CjxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAiIHJlc3VsdD0iQmFja2dyb3VuZEltYWdlRml4Ii8+CjxmZUNvbG9yTWF0cml4IGluPSJTb3VyY2VBbHBoYSIgdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDEyNyAwIiByZXN1bHQ9ImhhcmRBbHBoYSIvPgo8ZmVPZmZzZXQgZHk9IjIiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMSIvPgo8ZmVDb21wb3NpdGUgaW4yPSJoYXJkQWxwaGEiIG9wZXJhdG9yPSJvdXQiLz4KPGZlQ29sb3JNYXRyaXggdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMC44NzA1ODggMCAwIDAgMCAwLjg2NjY2NyAwIDAgMCAwIDAuODQzMTM3IDAgMCAwIDEgMCIvPgo8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9ImVmZmVjdDFfZHJvcFNoYWRvd18yNjg2XzI4NzUiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJlZmZlY3QxX2Ryb3BTaGFkb3dfMjY4Nl8yODc1IiByZXN1bHQ9InNoYXBlIi8+CjwvZmlsdGVyPgo8L2RlZnM+Cjwvc3ZnPgo=");
-}
-.sv-blog-pills-arrow.is-next{
-  right: 3.4%;
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTciIGhlaWdodD0iNTciIHZpZXdCb3g9IjAgMCA1NyA1NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgZmlsdGVyPSJ1cmwoI2ZpbHRlcjBfZF8yNjg2XzI4ODEpIj4KPGNpcmNsZSBjeD0iMjguMjg0MyIgY3k9IjI4LjI4NDMiIHI9IjIwIiB0cmFuc2Zvcm09InJvdGF0ZSg0NSAyOC4yODQzIDI4LjI4NDMpIiBmaWxsPSIjRjhGOEY4Ii8+CjwvZz4KPHBhdGggZD0iTTM1Ljc4MTkgMjguNDMwNkwyMC4wMjIzIDI4LjQ1NjYiIHN0cm9rZT0iIzI2MjUyNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxwYXRoIGQ9Ik0yOS40NTYxIDM0LjkzNDhMMzUuNzkxMiAyOC40NTkxTDI5LjMxNTUgMjIuMTI0MSIgc3Ryb2tlPSIjMjYyNTI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPGRlZnM+CjxmaWx0ZXIgaWQ9ImZpbHRlcjBfZF8yNjg2XzI4ODEiIHg9IjYuMjg0MjciIHk9IjguMjg0MyIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjQ0IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiIGNvbG9yLWludGVycG9sYXRpb24tZmlsdGVycz0ic1JHQiI+CjxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAiIHJlc3VsdD0iQmFja2dyb3VuZEltYWdlRml4Ii8+CjxmZUNvbG9yTWF0cml4IGluPSJTb3VyY2VBbHBoYSIgdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDEyNyAwIiByZXN1bHQ9ImhhcmRBbHBoYSIvPgo8ZmVPZmZzZXQgZHk9IjIiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMSIvPgo8ZmVDb21wb3NpdGUgaW4yPSJoYXJkQWxwaGEiIG9wZXJhdG9yPSJvdXQiLz4KPGZlQ29sb3JNYXRyaXggdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMC44NzA1ODggMCAwIDAgMCAwLjg2NjY2NyAwIDAgMCAwIDAuODQzMTM3IDAgMCAwIDEgMCIvPgo8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9ImVmZmVjdDFfZHJvcFNoYWRvd18yNjg2XzI4ODEiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJlZmZlY3QxX2Ryb3BTaGFkb3dfMjY4Nl8yODgxIiByZXN1bHQ9InNoYXBlIi8+CjwvZmlsdGVyPgo8L2RlZnM+Cjwvc3ZnPgo=");
-}
-@media (min-width: 992px){
-  .sv-blog-filterbar.sv-has-overflow .sv-blog-pills-arrow{ display: block; }
-  /* clear the arrows so pills don't slide underneath them (arrow ends ≈ 3.4% + 48px) */
-  .sv-blog-filterbar.sv-has-overflow .sv-blog-pills{ padding-left: calc(3.4% + 68px); padding-right: calc(3.4% + 68px); }
-}
-/* ----- Filter category panel (Figma 235:8355, flat-tag version) — opened by the Filter button;
-   built by sava.js by cloning the pill row, so it always mirrors the live tags + active state.
-   Child of the sticky titlebar → anchors below it wherever it's stuck; full-width like the bar. ----- */
-.sv-blog-filter-panel{
-  display: none; position: absolute; top: 100%; left: 0; right: 0;
-  background: #fff; border-bottom: 1px solid #DEDDD7;
-  box-shadow: 0 24px 40px rgba(38,37,36,.08);
-  padding: 40px 5% 48px; max-height: 70vh; overflow: auto;
-}
-.sv-blog-filter-panel.is-open{ display: block; }
-.sv-blog-filter-panel_inner{
-  display: flex; flex-wrap: wrap; gap: 12px;
-  max-width: 1360px; margin: 0 auto;
-}
-.sv-blog-filter-panel_close{
-  position: absolute; top: 14px; right: 5%;
-  width: 32px; height: 32px; padding: 0; border: none; background: transparent; cursor: pointer;
-  font-size: 26px; line-height: 1; color: #262524;
-}
-.sv-blog-filter-btn{ user-select: none; }
-/* breathing room between the sticky Recent bar and the first row of cards */
-.blog_cms-wrapper{ padding-top: 40px; }
 
 /* ============================================================
-   SV Blog Article — post/detail page (Figma 237-10442)
-   Styles the Liquify article_hero + article_content sections.
-   Trail/tag visuals live as native Webflow styles; this block adds
-   section backgrounds, the 747px content column, and the rich-text
-   typography per Figma.
+   SAVA — Footer accordion (mobile only, ≤767px)
    ============================================================ */
-/* ----- Hero: white band, hairline bottom; title centered, capped at Figma's 986px ----- */
-[id*="article_hero"]{ background-color: #fff; border-bottom: 1px solid #DEDDD7; }
-[id*="article_hero"] .heading-style-h1{ max-width: 986px; margin-left: auto; margin-right: auto; }
+(function() {
+  function init() {
+	var mobileQuery = window.matchMedia('(max-width: 767px)');
 
-/* ----- Content: white bg; body column = 747px centered; featured image rounded ----- */
-[id*="article_content"]{ background-color: #fff; }
-.article_wrapper{ max-width: 747px; margin-left: auto; margin-right: auto; }
-.sv-article-tag{ margin: 0; }   /* hero pill is a <p> — strip the default paragraph margin */
-.sv-article-image{ width: 100%; height: auto; border-radius: 10px; display: block; }
+	document.querySelectorAll('[data-sava-accordion-trigger]').forEach(function(trigger) {
+	  if (trigger._savaInit) return;
+	  trigger._savaInit = true;
 
-/* ----- Rich-text typography (Figma): section heads = Gelica Light 36/40 CENTERED with
-   generous space above; body = Gibson Book 16/24 left-aligned ----- */
-.article_wrapper .text-rich-text{
-  font-family: "Gibson", sans-serif; font-weight: 300;
-  font-size: 16px; line-height: 24px; color: #262524;
-}
-.article_wrapper .text-rich-text h2{
-  font-family: "Gelica", serif; font-weight: 300;
-  font-size: 36px; line-height: 40px; color: #262524;
-  text-align: center; margin: 64px 0 28px;
-}
-.article_wrapper .text-rich-text h3{
-  font-family: "Gelica", serif; font-weight: 300;
-  font-size: 28px; line-height: 34px; color: #262524;
-  text-align: center; margin: 48px 0 20px;
-}
-/* h4 = the "DO:" / "DON'T:" style bold sub-heads */
-.article_wrapper .text-rich-text h4{
-  font-family: "Gibson", sans-serif; font-weight: 500;
-  font-size: 16px; line-height: 22px; letter-spacing: .5px; text-transform: uppercase;
-  margin: 32px 0 12px;
-}
-.article_wrapper .text-rich-text p{ margin: 0 0 16px; }
-.article_wrapper .text-rich-text ul,
-.article_wrapper .text-rich-text ol{ margin: 0 0 16px; padding-left: 22px; }
-.article_wrapper .text-rich-text li{ margin-bottom: 8px; }
-.article_wrapper .text-rich-text blockquote{
-  border-left: 3px solid #F6D7B9; margin: 28px 0; padding: 8px 0 8px 20px;
-  font-family: "Gelica", serif; font-weight: 300; font-size: 22px; line-height: 32px;
-}
-.article_wrapper .text-rich-text img{ border-radius: 10px; }
-/* tables (e.g. the fasting-timeline): hairline rows, uppercase mono header row */
-.article_wrapper .text-rich-text table{ width: 100%; border-collapse: collapse; margin: 28px 0; }
-.article_wrapper .text-rich-text th{
-  font-family: "InterstateMono", monospace; font-weight: 300;
-  font-size: 13px; letter-spacing: .7px; text-transform: uppercase; text-align: left;
-  padding: 10px 12px 10px 0; border-bottom: 1px solid #DEDDD7;
-}
-.article_wrapper .text-rich-text td{
-  font-size: 15px; line-height: 22px; padding: 12px 12px 12px 0;
-  border-bottom: 1px solid #DEDDD7; vertical-align: top;
-}
-/* mobile */
-@media (max-width: 767px){
-  .article_wrapper .text-rich-text h2{ font-size: 28px; line-height: 34px; margin-top: 44px; }
-  .article_wrapper .text-rich-text h3{ font-size: 24px; line-height: 30px; }
-}
+	  var col = trigger.closest('[data-sava-accordion]');
+	  var panel = col && col.querySelector('[data-sava-accordion-panel]');
+	  if (!panel) return;
+
+	  trigger.setAttribute('role', 'button');
+	  trigger.setAttribute('tabindex', '0');
+	  trigger.setAttribute('aria-expanded', 'false');
+
+	  function toggle() {
+		if (!mobileQuery.matches) return;
+		var isOpen = trigger.getAttribute('aria-expanded') === 'true';
+		if (isOpen) {
+		  panel.style.maxHeight = '0px';
+		  trigger.setAttribute('aria-expanded', 'false');
+		} else {
+		  panel.style.maxHeight = panel.scrollHeight + 'px';
+		  trigger.setAttribute('aria-expanded', 'true');
+		}
+	  }
+
+	  trigger.addEventListener('click', toggle);
+	  trigger.addEventListener('keydown', function(e) {
+		if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+	  });
+
+	  mobileQuery.addEventListener('change', function(e) {
+		if (!e.matches) {
+		  panel.style.maxHeight = '';
+		  trigger.setAttribute('aria-expanded', 'false');
+		}
+	  });
+	});
+  }
+
+  if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', init);
+  } else {
+	init();
+  }
+})();
+
+
+/* ============================================================
+   SAVA — mobile nav open-state class
+   Mirrors .w--open on .w-nav-button to .sava-nav-open on .w-nav
+   ============================================================ */
+(function(){
+  function init(){
+	var btn = document.querySelector('.w-nav-button');
+	var nav = btn && btn.closest('.w-nav');
+	if (!nav) return;
+	var sync = function(){ nav.classList.toggle('sava-nav-open', btn.classList.contains('w--open')); };
+	new MutationObserver(sync).observe(btn, {attributes:true, attributeFilter:['class']});
+	sync();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+
+
+/* ===== SV Product Tabs — tab click handler (2026-06-09) ===== */
+(function(){
+  document.addEventListener('click', function(e){
+	var t = e.target.closest('[data-sv-tab]');
+	if(!t) return;
+	var root = t.closest('.sv-product-tabs, [data-sv-tabs]');
+	if(!root) return;
+	var key = t.getAttribute('data-sv-tab');
+	root.querySelectorAll('[data-sv-tab]').forEach(function(el){
+	  el.classList.toggle('is-active', el === t);
+	});
+	root.querySelectorAll('[data-sv-pane]').forEach(function(el){
+	  el.classList.toggle('is-active', el.getAttribute('data-sv-pane') === key);
+	});
+  });
+})();
+
+/* ===== SV Quantity Stepper — −/+ controls around the native qty input (2026-06-10) ===== */
+(function(){
+  document.addEventListener('click', function(e){
+	var minus = e.target.closest('[data-sv-qty-minus]');
+	var plus = e.target.closest('[data-sv-qty-plus]');
+	if(!minus && !plus) return;
+	var stepper = (minus || plus).closest('.sv-qty-stepper');
+	if(!stepper) return;
+	var input = stepper.querySelector('input');
+	if(!input) return;
+	var val = parseInt(input.value, 10) || 1;
+	val = minus ? Math.max(1, val - 1) : val + 1;
+	input.value = val;
+	input.dispatchEvent(new Event('input', { bubbles: true }));
+	input.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+})();
+
+/* ===== SV Variant card icons — inject pouch/stick icon by label text (2026-06-10) ===== */
+(function(){
+  var ICONS = {
+	bag: 'https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a001e09d3badd55b008a9bd_Icons_Pouch.svg',
+	stick: 'https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a001e09df8b9f5531918f77_Icons_Stick.svg'
+  };
+  function decorate(){
+	document.querySelectorAll('.product-header_radio').forEach(function(card){
+	  if(card.dataset.svIcon) return;
+	  card.dataset.svIcon = 'done';
+	  var t = (card.textContent || '').toLowerCase();
+	  var src = t.indexOf('bag') > -1 ? ICONS.bag : (t.indexOf('stick') > -1 ? ICONS.stick : null);
+	  if(!src) return;
+	  var img = document.createElement('img');
+	  img.src = src; img.alt = ''; img.className = 'sv-variant-card_icon';
+	  card.insertBefore(img, card.firstChild);
+	});
+  }
+  document.addEventListener('DOMContentLoaded', decorate);
+  setTimeout(decorate, 800); /* re-run after Alpine renders the variant loop */
+})();
+
+/* ============================================================
+   SAVA — unified marquee (fill-to-width, seamless loop, constant speed)
+   Replaces the old Promotional Banner + logo-scroller marquee handlers.
+   Works for any [data-sava-marquee] track:
+	 1. clones the original child set until one pass overfills the viewport
+	 2. duplicates the filled strip once so translateX(-50%) never gaps
+	 3. logo scroller (or any track with data-marquee-speed) scrolls at a
+		constant px/sec; other marquees keep their CSS animation-duration
+   (2026-06-14)
+   ============================================================ */
+(function(){
+  function imagesReady(track){
+	var imgs = track.querySelectorAll('img'), i;
+	for (i = 0; i < imgs.length; i++){
+	  if (!imgs[i].complete || imgs[i].naturalWidth === 0) return false;
+	}
+	return true;
+  }
+
+  function build(track){
+	if (track.dataset.marqueeReady || !track.children.length) return;
+
+	var container = track.parentElement;
+	var viewport = (container && container.offsetWidth) || window.innerWidth;
+	var unit = Array.prototype.slice.call(track.children); // the original repeating set
+
+	/* 1) fill: repeat the unit until one pass is at least a full viewport wide */
+	var guard = 0;
+	while (track.scrollWidth < viewport && guard < 60){
+	  unit.forEach(function(node){
+		var c = node.cloneNode(true);
+		c.setAttribute('aria-hidden', 'true');
+		track.appendChild(c);
+	  });
+	  guard++;
+	}
+	/* 2) duplicate the filled strip once → translateX(-50%) loops with no gap */
+	Array.prototype.slice.call(track.children).forEach(function(node){
+	  var c = node.cloneNode(true);
+	  c.setAttribute('aria-hidden', 'true');
+	  track.appendChild(c);
+	});
+	/* 3) constant speed (px/sec) for the logo scroller or any data-marquee-speed track */
+	var speedAttr = track.getAttribute('data-marquee-speed');
+	var wantsConstant = speedAttr || track.classList.contains('sv-logo-scroller_track');
+	if (wantsConstant){
+	  var pxPerSec = parseFloat(speedAttr) || 60;
+	  track.style.animationDuration = ((track.scrollWidth / 2) / pxPerSec) + 's';
+	}
+	track.dataset.marqueeReady = 'true';
+  }
+
+  function tryBuild(track, attempts){
+	if (track.dataset.marqueeReady) return;
+	if (!imagesReady(track) && attempts < 20){
+	  return setTimeout(function(){ tryBuild(track, attempts + 1); }, 150);
+	}
+	build(track);
+  }
+
+  function initAll(){
+	document.querySelectorAll('[data-sava-marquee]').forEach(function(t){ tryBuild(t, 0); });
+  }
+
+  window.addEventListener('load', initAll);
+  if (document.readyState === 'loading'){
+	document.addEventListener('DOMContentLoaded', function(){ setTimeout(initAll, 300); });
+  } else {
+	setTimeout(initAll, 300);
+  }
+})();
+
+
+/* ===== SV Key Ingredients — Supplement Facts lightbox (2026-06-17) =====
+   Intercepts the "View Supplement Facts Label" link and opens the metafield
+   file (image or PDF) in an on-page lightbox instead of a new tab.
+   No-JS fallback: the link still opens the file (target=_blank). ===== */
+(function(){
+  function onKey(e){ if (e.key === 'Escape') closeLb(); }
+  function closeLb(){
+    var ex = document.querySelector('.sv-facts-lightbox');
+    if (ex) ex.remove();
+    document.removeEventListener('keydown', onKey);
+    document.body.style.overflow = '';
+  }
+  function openLb(src){
+    closeLb();
+    var ov = document.createElement('div');
+    ov.className = 'sv-facts-lightbox';
+    ov.style.cssText = 'position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(20,19,18,.88);padding:4vmin;';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.setAttribute('aria-label', 'Close');
+    btn.innerHTML = '&times;';
+    btn.style.cssText = 'position:absolute;top:16px;right:16px;width:40px;height:40px;border:0;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:24px;line-height:40px;cursor:pointer;';
+    var media;
+    if (/\.pdf(\?|$)/i.test(src)){
+      media = document.createElement('iframe');
+      media.src = src;
+      media.style.cssText = 'width:92vw;height:88vh;border:0;border-radius:6px;background:#fff;';
+    } else {
+      media = document.createElement('img');
+      media.src = src;
+      media.alt = 'Supplement Facts';
+      media.style.cssText = 'max-width:92vw;max-height:88vh;width:auto;height:auto;display:block;border-radius:6px;background:#fff;';
+    }
+    ov.appendChild(btn);
+    ov.appendChild(media);
+    document.body.appendChild(ov);
+    document.body.style.overflow = 'hidden';
+    ov.addEventListener('click', function(e){ if (e.target === ov) closeLb(); });
+    btn.addEventListener('click', closeLb);
+    document.addEventListener('keydown', onKey);
+  }
+  document.addEventListener('click', function(e){
+    var p = e.target.closest('.sv-keying_facts');
+    if (!p) return;
+    var a = p.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href || href === '#') return;
+    e.preventDefault();
+    openLb(href);
+  });
+})();
+
+/* ===== SV All Flavors — per-flavor hover color (2026-06-16) ===== */
+(function(){
+  document.querySelectorAll('[data-sv-flavor]').forEach(function(el){
+    var c = el.getAttribute('data-sv-flavor');
+    if (c) el.style.setProperty('--sv-flavor', c);
+  });
+})();
+
+/* ===== SV Product Header gallery — nudge Swiper to recompute sizes after the left-rail reflow (2026-06-18) ===== */
+(function(){
+  function upd(){
+    document.querySelectorAll('.swiper.is-product-gallery, .swiper.is-product-thumbnail').forEach(function(el){
+      if (el.swiper && typeof el.swiper.update === 'function') el.swiper.update();
+    });
+  }
+  window.addEventListener('load', function(){ upd(); setTimeout(upd, 300); setTimeout(upd, 900); });
+  var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(upd, 150); });
+})();
+
+/* ===== SV Blog — highlight the active quick-filter pill by current URL (2026-06-23) ===== */
+(function(){
+  function setActive(){
+    var pills = document.querySelectorAll('.sv-blog-pill');
+    if (!pills.length) return;
+    var here = location.pathname.replace(/\/+$/, '');
+    pills.forEach(function(p){
+      var a = document.createElement('a'); a.href = p.getAttribute('href') || '';
+      p.classList.toggle('is-active', a.pathname.replace(/\/+$/, '') === here);
+    });
+  }
+  document.addEventListener('DOMContentLoaded', setActive);
+  setActive();
+})();
+
+/* ===== SV Blog — inject prev/next carousel arrows into the quick-filter bar (2026-07-01)
+   Buttons are styled by sava.css (.sv-blog-pills-arrow, gallery circle-arrow data-URIs) and only
+   shown on desktop when the pill row actually overflows (.sv-has-overflow on the bar). ===== */
+(function(){
+  function init(){
+    var bar = document.querySelector('.sv-blog-filterbar');
+    var pills = bar && bar.querySelector('.sv-blog-pills');
+    if (!bar || !pills || bar.dataset.savaArrows) return;
+    bar.dataset.savaArrows = 'true';
+    ['prev','next'].forEach(function(dir){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'sv-blog-pills-arrow is-' + dir;
+      b.setAttribute('aria-label', dir === 'prev' ? 'Scroll filters left' : 'Scroll filters right');
+      b.addEventListener('click', function(){
+        pills.scrollBy({ left: (dir === 'prev' ? -1 : 1) * Math.round(pills.clientWidth * 0.7), behavior: 'smooth' });
+      });
+      bar.appendChild(b);
+    });
+    function upd(){ bar.classList.toggle('sv-has-overflow', pills.scrollWidth > pills.clientWidth + 4); }
+    upd();
+    var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(upd, 150); });
+  }
+  document.addEventListener('DOMContentLoaded', init);
+  init();
+})();
+
+/* ===== SV Blog — Filter button opens the category panel (Figma 235:8355, flat-tag version).
+   Built by cloning the pill row, so it always mirrors the live tags + active state.
+   Closes on ✕, outside click, Escape, or picking a category (navigation). ===== */
+(function(){
+  function init(){
+    var bar = document.querySelector('.sv-blog-titlebar');
+    var btn = bar && bar.querySelector('.sv-blog-filter-btn');
+    var pills = document.querySelectorAll('.sv-blog-pills .sv-blog-pill');
+    if (!bar || !btn || !pills.length || bar.dataset.savaFilterPanel) return;
+    bar.dataset.savaFilterPanel = 'true';
+    var panel = document.createElement('div');
+    panel.className = 'sv-blog-filter-panel';
+    var close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'sv-blog-filter-panel_close';
+    close.setAttribute('aria-label', 'Close filters');
+    close.innerHTML = '×';
+    var inner = document.createElement('div');
+    inner.className = 'sv-blog-filter-panel_inner';
+    pills.forEach(function(p){ inner.appendChild(p.cloneNode(true)); });
+    panel.appendChild(close);
+    panel.appendChild(inner);
+    bar.appendChild(panel);
+    function setOpen(open){
+      panel.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    btn.addEventListener('click', function(e){ e.stopPropagation(); setOpen(!panel.classList.contains('is-open')); });
+    close.addEventListener('click', function(){ setOpen(false); });
+    document.addEventListener('click', function(e){
+      if (panel.classList.contains('is-open') && !panel.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') setOpen(false); });
+  }
+  document.addEventListener('DOMContentLoaded', init);
+  init();
+})();
