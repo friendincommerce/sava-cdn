@@ -2716,3 +2716,40 @@ body:has(section.sv-trust-points) {
   .article_wrapper .text-rich-text h2{ font-size: 28px; line-height: 34px; margin-top: 44px; }
   .article_wrapper .text-rich-text h3{ font-size: 24px; line-height: 30px; }
 }
+
+/* ----- SV Deep Dive — universal end-of-article section (Figma 239:10924).
+   Soft-white fading to peach; editable Heading/Body/Share Label + Instagram URL
+   in the Theme Editor; Pinterest/Facebook/Email links share the current article. ----- */
+.sv-deep-dive{
+  background: var(--sava-gradient-light-peach-fade-transparent, linear-gradient(180deg, rgba(248,248,248,0) 49.52%, #F6D7B9 100%)),
+              var(--_sava-color-styles---soft-white, #F8F8F8);
+  border-top: 1px solid #DEDDD7;
+}
+.sv-deep-dive_content{ max-width: 747px; margin: 0 auto; }
+.sv-deep-dive_heading{
+  font-family: "Gelica", serif; font-weight: 300;
+  font-size: 36px; line-height: 40px; color: #262524;
+  text-align: center; margin: 0 0 36px;
+}
+.sv-deep-dive_body{
+  font-family: "Gibson", sans-serif; font-weight: 300;
+  font-size: 16px; line-height: 24px; color: #262524;
+}
+.sv-deep-dive_body p{ margin: 0 0 16px; }
+.sv-deep-dive_body ul, .sv-deep-dive_body ol{ margin: 0 0 16px; padding-left: 22px; }
+.sv-deep-dive_body li{ margin-bottom: 8px; }
+.sv-deep-dive_body a{ color: #262524; text-decoration: underline; }
+.sv-deep-dive_share{ margin-top: 72px; text-align: center; }
+.sv-deep-dive_share-label{
+  font-family: "Gibson", sans-serif; font-weight: 500;
+  font-size: 16px; letter-spacing: 2.4px; text-transform: uppercase;
+  color: #262524; margin: 0 0 20px;
+}
+.sv-deep-dive_icons{ display: flex; justify-content: center; align-items: center; gap: 19px; }
+.sv-deep-dive_icon-link{ display: inline-flex; align-items: center; transition: opacity .2s ease; }
+.sv-deep-dive_icon-link:hover{ opacity: .6; }
+.sv-deep-dive_icon{ height: 23px; width: auto; display: block; }
+@media (max-width: 767px){
+  .sv-deep-dive_heading{ font-size: 28px; line-height: 34px; }
+  .sv-deep-dive_share{ margin-top: 52px; }
+}
