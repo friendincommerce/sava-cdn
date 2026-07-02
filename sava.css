@@ -2624,5 +2624,25 @@ body:has(section.sv-trust-points) {
   /* clear the arrows so pills don't slide underneath them (arrow ends ≈ 3.4% + 48px) */
   .sv-blog-filterbar.sv-has-overflow .sv-blog-pills{ padding-left: calc(3.4% + 68px); padding-right: calc(3.4% + 68px); }
 }
+/* ----- Filter category panel (Figma 235:8355, flat-tag version) — opened by the Filter button;
+   built by sava.js by cloning the pill row, so it always mirrors the live tags + active state.
+   Child of the sticky titlebar → anchors below it wherever it's stuck; full-width like the bar. ----- */
+.sv-blog-filter-panel{
+  display: none; position: absolute; top: 100%; left: 0; right: 0;
+  background: #fff; border-bottom: 1px solid #DEDDD7;
+  box-shadow: 0 24px 40px rgba(38,37,36,.08);
+  padding: 40px 5% 48px; max-height: 70vh; overflow: auto;
+}
+.sv-blog-filter-panel.is-open{ display: block; }
+.sv-blog-filter-panel_inner{
+  display: flex; flex-wrap: wrap; gap: 12px;
+  max-width: 1360px; margin: 0 auto;
+}
+.sv-blog-filter-panel_close{
+  position: absolute; top: 14px; right: 5%;
+  width: 32px; height: 32px; padding: 0; border: none; background: transparent; cursor: pointer;
+  font-size: 26px; line-height: 1; color: #262524;
+}
+.sv-blog-filter-btn{ user-select: none; }
 /* breathing room between the sticky Recent bar and the first row of cards */
 .blog_cms-wrapper{ padding-top: 40px; }
