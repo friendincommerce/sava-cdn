@@ -2654,8 +2654,8 @@ body:has(section.sv-trust-points) {
    section backgrounds, the 747px content column, and the rich-text
    typography per Figma.
    ============================================================ */
-/* ----- Hero: white band, hairline bottom; title centered, capped at Figma's 986px ----- */
-[id*="article_hero"]{ background-color: #fff; border-bottom: 1px solid #DEDDD7; }
+/* ----- Hero: soft-white band, hairline bottom; title centered, capped at Figma's 986px ----- */
+[id*="article_hero"]{ background-color: var(--_sava-color-styles---soft-white, #F8F8F8); border-bottom: 1px solid #DEDDD7; }
 [id*="article_hero"] .heading-style-h1{ max-width: 986px; margin-left: auto; margin-right: auto; }
 /* Figma vertical rhythm: ~44px navbar→trail, ~56px trail→tags, ~104px title→hairline
    (the Liquify default padding-section-large = 8rem top was the big white gap) */
@@ -2664,7 +2664,7 @@ body:has(section.sv-trust-points) {
 .sv-article-tags{ margin-bottom: 36px !important; }
 
 /* ----- Content: white bg; body column = 747px centered; featured image rounded ----- */
-[id*="article_content"]{ background-color: #fff; }
+[id*="article_content"]{ background-color: var(--_sava-color-styles---soft-white, #F8F8F8); }
 .article_wrapper{ max-width: 747px; margin-left: auto; margin-right: auto; }
 .sv-article-tag{ margin: 0; }   /* hero pill is a <p> — strip the default paragraph margin */
 .sv-article-image{ width: 100%; height: auto; border-radius: 10px; display: block; }
