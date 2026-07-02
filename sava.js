@@ -518,3 +518,41 @@
   document.addEventListener('DOMContentLoaded', init);
   init();
 })();
+
+/* ===== SV Blog — Filter button opens the category panel (Figma 235:8355, flat-tag version).
+   Built by cloning the pill row, so it always mirrors the live tags + active state.
+   Closes on ✕, outside click, Escape, or picking a category (navigation). ===== */
+(function(){
+  function init(){
+    var bar = document.querySelector('.sv-blog-titlebar');
+    var btn = bar && bar.querySelector('.sv-blog-filter-btn');
+    var pills = document.querySelectorAll('.sv-blog-pills .sv-blog-pill');
+    if (!bar || !btn || !pills.length || bar.dataset.savaFilterPanel) return;
+    bar.dataset.savaFilterPanel = 'true';
+    var panel = document.createElement('div');
+    panel.className = 'sv-blog-filter-panel';
+    var close = document.createElement('button');
+    close.type = 'button';
+    close.className = 'sv-blog-filter-panel_close';
+    close.setAttribute('aria-label', 'Close filters');
+    close.innerHTML = '×';
+    var inner = document.createElement('div');
+    inner.className = 'sv-blog-filter-panel_inner';
+    pills.forEach(function(p){ inner.appendChild(p.cloneNode(true)); });
+    panel.appendChild(close);
+    panel.appendChild(inner);
+    bar.appendChild(panel);
+    function setOpen(open){
+      panel.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    btn.addEventListener('click', function(e){ e.stopPropagation(); setOpen(!panel.classList.contains('is-open')); });
+    close.addEventListener('click', function(){ setOpen(false); });
+    document.addEventListener('click', function(e){
+      if (panel.classList.contains('is-open') && !panel.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') setOpen(false); });
+  }
+  document.addEventListener('DOMContentLoaded', init);
+  init();
+})();
