@@ -2646,3 +2646,68 @@ body:has(section.sv-trust-points) {
 .sv-blog-filter-btn{ user-select: none; }
 /* breathing room between the sticky Recent bar and the first row of cards */
 .blog_cms-wrapper{ padding-top: 40px; }
+
+/* ============================================================
+   SV Blog Article — post/detail page (Figma 237-10442)
+   Styles the Liquify article_hero + article_content sections.
+   Trail/tag visuals live as native Webflow styles; this block adds
+   section backgrounds, the 747px content column, and the rich-text
+   typography per Figma.
+   ============================================================ */
+/* ----- Hero: white band, hairline bottom; title centered, capped at Figma's 986px ----- */
+[id*="article_hero"]{ background-color: #fff; border-bottom: 1px solid #DEDDD7; }
+[id*="article_hero"] .heading-style-h1{ max-width: 986px; margin-left: auto; margin-right: auto; }
+
+/* ----- Content: white bg; body column = 747px centered; featured image rounded ----- */
+[id*="article_content"]{ background-color: #fff; }
+.article_wrapper{ max-width: 747px; margin-left: auto; margin-right: auto; }
+.sv-article-tag{ margin: 0; }   /* hero pill is a <p> — strip the default paragraph margin */
+.sv-article-image{ width: 100%; height: auto; border-radius: 10px; display: block; }
+
+/* ----- Rich-text typography (Figma): section heads = Gelica Light 36/40 CENTERED with
+   generous space above; body = Gibson Book 16/24 left-aligned ----- */
+.article_wrapper .text-rich-text{
+  font-family: "Gibson", sans-serif; font-weight: 300;
+  font-size: 16px; line-height: 24px; color: #262524;
+}
+.article_wrapper .text-rich-text h2{
+  font-family: "Gelica", serif; font-weight: 300;
+  font-size: 36px; line-height: 40px; color: #262524;
+  text-align: center; margin: 64px 0 28px;
+}
+.article_wrapper .text-rich-text h3{
+  font-family: "Gelica", serif; font-weight: 300;
+  font-size: 28px; line-height: 34px; color: #262524;
+  text-align: center; margin: 48px 0 20px;
+}
+/* h4 = the "DO:" / "DON'T:" style bold sub-heads */
+.article_wrapper .text-rich-text h4{
+  font-family: "Gibson", sans-serif; font-weight: 500;
+  font-size: 16px; line-height: 22px; letter-spacing: .5px; text-transform: uppercase;
+  margin: 32px 0 12px;
+}
+.article_wrapper .text-rich-text p{ margin: 0 0 16px; }
+.article_wrapper .text-rich-text ul,
+.article_wrapper .text-rich-text ol{ margin: 0 0 16px; padding-left: 22px; }
+.article_wrapper .text-rich-text li{ margin-bottom: 8px; }
+.article_wrapper .text-rich-text blockquote{
+  border-left: 3px solid #F6D7B9; margin: 28px 0; padding: 8px 0 8px 20px;
+  font-family: "Gelica", serif; font-weight: 300; font-size: 22px; line-height: 32px;
+}
+.article_wrapper .text-rich-text img{ border-radius: 10px; }
+/* tables (e.g. the fasting-timeline): hairline rows, uppercase mono header row */
+.article_wrapper .text-rich-text table{ width: 100%; border-collapse: collapse; margin: 28px 0; }
+.article_wrapper .text-rich-text th{
+  font-family: "InterstateMono", monospace; font-weight: 300;
+  font-size: 13px; letter-spacing: .7px; text-transform: uppercase; text-align: left;
+  padding: 10px 12px 10px 0; border-bottom: 1px solid #DEDDD7;
+}
+.article_wrapper .text-rich-text td{
+  font-size: 15px; line-height: 22px; padding: 12px 12px 12px 0;
+  border-bottom: 1px solid #DEDDD7; vertical-align: top;
+}
+/* mobile */
+@media (max-width: 767px){
+  .article_wrapper .text-rich-text h2{ font-size: 28px; line-height: 34px; margin-top: 44px; }
+  .article_wrapper .text-rich-text h3{ font-size: 24px; line-height: 30px; }
+}
