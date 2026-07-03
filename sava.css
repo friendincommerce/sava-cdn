@@ -2760,11 +2760,12 @@ body:has(section.sv-trust-points) {
    Newsletter (blueberry band + Shopify customer form).
    All copy is Theme-Editor-editable via li-settings.
    ============================================================ */
-/* ----- Hero ----- */
-.sv-contact-hero{ background-color: var(--_sava-color-styles---soft-white, #F8F8F8); padding: 8.5rem 0; }
+/* ----- Hero: light-grey band, centered title (user preference over Figma's left) ----- */
+.sv-contact-hero{ background-color: var(--_sava-color-styles---light-grey, #EEEEED); padding: 8.5rem 0; }
 .sv-contact-hero_heading{
   font-family: "Gelica", serif; font-weight: 300;
   font-size: 52px; line-height: 54px; color: #262524; margin: 0;
+  text-align: center;
 }
 /* ----- Email Us: full-bleed background image + left content stack ----- */
 .sv-email-us{ position: relative; overflow: hidden; background-color: var(--_sava-color-styles---soft-white, #F8F8F8); padding: 8rem 0 9rem; }
