@@ -556,3 +556,18 @@
   document.addEventListener('DOMContentLoaded', init);
   init();
 })();
+
+/* ===== SV Quiz Hero — force-load the collage images.
+   Chrome's native loading="lazy" never fires for these absolutely-positioned
+   images inside the overflow:hidden hero on first paint — it only re-checks
+   after a scroll, so a visitor who doesn't scroll sees an empty collage.
+   They're above the fold anyway, so eager is correct. ===== */
+(function(){
+  function init(){
+    document.querySelectorAll('.sv-quiz-hero_images img').forEach(function(img){
+      img.loading = 'eager';
+    });
+  }
+  document.addEventListener('DOMContentLoaded', init);
+  init();
+})();
