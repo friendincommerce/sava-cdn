@@ -2753,3 +2753,81 @@ body:has(section.sv-trust-points) {
   .sv-deep-dive_heading{ font-size: 28px; line-height: 34px; }
   .sv-deep-dive_share{ margin-top: 52px; }
 }
+
+/* ============================================================
+   SV Contact page (Figma 235-8724) — three sections:
+   Contact Hero (left title) / Email Us (full-bleed image band) /
+   Newsletter (blueberry band + Shopify customer form).
+   All copy is Theme-Editor-editable via li-settings.
+   ============================================================ */
+/* ----- Hero ----- */
+.sv-contact-hero{ background-color: var(--_sava-color-styles---soft-white, #F8F8F8); padding: 8.5rem 0; }
+.sv-contact-hero_heading{
+  font-family: "Gelica", serif; font-weight: 300;
+  font-size: 52px; line-height: 54px; color: #262524; margin: 0;
+}
+/* ----- Email Us: full-bleed background image + left content stack ----- */
+.sv-email-us{ position: relative; overflow: hidden; background-color: var(--_sava-color-styles---soft-white, #F8F8F8); padding: 8rem 0 9rem; }
+.sv-email-us_bg{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.sv-email-us .padding-global{ position: relative; z-index: 1; }
+.sv-email-us_content{ max-width: 480px; }
+.sv-email-us_eyebrow{
+  font-family: "InterstateMono", monospace; font-weight: 300;
+  font-size: 14px; letter-spacing: 0.7px; text-transform: uppercase;
+  color: #262524; margin: 0 0 16px;
+}
+.sv-email-us_heading{
+  font-family: "Gelica", serif; font-weight: 300;
+  font-size: 52px; line-height: 54px; color: #262524; margin: 0 0 40px;
+}
+.sv-email-us_pill{
+  display: inline-block; background-color: #fff; border-radius: 10px;
+  padding: 18px 20px; text-decoration: none;
+}
+.sv-email-us_pill-text{
+  font-family: "Gibson", sans-serif; font-weight: 500;
+  font-size: 16px; letter-spacing: 2.4px; text-transform: uppercase;
+  color: #262524; text-decoration: underline; margin: 0; white-space: nowrap;
+}
+.sv-email-us_note{
+  font-family: "Gibson", sans-serif; font-weight: 300;
+  font-size: 16px; line-height: 24px; color: #262524; margin: 16px 0 0;
+}
+/* ----- Newsletter: blueberry band, centered, Shopify customer form ----- */
+.sv-contact-news{ background-color: #99BBE1; padding: 11rem 0; text-align: center; }
+.sv-contact-news_heading{
+  font-family: "Gelica", serif; font-weight: 300;
+  font-size: 36px; line-height: 40px; color: var(--_sava-color-styles---soft-white, #F8F8F8);
+  max-width: 460px; margin: 0 auto 40px;
+}
+.sv-contact-news_body{
+  font-family: "Gibson", sans-serif; font-weight: 300;
+  font-size: 16px; line-height: 24px; color: var(--_sava-color-styles---soft-white, #F8F8F8);
+  max-width: 576px; margin: 0 auto 48px;
+}
+.sv-contact-news_form-block{ max-width: 448px; margin: 0 auto; }
+.sv-contact-news_form{ position: relative; }
+.sv-contact-news_input{
+  width: 100%; height: 37px; box-sizing: border-box;
+  background-color: transparent; border: 1px solid var(--_sava-color-styles---soft-white, #F8F8F8);
+  border-radius: 10px; padding: 0 48px 0 14px; margin: 0;
+  font-family: "Gibson", sans-serif; font-weight: 300; font-size: 16px; color: #fff;
+}
+.sv-contact-news_input::placeholder{ color: #fff; opacity: 1; }
+.sv-contact-news_input:focus{ outline: none; border-color: #fff; }
+.sv-contact-news_submit{
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  width: 28px; height: 28px; padding: 0; border: none; cursor: pointer;
+  color: transparent; font-size: 0;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23F8F8F8'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M3%2012h17M14%205l7%207-7%207'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: center; background-size: 22px;
+}
+/* mobile */
+@media (max-width: 767px){
+  .sv-contact-hero{ padding: 4.5rem 0; }
+  .sv-contact-hero_heading, .sv-email-us_heading{ font-size: 38px; line-height: 44px; }
+  .sv-email-us{ padding: 5rem 0 6rem; }
+  .sv-email-us_pill-text{ white-space: normal; font-size: 14px; letter-spacing: 1.8px; }
+  .sv-contact-news{ padding: 7rem 0; }
+}
