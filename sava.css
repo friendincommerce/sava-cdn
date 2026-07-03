@@ -2824,11 +2824,18 @@ body:has(section.sv-trust-points) {
   background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%20stroke='%23F8F8F8'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M3%2012h17M14%205l7%207-7%207'/%3E%3C/svg%3E");
   background-repeat: no-repeat; background-position: center; background-size: 22px;
 }
-/* mobile */
+/* mobile — Email Us STACKS (Figma mobile): centered content on soft-white, image below, flush bottom */
 @media (max-width: 767px){
   .sv-contact-hero{ padding: 4.5rem 0; }
   .sv-contact-hero_heading, .sv-email-us_heading{ font-size: 38px; line-height: 44px; }
-  .sv-email-us{ padding: 5rem 0 6rem; }
+  .sv-email-us{ padding: 4.5rem 0 0; display: flex; flex-direction: column; }
+  .sv-email-us .padding-global{ order: 1; }
+  .sv-email-us_bg{
+    position: static; order: 2;              /* out of the overlay, below the content */
+    width: 100%; height: 440px; object-fit: cover;
+    margin-top: 3.5rem;                      /* content → image gap; image sits flush on the section bottom */
+  }
+  .sv-email-us_content{ max-width: none; text-align: center; }
   .sv-email-us_pill-text{ white-space: normal; font-size: 14px; letter-spacing: 1.8px; }
   .sv-contact-news{ padding: 7rem 0; }
 }
