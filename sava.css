@@ -2833,6 +2833,7 @@ body:has(section.sv-trust-points) {
   .sv-email-us_bg{
     position: static; order: 2;              /* out of the overlay, below the content */
     width: 100%; height: 440px; object-fit: cover;
+    object-position: right center;           /* the products live on the RIGHT of the wide source image — crop to them (Figma mobile) */
     margin-top: 3.5rem;                      /* content → image gap; image sits flush on the section bottom */
   }
   .sv-email-us_content{ max-width: none; text-align: center; }
