@@ -2840,3 +2840,76 @@ body:has(section.sv-trust-points) {
   .sv-email-us_pill-text{ white-space: normal; font-size: 14px; letter-spacing: 1.8px; }
   .sv-contact-news{ padding: 7rem 0; }
 }
+
+/* ============================================================
+   SV Quiz Hero (Figma 46-4809 desktop / 233-2716 mobile)
+   Peach-fade hero with centered editable copy + 8 merchant-editable
+   collage images at fixed positions (left/right px-anchored so the
+   composition holds as the viewport scales; edge images bleed off).
+   Desktop: images surround the copy. Mobile: copy on top, collage below.
+   ============================================================ */
+.sv-quiz-hero{
+  position: relative; overflow: hidden;
+  min-height: 898px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--sava-gradient-light-peach-fade-transparent, linear-gradient(180deg, rgba(248,248,248,0) 49.52%, #F6D7B9 100%)),
+              var(--_sava-color-styles---soft-white, #F8F8F8);
+}
+.sv-quiz-hero_images{ position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.sv-quiz-hero_images img{ position: absolute; object-fit: cover; border-radius: 10px; }
+/* desktop collage positions (1440 design; left cluster px-from-left, right cluster px-from-right) */
+.sv-quiz-img1{ left: -28px;  top: 64px;  width: 332px; height: 188px; }
+.sv-quiz-img2{ left: 51.1%;  top: 16px;  width: 256px; height: 142px; }
+.sv-quiz-img3{ right: 73px;  top: 72px;  width: 231px; height: 157px; }
+.sv-quiz-img4{ right: -115px; top: 158px; width: 231px; height: 290px; }
+.sv-quiz-img5{ left: 46px;   top: 513px; width: 248px; height: 193px; }
+.sv-quiz-img6{ left: 202px;  top: 640px; width: 332px; height: 188px; }
+.sv-quiz-img7{ left: 48.2%;  top: 740px; width: 244px; height: 244px; }
+.sv-quiz-img8{ right: -38px; top: 486px; width: 342px; height: 342px; }
+/* content stack */
+.sv-quiz-hero_content{ position: relative; z-index: 1; text-align: center; }
+.sv-quiz-hero_eyebrow{
+  font-family: "InterstateMono", monospace; font-weight: 300;
+  font-size: 14px; letter-spacing: 0.7px; text-transform: uppercase;
+  color: #262524; margin: 0 0 16px;
+}
+.sv-quiz-hero_heading{
+  font-family: "Gelica", serif; font-weight: 300;
+  font-size: 52px; line-height: 54px; color: #262524; margin: 0 0 29px;
+}
+.sv-quiz-hero_body{
+  font-family: "Gibson", sans-serif; font-weight: 300;
+  font-size: 16px; line-height: 24px; color: #262524;
+  max-width: 644px; margin: 0 auto 48px;
+}
+/* standard SAVA button (white pill, dark fill on hover) */
+.sv-quiz-hero_button{
+  display: inline-block; background-color: #fff;
+  border: 0.75px solid var(--_sava-color-styles---mid-grey, #DEDDD7); border-radius: 10px;
+  padding: 13px 31px; text-decoration: none;
+  transition: background-color .2s ease, color .2s ease;
+}
+.sv-quiz-hero_button p{
+  font-family: "Gibson", sans-serif; font-weight: 500;
+  font-size: 16px; letter-spacing: 2.4px; text-transform: uppercase;
+  color: #262524; margin: 0; transition: color .2s ease;
+}
+.sv-quiz-hero_button:hover{ background-color: #262524; }
+.sv-quiz-hero_button:hover p{ color: #fff; }
+/* mobile: copy on top, full-width button, collage cascades below (Figma 233-2716) */
+@media (max-width: 767px){
+  .sv-quiz-hero{ display: block; min-height: 0; padding: 44px 0 0; }
+  .sv-quiz-hero_content{ padding: 0 20px; }
+  .sv-quiz-hero_heading{ font-size: 36px; line-height: 40px; margin-bottom: 20px; }
+  .sv-quiz-hero_body{ margin-bottom: 44px; }
+  .sv-quiz-hero_button{ display: block; text-align: center; margin: 0 20px; }
+  .sv-quiz-hero_images{ position: relative; inset: auto; height: 960px; margin-top: 64px; }
+  .sv-quiz-img1{ left: -46px;  top: 36px;  width: 218px; height: 123px; }
+  .sv-quiz-img2{ left: auto; right: 20px;  top: 0;     width: 151px; height: 84px; }
+  .sv-quiz-img3{ right: -72px; top: 125px; width: 144px; height: 98px; }
+  .sv-quiz-img4{ right: -8px;  top: 184px; width: 195px; height: 245px; }
+  .sv-quiz-img5{ left: 39px;   top: 254px; width: 133px; height: 104px; }
+  .sv-quiz-img6{ left: -86px;  top: 545px; width: 332px; height: 188px; }
+  .sv-quiz-img7{ left: 28%;    top: 778px; width: 177px; height: 177px; }
+  .sv-quiz-img8{ right: -33px; top: 480px; width: 159px; height: 159px; }
+}
