@@ -2968,7 +2968,6 @@ body:has(section.sv-trust-points) {
   border: 0.75px solid #DEDDD7;
   border-radius: 10px;   /* standard SAVA button radius */
   padding: 13px 31px;    /* standard SAVA button padding */
-  margin-right: 8px;
   text-decoration: none;
   transition: background-color 0.2s ease;
 }
@@ -2988,6 +2987,13 @@ body:has(section.sv-trust-points) {
 
 /* Search icon — inherits the account icon footprint via nav_shop-icon-2 */
 .sava-nav_search-icon{ color: #262524; }
+
+/* Icon row spacing — Figma runs a uniform ~32px gap from pill to cart */
+.section_navbar-mega .nav_shop-icons{
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
 
 /* SV Nav Search — slide-down bar under the navbar (markup injected by sava.js).
    White rounded field per the Figma mobile search pattern; live-suggestion
