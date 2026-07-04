@@ -1087,18 +1087,18 @@ a.sava-mega-menu_learn-card {
 	column-count: 1 !important;
   }
 
-  /* Mobile sticky pill bar — 5 pills (4 from linklist + Shop All-dark) */
+  /* Mobile pill stack — 5 pills (4 from linklist + Shop All-dark).
+	 NORMAL FLOW at the end of the drawer: margin-top:auto still
+	 bottom-aligns them while the accordions are collapsed, but once
+	 a toggle expands they get pushed down with the content (Figma).
+	 The old position:sticky pinned them in place over the expanding
+	 content and caused the flicker/overlap. */
   .sava-mega-menu_mobile-pills {
 	display: flex !important;
 	flex-direction: column;
 	gap: 13px;
-	padding: 20px 20px 24px;
+	padding: 20px 20px 40px;
 	margin-top: auto;
-	border-top: 1px solid rgba(0,0,0,0.08);
-	background: var(--_sava-color-styles---soft-white, #F8F8F8);
-	position: sticky;
-	bottom: 0;
-	z-index: 2;
   }
 
   .sava-mega-menu_mobile-pills .sava-mega-menu_pill {
@@ -1117,9 +1117,21 @@ a.sava-mega-menu_learn-card {
 	left: 20px;
 	top: 0;
 	display: flex;
+	flex-direction: row-reverse; /* Figma order: bag, then account */
 	align-items: center;
 	gap: 30px;
 	height: 75px;
+	z-index: 102;
+  }
+
+  /* Close button (the transformed hamburger) sits at the RIGHT edge when open */
+  .w-nav.sava-nav-open .nav_menu-button {
+	position: absolute;
+	right: 20px;
+	top: 0;
+	height: 75px;
+	display: flex;
+	align-items: center;
 	z-index: 102;
   }
 }
@@ -3076,10 +3088,39 @@ body:has(section.sv-trust-points) {
   padding: 16px 20px;
 }
 
-/* Collapsed nav (tablet/mobile): pill + search belong to the drawer design, not the bar */
+/* ============================================================
+   SV Header Mega — MOBILE bar (Figma: hamburger LEFT, logo CENTER,
+   cart RIGHT; always-visible search field under the bar; account
+   icon appears only in the open-drawer icon row)
+   ============================================================ */
 @media (max-width: 991px){
   .sava-nav_rewards-wrap,
   .sava-nav_rewards-pill,
-  .sava-nav_search-icon,
-  .sv-nav-search{ display: none; }
+  .sava-nav_search-icon{ display: none; }
+
+  .section_navbar-mega .nav_container{
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+  }
+  .section_navbar-mega .nav_menu-button{ order: -1; }
+  .section_navbar-mega .nav_logo-link{
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+  }
+  /* account is drawer-only on mobile */
+  .section_navbar-mega .nav_account{ display: none; }
+  .w-nav.sava-nav-open .nav_account{ display: block; }
+
+  /* Search field: ALWAYS visible below the bar on mobile (not click-toggled);
+	 hidden while the drawer is open (Figma shows only the icon row + accordions) */
+  .sv-nav-search{
+	display: block;
+	position: static;
+	padding: 2px 20px 16px;
+	border-bottom: 0.75px solid #DEDDD7;
+  }
+  .w-nav.sava-nav-open .sv-nav-search{ display: none; }
 }
