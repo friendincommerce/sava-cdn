@@ -440,7 +440,7 @@
 }
 
 .sava-mega-menu_dropdown .nav_dropdown-toggle,
-.sava-mega-menu_dropdown .nav_dropdown-toggle\ 2 {
+.sava-mega-menu_dropdown .nav_dropdown-toggle-2 {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -451,7 +451,7 @@
 }
 
 .sava-mega-menu_dropdown .nav_dropdown-toggle p,
-.sava-mega-menu_dropdown .nav_dropdown-toggle\ 2 p {
+.sava-mega-menu_dropdown .nav_dropdown-toggle-2 p {
   margin: 0;
   font-family: 'Gelica', serif;
   font-weight: 300;
@@ -1017,7 +1017,7 @@ a.sava-mega-menu_learn-card {
   }
 
   .sava-mega-menu_dropdown .nav_dropdown-toggle,
-  .sava-mega-menu_dropdown .nav_dropdown-toggle\ 2 {
+  .sava-mega-menu_dropdown .nav_dropdown-toggle-2 {
 	width: 100%;
 	justify-content: space-between;
 	padding: 32px 20px 10px;
@@ -1028,9 +1028,9 @@ a.sava-mega-menu_learn-card {
 	 defeats any Designer mobile-breakpoint override; targets both <p>
 	 and direct toggle in case text isn't wrapped.                    */
   .sava-mega-menu_dropdown .nav_dropdown-toggle,
-  .sava-mega-menu_dropdown .nav_dropdown-toggle\ 2,
+  .sava-mega-menu_dropdown .nav_dropdown-toggle-2,
   .sava-mega-menu_dropdown .nav_dropdown-toggle p,
-  .sava-mega-menu_dropdown .nav_dropdown-toggle\ 2 p {
+  .sava-mega-menu_dropdown .nav_dropdown-toggle-2 p {
 	font-family: 'Gelica', Georgia, serif !important;
 	font-weight: 300 !important;
 	font-style: normal !important;
@@ -2921,4 +2921,62 @@ body:has(section.sv-trust-points) {
   .sv-quiz-img5{ left: 39px;   top: 254px; width: 133px; height: 104px; }
   /* Figma mobile shows only the first five collage images */
   .sv-quiz-img6, .sv-quiz-img7, .sv-quiz-img8{ display: none; }
+}
+
+/* ============================================================
+   SV Header Mega — desktop polish (2026-07-04)
+   Nav bar + open mega panels on soft-white; primary links Gelica
+   Light (base rule higher up was DEAD until the selector fix —
+   Webflow publishes the "nav_dropdown-toggle 2" class as
+   nav_dropdown-toggle-2, hyphen not space); SAVA REWARDS pill
+   (Liquid hides it while the Rewards Link URL is blank) + search
+   icon linking to /search.
+   ============================================================ */
+.section_navbar-mega .nav_component-2,
+.section_navbar-mega .nav_dropdown-list-2,
+.section_navbar-mega .sava-mega-menu_dropdown-list,
+.section_navbar-mega .sava-mega-menu_inner{
+  background-color: #F8F8F8;
+}
+.section_navbar-mega .nav_dropdown-toggle-2 p{
+  font-size: 20px;
+  line-height: 26px;
+  color: #262524;
+}
+
+/* SAVA REWARDS pill */
+.sava-nav_rewards-wrap{ display: contents; }
+.sava-nav_rewards-pill{
+  display: inline-flex;
+  align-items: center;
+  background-color: #fff;
+  border: 0.75px solid #DEDDD7;
+  border-radius: 999px;
+  padding: 14px 28px;
+  margin-right: 8px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+.sava-nav_rewards-label{
+  margin: 0;
+  font-family: 'Gibson', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: 2.1px;
+  text-transform: uppercase;
+  color: #262524;
+  white-space: nowrap;
+}
+.sava-nav_rewards-pill:hover{ background-color: #262524; }
+.sava-nav_rewards-pill:hover .sava-nav_rewards-label{ color: #fff; }
+
+/* Search icon — inherits the account icon footprint via nav_shop-icon-2 */
+.sava-nav_search-icon{ color: #262524; }
+
+/* Collapsed nav (tablet/mobile): pill + search belong to the drawer design, not the bar */
+@media (max-width: 991px){
+  .sava-nav_rewards-wrap,
+  .sava-nav_rewards-pill,
+  .sava-nav_search-icon{ display: none; }
 }
