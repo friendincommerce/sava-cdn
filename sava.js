@@ -561,7 +561,10 @@
    Chrome's native loading="lazy" never fires for these absolutely-positioned
    images inside the overflow:hidden hero on first paint — it only re-checks
    after a scroll, so a visitor who doesn't scroll sees an empty collage.
-   They're above the fold anyway, so eager is correct. ===== */
+   They're above the fold anyway, so eager is correct.
+   Re-runs on the Shopify Theme Editor's section events (the editor re-renders
+   section DOM without re-firing DOMContentLoaded) and once more after full
+   window load as a belt-and-braces pass. ===== */
 (function(){
   function init(){
     document.querySelectorAll('.sv-quiz-hero_images img').forEach(function(img){
@@ -569,5 +572,8 @@
     });
   }
   document.addEventListener('DOMContentLoaded', init);
+  window.addEventListener('load', init);
+  document.addEventListener('shopify:section:load', init);
+  document.addEventListener('shopify:section:select', init);
   init();
 })();
