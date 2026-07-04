@@ -2988,11 +2988,26 @@ body:has(section.sv-trust-points) {
 /* Search icon — inherits the account icon footprint via nav_shop-icon-2 */
 .sava-nav_search-icon{ color: #262524; }
 
-/* Icon row spacing — Figma runs a uniform ~32px gap from pill to cart */
+/* Icon row spacing — uniform gap from pill to cart */
 .section_navbar-mega .nav_shop-icons{
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 20px;
+}
+
+/* Logo must never shrink — it was getting crushed when the bar ran out of room */
+.section_navbar-mega .nav_logo-link{ flex-shrink: 0; }
+
+/* Narrow-desktop squeeze (992–1150px): the full-size links + pill + icons
+   overflow the bar just above the tablet breakpoint and clipped the logo.
+   Tighten type and spacing until the collapse point. */
+@media (max-width: 1150px) and (min-width: 992px){
+  .section_navbar-mega .nav_dropdown-toggle-2 p{ font-size: 17px; }
+  .section_navbar-mega .nav_dropdown-toggle-2{ padding: 0.75rem 1.9rem 0.75rem 0.6rem; }
+  .section_navbar-mega .nav_dropdown-toggle-2 .dropdown-icon{ right: 0.6rem; }
+  .section_navbar-mega .nav_shop-icons{ gap: 14px; }
+  .sava-nav_rewards-pill{ padding: 11px 18px; }
+  .sava-nav_rewards-label{ font-size: 12px; letter-spacing: 1.8px; }
 }
 
 /* SV Nav Search — slide-down bar under the navbar (markup injected by sava.js).
