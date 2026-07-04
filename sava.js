@@ -577,3 +577,58 @@
   document.addEventListener('shopify:section:select', init);
   init();
 })();
+
+/* ===== SV Nav Search — the header magnifier opens a full-width search bar
+   under the navbar (mirrors the Figma mobile pattern). Typing gets live
+   suggestions via Liquify's global <predictive-search> element (defined in
+   snippets/search_javascript, fetches /search/suggest); Enter or the
+   magnifier submits GET /search?q=… . Empty queries don't submit — that's
+   what produced the bare "No results found" page. The icon's href=/search
+   stays as a no-JS fallback. ===== */
+(function(){
+  var SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 19" fill="none" width="20" height="20"><circle cx="8.1" cy="8.1" r="7.35" stroke="currentColor" stroke-width="0.75"/><path d="M13.4 13.4L18.4 18.4" stroke="currentColor" stroke-width="0.75" stroke-linecap="round"/></svg>';
+  function init(){
+    document.querySelectorAll('.section_navbar-mega .nav_component-2').forEach(function(nav){
+      var icon = nav.querySelector('.sava-nav_search-icon');
+      if (!icon || icon.dataset.svSearchBound) return;
+      icon.dataset.svSearchBound = '1';
+
+      var panel = document.createElement('div');
+      panel.className = 'sv-nav-search';
+      panel.innerHTML =
+        '<predictive-search class="sv-nav-search_inner">' +
+          '<form action="/search" method="get" role="search" class="sv-nav-search_form">' +
+            '<input type="search" name="q" class="sv-nav-search_input" placeholder="Search for a product" autocomplete="off" aria-label="Search">' +
+            '<button type="submit" class="sv-nav-search_submit" aria-label="Submit search">' + SVG + '</button>' +
+          '</form>' +
+          '<div id="predictive-search" class="sv-nav-search_results" style="display: none;"></div>' +
+        '</predictive-search>';
+      nav.appendChild(panel);
+
+      var input = panel.querySelector('.sv-nav-search_input');
+      panel.querySelector('form').addEventListener('submit', function(e){
+        if (!input.value.trim()) e.preventDefault();
+      });
+
+      function setOpen(open){
+        panel.classList.toggle('is-open', open);
+        if (open) setTimeout(function(){ input.focus(); }, 0);
+      }
+      icon.addEventListener('click', function(e){
+        e.preventDefault();
+        setOpen(!panel.classList.contains('is-open'));
+      });
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape') setOpen(false);
+      });
+      document.addEventListener('click', function(e){
+        if (!panel.classList.contains('is-open')) return;
+        if (panel.contains(e.target) || icon.contains(e.target)) return;
+        setOpen(false);
+      });
+    });
+  }
+  document.addEventListener('DOMContentLoaded', init);
+  document.addEventListener('shopify:section:load', init);
+  init();
+})();
