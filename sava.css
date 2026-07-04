@@ -2909,7 +2909,7 @@ body:has(section.sv-trust-points) {
   .sv-quiz-hero_body{ margin-bottom: 44px; }
   .sv-quiz-hero_button{ display: block; text-align: center; margin: 0 20px; }
   .sv-quiz-hero_images{
-    order: 2; position: relative; inset: auto; height: 955px; margin-top: 48px;
+    order: 2; position: relative; inset: auto; height: 450px; margin-top: 48px;
     width: 100%;   /* the section's align-items:center stops this in-flow div from stretching;
                       with only absolute children it collapses to 0 wide and the imgs'
                       max-width:100% clamps them invisible */
@@ -2919,7 +2919,6 @@ body:has(section.sv-trust-points) {
   .sv-quiz-img3{ right: -72px; top: 125px; width: 144px; height: 98px; }
   .sv-quiz-img4{ right: -8px;  top: 184px; width: 195px; height: 245px; }
   .sv-quiz-img5{ left: 39px;   top: 254px; width: 133px; height: 104px; }
-  .sv-quiz-img6{ left: -86px;  top: 545px; width: 332px; height: 188px; }
-  .sv-quiz-img7{ left: 28%;    top: 778px; width: 177px; height: 177px; }
-  .sv-quiz-img8{ right: -33px; top: 480px; width: 159px; height: 159px; }
+  /* Figma mobile shows only the first five collage images */
+  .sv-quiz-img6, .sv-quiz-img7, .sv-quiz-img8{ display: none; }
 }
