@@ -2903,12 +2903,17 @@ body:has(section.sv-trust-points) {
                                                 first in the DOM, so block flow put it on top */
     min-height: 0; padding: 44px 0 0;
   }
-  .sv-quiz-hero .padding-global{ order: 1; }
+  .sv-quiz-hero .padding-global{ order: 1; width: 100%; }
   .sv-quiz-hero_content{ padding: 0 20px; }
   .sv-quiz-hero_heading{ font-size: 36px; line-height: 40px; margin-bottom: 20px; }
   .sv-quiz-hero_body{ margin-bottom: 44px; }
   .sv-quiz-hero_button{ display: block; text-align: center; margin: 0 20px; }
-  .sv-quiz-hero_images{ order: 2; position: relative; inset: auto; height: 955px; margin-top: 48px; }
+  .sv-quiz-hero_images{
+    order: 2; position: relative; inset: auto; height: 955px; margin-top: 48px;
+    width: 100%;   /* the section's align-items:center stops this in-flow div from stretching;
+                      with only absolute children it collapses to 0 wide and the imgs'
+                      max-width:100% clamps them invisible */
+  }
   .sv-quiz-img1{ left: -46px;  top: 36px;  width: 218px; height: 123px; }
   .sv-quiz-img2{ left: auto; right: 20px;  top: 0;     width: 151px; height: 84px; }
   .sv-quiz-img3{ right: -72px; top: 125px; width: 144px; height: 98px; }
