@@ -1691,6 +1691,13 @@ main.main-wrapper:has(section.section_filter) {
   color: var(--_sava-color-styles---soft-black, #262524) !important;
 }
 
+/* Optical centering: the chip label's box is geometrically centered
+   (measured 10.3px above and below), but Gibson's glyphs sit LOW in
+   their line box — nudge up so the cap-height reads centered */
+.filter_tag > div {
+  transform: translateY(-1.5px);
+}
+
 /* ✕ remove-filter — was a 14px sliver; real 28px hit target + visible icon */
 .filter_close {
   display: inline-flex !important;
