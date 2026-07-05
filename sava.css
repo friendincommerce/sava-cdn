@@ -2593,7 +2593,8 @@ body:has(section.sv-trust-points) {
 /* ----- Card: white, rounded, padded; the whole card is the article link.
    .blog_cms-item is the grid cell; making it a column flex + flex:1 on the card lets every
    card stretch to the row's (equal) height regardless of title length or tag count. ----- */
-.blog_cms-item{ display: flex; flex-direction: column; }
+/* .blog_list-item = the same card in the You May Also Like section */
+.blog_cms-item, .blog_list-item{ display: flex; flex-direction: column; }
 .blog_item-grid{
   flex: 1;
   display: flex !important; flex-direction: column;
@@ -2607,7 +2608,14 @@ body:has(section.sv-trust-points) {
 .blog_tags-wrapper{ display: flex; flex-direction: column-reverse; gap: 14px; position: relative; }
 /* reserve the pill-row height even when an article has no tags, so every card's image + title
    line up across the grid (a no-tag card no longer shifts up to fill the gap) */
-.blog_tag-row{ position: static !important; inset: auto !important; margin: 0 !important; flex-wrap: wrap; gap: 11px; min-height: 27px; }
+.blog_tag-row{
+  position: static !important; inset: auto !important; margin: 0 !important;
+  flex-wrap: wrap; gap: 11px; min-height: 27px;
+  /* the JS row-equalizer grows this box — keep the wrapped pill lines
+	 pinned to the TOP (Figma) instead of distributed down the space */
+  align-content: flex-start;
+  align-items: flex-start;
+}
 
 /* image → rounded ≈3:2 */
 .blog_img{
