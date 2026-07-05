@@ -1716,21 +1716,29 @@ main.main-wrapper:has(section.section_filter) {
   .filter_filters-wrapper.sv-filters-open {
 	transform: translate(0, 0) !important;
   }
-  /* close ✕ — injected by sava.js. The wrapper always carries a transform,
-	 so position:fixed anchors to the PANEL (stays put while it scrolls). */
-  .sv-filters-close {
+  /* room for the fixed SHOW RESULTS bar */
+  .filter_filters-wrapper {
+	padding-bottom: 110px !important;
+  }
+  /* SHOW RESULTS apply bar — injected by sava.js; the wrapper always
+	 carries a transform, so position:fixed anchors to the PANEL */
+  .sv-filters-apply {
 	position: fixed;
-	top: 14px;
-	right: 18px;
-	width: 40px;
-	height: 40px;
+	left: 5%;
+	right: 5%;
+	bottom: 20px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding: 16px;
+	background-color: var(--_sava-color-styles---soft-black, #262524);
+	border-radius: 10px;
+	color: #fff;
 	font-family: Gibson, sans-serif;
-	font-size: 30px;
-	line-height: 1;
-	color: var(--_sava-color-styles---soft-black, #262524);
+	font-weight: 500;
+	font-size: 15px;
+	letter-spacing: 2.2px;
+	text-transform: uppercase;
 	text-decoration: none;
 	z-index: 2;
   }
@@ -1751,6 +1759,13 @@ main.main-wrapper:has(section.section_filter) {
   .sv-collection-product-card_image-wrap {
 	margin-top: 0 !important;
 	padding: 0 !important;
+  }
+}
+
+/* desktop: the apply bar is a mobile-panel concept — never show it there */
+@media (min-width: 992px) {
+  .sv-filters-apply {
+	display: none !important;
   }
 }
 
