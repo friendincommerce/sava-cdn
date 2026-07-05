@@ -618,17 +618,37 @@
       if (!icon || icon.dataset.svSearchBound) return;
       icon.dataset.svSearchBound = '1';
 
-      var panel = document.createElement('div');
-      panel.className = 'sv-nav-search';
-      panel.innerHTML =
-        '<predictive-search class="sv-nav-search_inner">' +
+      /* Prefer the SERVER-RENDERED shell (in the Webflow markup since
+         2026-07-05) so the field is visible immediately on page load —
+         injection only remains as a fallback for older conversions. */
+      var panel = nav.querySelector('.sv-nav-search');
+      if (!panel) {
+        panel = document.createElement('div');
+        panel.className = 'sv-nav-search';
+        panel.innerHTML =
           '<form action="/search" method="get" role="search" class="sv-nav-search_form">' +
             '<input type="search" name="q" class="sv-nav-search_input" placeholder="Search for a product" autocomplete="off" aria-label="Search">' +
             '<button type="submit" class="sv-nav-search_submit" aria-label="Submit search">' + SVG + '</button>' +
-          '</form>' +
-          '<div id="predictive-search" class="sv-nav-search_results" style="display: none;"></div>' +
-        '</predictive-search>';
-      nav.appendChild(panel);
+          '</form>';
+        nav.appendChild(panel);
+      }
+      /* Liquify's PredictiveSearch class requires input[type="search"] —
+         re-assert it in case the publish pipeline strips the attribute. */
+      var inp0 = panel.querySelector('.sv-nav-search_input');
+      if (inp0) inp0.setAttribute('type', 'search');
+      /* Upgrade the shell with the predictive-search custom element
+         (live suggestions) — progressive enhancement over the static form. */
+      if (!panel.querySelector('predictive-search')) {
+        var ps = document.createElement('predictive-search');
+        ps.className = 'sv-nav-search_inner';
+        ps.appendChild(panel.querySelector('form'));
+        var results = document.createElement('div');
+        results.id = 'predictive-search';
+        results.className = 'sv-nav-search_results';
+        results.style.display = 'none';
+        ps.appendChild(results);
+        panel.appendChild(ps);
+      }
 
       var input = panel.querySelector('.sv-nav-search_input');
       panel.querySelector('form').addEventListener('submit', function(e){
