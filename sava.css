@@ -1007,6 +1007,8 @@ a.sava-mega-menu_learn-card {
   .nav_menu-2.is-page-height-tablet[data-nav-menu-open] {
 	display: flex !important;
 	flex-direction: column;
+	align-items: stretch; /* compiled base has align-items:center — unsized children
+							 (the pills row) shrank to content width */
 	height: calc(100vh - 75px); /* fills below the 75px bar */
 	overflow-y: auto;
 	padding: 0;
@@ -1024,9 +1026,11 @@ a.sava-mega-menu_learn-card {
 	/* THE overlap fix (measured live 2026-07-05): compiled webflow css keeps
 	   .nav_menu-dropdown a flex ROW locked at height:5rem on this element, so
 	   the opened list never grew the wrapper — its content just overflowed and
-	   painted over the toggles below. Block flow + auto height = real accordion. */
-	display: block;
-	height: auto;
+	   painted over the toggles below. Block flow + auto height = real accordion.
+	   !important defends against Webflow's runtime open-state classes. */
+	display: block !important;
+	height: auto !important;
+	min-height: 0 !important;
   }
 
   .sava-mega-menu_dropdown .nav_dropdown-toggle,
