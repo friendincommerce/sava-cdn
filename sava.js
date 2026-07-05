@@ -681,27 +681,89 @@
    fixed panel in), injected ✕ / Escape closes, page scroll locks while
    open. ===== */
 (function(){
+  /* filter.* key=value pairs of a query string, as delimited strings */
+  function pairsOf(search){
+	var p = new URLSearchParams(search), out = [];
+	p.forEach(function(v, k){ if (k.indexOf('filter.') === 0) out.push(k + ' ' + v); });
+	return out;
+  }
   function init(){
 	var btn = document.querySelector('.filter_tablet-filters-button');
 	var wrap = document.querySelector('.filter_filters-wrapper');
 	if (!btn || !wrap || btn.dataset.svBound) return;
 	btn.dataset.svBound = '1';
+	var closeBtn = wrap.querySelector('.filter_tablet-modal-close-button');
 
-	var close = document.createElement('a');
-	close.href = '#';
-	close.className = 'sv-filters-close';
-	close.setAttribute('aria-label', 'Close filters');
-	close.innerHTML = '&times;';
-	wrap.appendChild(close);
+	/* bottom APPLY bar (mobile only via CSS) */
+	var apply = document.createElement('a');
+	apply.href = '#';
+	apply.className = 'sv-filters-apply';
+	apply.textContent = 'SHOW RESULTS';
+	wrap.appendChild(apply);
+
+	var pending = {}; /* queued selections: href / sort key → {el} */
 
 	function setOpen(open){
 	  wrap.classList.toggle('sv-filters-open', open);
 	  document.documentElement.style.overflow = open ? 'hidden' : '';
+	  if (!open){ /* closing discards the queue + reverts the check marks */
+		Object.keys(pending).forEach(function(key){
+		  var icon = pending[key].el.querySelector('.filter_form_checkbox-icon');
+		  if (icon) icon.classList.toggle('is-checked');
+		});
+		pending = {};
+	  }
 	}
 	btn.addEventListener('click', function(e){ e.preventDefault(); setOpen(true); });
-	close.addEventListener('click', function(e){ e.preventDefault(); setOpen(false); });
+	if (closeBtn) closeBtn.addEventListener('click', function(e){
+	  e.preventDefault(); e.stopPropagation(); setOpen(false);
+	}, true);
 	document.addEventListener('keydown', function(e){
 	  if (e.key === 'Escape') setOpen(false);
+	});
+
+	/* BATCH MODE — while the mobile panel is open, option taps queue up
+	   instead of navigating; SHOW RESULTS applies them all in one URL.
+	   Desktop (>991px) keeps standard instant-apply. */
+	wrap.addEventListener('click', function(e){
+	  if (!wrap.classList.contains('sv-filters-open') || window.innerWidth > 991) return;
+	  var link = e.target.closest('a.filter_form_checkbox, a.sv-sort-option');
+	  if (!link || link.classList.contains('is-disabled')) return;
+	  e.preventDefault();
+	  e.stopPropagation(); /* also blocks the sort group's instant handler */
+	  var key = link.classList.contains('sv-sort-option')
+		? 'sort:' + link.getAttribute('data-sort')
+		: link.href;
+	  if (pending[key]) delete pending[key]; else pending[key] = {el: link};
+	  var icon = link.querySelector('.filter_form_checkbox-icon');
+	  if (icon) icon.classList.toggle('is-checked');
+	}, true);
+
+	apply.addEventListener('click', function(e){
+	  e.preventDefault();
+	  var params = new URLSearchParams(location.search);
+	  var current = pairsOf(location.search);
+	  Object.keys(pending).forEach(function(key){
+		if (key.indexOf('sort:') === 0){ params.set('sort_by', key.slice(5)); return; }
+		var target = pairsOf(key.split('?')[1] || '');
+		/* pairs the option's link adds vs the CURRENT page */
+		target.forEach(function(p){
+		  if (current.indexOf(p) === -1){
+			var i = p.indexOf(' ');
+			params.append(p.slice(0, i), p.slice(i + 1));
+		  }
+		});
+		/* pairs it removes (deselecting an active filter) */
+		current.forEach(function(p){
+		  if (target.indexOf(p) === -1){
+			var i = p.indexOf(' '), k = p.slice(0, i), v = p.slice(i + 1);
+			var vals = params.getAll(k).filter(function(x){ return x !== v; });
+			params.delete(k);
+			vals.forEach(function(x){ params.append(k, x); });
+		  }
+		});
+	  });
+	  location.search = params.toString();
 	});
   }
   document.addEventListener('DOMContentLoaded', init);
