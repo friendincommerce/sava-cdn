@@ -1,4 +1,4 @@
-/* ============================================================================
+\/* ============================================================================
    SAVA — external CSS bundle
    Hosted: https://cdn.jsdelivr.net/gh/friendincommerce/sava-cdn@main/sava.css
    Loaded from Webflow Site Settings → Head + carried into Shopify theme.liquid
@@ -996,12 +996,15 @@ a.sava-mega-menu_learn-card {
    SAVA MEGA MENU — MOBILE RESPONSIVE OVERRIDES
    ==================================================================== */
 @media (max-width: 991px) {
-  /* NavbarMenu becomes a full drawer.
-	 (compiled class is nav_menu-2 — the old escaped-space selector never
-	 matched, so the drawer bg/flex/scroll rules were dead until 2026-07-05:
-	 that's what caused the white drawer + unscrollable fixed height) */
-  .nav_menu.is-page-height-tablet,
-  .nav_menu-2.is-page-height-tablet {
+  /* NavbarMenu becomes a full drawer — ONLY while Webflow marks it open
+	 (data-nav-menu-open). Without that guard the display:flex !important
+	 beats Webflow's collapsed display:none and the drawer contents render
+	 inline on the page with the menu closed.
+	 (Compiled class is nav_menu-2 — the old escaped-space selector never
+	 matched, so these rules were dead until 2026-07-05: that's what caused
+	 the white drawer + unscrollable fixed height.) */
+  .nav_menu.is-page-height-tablet[data-nav-menu-open],
+  .nav_menu-2.is-page-height-tablet[data-nav-menu-open] {
 	display: flex !important;
 	flex-direction: column;
 	height: calc(100vh - 75px); /* fills below the 75px bar */
