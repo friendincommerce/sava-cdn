@@ -661,8 +661,51 @@
 	  location.search = params.toString();
 	});
   }
-  document.addEventListener('DOMContentLoaded', buildSortGroup);
-  buildSortGroup();
+  /* All groups start COLLAPSED (Figma: "dropdowns remain condensed until
+	 click"); active filters stay visible via the chips above the grid. */
+  function collapseAll(){
+	document.querySelectorAll('.filter_filter-group').forEach(function(g){
+	  g.classList.add('is-collapsed');
+	});
+  }
+  function init(){ buildSortGroup(); collapseAll(); }
+  document.addEventListener('DOMContentLoaded', init);
+  init();
+})();
+
+/* ===== Collections mobile Filters modal.
+   The Filters button + panel are wired by a Webflow IX2 interaction that
+   never initializes on the converted theme: theme.liquid hardcodes the
+   HOME page's data-wf-page id on every template, and IX2 configs are
+   keyed per page. Re-wire: button adds .sv-filters-open (CSS slides the
+   fixed panel in), injected ✕ / Escape closes, page scroll locks while
+   open. ===== */
+(function(){
+  function init(){
+	var btn = document.querySelector('.filter_tablet-filters-button');
+	var wrap = document.querySelector('.filter_filters-wrapper');
+	if (!btn || !wrap || btn.dataset.svBound) return;
+	btn.dataset.svBound = '1';
+
+	var close = document.createElement('a');
+	close.href = '#';
+	close.className = 'sv-filters-close';
+	close.setAttribute('aria-label', 'Close filters');
+	close.innerHTML = '&times;';
+	wrap.appendChild(close);
+
+	function setOpen(open){
+	  wrap.classList.toggle('sv-filters-open', open);
+	  document.documentElement.style.overflow = open ? 'hidden' : '';
+	}
+	btn.addEventListener('click', function(e){ e.preventDefault(); setOpen(true); });
+	close.addEventListener('click', function(e){ e.preventDefault(); setOpen(false); });
+	document.addEventListener('keydown', function(e){
+	  if (e.key === 'Escape') setOpen(false);
+	});
+  }
+  document.addEventListener('DOMContentLoaded', init);
+  init();
 })();
 
 /* ===== Blog cards — per-row tag-area equalizer.
