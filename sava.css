@@ -1592,16 +1592,34 @@ main.main-wrapper:has(section.section_filter) {
   line-height: 1 !important;
 }
 
-/* Chevron icon — pure CSS border-trick V shape */
+/* Chevron icon — pure CSS border-trick V shape.
+   OPEN (default) points UP per Figma; collapsing rotates it 180° down. */
 .filter_filter-group-heading::after {
   content: '';
   width: 8px;
   height: 8px;
   border-right: 1.5px solid var(--_sava-color-styles---soft-black, #262524);
   border-bottom: 1.5px solid var(--_sava-color-styles---soft-black, #262524);
-  transform: rotate(45deg) translateY(-2px);
+  transform: rotate(225deg) translateY(-2px);
+  transition: transform 0.25s ease;
   flex-shrink: 0;
   margin-left: 12px;
+}
+.filter_filter-group.is-collapsed .filter_filter-group-heading::after {
+  transform: rotate(45deg) translateY(-2px);
+}
+/* Phase 2 accordion — sava.js toggles .is-collapsed on heading click */
+.filter_filter-group.is-collapsed .filter_list {
+  display: none !important;
+}
+
+/* Figma heading reads "FILTER BY PRODUCT TYPE" etc. — prefix the
+   Search & Discovery label. The JS-injected Sort By group opts out. */
+.filter_filter-group-heading > div::before {
+  content: 'Filter by ';
+}
+.sv-sort-group .filter_filter-group-heading > div::before {
+  content: none;
 }
 
 /* Filter options list */
@@ -1663,8 +1681,8 @@ main.main-wrapper:has(section.section_filter) {
 .filter_tag {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 8px !important;
-  padding: 6px 14px !important;
+  gap: 4px !important;
+  padding: 5px 8px 5px 16px !important;
   border: 1px solid var(--_sava-color-styles---soft-black, #262524) !important;
   border-radius: 999px !important;
   background: transparent !important;
@@ -1673,27 +1691,39 @@ main.main-wrapper:has(section.section_filter) {
   color: var(--_sava-color-styles---soft-black, #262524) !important;
 }
 
+/* ✕ remove-filter — was a 14px sliver; real 28px hit target + visible icon */
 .filter_close {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 14px !important;
-  height: 14px !important;
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 50%;
   color: var(--_sava-color-styles---soft-black, #262524) !important;
+  transition: background-color 0.15s ease;
+}
+.filter_close:hover {
+  background-color: #EEEEED;
+}
+.filter_close .filter_close-icon {
+  width: 18px !important;
+  height: 18px !important;
 }
 
-/* Sort select ("Featured" / "Most relevant" dropdown) */
+/* Sort select — HIDDEN: replaced by the sidebar "Sort By" radio group
+   (sava.js builds it from this select's options; Figma 234:4773) */
 #sort-by.sort_select,
 .sort_select {
-  font-family: Gibson, sans-serif !important;
-  font-weight: 400 !important;
-  font-size: 13px !important;
-  color: var(--_sava-color-styles---soft-black, #262524) !important;
-  background-color: #FFFFFF !important;
-  border: 1px solid var(--_sava-color-styles---mid-grey, #DEDDD7) !important;
-  border-radius: 6px !important;
-  padding: 8px 32px 8px 14px !important;
-  cursor: pointer;
+  display: none !important;
+}
+
+/* Sticky sidebar per Figma annotation — desktop only (the same wrapper
+   doubles as the tablet/mobile Filters modal, which must not be sticky) */
+@media (min-width: 992px) {
+  .filter_form {
+	position: sticky;
+	top: 100px; /* clears the 78px navbar */
+  }
 }
 
 
