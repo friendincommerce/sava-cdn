@@ -295,7 +295,12 @@
 	if (!toggle) return;
 	e.preventDefault();
 	e.stopPropagation();
-	toggle.closest('.sava-mega-menu_dropdown').classList.toggle('sv-acc-open');
+	var dd = toggle.closest('.sava-mega-menu_dropdown');
+	dd.classList.toggle('sv-acc-open');
+	/* Webflow's dropdown JS leaves inline height:0 on the list (its close
+	   animation) — strip it so the CSS accordion controls layout. */
+	var list = dd.querySelector('.sava-mega-menu_dropdown-list');
+	if (list) list.style.height = '';
   }, true);
 })();
 
