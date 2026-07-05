@@ -1680,13 +1680,21 @@ main.main-wrapper:has(section.section_filter) {
   opacity: 0.4;
 }
 
+/* Chips are grouped in one .filter_tags-inner-wrapper PER FILTER GROUP —
+   block-level shells that can't share a row, so chips from different
+   groups stacked wastefully (one per line on mobile). display:contents
+   dissolves the shells: all chips flow as one wrapping stream. */
+.filter_tags-inner-wrapper {
+  display: contents !important;
+}
+
 /* Active filter chip — top of feed (e.g. "In stock ×") */
 .filter_tag {
   display: inline-flex !important;
   align-items: center !important;
   gap: 4px !important;
   padding: 5px 8px 5px 16px !important;
-  margin: 0 6px 10px 0 !important; /* breathing room when chips wrap to a second row */
+  margin: 0 8px 8px 0 !important; /* breathing room when chips wrap (adds to the wrapper's 8px row-gap) */
   border: 1px solid var(--_sava-color-styles---soft-black, #262524) !important;
   border-radius: 999px !important;
   background: transparent !important;
