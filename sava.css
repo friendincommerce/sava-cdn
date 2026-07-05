@@ -1178,6 +1178,32 @@ a.sava-mega-menu_learn-card {
 	align-items: center;
 	z-index: 102;
   }
+
+  /* Hamburger → ✕ when the drawer is open. The icon is CUSTOM line divs
+	 (not Webflow's built-in nav icon), so no swap animation exists natively —
+	 absolute-center the outer lines and rotate ±45°, hide the middle. */
+  .w-nav .menu-icon_line-top-2,
+  .w-nav .menu-icon_line-middle-2,
+  .w-nav .menu-icon_line-bottom-2 {
+	transition: transform 0.2s ease, opacity 0.15s ease;
+  }
+  .w-nav.sava-nav-open .menu-icon-2 { position: relative; }
+  .w-nav.sava-nav-open .menu-icon_line-top-2,
+  .w-nav.sava-nav-open .menu-icon_line-bottom-2 {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 22px;
+	height: 2px;
+	margin: 0;
+  }
+  .w-nav.sava-nav-open .menu-icon_line-top-2 {
+	transform: translate(-50%, -50%) rotate(45deg);
+  }
+  .w-nav.sava-nav-open .menu-icon_line-bottom-2 {
+	transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  .w-nav.sava-nav-open .menu-icon_line-middle-2 { opacity: 0; }
 }
 
 @media (min-width: 992px) {
