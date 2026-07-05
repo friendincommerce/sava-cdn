@@ -267,11 +267,36 @@
 	var btn = document.querySelector('.w-nav-button');
 	var nav = btn && btn.closest('.w-nav');
 	if (!nav) return;
-	var sync = function(){ nav.classList.toggle('sava-nav-open', btn.classList.contains('w--open')); };
+	var sync = function(){
+	  var open = btn.classList.contains('w--open');
+	  nav.classList.toggle('sava-nav-open', open);
+	  /* closing the drawer collapses any open accordion sections */
+	  if (!open) nav.querySelectorAll('.sava-mega-menu_dropdown.sv-acc-open').forEach(function(dd){
+		dd.classList.remove('sv-acc-open');
+	  });
+	};
 	new MutationObserver(sync).observe(btn, {attributes:true, attributeFilter:['class']});
 	sync();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+
+/* ===== SV Mobile Accordion — mega menu drawer (≤991px).
+   Webflow's dropdowns run in HOVER mode (data-hover=true, needed for the
+   desktop mega menu); at mobile widths a mouse hover pre-opens the list so
+   the first click instantly re-closes it — the grey flash. This capture-
+   phase handler bypasses Webflow's dropdown handlers entirely on mobile
+   and drives .sv-acc-open, which the mobile CSS treats as the single
+   source of truth for open state. ===== */
+(function(){
+  document.addEventListener('click', function(e){
+	if (window.innerWidth > 991) return;
+	var toggle = e.target.closest('.sava-mega-menu_dropdown .nav_dropdown-toggle-2');
+	if (!toggle) return;
+	e.preventDefault();
+	e.stopPropagation();
+	toggle.closest('.sava-mega-menu_dropdown').classList.toggle('sv-acc-open');
+  }, true);
 })();
 
 
