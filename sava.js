@@ -608,6 +608,63 @@
   init();
 })();
 
+/* ===== Collections filter sidebar — Phase 2 (Figma 234:4773).
+   (a) Accordion: clicking a filter-group heading toggles .is-collapsed
+	   (CSS hides the list + rotates the chevron). Default = open.
+   (b) Sort By group: builds a radio-style group in the sidebar from the
+	   hidden #sort-by select's options (whitelisted to the Figma's three:
+	   Best Selling / Price Low-High / Price High-Low, falling back to all
+	   options if none match). Clicking sets ?sort_by= like the select did. ===== */
+(function(){
+  var SORT_WHITELIST = ['best-selling', 'price-ascending', 'price-descending'];
+
+  document.addEventListener('click', function(e){
+	var heading = e.target.closest('.filter_filter-group-heading');
+	if (!heading) return;
+	var group = heading.closest('.filter_filter-group');
+	if (group) group.classList.toggle('is-collapsed');
+  });
+
+  function buildSortGroup(){
+	var select = document.querySelector('#sort-by');
+	var list = document.querySelector('.filter_filter-group-list');
+	if (!select || !list || list.querySelector('.sv-sort-group')) return;
+
+	var options = Array.prototype.filter.call(select.options, function(o){
+	  return SORT_WHITELIST.indexOf(o.value) !== -1;
+	});
+	if (!options.length) options = Array.prototype.slice.call(select.options);
+
+	var items = options.map(function(o){
+	  return '<div class="filter_item">' +
+		'<a href="#" class="filter_form_checkbox sv-sort-option" data-sort="' + o.value + '">' +
+		  '<div class="filter_form_checkbox-icon' + (o.selected ? ' is-checked' : '') + '"></div>' +
+		  '<div class="filter_form_checkbox-label">' + o.text + '</div>' +
+		'</a></div>';
+	}).join('');
+
+	var group = document.createElement('div');
+	group.className = 'filter_filter-group sv-sort-group';
+	group.innerHTML =
+	  '<div class="filter_filter-group-heading">' +
+		'<div class="text-size-medium text-weight-semibold">Sort By</div>' +
+	  '</div>' +
+	  '<div class="filter_list">' + items + '</div>';
+	list.appendChild(group);
+
+	group.addEventListener('click', function(e){
+	  var opt = e.target.closest('.sv-sort-option');
+	  if (!opt) return;
+	  e.preventDefault();
+	  var params = new URLSearchParams(location.search);
+	  params.set('sort_by', opt.getAttribute('data-sort'));
+	  location.search = params.toString();
+	});
+  }
+  document.addEventListener('DOMContentLoaded', buildSortGroup);
+  buildSortGroup();
+})();
+
 /* ===== Blog cards — per-row tag-area equalizer.
    Cards size their tag row to content, so a card whose tags wrap to two
    lines pushes its image lower than its neighbors' (Figma aligns all
