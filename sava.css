@@ -1698,6 +1698,62 @@ main.main-wrapper:has(section.section_filter) {
   transform: translateY(-1.5px);
 }
 
+/* ===========================================================
+   Collections MOBILE (≤991px) — filters modal + card tags (2026-07-06)
+   1) Filters modal: compiled css parks .filter_filters-wrapper as a
+	  full-screen fixed panel at translate(0,100%), revealed by a Webflow
+	  IX2 interaction that never runs on the converted theme (theme.liquid
+	  hardcodes the HOME page id in data-wf-page; IX2 configs are per-page).
+	  sava.js re-wires it with .sv-filters-open + an injected close ✕.
+   2) Product-card tags: .product-item_tag_list is absolute over the
+	  image-wrap's reserved top padding; on mobile multi-row tags overflow
+	  onto the image. Put tags in FLOW above the image so the card grows.
+   =========================================================== */
+@media (max-width: 991px) {
+  .filter_filters-wrapper {
+	transition: transform 0.35s ease;
+  }
+  .filter_filters-wrapper.sv-filters-open {
+	transform: translate(0, 0) !important;
+  }
+  /* close ✕ — injected by sava.js. The wrapper always carries a transform,
+	 so position:fixed anchors to the PANEL (stays put while it scrolls). */
+  .sv-filters-close {
+	position: fixed;
+	top: 14px;
+	right: 18px;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: Gibson, sans-serif;
+	font-size: 30px;
+	line-height: 1;
+	color: var(--_sava-color-styles---soft-black, #262524);
+	text-decoration: none;
+	z-index: 2;
+  }
+
+  /* tags in flow above the image (flex order beats unknown DOM order) */
+  .product-item_image-link {
+	display: flex !important;
+	flex-direction: column !important;
+  }
+  .product-item_tag_list {
+	position: static !important;
+	inset: auto !important;
+	order: -1;
+	margin: 0 0 10px 0 !important;
+  }
+  /* the image-wrap's top padding existed only to make room for the
+	 absolute tags — no longer needed (overrides the 48px/36px patches) */
+  .sv-collection-product-card_image-wrap {
+	margin-top: 0 !important;
+	padding: 0 !important;
+  }
+}
+
 /* ✕ remove-filter — was a 14px sliver; real 28px hit target + visible icon */
 .filter_close {
   display: inline-flex !important;
