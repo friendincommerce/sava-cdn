@@ -3218,3 +3218,68 @@ body:has(section.sv-trust-points) {
   }
   .w-nav.sava-nav-open .sv-nav-search{ display: none; }
 }
+
+/* ============================================================
+   You May Also Like — Related Articles section on blog articles
+   (Figma: centered Gelica heading, 3-up reuse of the collection
+   cards, centered BACK TO BLOG pill button). The cards are the
+   same Snippet / Blog Article item component as the collection —
+   only scoped overrides here.
+   ============================================================ */
+.section_related-articles{ background-color: #F8F8F8; }
+.section_related-articles .heading-style-h2{
+  text-align: center;
+  font-family: 'Gelica', serif;
+  font-weight: 300;
+  font-size: 36px;
+  line-height: 40px;
+  color: #262524;
+}
+/* 3-up grid (collection base rule is 2-up !important) */
+.section_related-articles .blog_list{
+  grid-template-columns: repeat(3, 1fr) !important;
+  grid-column-gap: 32px !important;
+}
+/* smaller card titles at 3-up width */
+.section_related-articles .blog_info-wrapper .heading-style-h3{
+  font-size: 28px;
+  line-height: 34px;
+}
+.related-articles_button-wrap{
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+.related-articles_button{
+  display: inline-block;
+  background-color: #fff;
+  border: 0.75px solid #DEDDD7;
+  border-radius: 10px;
+  padding: 13px 31px;
+  font-family: 'Gibson', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: #262524;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.related-articles_button:hover{
+  background-color: #262524;
+  color: #fff;
+}
+@media (max-width: 767px){
+  /* scoped 3-up above would beat the collection's generic mobile 1fr rule */
+  .section_related-articles .blog_list{
+	grid-template-columns: 1fr !important;
+	grid-row-gap: 28px !important;
+  }
+  .related-articles_button-wrap{ margin-top: 36px; }
+  .related-articles_button{
+	display: block;
+	width: 100%;
+	text-align: center;
+  }
+}
