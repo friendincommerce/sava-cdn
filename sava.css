@@ -1020,10 +1020,13 @@ a.sava-mega-menu_learn-card {
 	width: 100%;
 	position: static;
 	margin-bottom: 56px;
-	flex-shrink: 0; /* drawer is a fixed-height flex column — without this the
-					   browser COMPRESSES the rows to fit when a toggle expands,
-					   the content overflows its shrunken wrapper (the "overlap"),
-					   and overflow-y:auto never engages */
+	flex-shrink: 0; /* drawer is a fixed-height flex column — don't compress rows */
+	/* THE overlap fix (measured live 2026-07-05): compiled webflow css keeps
+	   .nav_menu-dropdown a flex ROW locked at height:5rem on this element, so
+	   the opened list never grew the wrapper — its content just overflowed and
+	   painted over the toggles below. Block flow + auto height = real accordion. */
+	display: block;
+	height: auto;
   }
 
   .sava-mega-menu_dropdown .nav_dropdown-toggle,
