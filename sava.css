@@ -1,4 +1,4 @@
-\/* ============================================================================
+/* ============================================================================
    SAVA — external CSS bundle
    Hosted: https://cdn.jsdelivr.net/gh/friendincommerce/sava-cdn@main/sava.css
    Loaded from Webflow Site Settings → Head + carried into Shopify theme.liquid
@@ -1115,6 +1115,7 @@ a.sava-mega-menu_learn-card {
 	gap: 13px;
 	padding: 20px 20px 40px;
 	margin-top: auto;
+	border-top: none; /* compiled webflow css draws a divider here; Figma has none */
   }
 
   .sava-mega-menu_mobile-pills .sava-mega-menu_pill {
@@ -3121,8 +3122,15 @@ body:has(section.sv-trust-points) {
   .sava-nav_search-icon{ display: none; }
 
   /* nav root is a flex ROW — a static search panel became a flex sibling
-	 of the bar and squeezed it to half width. Block flow stacks them. */
-  .section_navbar-mega .nav_component-2{ display: block; }
+	 of the bar and squeezed it to half width. Block flow stacks them.
+	 Compiled webflow css also gives this element 2.5rem side padding,
+	 which stacked with the rows' own 20px and inset everything ~55px —
+	 zero it here; the bar row and search row carry their own 20px. */
+  .section_navbar-mega .nav_component-2{
+	display: block;
+	padding-left: 0;
+	padding-right: 0;
+  }
 
   .section_navbar-mega .nav_container{
 	position: relative;
@@ -3132,8 +3140,18 @@ body:has(section.sv-trust-points) {
 	padding: 10px 20px; /* 20px side margins per Figma */
   }
   .section_navbar-mega .nav_menu-button{ order: -1; padding: 0; }
-  /* kill the white circle behind the hamburger lines */
-  .section_navbar-mega .menu-icon-2{ background-color: transparent; }
+  /* hamburger: compiled webflow css paints a white circle (bg + box-shadow)
+	 and Webflow-BLUE lines (#146ef5 hardcoded) — bare soft-black lines per Figma */
+  .section_navbar-mega .menu-icon-2{
+	background-color: transparent;
+	box-shadow: none;
+  }
+  .section_navbar-mega .menu-icon_line-top-2,
+  .section_navbar-mega .menu-icon_line-bottom-2,
+  .section_navbar-mega .menu-icon_line-middle-2,
+  .section_navbar-mega .menu-icon_line-middle-inner{
+	background-color: #262524;
+  }
   .section_navbar-mega .nav_logo-link{
 	position: absolute;
 	left: 50%;
@@ -3148,7 +3166,7 @@ body:has(section.sv-trust-points) {
   .sv-nav-search{
 	display: block;
 	position: static;
-	padding: 14px 20px 20px; /* clear gap between the bar row and the search row */
+	padding: 20px 20px 24px; /* Figma vertical rhythm around the search row */
 	border-bottom: 0.75px solid #DEDDD7;
   }
   .w-nav.sava-nav-open .sv-nav-search{ display: none; }
