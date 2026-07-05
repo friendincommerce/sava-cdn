@@ -1071,7 +1071,14 @@ a.sava-mega-menu_learn-card {
 	 sava.js toggles .sv-acc-open in a capture-phase handler instead;
 	 Webflow's own w--open state is ignored at this breakpoint. */
   .sava-mega-menu_dropdown .sava-mega-menu_dropdown-list{ display: none !important; }
-  .sava-mega-menu_dropdown.sv-acc-open .sava-mega-menu_dropdown-list{ display: block !important; }
+  .sava-mega-menu_dropdown.sv-acc-open .sava-mega-menu_dropdown-list{
+	display: block !important;
+	/* Webflow's dropdown JS leaves an inline style="height: 0px" on the list
+	   (close/init animation) — zero layout height + visible overflow was THE
+	   text-overlap bug, hitting whichever lists its JS had touched (why results
+	   varied per toggle). Stylesheet !important beats the non-important inline. */
+	height: auto !important;
+  }
   .sava-mega-menu_dropdown .dropdown-icon{ transform: none !important; }
   .sava-mega-menu_dropdown.sv-acc-open .dropdown-icon{ transform: rotate(180deg) !important; }
 
