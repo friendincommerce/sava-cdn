@@ -608,6 +608,44 @@
   init();
 })();
 
+/* ===== Blog cards — per-row tag-area equalizer.
+   Cards size their tag row to content, so a card whose tags wrap to two
+   lines pushes its image lower than its neighbors' (Figma aligns all
+   images in a row). For every card row (collection grid AND the You May
+   Also Like section — same card component), set each tag row's
+   min-height to the tallest tag stack in that row. Re-runs on resize
+   (rows regroup at breakpoints) and full load (font metrics settle). ===== */
+(function(){
+  function equalize(){
+    document.querySelectorAll('.blog_list').forEach(function(list){
+      var tagRows = Array.prototype.slice.call(list.querySelectorAll('.blog_tag-row'));
+      if (!tagRows.length) return;
+      tagRows.forEach(function(t){ t.style.minHeight = ''; }); // clean remeasure
+      var rows = {};
+      tagRows.forEach(function(t){
+        var card = t.closest('.blog_cms-item, .blog_list-item');
+        if (!card) return;
+        var top = Math.round(card.getBoundingClientRect().top);
+        (rows[top] = rows[top] || []).push(t);
+      });
+      Object.keys(rows).forEach(function(top){
+        var group = rows[top];
+        var max = Math.max.apply(null, group.map(function(t){
+          return t.getBoundingClientRect().height;
+        }));
+        group.forEach(function(t){ t.style.minHeight = max + 'px'; });
+      });
+    });
+  }
+  var timer;
+  function schedule(){ clearTimeout(timer); timer = setTimeout(equalize, 120); }
+  document.addEventListener('DOMContentLoaded', equalize);
+  window.addEventListener('load', equalize);
+  window.addEventListener('resize', schedule);
+  document.addEventListener('shopify:section:load', equalize);
+  equalize();
+})();
+
 /* ===== SV Nav Search — the header magnifier opens a full-width search bar
    under the navbar (mirrors the Figma mobile pattern). Typing gets live
    suggestions via Liquify's global <predictive-search> element (defined in
