@@ -1045,8 +1045,18 @@ a.sava-mega-menu_learn-card {
 	box-shadow: none !important;
 	border-top: none !important;
 	width: 100% !important;
-	background: transparent;
+	background: transparent !important;
   }
+
+  /* Custom mobile accordion — Webflow's dropdowns run in HOVER mode for
+	 desktop, and at mobile widths a mouse-hover pre-opens the list so the
+	 first click instantly re-closes it (grey flash, second click "works").
+	 sava.js toggles .sv-acc-open in a capture-phase handler instead;
+	 Webflow's own w--open state is ignored at this breakpoint. */
+  .sava-mega-menu_dropdown .sava-mega-menu_dropdown-list{ display: none !important; }
+  .sava-mega-menu_dropdown.sv-acc-open .sava-mega-menu_dropdown-list{ display: block !important; }
+  .sava-mega-menu_dropdown .dropdown-icon{ transform: none !important; }
+  .sava-mega-menu_dropdown.sv-acc-open .dropdown-icon{ transform: rotate(180deg) !important; }
 
   .sava-mega-menu_inner {
 	padding: 4px 24px 20px;
@@ -3097,6 +3107,10 @@ body:has(section.sv-trust-points) {
   .sava-nav_rewards-wrap,
   .sava-nav_rewards-pill,
   .sava-nav_search-icon{ display: none; }
+
+  /* nav root is a flex ROW — a static search panel became a flex sibling
+	 of the bar and squeezed it to half width. Block flow stacks them. */
+  .section_navbar-mega .nav_component-2{ display: block; }
 
   .section_navbar-mega .nav_container{
 	position: relative;
