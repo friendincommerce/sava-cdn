@@ -1020,6 +1020,10 @@ a.sava-mega-menu_learn-card {
 	width: 100%;
 	position: static;
 	margin-bottom: 56px;
+	flex-shrink: 0; /* drawer is a fixed-height flex column — without this the
+					   browser COMPRESSES the rows to fit when a toggle expands,
+					   the content overflows its shrunken wrapper (the "overlap"),
+					   and overflow-y:auto never engages */
   }
 
   .sava-mega-menu_dropdown .nav_dropdown-toggle,
@@ -1114,7 +1118,10 @@ a.sava-mega-menu_learn-card {
 	flex-direction: column;
 	gap: 13px;
 	padding: 20px 20px 40px;
-	margin-top: auto;
+	/* 64px + the Learn dropdown's 56px margin-bottom = ~120px below the
+	   closed Learn toggle (user spec). Flows down as toggles expand. */
+	margin-top: 64px;
+	flex-shrink: 0;
 	border-top: none; /* compiled webflow css draws a divider here; Figma has none */
   }
 
