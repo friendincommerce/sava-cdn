@@ -1689,6 +1689,32 @@ main.main-wrapper:has(section.section_filter) {
   color: inherit;
 }
 
+/* SV Carousel Hero — EQUAL-HEIGHT slides. The swiper wrapper sizes to the
+   tallest slide's content; slides with less body text were shorter and the
+   section bg color showed as a bar under their image. Stretch every slide
+   to the wrapper height — the absolutely-positioned image-wrap (height:100%
+   of the slide) then fills it automatically, on every slide. */
+.about-hero .swiper-wrapper {
+  align-items: stretch !important;
+}
+.about-hero .swiper-slide {
+  height: auto !important;
+  display: flex !important;
+}
+.about-hero .swiper-slide .about-hero_slide {
+  width: 100%;
+  min-height: 100%;
+}
+
+/* Mobile: CTA spans the full content column (Figma mobile) */
+@media (max-width: 767px) {
+  .about-hero_cta {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+  }
+}
+
 /* Sticky collection title ("Products" bar) shipped at z-index 10 — TYING
    the header section's 10, so DOM order let it paint over the open mega
    menu (the menu's z:100 only counts inside the header's own context).
