@@ -1680,6 +1680,15 @@ main.main-wrapper:has(section.section_filter) {
   opacity: 0.4;
 }
 
+/* SV Carousel Hero — the CTA label is now an editable <p> inside the
+   button link (li-settings:text="CTA Label"); inherit the button's
+   typography and kill default paragraph margins */
+.about-hero_cta-label {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+}
+
 /* Sticky collection title ("Products" bar) shipped at z-index 10 — TYING
    the header section's 10, so DOM order let it paint over the open mega
    menu (the menu's z:100 only counts inside the header's own context).
