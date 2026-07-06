@@ -1680,6 +1680,15 @@ main.main-wrapper:has(section.section_filter) {
   opacity: 0.4;
 }
 
+/* Sticky collection title ("Products" bar) shipped at z-index 10 — TYING
+   the header section's 10, so DOM order let it paint over the open mega
+   menu (the menu's z:100 only counts inside the header's own context).
+   9 keeps it above page content but under the header — same fix as the
+   blog's sticky Recent bar. */
+.sv-collection-hero-section {
+  z-index: 9 !important;
+}
+
 /* Chips are grouped in one .filter_tags-inner-wrapper PER FILTER GROUP —
    block-level shells that can't share a row, so chips from different
    groups stacked wastefully (one per line on mobile). display:contents
