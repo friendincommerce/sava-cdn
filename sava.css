@@ -475,9 +475,12 @@
    so its bounds must match the visible content area or diagonal mouse
    movements (toggle → right-side cards) close the dropdown prematurely.
 
-   --sava-mega-menu-top sets where the dropdown starts vertically:
-	 78px = navbar only
-	 126px = navbar (78px) + rotating banner (48px)                    */
+   --sava-mega-menu-top sets where the dropdown starts vertically.
+   sava.js measures the navbar's real bottom edge and overwrites this
+   on load/scroll/resize (sections above the navbar in the Header
+   Group — Promotional Banner etc. — push the navbar down, so the
+   value can't be hardcoded). 78px here is only the no-JS fallback
+   (navbar alone at the viewport top).                               */
 :root {
   --sava-mega-menu-top: 78px;
 }
