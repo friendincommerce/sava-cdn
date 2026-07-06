@@ -281,6 +281,33 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 
+/* ===== SV Mega Menu — dynamic top offset (2026-07-06).
+   The desktop dropdown panel is position:fixed at top:--sava-mega-menu-top
+   (78px fallback in sava.css = navbar alone at the viewport top). Any
+   section above the navbar in the Header Group (Promotional Banner,
+   announcement bars) pushes the navbar down and the fixed panel opens OVER
+   it. Measure the navbar's real bottom edge and feed the variable instead —
+   works with or without the banner, at any banner height, and while
+   scrolling. Mobile is unaffected (the panel is position:static <992px). ===== */
+(function(){
+  var last = '', raf = 0;
+  function apply(){
+	raf = 0;
+	var nav = document.querySelector('.section_navbar-mega') || document.querySelector('.w-nav');
+	if (!nav) return;
+	var px = Math.max(0, Math.round(nav.getBoundingClientRect().bottom)) + 'px';
+	if (px === last) return;
+	last = px;
+	document.documentElement.style.setProperty('--sava-mega-menu-top', px);
+  }
+  function queue(){ if (!raf) raf = requestAnimationFrame(apply); }
+  window.addEventListener('scroll', queue, {passive:true});
+  window.addEventListener('resize', queue, {passive:true});
+  window.addEventListener('load', apply);
+  document.addEventListener('shopify:section:load', apply);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply); else apply();
+})();
+
 /* ===== SV Mobile Accordion — mega menu drawer (≤991px).
    Webflow's dropdowns run in HOVER mode (data-hover=true, needed for the
    desktop mega menu); at mobile widths a mouse hover pre-opens the list so
