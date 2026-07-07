@@ -3390,8 +3390,24 @@ body:has(section.sv-trust-points) {
 	position: static;
 	padding: 20px 20px 24px; /* Figma vertical rhythm around the search row */
 	border-bottom: 0.75px solid #DEDDD7;
+	max-height: 130px;
+	transition: max-height 0.28s ease, opacity 0.22s ease, padding 0.28s ease;
   }
   .w-nav.sava-nav-open .sv-nav-search{ display: none; }
+
+  /* Collapse the search row once the page is scrolled (sava.js toggles
+	 sv-search-collapsed on the .w-nav at scrollY > 24; it never collapses
+	 while the input is focused). overflow:hidden lives ONLY in this
+	 collapsed state — the expanded row must overflow so the absolute
+	 predictive-results panel can drop below it unclipped. */
+  .w-nav.sv-search-collapsed .sv-nav-search{
+	overflow: hidden;
+	max-height: 0;
+	opacity: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+	border-bottom-width: 0;
+  }
 }
 
 /* ============================================================
