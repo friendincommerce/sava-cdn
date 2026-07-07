@@ -308,6 +308,31 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply); else apply();
 })();
 
+/* ===== SV Mobile Nav — collapse the search row on scroll (2026-07-06).
+   The mobile header keeps the always-visible search field only at the very
+   top of the page; once scrolled (>24px) sava.css collapses it (≤991px
+   media block), leaving hamburger / logo / cart. Never collapses while the
+   input is focused — the iOS keyboard scrolls the page and would otherwise
+   yank the field away mid-search. Desktop is untouched (no matching CSS). ===== */
+(function(){
+  var raf = 0;
+  function apply(){
+	raf = 0;
+	var nav = document.querySelector('.section_navbar-mega .nav_component-2');
+	if (!nav) return;
+	var panel = nav.querySelector('.sv-nav-search');
+	var typing = panel && panel.contains(document.activeElement);
+	nav.classList.toggle('sv-search-collapsed', window.scrollY > 24 && !typing);
+  }
+  function queue(){ if (!raf) raf = requestAnimationFrame(apply); }
+  window.addEventListener('scroll', queue, {passive:true});
+  window.addEventListener('resize', queue, {passive:true});
+  document.addEventListener('focusin', queue);
+  document.addEventListener('focusout', queue);
+  document.addEventListener('shopify:section:load', apply);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply); else apply();
+})();
+
 /* ===== SV Mobile Accordion — mega menu drawer (≤991px).
    Webflow's dropdowns run in HOVER mode (data-hover=true, needed for the
    desktop mega menu); at mobile widths a mouse hover pre-opens the list so
