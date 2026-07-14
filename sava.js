@@ -951,12 +951,13 @@
 })();
 
 /* ===== Recharge subscription widget — shadow-root style injection
-   (2026-07-14). The widget is <recharge-subscription-widget>, an OPEN
-   shadow-DOM custom element with adopted stylesheets, so neither sava.css
-   nor theme CSS can reach it (and its "Advanced custom CSS" admin field
-   wasn't propagating). Inject the SAVA label styles directly into the
-   shadow root. The element renders async, so poll briefly until the
-   root exists. ===== */
+   (2026-07-14, rev 2). The widget is <recharge-subscription-widget>, an
+   OPEN shadow-DOM custom element, so neither sava.css nor theme CSS can
+   reach it (and its "Advanced custom CSS" admin field wasn't
+   propagating). A one-shot injection loses the race: the widget renders
+   AFTER the shadow root exists and wipes/overrides foreign styles. So
+   this RE-ASSERTS: poll for ~20s and re-append the tagged <style>
+   whenever the rendered root is missing it. ===== */
 (function(){
   var CSS =
     '.rc-purchase-option__selector{' +
@@ -968,27 +969,35 @@
       'text-transform:uppercase !important;' +
       'letter-spacing:2.4px !important;' +
     '}';
-  function inject(el){
-    if (!el || el.dataset.svStyled) return false;
+  function ensure(el){
     var root = el.shadowRoot;
     if (!root) return false;
-    var s = document.createElement('style');
-    s.textContent = CSS;
-    root.appendChild(s);
-    el.dataset.svStyled = '1';
+    /* Wait until the widget has rendered its own content — injecting
+       earlier gets wiped by the widget's first render. */
+    if (!root.childElementCount) return false;
+    if (!root.querySelector('style[data-sv-rc]')) {
+      var s = document.createElement('style');
+      s.setAttribute('data-sv-rc', '1');
+      s.textContent = CSS;
+      root.appendChild(s);
+    }
     return true;
   }
-  function scan(){
-    var widgets = document.querySelectorAll('recharge-subscription-widget');
-    var pending = false;
-    widgets.forEach(function(el){ if (!inject(el) && !el.dataset.svStyled) pending = true; });
-    return widgets.length > 0 && !pending;
+  function tick(){
+    var ok = true;
+    document.querySelectorAll('recharge-subscription-widget').forEach(function(el){
+      if (!ensure(el)) ok = false;
+    });
+    return ok;
   }
+  var running = false;
   function start(){
-    if (scan()) return;
+    if (running) return;
+    running = true;
     var tries = 0;
     var t = setInterval(function(){
-      if (scan() || ++tries > 60) clearInterval(t);
+      tick();
+      if (++tries > 80) { clearInterval(t); running = false; }
     }, 250);
   }
   document.addEventListener('DOMContentLoaded', start);
