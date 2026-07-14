@@ -896,15 +896,30 @@
       /* Upgrade the shell with the predictive-search custom element
          (live suggestions) — progressive enhancement over the static form. */
       if (!panel.querySelector('predictive-search')) {
-        var ps = document.createElement('predictive-search');
-        ps.className = 'sv-nav-search_inner';
-        ps.appendChild(panel.querySelector('form'));
-        var results = document.createElement('div');
-        results.id = 'predictive-search';
-        results.className = 'sv-nav-search_results';
-        results.style.display = 'none';
-        ps.appendChild(results);
-        panel.appendChild(ps);
+        var form0 = panel.querySelector('form');
+        try {
+          /* Build inside an inert <template> so the custom element is NOT
+             upgraded until it's connected. If PredictiveSearch (defined in a
+             body inline script) is already registered, a bare createElement
+             runs its constructor on a CHILDLESS element -> querySelector is
+             null -> TypeError that aborts this whole init (seen on product
+             pages 2026-07-14). Template content upgrades on connection, when
+             the form child is already in place. */
+          var tpl = document.createElement('template');
+          tpl.innerHTML = '<predictive-search class="sv-nav-search_inner"></predictive-search>';
+          var ps = tpl.content.firstChild;
+          ps.appendChild(form0);
+          var results = document.createElement('div');
+          results.id = 'predictive-search';
+          results.className = 'sv-nav-search_results';
+          results.style.display = 'none';
+          ps.appendChild(results);
+          panel.appendChild(ps);
+        } catch (err) {
+          /* Predictive enhancement failed — restore the static GET form,
+             which works on its own. */
+          if (form0 && !panel.contains(form0)) panel.appendChild(form0);
+        }
       }
 
       var input = panel.querySelector('.sv-nav-search_input');
@@ -933,4 +948,50 @@
   document.addEventListener('DOMContentLoaded', init);
   document.addEventListener('shopify:section:load', init);
   init();
+})();
+
+/* ===== Recharge subscription widget — shadow-root style injection
+   (2026-07-14). The widget is <recharge-subscription-widget>, an OPEN
+   shadow-DOM custom element with adopted stylesheets, so neither sava.css
+   nor theme CSS can reach it (and its "Advanced custom CSS" admin field
+   wasn't propagating). Inject the SAVA label styles directly into the
+   shadow root. The element renders async, so poll briefly until the
+   root exists. ===== */
+(function(){
+  var CSS =
+    '.rc-purchase-option__selector{' +
+      'font-size:16px !important;' +
+      'padding:3px 0 !important;' +
+      'font-weight:600 !important;' +
+      'display:flex !important;' +
+      'align-items:center !important;' +
+      'text-transform:uppercase !important;' +
+      'letter-spacing:2.4px !important;' +
+    '}';
+  function inject(el){
+    if (!el || el.dataset.svStyled) return false;
+    var root = el.shadowRoot;
+    if (!root) return false;
+    var s = document.createElement('style');
+    s.textContent = CSS;
+    root.appendChild(s);
+    el.dataset.svStyled = '1';
+    return true;
+  }
+  function scan(){
+    var widgets = document.querySelectorAll('recharge-subscription-widget');
+    var pending = false;
+    widgets.forEach(function(el){ if (!inject(el) && !el.dataset.svStyled) pending = true; });
+    return widgets.length > 0 && !pending;
+  }
+  function start(){
+    if (scan()) return;
+    var tries = 0;
+    var t = setInterval(function(){
+      if (scan() || ++tries > 60) clearInterval(t);
+    }, 250);
+  }
+  document.addEventListener('DOMContentLoaded', start);
+  document.addEventListener('shopify:section:load', start);
+  start();
 })();
