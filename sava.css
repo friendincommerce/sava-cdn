@@ -3473,13 +3473,21 @@ body:has(section.sv-trust-points) {
 	width: 100%;
 	text-align: center;
   }
-	.rc-purchase-option__selector {
-    font-size: 16px !important;
-    padding: 3px 0px !important;
-    font-weight: 600 !important;
-    display: flex !important;
-    align-items: center !important;
-    text-transform: uppercase !important;
-    letter-spacing: 2.4px !important;
 }
+
+/* ===========================================================
+   SAVA — Recharge subscription widget (2026-07-14)
+   Recharge's "Advanced custom CSS" box wasn't reaching the
+   storefront reliably, so the plan-selector label styling
+   lives here instead. Uppercase + 2.4px tracking to match
+   the SAVA label spec (Gibson 16px).
+   =========================================================== */
+.rc-purchase-option__selector {
+  font-size: 16px !important;
+  padding: 3px 0 !important;
+  font-weight: 600 !important;
+  display: flex !important;
+  align-items: center !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2.4px !important;
 }
