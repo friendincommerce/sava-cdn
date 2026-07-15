@@ -1004,3 +1004,51 @@
   document.addEventListener('shopify:section:load', start);
   start();
 })();
+
+
+/* ===== Recharge selling-plan bridge (2026-07-14). The widget only wires
+   itself to a product form containing input[name="id"] — the Liquify ATC
+   form has none (variant handling is Alpine JS), so subscription
+   selections were silently dropped and every add-to-cart was one-time
+   (console: "[Recharge Warning] Could not infer a product form…").
+   Inject that input BEFORE the widget module executes (sava.js is a
+   deferred head script; the widget module sits later in the body, so we
+   run first). Recharge then maintains a selling_plan input in the form,
+   and Liquify's addToCart serializes the whole form into the cart
+   payload, carrying the plan along. ===== */
+(function(){
+  function bridge(){
+    var widget = document.querySelector('recharge-subscription-widget');
+    if (!widget) return;
+    var form = document.querySelector('.product-header_component form[action*="/cart/add"]');
+    if (!form || form.dataset.svRcBridge) return;
+    form.dataset.svRcBridge = '1';
+    var input = form.querySelector('input[name="id"]');
+    if (!input) {
+      input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'id';
+      input.value = widget.getAttribute('default-variant-id') || '';
+      form.appendChild(input);
+    }
+    /* At click time: refresh the variant id from Alpine state (variant
+       switches never touch this input) and strip an EMPTY selling_plan
+       (one-time selected) so the JSON payload stays valid. Capture phase
+       runs before Alpine's bubble-phase @click="addToCart". */
+    form.addEventListener('click', function(e){
+      if (!e.target.closest('[li-element="add-to-cart"]')) return;
+      try {
+        var container = form.closest('[li-element="product-variant-container"]');
+        var data = window.Alpine && container ? window.Alpine.$data(container) : null;
+        var cur = data && data.product && data.product.selected_or_first_available_variant;
+        if (cur && cur.id) input.value = cur.id;
+      } catch (err) {}
+      form.querySelectorAll('input[name="selling_plan"]').forEach(function(sp){
+        if (!sp.value) sp.remove();
+      });
+    }, true);
+  }
+  bridge();
+  document.addEventListener('DOMContentLoaded', bridge);
+  document.addEventListener('shopify:section:load', bridge);
+})();
