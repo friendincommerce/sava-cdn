@@ -2215,7 +2215,7 @@ body:has(section.sv-trust-points) {
 .section_product-header [li-block="Add to Cart"] .button {
   background-color: #EDE087 !important;
   border: none !important;
-  border-radius: 4px !important;
+  border-radius: 10px !important;
   color: var(--_sava-color-styles---soft-black, #262524) !important;
   font-family: InterstateMono, monospace !important;
   font-weight: 400 !important;
