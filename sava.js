@@ -968,7 +968,180 @@
       'align-items:center !important;' +
       'text-transform:uppercase !important;' +
       'letter-spacing:2.4px !important;' +
-    '}';
+    '}' +
+    /* Selected option card = SAVA "Lemon Fade" (Figma: linear, #FFF at 50%
+       -> #EDE087 at 100%). NOTE: the widget renders NO "selected" class —
+       selection lives on the radio input's :checked, so target the card
+       via :has(). Console-verified 2026-07-15. */
+    '.rc-purchase-option:has(.rc-purchase-option__input:checked){' +
+      'background:linear-gradient(180deg,#FFFFFF 50%,#EDE087 100%) !important;' +
+    '}' +
+    /* Unselected option card = white bg + SAVA mid-grey border (Figma
+       #DEDDD7, matches the site's pill buttons). */
+    '.rc-purchase-option:not(:has(.rc-purchase-option__input:checked)){' +
+      'border-color:#DEDDD7 !important;' +
+      'background:#FFFFFF !important;' +
+    '}' +
+    /* Label row: option name left, prices right (the label wraps both
+       the selector row and the prices div). The widget's own CSS gives
+       the children full width (stacked layout) — force one row and let
+       the children size to content. */
+    '.rc-purchase-option__label{' +
+      'display:flex !important;' +
+      'flex-direction:row !important;' +
+      'flex-wrap:nowrap !important;' +
+      'justify-content:space-between !important;' +
+      'align-items:center !important;' +
+      'gap:12px !important;' +
+      'width:100% !important;' +
+      'box-sizing:border-box !important;' +
+    '}' +
+    '.rc-purchase-option__selector{' +
+      'width:auto !important;' +
+      'flex:1 1 auto !important;' +
+      'justify-content:flex-start !important;' +
+      'text-align:left !important;' +
+    '}' +
+    '.rc-purchase-option__prices{' +
+      'width:auto !important;' +
+      'flex:0 0 auto !important;' +
+      'margin-left:auto !important;' +
+      'text-align:right !important;' +
+    '}' +
+    /* Prices: InterstateMono Bold 18 / 5% tracking (Figma). NOTE: the
+       rendered spans are .rc-price / .rc-price.strike-through — the
+       __original-price names exist only as part="" attributes. */
+    '.rc-purchase-option__prices{' +
+      'font-family:InterstateMono,monospace !important;' +
+      'font-weight:700 !important;' +
+      'font-size:18px !important;' +
+      'letter-spacing:0.05em !important;' +
+    '}' +
+    '.rc-price.strike-through{' +
+      'font-weight:400 !important;' +
+      'font-size:14px !important;' +
+    '}' +
+    /* "Save up to 10%" badge: Gibson, SAVA radius on the exposed top
+       corners, anchored so its bottom edge sits flush on the card top. */
+    '.rc-purchase-option{position:relative !important;}' +
+    '.rc-purchase-option__badge{' +
+      'font-family:Gibson,sans-serif !important;' +
+      'font-size:16px !important;' +
+      'font-weight:400 !important;' +
+      'letter-spacing:0 !important;' +
+      'padding:10px 20px !important;' +
+      'border-radius:10px 10px 0 0 !important;' +
+      'position:absolute !important;' +
+      'bottom:100% !important;' +
+      'top:auto !important;' +
+      'right:16px !important;' +
+      'margin:0 !important;' +
+    '}' +
+    /* "Learn more": hide the native text link; an inline (i) icon next to
+       the SUBSCRIBE & SAVE label (mounted below) opens the same modal.
+       NOTE: the widget nests child components with their OWN shadow roots
+       (rc-learn-more, rc-benefits, rc-selling-plans) — reach the trigger
+       via its exported ::part from the outer root. */
+    'rc-learn-more::part(rc-learn-more__trigger){display:none !important;}' +
+    'rc-learn-more::part(rc-learn-more__trigger-compact){display:none !important;}' +
+    '.sv-rc-info{' +
+      'background:none;border:0;padding:0;margin-left:8px;cursor:pointer;' +
+      'display:inline-flex;align-items:center;color:#262524;line-height:0;' +
+    '}' +
+    '.sv-rc-info svg{width:20px;height:20px;display:block;}';
+  var ICON =
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" width="20" height="20" aria-hidden="true">' +
+      '<circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5"/>' +
+      '<circle cx="10" cy="6.1" r="1.1" fill="currentColor"/>' +
+      '<rect x="9.2" y="8.7" width="1.6" height="6" rx="0.8" fill="currentColor"/>' +
+    '</svg>';
+  /* Mount the (i) trigger inside the subscription option's label row.
+     Idempotent — safe to call from the poll loop and the observer. */
+  /* SAVA-owned Learn More modal. Driving Recharge's own trigger proved
+     unreliable (fresh rc-learn-more instances drop the first synthetic
+     click after the selection re-render cascade), so we render the SAME
+     content ourselves. The modal HTML ships in the widget config on
+     every product page (learnMoreContent) — reading it at runtime keeps
+     us in sync with whatever the client sets in Recharge admin. */
+  function getLearnMoreContent(){
+    try {
+      return window.SubscriptionWidgetConfig.configs.subscription_widget_v2
+        .default_widget_config.ab_splits[0].display_configs[0]
+        .config_information.learnMoreContent || '';
+    } catch (err) { return ''; }
+  }
+  /* The config HTML uses <span rc-*-icon> placeholders that Recharge's
+     component swaps for SVGs — provide our own equivalents. */
+  var LM_ICONS = {
+    'rc-calendar-icon': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>',
+    'rc-bell-icon': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40"><path d="M6 9a6 6 0 1 1 12 0c0 5 2 6 2 6H4s2-1 2-6"/><path d="M10 20a2.2 2.2 0 0 0 4 0"/></svg>',
+    'rc-phone-icon': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40"><path d="M4 20l4.5-1 10-10a2.1 2.1 0 0 0-3-3l-10 10L4 20z"/><path d="M13.5 7.5l3 3"/></svg>'
+  };
+  function ensureLmStyles(){
+    if (document.getElementById('sv-lm-styles')) return;
+    var st = document.createElement('style');
+    st.id = 'sv-lm-styles';
+    st.textContent =
+      '.sv-lm-overlay{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(20,19,18,.5);padding:4vmin;}' +
+      /* The config styles reference --rc-widget-* vars — define them here
+         to match the widget config (brand #262524 on white, SAVA radius). */
+      '.sv-lm-card{background:#fff;border-radius:12px;max-width:760px;width:100%;max-height:88vh;overflow:auto;padding:56px 40px 36px;position:relative;' +
+        '--rc-widget-brand-color:#262524;--rc-widget-brand-color-80:#4e4d4c;--rc-widget-brand-contrast-color:#FFFFFF;--rc-widget-button-radius:10px;--rc-widget-card-radius:8px;}' +
+      '.sv-lm-close{position:absolute;top:14px;right:18px;background:none;border:0;font-size:28px;line-height:1;cursor:pointer;color:#262524;padding:4px;}';
+    document.head.appendChild(st);
+  }
+  function openLearnMore(){
+    if (document.querySelector('.sv-lm-overlay')) return;
+    var html = getLearnMoreContent();
+    if (!html) return;
+    ensureLmStyles();
+    /* The embedded <style> in the config scopes rules to the
+       rc-learn-more-modal tag — rescope them to our wrapper class.
+       (Do NOT create a real <rc-learn-more-modal>: Recharge defines it.) */
+    html = html.split('rc-learn-more-modal').join('.sv-lm-body');
+    var overlay = document.createElement('div');
+    overlay.className = 'sv-lm-overlay';
+    var card = document.createElement('div');
+    card.className = 'sv-lm-card';
+    card.innerHTML = '<button type="button" class="sv-lm-close" aria-label="Close">&times;</button><div class="sv-lm-body">' + html + '</div>';
+    overlay.appendChild(card);
+    Object.keys(LM_ICONS).forEach(function(attr){
+      card.querySelectorAll('[' + attr + ']').forEach(function(el){ el.innerHTML = LM_ICONS[attr]; });
+    });
+    function close(){
+      overlay.remove();
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKey);
+    }
+    function onKey(ev){ if (ev.key === 'Escape') close(); }
+    overlay.addEventListener('click', function(ev){ if (ev.target === overlay) close(); });
+    card.querySelector('.sv-lm-close').addEventListener('click', close);
+    card.querySelectorAll('[data-dismiss-modal]').forEach(function(b){ b.addEventListener('click', close); });
+    document.addEventListener('keydown', onKey);
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+  }
+
+  function mountInfo(root){
+    /* The __selector_subscription class is state-dependent — anchor on the
+       stable radio value instead. */
+    var sel = root.querySelector(
+      '.rc-purchase-option:has(input[value="subscription"]) .rc-purchase-option__selector');
+    if (!sel || sel.querySelector('.sv-rc-info')) return;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'sv-rc-info';
+    btn.setAttribute('aria-label', 'Learn more about subscribing');
+    btn.innerHTML = ICON;
+    btn.addEventListener('click', function(e){
+      /* Inside the option <label>: preventDefault stops the click from
+         also toggling the radio. */
+      e.preventDefault();
+      e.stopPropagation();
+      openLearnMore();
+    });
+    sel.appendChild(btn);
+  }
   function ensure(el){
     var root = el.shadowRoot;
     if (!root) return false;
@@ -980,6 +1153,22 @@
       s.setAttribute('data-sv-rc', '1');
       s.textContent = CSS;
       root.appendChild(s);
+    }
+    mountInfo(root);
+    /* Widget re-renders (option toggles, variant changes) wipe mounted
+       nodes at any time — keep them alive beyond the poll window. The
+       callback is idempotent, so our own insertions no-op. */
+    if (!el.__svRcObserver) {
+      el.__svRcObserver = new MutationObserver(function(){
+        if (!root.querySelector('style[data-sv-rc]')) {
+          var s2 = document.createElement('style');
+          s2.setAttribute('data-sv-rc', '1');
+          s2.textContent = CSS;
+          root.appendChild(s2);
+        }
+        mountInfo(root);
+      });
+      el.__svRcObserver.observe(root, { childList: true, subtree: true });
     }
     return true;
   }
