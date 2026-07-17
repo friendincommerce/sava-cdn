@@ -1251,9 +1251,15 @@
    successful add (Boost retained it for exactly this reason), so open
    the Boost drawer from that event instead. Guarded — no-ops on any
    page/store without Boost. Runs alongside Boost's inline patch until
-   the next conversion removes it (double open() is idempotent). ===== */
+   the next conversion removes it (double open() is idempotent).
+   The .Boost_CartCount presence check ties the bridge to the theme's
+   "Use Boost cart drawer" checkbox (SV Header Mega setting): when the
+   merchant turns Boost off, the header renders the native mini-cart
+   instead of the Boost cart link, so the bridge stands down and the
+   native drawer handles 'toggleminicart' on its own. ===== */
 (function(){
   window.addEventListener('toggleminicart', function(){
+    if (!document.querySelector('.Boost_CartCount')) return;
     if (window.Boost && window.Boost.Cart && typeof window.Boost.Cart.open === 'function') {
       window.Boost.Cart.open();
     }
