@@ -3491,3 +3491,22 @@ body:has(section.sv-trust-points) {
   text-transform: uppercase !important;
   letter-spacing: 2.4px !important;
 }
+
+/* ============================================================
+   Boost cart count bubble — clone of Webflow's .nav_shop-quantity-2
+   so the badge stays styled even if that class is purged from the
+   compiled CSS after the Liquify mini-cart removal (2026-07-17).
+   ============================================================ */
+.Boost_CartCount {
+  color: #fff;
+  background-color: #110d1a;
+  border-radius: 100%;
+  justify-content: center;
+  align-items: center;
+  width: 1rem;
+  height: 1rem;
+  font-size: .7rem;
+  display: flex;
+  position: absolute;
+  inset: auto 0% 0% auto;
+}
