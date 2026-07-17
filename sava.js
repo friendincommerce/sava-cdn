@@ -1241,3 +1241,21 @@
   document.addEventListener('DOMContentLoaded', bridge);
   document.addEventListener('shopify:section:load', bridge);
 })();
+
+
+/* ===== Boost slide-out cart bridge (2026-07-17). Boost.shop support
+   patched assets/li_custom.js directly (guarded Boost.Cart.open() after
+   a successful add-to-cart) — but Liquiflow conversions REGENERATE that
+   asset, which would silently wipe their patch. Conversion-proof port:
+   stock li_custom.js always dispatches 'toggleminicart' after a
+   successful add (Boost retained it for exactly this reason), so open
+   the Boost drawer from that event instead. Guarded — no-ops on any
+   page/store without Boost. Runs alongside Boost's inline patch until
+   the next conversion removes it (double open() is idempotent). ===== */
+(function(){
+  window.addEventListener('toggleminicart', function(){
+    if (window.Boost && window.Boost.Cart && typeof window.Boost.Cart.open === 'function') {
+      window.Boost.Cart.open();
+    }
+  });
+})();
