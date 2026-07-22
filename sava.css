@@ -244,7 +244,13 @@
 	position: relative;
 }
 
-.sava-footer .sava-footer_form-submit,
+/* Two stray <a class="sava-footer_form-submit"> duplicates sit ON TOP of the real
+   submit input at the same absolute position and swallow clicks (href="#") — hide
+   them so the real input is what gets clicked. (Also being removed at source.) */
+.sava-footer a.sava-footer_form-submit { display: none !important; }
+
+/* Real submit = white circle + dark arrow per Figma. The old rule drew a DARK
+   arrow on a transparent bg — invisible on the dark footer. */
 .sava-footer input[type="submit"].sava-footer_form-submit {
 	position: absolute !important;
 	top: 50% !important;
@@ -255,9 +261,10 @@
 	padding: 0 !important;
 	margin: 0 !important;
 	border: 0 !important;
-	background-color: transparent !important;
-	background-image: url('https://cdn.prod.website-files.com/69ffc1011bc4b498238115c4/6a001adb40613842167d0f24_sava-arrow-up-right.svg') !important;
-	background-size: 22px 22px !important;
+	border-radius: 50% !important;
+	background-color: #FFFFFF !important;
+	background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2024%2024'%20fill='none'%3E%3Cpath%20d='M4%2012h15M13%206l6.5%206-6.5%206'%20stroke='%23262524'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+	background-size: 16px 16px !important;
 	background-position: center !important;
 	background-repeat: no-repeat !important;
 	color: transparent !important;
@@ -268,8 +275,11 @@
 	cursor: pointer !important;
 	-webkit-appearance: none !important;
 	appearance: none !important;
-	border-radius: 0 !important;
 	box-shadow: none !important;
+	transition: transform 0.2s ease;
+}
+.sava-footer input[type="submit"].sava-footer_form-submit:hover {
+	transform: translateY(-50%) scale(1.08) !important;
 }
 
 .sava-footer .w-form-done,
@@ -277,6 +287,11 @@
 	background-color: transparent !important;
 	padding: 12px 0 !important;
 	border: 0 !important;
+	color: #F8F8F8;
+	font-family: Gibson, sans-serif;
+	font-size: 16px;
+	font-weight: 300;
+	text-align: left;
 }
 
 .sava-footer_col-heading::after {
