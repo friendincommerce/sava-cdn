@@ -3540,6 +3540,10 @@ body:has(section.sv-trust-points) {
    stretches to the tallest card in the row. */
 .partner-perks_grid > div{ display: flex; }
 .partner-perks_card{ width: 100%; height: 100%; }
+/* Anchor card content to the TOP (Figma): titles share one level, body follows,
+   leftover space falls BELOW the body. Overrides the compiled margin-top:auto
+   that bottom-anchored the title/body cluster. */
+.partner-perks_card-title{ margin-top: 0 !important; }
 
 /* Partners photo: hard-cap at the Figma 377:400 crop. The compiled image_tag may not
    carry the partners_card-image class, so also target any img inside the card. */
