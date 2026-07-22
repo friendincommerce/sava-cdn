@@ -1265,3 +1265,42 @@
     }
   });
 })();
+
+
+/* ===== SV Partner Program (2026-07-21): perk card colors + partners arrows.
+   Card color = hidden hex paragraph rendered by the block's "Card Color"
+   text setting (a per-block color PICKER silently drops the whole section
+   at conversion — proven trap; hidden hex text + JS is the validated
+   workaround from SV All Flavors). Arrows scroll the partners list by one
+   card. Idempotent; re-runs on Theme Editor section loads. ===== */
+(function(){
+  function paint(){
+    document.querySelectorAll('.partner-perks_color-hex').forEach(function(p){
+      var hex = (p.textContent || '').trim();
+      var card = p.closest('.partner-perks_card');
+      if (card && /^#([0-9a-f]{3}|[0-9a-f]{6}|[0-9a-f]{8})$/i.test(hex)) card.style.backgroundColor = hex;
+    });
+  }
+  function arrows(){
+    document.querySelectorAll('.section_partners').forEach(function(sec){
+      if (sec.dataset.svPartnersBound === '1') return;
+      var list = sec.querySelector('.partners_list');
+      if (!list) return;
+      sec.dataset.svPartnersBound = '1';
+      function step(){
+        var item = list.querySelector('.partners_item');
+        return item ? item.getBoundingClientRect().width + 20 : list.clientWidth;
+      }
+      sec.querySelectorAll('.partners_arrow').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var dir = btn.classList.contains('is-prev') ? -1 : 1;
+          list.scrollBy({ left: dir * step(), behavior: 'smooth' });
+        });
+      });
+    });
+  }
+  function init(){ paint(); arrows(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+  document.addEventListener('shopify:section:load', init);
+})();
