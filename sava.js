@@ -1304,3 +1304,32 @@
   else init();
   document.addEventListener('shopify:section:load', init);
 })();
+
+
+/* ===== Footer newsletter success message (2026-07-22) =====
+   The footer form is a Shopify customer form (li-form="customer") that posts
+   natively and redirects to return_to with ?customer_posted=true. Webflow's
+   .w-form-done block only appears via Webflow's own AJAX handler (absent on
+   Shopify), so the user got no confirmation. Surface it ourselves on the
+   redirected page load: swap the form for the success message and bring it
+   into view. */
+(function(){
+  function show(){
+    var posted;
+    try { posted = new URLSearchParams(window.location.search).get('customer_posted') === 'true'; }
+    catch (e) { return; }
+    if (!posted) return;
+    var wraps = document.querySelectorAll('.sava-footer .w-form');
+    for (var i = 0; i < wraps.length; i++) {
+      var form = wraps[i].querySelector('form');
+      var done = wraps[i].querySelector('.w-form-done');
+      if (form && done) { form.style.display = 'none'; done.style.display = 'block'; }
+    }
+    var done0 = document.querySelector('.sava-footer .w-form-done');
+    if (done0 && done0.scrollIntoView) {
+      setTimeout(function(){ done0.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 300);
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', show);
+  else show();
+})();
