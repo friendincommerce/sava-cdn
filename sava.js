@@ -1333,3 +1333,84 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', show);
   else show();
 })();
+
+
+/* ===== Footer newsletter AJAX submit + feedback bubble (2026-07-22) =====
+   Replaces the reload/redirect UX: validate the email locally, POST the
+   Shopify customer form in the background, and pop a pill bubble above the
+   field (green check on success, red X + message on invalid input). If
+   Shopify answers with its bot-check challenge page or the request fails,
+   fall back to a native submit — the customer_posted handler above then
+   surfaces the success message after the redirect. form.submit() bypasses
+   this listener by design, so the fallback cannot loop. */
+(function(){
+  var VALID = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  function ensureBubble(form){
+    var b = form.querySelector('.sv-nl-bubble');
+    if (!b) {
+      b = document.createElement('div');
+      b.className = 'sv-nl-bubble';
+      b.setAttribute('role', 'status');
+      var i = document.createElement('span'); i.className = 'sv-nl-bubble_icon';
+      var t = document.createElement('span'); t.className = 'sv-nl-bubble_text';
+      b.appendChild(i); b.appendChild(t);
+      form.appendChild(b);
+    }
+    return b;
+  }
+
+  function pop(form, ok, msg){
+    var b = ensureBubble(form);
+    b.classList.toggle('is-error', !ok);
+    b.querySelector('.sv-nl-bubble_icon').textContent = ok ? '\u2713' : '\u2715';
+    b.querySelector('.sv-nl-bubble_text').textContent = msg;
+    b.classList.add('is-show');
+    if (b.__svTimer) clearTimeout(b.__svTimer);
+    b.__svTimer = setTimeout(function(){ b.classList.remove('is-show'); }, ok ? 4000 : 5000);
+  }
+
+  function bind(form){
+    if (form.dataset.svNlBound) return;
+    form.dataset.svNlBound = '1';
+    form.addEventListener('submit', function(e){
+      var input = form.querySelector('input[name="contact[email]"], input[type="email"]');
+      if (!input) return;
+      var val = (input.value || '').trim();
+      if (!VALID.test(val)) {
+        e.preventDefault();
+        pop(form, false, 'Please enter a valid email address');
+        input.style.borderColor = '#F09595';
+        input.addEventListener('input', function fix(){
+          input.style.borderColor = '';
+          input.removeEventListener('input', fix);
+        });
+        return;
+      }
+      e.preventDefault();
+      fetch(form.getAttribute('action') || '/contact', {
+        method: 'POST',
+        body: new FormData(form),
+        credentials: 'same-origin',
+        redirect: 'follow'
+      }).then(function(res){
+        if (!res.ok || (res.url && res.url.indexOf('challenge') !== -1)) {
+          form.submit();
+          return;
+        }
+        input.value = '';
+        pop(form, true, 'Thanks for subscribing!');
+      }).catch(function(){
+        form.submit();
+      });
+    });
+  }
+
+  function init(){
+    var forms = document.querySelectorAll('.sava-footer form');
+    for (var i = 0; i < forms.length; i++) bind(forms[i]);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+  document.addEventListener('shopify:section:load', init);
+})();
