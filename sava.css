@@ -3527,6 +3527,22 @@ body:has(section.sv-trust-points) {
 .partner-story_button:hover .partner-story_button-label,
 .join-cta_button:hover .join-cta_button-label{ color: #fff; }
 
+/* Perks grid: minmax(0,1fr) so the 1fr columns can actually SHRINK — a bare 1fr's
+   min is content-size (the "Commission" heading), which jams 4-up at ~1150px and
+   shoves cards off the right edge. 2 columns through tablet/narrow desktop,
+   1 column on phones. */
+.partner-perks_grid{ grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+@media (max-width: 1149px){ .partner-perks_grid{ grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media (max-width: 479px){ .partner-perks_grid{ grid-template-columns: minmax(0, 1fr) !important; } }
+
+/* Partners photo: hard-cap at the Figma 377:400 crop. The compiled image_tag may not
+   carry the partners_card-image class, so also target any img inside the card. */
+.partners_card img, .partners_card-image{
+  aspect-ratio: 377 / 400 !important; object-fit: cover !important;
+  width: 100% !important; height: auto !important;
+  border-radius: 10px; margin-bottom: 33px; display: block;
+}
+
 /* Partners carousel: hidden scrollbar; same Figma circle-arrow assets as the product gallery */
 .partners_list{ scrollbar-width: none; scroll-behavior: smooth; }
 .partners_list::-webkit-scrollbar{ display: none; }
@@ -3539,9 +3555,9 @@ body:has(section.sv-trust-points) {
      display:contents releases the header's children so flex order can re-place the button. --- */
   .section_partner-perks .padding-section-large{ display: flex; flex-direction: column; }
   .section_partner-perks .partner-perks_header{ display: contents; }
-  .partner-perks_header-text{ order: 1; text-align: center; margin-bottom: 40px; }
-  .partner-perks_grid{ order: 2; grid-template-columns: 1fr; justify-items: center; }
-  .partner-perks_item{ width: 100%; max-width: 310px; }
+  .partner-perks_header > div:first-child{ order: 1; text-align: center; margin-bottom: 40px; } /* header-text div compiled classless */
+  .partner-perks_grid{ order: 2; justify-items: center; } /* column count handled by the width-tiered rules above */
+  .partner-perks_grid > div{ width: 100%; max-width: 310px; margin-left: auto; margin-right: auto; } /* li-block wrapper compiled classless */
   .partner-perks_button{ order: 3; width: 100%; text-align: center; margin-top: 40px; }
   .partner-perks_heading{ font-size: 36px; line-height: 40px; }
 
