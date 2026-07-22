@@ -294,6 +294,43 @@
 	text-align: left;
 }
 
+/* Footer newsletter feedback bubble (success + validation error), shown above
+   the email field by the sava.js AJAX handler. */
+.sv-nl-bubble {
+	position: absolute;
+	bottom: calc(100% + 10px);
+	left: 0;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: #FFFFFF;
+	color: #262524;
+	font-family: Gibson, sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1;
+	padding: 10px 16px;
+	border-radius: 999px;
+	opacity: 0;
+	transform: translateY(6px);
+	transition: opacity 0.35s ease, transform 0.35s ease;
+	pointer-events: none;
+	white-space: nowrap;
+	z-index: 5;
+}
+.sv-nl-bubble::after {
+	content: '';
+	position: absolute;
+	top: 100%;
+	left: 22px;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid #FFFFFF;
+}
+.sv-nl-bubble.is-show { opacity: 1; transform: translateY(0); }
+.sv-nl-bubble_icon { color: #0F6E56; font-size: 14px; }
+.sv-nl-bubble.is-error .sv-nl-bubble_icon { color: #A32D2D; }
+
 .sava-footer_col-heading::after {
 	content: '';
 	width: 10px;
