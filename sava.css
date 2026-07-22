@@ -3535,6 +3535,12 @@ body:has(section.sv-trust-points) {
 @media (max-width: 1149px){ .partner-perks_grid{ grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
 @media (max-width: 479px){ .partner-perks_grid{ grid-template-columns: minmax(0, 1fr) !important; } }
 
+/* Equal-height perk cards: the grid stretches its children (the classless li-block
+   wrappers), but the card inside doesn't fill them. Flex the wrapper so the card
+   stretches to the tallest card in the row. */
+.partner-perks_grid > div{ display: flex; }
+.partner-perks_card{ width: 100%; height: 100%; }
+
 /* Partners photo: hard-cap at the Figma 377:400 crop. The compiled image_tag may not
    carry the partners_card-image class, so also target any img inside the card. */
 .partners_card img, .partners_card-image{
