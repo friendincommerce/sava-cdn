@@ -3510,3 +3510,59 @@ body:has(section.sv-trust-points) {
   position: absolute;
   inset: auto 0% 0% auto;
 }
+
+
+/* ============================================================
+   SV Partner Program page (2026-07-21) — SV Partner Perks / SV Partner
+   Story / SV Partners / SV Join CTA. Desktop base styles are real Webflow
+   styles; this block adds what the Designer panel can't express: button
+   hover (parent affects child), per-block card color (JS partner, see
+   sava.js), the partners scroller + circle arrows, and ALL mobile (<=767)
+   stacking per the Figma mobile frame (2875:3073).
+   ============================================================ */
+.partner-perks_button, .partner-story_button, .join-cta_button,
+.partner-perks_button-label, .partner-story_button-label, .join-cta_button-label{ transition: background-color .2s, color .2s; }
+.partner-perks_button:hover, .partner-story_button:hover, .join-cta_button:hover{ background-color: #262524 !important; }
+.partner-perks_button:hover .partner-perks_button-label,
+.partner-story_button:hover .partner-story_button-label,
+.join-cta_button:hover .join-cta_button-label{ color: #fff; }
+
+/* Partners carousel: hidden scrollbar; same Figma circle-arrow assets as the product gallery */
+.partners_list{ scrollbar-width: none; scroll-behavior: smooth; }
+.partners_list::-webkit-scrollbar{ display: none; }
+.partners_arrow{ background-repeat: no-repeat; background-position: center; background-size: 57px 57px; margin-top: 28px; }
+.partners_arrow.is-prev{ background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTciIGhlaWdodD0iNTciIHZpZXdCb3g9IjAgMCA1NyA1NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgZmlsdGVyPSJ1cmwoI2ZpbHRlcjBfZF8yNjg2XzI4NzUpIj4KPGNpcmNsZSBjeD0iMjguMjg0MyIgY3k9IjI4LjI4NDMiIHI9IjIwIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTM1IDI4LjI4NDMgMjguMjg0MykiIGZpbGw9IiNGOEY4RjgiLz4KPC9nPgo8cGF0aCBkPSJNMjAuNzg3MSAyOC4xMzc1TDM2LjU0NjcgMjguMTExNSIgc3Ryb2tlPSIjMjYyNTI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTI3LjExMjIgMjEuNjMzNkwyMC43NzcxIDI4LjEwOTNMMjcuMjUyOCAzNC40NDQ0IiBzdHJva2U9IiMyNjI1MjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8ZGVmcz4KPGZpbHRlciBpZD0iZmlsdGVyMF9kXzI2ODZfMjg3NSIgeD0iNi4yODQyNyIgeT0iOC4yODQyMyIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjQ0IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiIGNvbG9yLWludGVycG9sYXRpb24tZmlsdGVycz0ic1JHQiI+CjxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAiIHJlc3VsdD0iQmFja2dyb3VuZEltYWdlRml4Ii8+CjxmZUNvbG9yTWF0cml4IGluPSJTb3VyY2VBbHBoYSIgdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDEyNyAwIiByZXN1bHQ9ImhhcmRBbHBoYSIvPgo8ZmVPZmZzZXQgZHk9IjIiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMSIvPgo8ZmVDb21wb3NpdGUgaW4yPSJoYXJkQWxwaGEiIG9wZXJhdG9yPSJvdXQiLz4KPGZlQ29sb3JNYXRyaXggdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMC44NzA1ODggMCAwIDAgMCAwLjg2NjY2NyAwIDAgMCAwIDAuODQzMTM3IDAgMCAwIDEgMCIvPgo8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9ImVmZmVjdDFfZHJvcFNoYWRvd18yNjg2XzI4NzUiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJlZmZlY3QxX2Ryb3BTaGFkb3dfMjY4Nl8yODc1IiByZXN1bHQ9InNoYXBlIi8+CjwvZmlsdGVyPgo8L2RlZnM+Cjwvc3ZnPgo="); }
+.partners_arrow.is-next{ background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTciIGhlaWdodD0iNTciIHZpZXdCb3g9IjAgMCA1NyA1NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgZmlsdGVyPSJ1cmwoI2ZpbHRlcjBfZF8yNjg2XzI4ODEpIj4KPGNpcmNsZSBjeD0iMjguMjg0MyIgY3k9IjI4LjI4NDMiIHI9IjIwIiB0cmFuc2Zvcm09InJvdGF0ZSg0NSAyOC4yODQzIDI4LjI4NDMpIiBmaWxsPSIjRjhGOEY4Ii8+CjwvZz4KPHBhdGggZD0iTTM1Ljc4MTkgMjguNDMwNkwyMC4wMjIzIDI4LjQ1NjYiIHN0cm9rZT0iIzI2MjUyNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CjxwYXRoIGQ9Ik0yOS40NTYxIDM0LjkzNDhMMzUuNzkxMiAyOC40NTkxTDI5LjMxNTUgMjIuMTI0MSIgc3Ryb2tlPSIjMjYyNTI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPGRlZnM+CjxmaWx0ZXIgaWQ9ImZpbHRlcjBfZF8yNjg2XzI4ODEiIHg9IjYuMjg0MjciIHk9IjguMjg0MyIgd2lkdGg9IjQ0IiBoZWlnaHQ9IjQ0IiBmaWx0ZXJVbml0cz0idXNlclNwYWNlT25Vc2UiIGNvbG9yLWludGVycG9sYXRpb24tZmlsdGVycz0ic1JHQiI+CjxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAiIHJlc3VsdD0iQmFja2dyb3VuZEltYWdlRml4Ii8+CjxmZUNvbG9yTWF0cml4IGluPSJTb3VyY2VBbHBoYSIgdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDEyNyAwIiByZXN1bHQ9ImhhcmRBbHBoYSIvPgo8ZmVPZmZzZXQgZHk9IjIiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMSIvPgo8ZmVDb21wb3NpdGUgaW4yPSJoYXJkQWxwaGEiIG9wZXJhdG9yPSJvdXQiLz4KPGZlQ29sb3JNYXRyaXggdHlwZT0ibWF0cml4IiB2YWx1ZXM9IjAgMCAwIDAgMC44NzA1ODggMCAwIDAgMCAwLjg2NjY2NyAwIDAgMCAwIDAuODQzMTM3IDAgMCAwIDEgMCIvPgo8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9ImVmZmVjdDFfZHJvcFNoYWRvd18yNjg2XzI4ODEiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJlZmZlY3QxX2Ryb3BTaGFkb3dfMjY4Nl8yODgxIiByZXN1bHQ9InNoYXBlIi8+CjwvZmlsdGVyPgo8L2RlZnM+Cjwvc3ZnPgo="); }
+
+@media (max-width: 767px){
+  /* --- Perks: centered header, stacked 310px cards, CTA drops BELOW the cards full-width.
+     display:contents releases the header's children so flex order can re-place the button. --- */
+  .section_partner-perks .padding-section-large{ display: flex; flex-direction: column; }
+  .section_partner-perks .partner-perks_header{ display: contents; }
+  .partner-perks_header-text{ order: 1; text-align: center; margin-bottom: 40px; }
+  .partner-perks_grid{ order: 2; grid-template-columns: 1fr; justify-items: center; }
+  .partner-perks_item{ width: 100%; max-width: 310px; }
+  .partner-perks_button{ order: 3; width: 100%; text-align: center; margin-top: 40px; }
+  .partner-perks_heading{ font-size: 36px; line-height: 40px; }
+
+  /* --- Story: single column, image band below the text --- */
+  .partner-story_grid{ grid-template-columns: 1fr; }
+  .partner-story_content{ padding: 60px 20px 70px; }
+  .partner-story_image-wrap{ min-height: 382px; }
+  .partner-story_button{ width: 100%; text-align: center; }
+
+  /* --- Partners: one ~90% card per view; arrows BELOW the cards, centered side by side.
+     flex row + wrap: header-text and list each take a full row (basis 100%), the two
+     order-3 arrows land together on the final row. --- */
+  .section_partners .padding-section-large{ display: flex; flex-wrap: wrap; justify-content: center; }
+  .section_partners .partners_header{ display: contents; }
+  .partners_header-text{ flex-basis: 100%; order: 1; margin-bottom: 40px; }
+  .partners_list{ flex-basis: 100%; order: 2; grid-auto-columns: 90%; margin-bottom: 40px; }
+  .partners_arrow{ order: 3; margin: 0 4px; }
+  .partners_heading{ font-size: 36px; line-height: 40px; }
+
+  /* --- Join band --- */
+  .join-cta_content{ padding-top: 56px; padding-bottom: 64px; }
+  .join-cta_heading{ font-size: 36px; line-height: 40px; }
+  .join-cta_button{ width: 100%; text-align: center; }
+}
