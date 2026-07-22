@@ -28,6 +28,140 @@
 	html { font-size: 16px !important; }
 }
 
+/* ============================================================
+   FONT ALIAS BLOCK (2026-07-22) — DO NOT REMOVE.
+   The Adobe Fonts kit (use.typekit.net/myg3jqa.js) registers the
+   brand faces ONLY as "canada-type-gibson", "interstate-mono" and
+   "gelica" — but Webflow's compiled styles ask for "Gibson",
+   "InterstateMono", "Gelica Light", "Gibson Medium/Book" etc.
+   Those names resolved via LOCALLY INSTALLED fonts on designer
+   machines and silently fell back for everyone else. These
+   @font-face aliases point the site's family names at the same
+   Adobe-served files. ("Gelica" needs no alias: family matching is
+   case-insensitive, so it matches the kit's "gelica".)
+   ============================================================ */
+@font-face {
+  font-family: "Gibson";
+  src: url("https://use.typekit.net/af/5144b8/0000000000000000775a92af/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff2"),
+       url("https://use.typekit.net/af/5144b8/0000000000000000775a92af/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff"),
+       url("https://use.typekit.net/af/5144b8/0000000000000000775a92af/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("opentype");
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+
+@font-face {
+  font-family: "Gibson";
+  src: url("https://use.typekit.net/af/93f3ba/0000000000000000775a92b8/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("woff2"),
+       url("https://use.typekit.net/af/93f3ba/0000000000000000775a92b8/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("woff"),
+       url("https://use.typekit.net/af/93f3ba/0000000000000000775a92b8/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("opentype");
+  font-weight: 300; font-style: italic; font-display: swap;
+}
+
+@font-face {
+  font-family: "Gibson";
+  src: url("https://use.typekit.net/af/b00ba4/00000000000000007759afd3/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),
+       url("https://use.typekit.net/af/b00ba4/00000000000000007759afd3/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),
+       url("https://use.typekit.net/af/b00ba4/00000000000000007759afd3/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+
+@font-face {
+  font-family: "Gibson";
+  src: url("https://use.typekit.net/af/4475f4/0000000000000000775a92bd/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3") format("woff2"),
+       url("https://use.typekit.net/af/4475f4/0000000000000000775a92bd/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3") format("woff"),
+       url("https://use.typekit.net/af/4475f4/0000000000000000775a92bd/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3") format("opentype");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+
+@font-face {
+  font-family: "InterstateMono";
+  src: url("https://use.typekit.net/af/1697d8/00000000000000007735d0f8/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff2"),
+       url("https://use.typekit.net/af/1697d8/00000000000000007735d0f8/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff"),
+       url("https://use.typekit.net/af/1697d8/00000000000000007735d0f8/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("opentype");
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+
+@font-face {
+  font-family: "InterstateMono";
+  src: url("https://use.typekit.net/af/5ce34d/00000000000000007735d0fc/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),
+       url("https://use.typekit.net/af/5ce34d/00000000000000007735d0fc/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),
+       url("https://use.typekit.net/af/5ce34d/00000000000000007735d0fc/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+
+@font-face {
+  font-family: "InterstateMono";
+  src: url("https://use.typekit.net/af/4121d4/00000000000000007735d102/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),
+       url("https://use.typekit.net/af/4121d4/00000000000000007735d102/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),
+       url("https://use.typekit.net/af/4121d4/00000000000000007735d102/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+@font-face {
+  font-family: "Interstate Mono";
+  src: url("https://use.typekit.net/af/1697d8/00000000000000007735d0f8/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff2"),
+       url("https://use.typekit.net/af/1697d8/00000000000000007735d0f8/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff"),
+       url("https://use.typekit.net/af/1697d8/00000000000000007735d0f8/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("opentype");
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+
+@font-face {
+  font-family: "Interstate Mono";
+  src: url("https://use.typekit.net/af/5ce34d/00000000000000007735d0fc/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),
+       url("https://use.typekit.net/af/5ce34d/00000000000000007735d0fc/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),
+       url("https://use.typekit.net/af/5ce34d/00000000000000007735d0fc/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+
+@font-face {
+  font-family: "Interstate Mono";
+  src: url("https://use.typekit.net/af/4121d4/00000000000000007735d102/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff2"),
+       url("https://use.typekit.net/af/4121d4/00000000000000007735d102/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("woff"),
+       url("https://use.typekit.net/af/4121d4/00000000000000007735d102/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3") format("opentype");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+@font-face {
+  font-family: "Gelica Light";
+  src: url("https://use.typekit.net/af/b49bb6/0000000000000000774ba05e/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff2"),
+       url("https://use.typekit.net/af/b49bb6/0000000000000000774ba05e/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff"),
+       url("https://use.typekit.net/af/b49bb6/0000000000000000774ba05e/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("opentype");
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+
+@font-face {
+  font-family: "Gelica Light";
+  src: url("https://use.typekit.net/af/a1df15/0000000000000000774ba05f/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("woff2"),
+       url("https://use.typekit.net/af/a1df15/0000000000000000774ba05f/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("woff"),
+       url("https://use.typekit.net/af/a1df15/0000000000000000774ba05f/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i3&v=3") format("opentype");
+  font-weight: 300; font-style: italic; font-display: swap;
+}
+
+@font-face {
+  font-family: "Gibson Medium";
+  src: url("https://use.typekit.net/af/4475f4/0000000000000000775a92bd/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3") format("woff2"),
+       url("https://use.typekit.net/af/4475f4/0000000000000000775a92bd/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3") format("woff"),
+       url("https://use.typekit.net/af/4475f4/0000000000000000775a92bd/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3") format("opentype");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+
+@font-face {
+  font-family: "Gibson Book";
+  src: url("https://use.typekit.net/af/b00ba4/00000000000000007759afd3/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),
+       url("https://use.typekit.net/af/b00ba4/00000000000000007759afd3/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),
+       url("https://use.typekit.net/af/b00ba4/00000000000000007759afd3/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+
+@font-face {
+  font-family: "InterstateMono Light";
+  src: url("https://use.typekit.net/af/1697d8/00000000000000007735d0f8/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff2"),
+       url("https://use.typekit.net/af/1697d8/00000000000000007735d0f8/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("woff"),
+       url("https://use.typekit.net/af/1697d8/00000000000000007735d0f8/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n3&v=3") format("opentype");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+
+
+
 /* ===== SAVA Link Card ===== */
 
 .sava-link-card:hover .sava-link-card_button {
