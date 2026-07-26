@@ -1414,3 +1414,114 @@
   else init();
   document.addEventListener('shopify:section:load', init);
 })();
+
+
+/* ===== SV Teaser (password page) helpers (2026-07-23) =====
+   1) Countdown: reads the editable ISO datetime from .teaser-countdown_target
+      (blank/invalid -> stays at 00) and ticks the four .teaser-countdown_num
+      tiles in DOM order: days, hours, minutes, seconds.
+   2) Founder background: paints .section_teaser-founder with the hex rendered
+      into .teaser-founder_bg-hex by the section's Background Color picker
+      (Liquid can't reach the section tag's style; JS painter is the proven route).
+   3) Signup: posts the email to Klaviyo's list-subscribe endpoint using the
+      list id from the hidden .teaser-signup_klaviyo setting, with the same
+      .sv-nl-bubble feedback used by the footer newsletter. The endpoint only
+      accepts opaque cross-origin posts, so the bubble confirms the SEND. */
+(function(){
+  function initCountdown(){
+    var sec = document.querySelector('.section_teaser-countdown');
+    if (!sec || sec.dataset.svCd) return;
+    var nums = sec.querySelectorAll('.teaser-countdown_num');
+    var tgt = sec.querySelector('.teaser-countdown_target');
+    if (nums.length < 4 || !tgt) return;
+    var when = Date.parse((tgt.textContent || '').trim());
+    if (isNaN(when)) return;
+    sec.dataset.svCd = '1';
+    function pad(n){ return (n < 10 ? '0' : '') + n; }
+    function tick(){
+      var diff = Math.max(0, when - Date.now());
+      nums[0].textContent = pad(Math.floor(diff / 86400000));
+      nums[1].textContent = pad(Math.floor(diff % 86400000 / 3600000));
+      nums[2].textContent = pad(Math.floor(diff % 3600000 / 60000));
+      nums[3].textContent = pad(Math.floor(diff % 60000 / 1000));
+    }
+    tick();
+    setInterval(tick, 1000);
+  }
+
+  function paintFounder(){
+    document.querySelectorAll('.section_teaser-founder').forEach(function(sec){
+      var hexEl = sec.querySelector('.teaser-founder_bg-hex');
+      if (!hexEl) return;
+      var hex = (hexEl.textContent || '').trim();
+      if (/^#[0-9a-fA-F]{3,8}$/.test(hex)) sec.style.backgroundColor = hex;
+    });
+  }
+
+  function ensureBubble(host){
+    var b = host.querySelector('.sv-nl-bubble');
+    if (!b) {
+      b = document.createElement('div');
+      b.className = 'sv-nl-bubble';
+      b.setAttribute('role', 'status');
+      var i = document.createElement('span'); i.className = 'sv-nl-bubble_icon';
+      var t = document.createElement('span'); t.className = 'sv-nl-bubble_text';
+      b.appendChild(i); b.appendChild(t);
+      host.appendChild(b);
+    }
+    return b;
+  }
+
+  function pop(host, ok, msg){
+    var b = ensureBubble(host);
+    b.classList.toggle('is-error', !ok);
+    b.querySelector('.sv-nl-bubble_icon').textContent = ok ? '\u2713' : '\u2715';
+    b.querySelector('.sv-nl-bubble_text').textContent = msg;
+    b.classList.add('is-show');
+    if (b.__svTimer) clearTimeout(b.__svTimer);
+    b.__svTimer = setTimeout(function(){ b.classList.remove('is-show'); }, ok ? 4000 : 5000);
+  }
+
+  function initSignup(){
+    var sec = document.querySelector('.section_teaser-signup');
+    if (!sec) return;
+    var form = sec.querySelector('form');
+    if (!form || form.dataset.svTeaser) return;
+    form.dataset.svTeaser = '1';
+    var VALID = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var host = sec.querySelector('.teaser-signup_form-wrap') || form;
+      var input = form.querySelector('input[type="email"]');
+      var listEl = sec.querySelector('.teaser-signup_klaviyo');
+      var list = listEl ? (listEl.textContent || '').trim() : '';
+      var val = input ? (input.value || '').trim() : '';
+      if (!VALID.test(val)) {
+        pop(host, false, 'Please enter a valid email address');
+        return;
+      }
+      if (!list || list === 'KLAVIYO_LIST_ID') {
+        pop(host, false, 'Signup is not connected yet');
+        return;
+      }
+      var body = 'g=' + encodeURIComponent(list) + '&email=' + encodeURIComponent(val);
+      fetch('https://manage.kmail-lists.com/ajax/subscriptions/subscribe', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body
+      }).then(function(){
+        input.value = '';
+        pop(host, true, 'Thanks for subscribing!');
+      }).catch(function(){
+        pop(host, false, 'Something went wrong \u2014 please try again');
+      });
+    });
+  }
+
+  function init(){ initCountdown(); paintFounder(); initSignup(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+  document.addEventListener('shopify:section:load', init);
+  document.addEventListener('shopify:section:select', function(){ paintFounder(); });
+})();
