@@ -3778,3 +3778,21 @@ body:has(section.sv-trust-points) {
   .join-cta_heading{ font-size: 36px; line-height: 40px; }
   .join-cta_button{ width: 100%; text-align: center; }
 }
+
+
+/* ===== SV Teaser password page — responsive + polish (2026-07-23) ===== */
+.teaser-signup_form-wrap { position: relative; }
+.teaser-signup_klaviyo { display: none !important; }
+.teaser-countdown_target { display: none !important; }
+@media (max-width: 767px) {
+	.teaser-hero_heading { font-size: 40px; }
+	.teaser-hero_sub { font-size: 18px; }
+	.teaser-countdown_units { gap: 10px; }
+	.teaser-countdown_unit { padding: 14px 12px; min-width: 72px; }
+	.teaser-countdown_num { font-size: 26px; }
+	.teaser-vip_card { padding: 24px 20px 28px; }
+}
+@media (max-width: 479px) {
+	.teaser-vip_form-row { flex-direction: column; }
+	.teaser-vip_unlock { width: 100%; }
+}
