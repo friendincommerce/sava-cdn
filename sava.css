@@ -3671,7 +3671,7 @@ body:has(section.sv-trust-points) {
 .rc-purchase-option__selector {
   font-size: 16px !important;
   padding: 3px 0 !important;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
   display: flex !important;
   align-items: center !important;
   text-transform: uppercase !important;
