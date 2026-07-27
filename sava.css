@@ -3781,6 +3781,21 @@ body:has(section.sv-trust-points) {
 
 
 /* ===== SV Teaser password page — responsive + polish (2026-07-23) ===== */
+/* Picker-rendered <img> tags may not carry the Webflow class (image_tag trap) —
+   constrain teaser images structurally. */
+.teaser-hero_inner img {
+	width: 180px !important; max-width: 60%; height: auto !important;
+	object-fit: contain; display: block; margin-left: auto; margin-right: auto;
+}
+.teaser-founder_inner img:first-of-type {
+	width: 96px !important; height: 96px !important; border-radius: 50%;
+	object-fit: cover !important; display: block; margin: 0 auto 24px;
+}
+.teaser-founder_inner img:last-of-type {
+	width: 120px !important; height: auto !important; object-fit: contain;
+	display: block; margin-left: auto; margin-right: auto;
+}
+
 .teaser-signup_form-wrap { position: relative; }
 .teaser-signup_klaviyo { display: none !important; }
 .teaser-countdown_target { display: none !important; }
