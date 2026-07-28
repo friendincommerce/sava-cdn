@@ -3781,6 +3781,11 @@ body:has(section.sv-trust-points) {
 
 
 /* ===== SV Teaser password page — responsive + polish (2026-07-23) ===== */
+/* The teaser signup uses the sava.js bubble for feedback — Webflow's stock
+   success/fail banners must never appear here. */
+.section_teaser-signup .w-form-fail,
+.section_teaser-signup .w-form-done { display: none !important; }
+
 /* Picker-rendered <img> tags may not carry the Webflow class (image_tag trap) —
    constrain teaser images structurally. */
 .teaser-hero_inner img {
