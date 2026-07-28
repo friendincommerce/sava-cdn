@@ -3781,6 +3781,23 @@ body:has(section.sv-trust-points) {
 
 
 /* ===== SV Teaser password page — responsive + polish (2026-07-23) ===== */
+/* Client request 2026-07-28 (Nina): lemon accent tile moves from Seconds to
+   Days, and the hero -> countdown -> signup vertical gaps tighten up. */
+.teaser-countdown_unit.is-accent { background-color: #FFFFFF !important; }
+.teaser-countdown_units .teaser-countdown_unit:first-child { background-color: #EDE087 !important; }
+.teaser-hero_inner { padding-bottom: 8px !important; }
+.teaser-countdown_inner { padding-top: 12px !important; padding-bottom: 16px !important; }
+.teaser-signup_inner { padding-top: 12px !important; }
+
+/* Teaser page: larger feedback bubble (the default 14px footer size reads
+   small against the hero-scale type on this page). */
+.section_teaser-signup .sv-nl-bubble {
+	font-size: 17px;
+	padding: 14px 22px;
+	gap: 10px;
+}
+.section_teaser-signup .sv-nl-bubble_icon { font-size: 17px; }
+
 /* The teaser signup uses the sava.js bubble for feedback — Webflow's stock
    success/fail banners must never appear here. */
 .section_teaser-signup .w-form-fail,
