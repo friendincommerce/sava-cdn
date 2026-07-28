@@ -3833,3 +3833,29 @@ body:has(section.sv-trust-points) {
 	.teaser-vip_form-row { flex-direction: column; }
 	.teaser-vip_unlock { width: 100%; }
 }
+
+
+/* ===== SV Rewards Benefits — comparison table (2026-07-28) ===== */
+/* Webflow single-class styles can't express sibling/last-child rules:
+   kill the divider under the final row. */
+.rewards-benefits_rowwrap:last-child .rewards-benefits_row { border-bottom: none; }
+
+@media (max-width: 767px) {
+	.rewards-benefits_heading { font-size: 36px; line-height: 40px; margin-bottom: 32px; }
+	/* Full-bleed card per the mobile Figma: cancel padding-global, square the sides */
+	.rewards-benefits_card {
+		padding: 27px 20px;
+		margin-left: -1.25rem; margin-right: -1.25rem;
+		border-left: none; border-right: none; border-radius: 0;
+	}
+	.rewards-benefits_head-row,
+	.rewards-benefits_row { grid-template-columns: 20.4% 26.4% 1fr; }
+	.rewards-benefits_head-row { min-height: 70px; padding-bottom: 8px; }
+	.rewards-benefits_col-label { font-size: 11px; letter-spacing: 1.5px; }
+	.rewards-benefits_col-members { font-size: 20px; line-height: 25px; }
+	.rewards-benefits_row { min-height: 53px; }
+	.rewards-benefits_value { font-size: 12px; letter-spacing: 1.5px; }
+	.rewards-benefits_benefit { font-size: 15px; line-height: 19px; padding-left: 14px; }
+	.rewards-benefits_icon { width: 19px; height: 19px; }
+	.rewards-benefits_highlight { left: 20.4%; width: 26.4%; }
+}
