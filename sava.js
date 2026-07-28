@@ -1489,8 +1489,12 @@
     if (!form || form.dataset.svTeaser) return;
     form.dataset.svTeaser = '1';
     var VALID = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    /* stopPropagation: Webflow's own form script listens for submit at the
+       document level and would fire a doomed AJAX post to its dead endpoint,
+       flashing the "Oops!" fail banner over our bubble. */
     form.addEventListener('submit', function(e){
       e.preventDefault();
+      e.stopPropagation();
       var host = sec.querySelector('.teaser-signup_form-wrap') || form;
       var input = form.querySelector('input[type="email"]');
       var listEl = sec.querySelector('.teaser-signup_klaviyo');
