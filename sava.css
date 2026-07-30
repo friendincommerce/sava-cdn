@@ -3980,3 +3980,27 @@ body:has(section.sv-trust-points) {
 	.shopify-policy__body .rte td,
 	.shopify-policy__body .rte th { padding: 0.5rem; }
 }
+
+/* Rich-text tables (cookie-policy page, blog articles) — mirrors the
+   policy-page table styling above for pages using the Default template */
+.text-rich-text table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.5rem 0;
+	font-size: 0.875rem;
+	line-height: 1.5;
+}
+.text-rich-text td,
+.text-rich-text th {
+	border: 1px solid #EEEEED;
+	padding: 0.75rem;
+	vertical-align: top;
+	text-align: left;
+}
+.text-rich-text th,
+.text-rich-text tr:first-child td { background-color: #F8F8F8; font-weight: 500; }
+@media (max-width: 767px) {
+	.text-rich-text table { font-size: 0.8125rem; }
+	.text-rich-text td,
+	.text-rich-text th { padding: 0.5rem; }
+}
