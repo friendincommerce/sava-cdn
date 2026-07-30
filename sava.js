@@ -1529,3 +1529,43 @@
   document.addEventListener('shopify:section:load', init);
   document.addEventListener('shopify:section:select', function(){ paintFounder(); });
 })();
+
+
+/* ===== SV Rewards Banner marquee (2026-07-28) =====
+   The Webflow section holds ONE item (editable text + icon). This helper
+   clones it to fill a seamless loop and scrolls the track. Speed (px/s)
+   comes from the data-sv-marquee attribute value. Respects
+   prefers-reduced-motion by leaving the banner static. */
+(function(){
+  function initMarquee(){
+    var tracks = document.querySelectorAll('[data-sv-marquee]');
+    for (var t = 0; t < tracks.length; t++) (function(track){
+      if (track.dataset.svMarqueeBound) return;
+      var item = track.firstElementChild;
+      if (!item || !item.offsetWidth) return;
+      track.dataset.svMarqueeBound = '1';
+      var setWidth = item.offsetWidth;
+      var clones = Math.max(1, Math.ceil(window.innerWidth / setWidth));
+      for (var i = 0; i < clones; i++) track.appendChild(item.cloneNode(true));
+      var setCount = clones + 1;
+      for (var j = 0; j < setCount; j++) track.appendChild(track.children[j].cloneNode(true));
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var loopWidth = 0;
+      for (var k = 0; k < setCount; k++) loopWidth += track.children[k].offsetWidth;
+      var speed = parseFloat(track.getAttribute('data-sv-marquee')) || 60;
+      var pos = 0, last = performance.now();
+      function tick(now){
+        var dt = (now - last) / 1000; last = now;
+        pos -= speed * dt;
+        if (-pos >= loopWidth) pos += loopWidth;
+        track.style.transform = 'translateX(' + pos + 'px)';
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    })(tracks[t]);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initMarquee);
+  else initMarquee();
+  window.addEventListener('load', initMarquee);
+  document.addEventListener('shopify:section:load', initMarquee);
+})();
