@@ -3859,3 +3859,124 @@ body:has(section.sv-trust-points) {
 	.rewards-benefits_icon { width: 19px; height: 19px; }
 	.rewards-benefits_highlight { left: 20.4%; width: 26.4%; }
 }
+
+
+/* ===== SV Rewards Banner + SV Wellness Journey (2026-07-28) ===== */
+.wellness-journey_button:hover { background-color: #262524; }
+.wellness-journey_button:hover .wellness-journey_button-label { color: #FFFFFF; }
+
+@media (max-width: 767px) {
+	.section_rewards-banner { padding-top: 16px; padding-bottom: 16px; }
+	.rewards-banner_text { font-size: 22px; line-height: 26px; }
+	.rewards-banner_icon { width: 20px; height: 20px; }
+	.rewards-banner_item { column-gap: 16px; padding-right: 16px; }
+
+	/* Wellness: content stacks above the photos; photos keep a nod to the
+	   desktop overlap */
+	.wellness-journey_content { position: static; width: 100%; margin-bottom: 32px; }
+	.wellness-journey_heading { font-size: 36px; line-height: 42px; }
+	.wellness-journey_images { padding-bottom: 0; }
+	.wellness-journey_photo-main { width: 100%; border-radius: 12px; }
+	.wellness-journey_photo-secondary {
+		position: relative; z-index: 2;
+		width: 78%; margin-top: -48px;
+		border-radius: 12px;
+	}
+}
+
+
+/* ============================================================
+   POLICY PAGES (/policies/*) — 2026-07-29
+   Shopify does NOT allow a theme template override for these
+   URLs; it always injects its own .shopify-policy__* markup
+   (styled by Shopify's policy-*.css) inside the theme layout.
+   So we restyle that default markup here to match SAVA content
+   pages. Conversion-proof: rides sava.css, no theme file needed.
+   ============================================================ */
+/* !important on layout props: Shopify's own policy-*.css arrives via
+   content_for_header AFTER the sava.css pin, so ties would go to it. */
+.shopify-policy__container {
+	width: auto !important;
+	max-width: 47rem !important;    /* matches the 747px article rich-text column */
+	margin: 0 auto !important;
+	padding: 4.5rem 1.25rem 6rem !important;
+	background-color: transparent;
+}
+.shopify-policy__title {
+	text-align: left !important;
+	padding: 0 0 2rem !important;
+	margin: 0 !important;
+}
+.shopify-policy__title h1 {
+	font-family: Gelica, Georgia, serif;
+	font-weight: 300;
+	font-size: 3rem;
+	line-height: 1.1;
+	color: #262524;
+	margin: 0;
+	text-transform: none;
+}
+.shopify-policy__body .rte {
+	font-family: Gibson, sans-serif;
+	font-weight: 300;
+	font-size: 1rem;
+	line-height: 1.65;
+	color: #262524;
+}
+.shopify-policy__body .rte p { margin: 0 0 1rem; }
+.shopify-policy__body .rte h2,
+.shopify-policy__body .rte h3 {
+	font-family: Gelica, Georgia, serif;
+	font-weight: 300;
+	font-size: 1.75rem;
+	line-height: 1.25;
+	color: #262524;
+	margin: 2.5rem 0 1rem;
+}
+.shopify-policy__body .rte h4 {
+	font-family: Gibson, sans-serif;
+	font-weight: 500;
+	font-size: 1.125rem;
+	line-height: 1.35;
+	color: #262524;
+	margin: 2rem 0 0.75rem;
+}
+.shopify-policy__body .rte ul,
+.shopify-policy__body .rte ol {
+	margin: 0 0 1rem;
+	padding-left: 1.5rem;
+}
+.shopify-policy__body .rte li { margin-bottom: 0.5rem; }
+.shopify-policy__body .rte li p { margin: 0; }
+.shopify-policy__body .rte a {
+	color: #262524;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+	word-break: break-word;
+}
+.shopify-policy__body .rte a:hover { opacity: 0.7; }
+/* CCPA categories table (and any other pasted tables) */
+.shopify-policy__body .rte table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.5rem 0;
+	font-size: 0.875rem;
+	line-height: 1.5;
+}
+.shopify-policy__body .rte td,
+.shopify-policy__body .rte th {
+	border: 1px solid #EEEEED;
+	padding: 0.75rem;
+	vertical-align: top;
+	text-align: left;
+}
+.shopify-policy__body .rte tr:first-child td { background-color: #F8F8F8; font-weight: 500; }
+@media (max-width: 767px) {
+	.shopify-policy__container { padding: 3rem 1.25rem 4rem; }
+	.shopify-policy__title h1 { font-size: 2.25rem; }
+	.shopify-policy__body .rte h2,
+	.shopify-policy__body .rte h3 { font-size: 1.5rem; }
+	.shopify-policy__body .rte table { font-size: 0.8125rem; }
+	.shopify-policy__body .rte td,
+	.shopify-policy__body .rte th { padding: 0.5rem; }
+}
