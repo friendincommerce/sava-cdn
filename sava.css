@@ -3865,6 +3865,20 @@ body:has(section.sv-trust-points) {
 .wellness-journey_button:hover { background-color: #262524; }
 .wellness-journey_button:hover .wellness-journey_button-label { color: #FFFFFF; }
 
+/* Enforce the Figma crops (main 846x564 = 3:2, secondary 582x369) so any
+   uploaded photo keeps the design's proportions instead of its natural
+   height — without this the images balloon to their intrinsic aspect. */
+.wellness-journey_photo-main {
+	aspect-ratio: 846 / 564;
+	height: auto;
+	object-fit: cover;
+}
+.wellness-journey_photo-secondary {
+	aspect-ratio: 582 / 369;
+	height: auto;
+	object-fit: cover;
+}
+
 @media (max-width: 767px) {
 	.section_rewards-banner { padding-top: 16px; padding-bottom: 16px; }
 	.rewards-banner_text { font-size: 22px; line-height: 26px; }
