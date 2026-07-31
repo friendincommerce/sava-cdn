@@ -3958,19 +3958,21 @@ body:has(section.sv-trust-points) {
 
 
 /* ===== Individual Quiz Page template (2026-07-31) =====
-   Quiz subpages (Shopify template "individual-quiz-page"). Scoped by the
-   template's unique section id — the class (.section_default) is shared
-   with every other Default-template page, the id is not. If this ever
-   stops applying, the template id changed (e.g. theme was duplicated):
-   re-grab the id from any quiz subpage's main section element.
+   Quiz subpages (Shopify template "individual-quiz-page", template id
+   28274448466214 — NOT 28062501470502, that's the Default page template;
+   the quiz page was still on Default when the id was first grabbed).
+   Scoped by the template's unique section id — the class
+   (.section_default) is shared with every other Default-template page,
+   the id is not. If this ever stops applying, re-grab the id from any
+   quiz subpage's main section element.
    Gradient = the exact .sv-quiz-hero recipe (soft-white base, transparent
    -> peach fade over the bottom half of the section). */
-#shopify-section-template--28062501470502__default {
+#shopify-section-template--28274448466214__default {
 	background:
 		linear-gradient(180deg, rgba(248, 248, 248, 0) 49.52%, #F6D7B9 100%),
 		#F8F8F8;
 }
-#shopify-section-template--28062501470502__default .heading-style-h1 {
+#shopify-section-template--28274448466214__default .heading-style-h1 {
 	text-align: center;
 }
 
