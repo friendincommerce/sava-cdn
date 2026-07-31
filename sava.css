@@ -848,6 +848,10 @@
   margin: 0;
   white-space: nowrap;
 }
+/* Shop All column headings are now links (2026-07-31) — kill the anchor
+   underline, add a hover affordance */
+a.sava-mega-menu_column-heading { text-decoration: none; }
+a.sava-mega-menu_column-heading:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 .sava-mega-menu_column-links {
   display: flex;
