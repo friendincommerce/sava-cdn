@@ -2432,11 +2432,15 @@ body:has(section.sv-trust-points) {
 .product-header_product-details > [li-block="Product Name"] {
   margin-bottom: 16px;
 }
+/* ⚙️ SPACING KNOBS (client request 2026-07-31: zeroed — was 16px / 24px).
+   If the client wants "a little" breathing room back, just raise these
+   two numbers; they are the ONLY thing controlling the gap below the
+   Nutritional Function line and the Description block. */
 .product-header_product-details > [li-block="Nutritional Function"] {
-  margin-bottom: 16px;
+  margin-bottom: 0;
 }
 .product-header_product-details > [li-block="Description"] {
-  margin-bottom: 24px;
+  margin-bottom: 0;
 }
 .product-header_product-details > [li-block="Product Price"] {
   margin-bottom: 12px;
