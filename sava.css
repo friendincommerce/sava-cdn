@@ -355,7 +355,11 @@
 	   holds a single link, so a small fixed max-height covers it and the
 	   compiled .35s max-height transition animates it */
 	.sava-footer_col.is-open .sava-footer_col-list { max-height: 48px; }
-	.sava-footer_col-link { padding: 7px 0; }
+	/* ⚙️ link spacing knob: this padding is the gap between children links */
+	.sava-footer_col-link { padding: 4px 0; }
+
+	/* children links centered (client-approved 2026-07-31) */
+	.sava-footer_col-link { text-align: center; }
 
 	/* "Connect with Us" was hugging the right edge in the stacked layout */
 	.sava-footer_connect-label { width: 100%; text-align: center; }
