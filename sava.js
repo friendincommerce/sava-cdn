@@ -1603,6 +1603,39 @@
 })();
 
 
+/* ===== Footer mobile accordion (2026-07-31) =====
+   The original Webflow embed script was stripped at conversion, and the
+   Webflow-era logic assumed ONE panel per column anyway — Liquiflow's
+   li-for compiles ONE PANEL PER LINK (N sibling
+   [data-sava-accordion-panel] divs per column). So: toggle .is-open on
+   the whole column + aria-expanded on the trigger (drives the chevron
+   CSS); the open/collapsed heights live in sava.css inside the mobile
+   media query, leaving desktop completely untouched. */
+(function(){
+  function bindFooterAccordions(){
+    var cols = document.querySelectorAll('[data-sava-accordion]');
+    for (var i = 0; i < cols.length; i++) (function(col){
+      if (col.dataset.svAccBound) return;
+      var trigger = col.querySelector('[data-sava-accordion-trigger]');
+      if (!trigger) return;
+      col.dataset.svAccBound = '1';
+      function toggle(){
+        if (!window.matchMedia('(max-width: 767px)').matches) return;
+        var open = col.classList.toggle('is-open');
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      trigger.addEventListener('click', toggle);
+      trigger.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
+    })(cols[i]);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindFooterAccordions);
+  else bindFooterAccordions();
+  document.addEventListener('shopify:section:load', bindFooterAccordions);
+})();
+
+
 /* ===== Generic section color painter (2026-07-30) =====
    Reusable Theme Editor color options without li-attribute hacks:
    a hidden element (.sv-paint-hex) carries
