@@ -3935,6 +3935,24 @@ body:has(section.sv-trust-points) {
 	.sv-cta-5050_padding { padding-top: 2rem; padding-bottom: 2rem; }
 }
 
+
+/* ===== Individual Quiz Page template (2026-07-31) =====
+   Quiz subpages (Shopify template "individual-quiz-page"). Scoped by the
+   template's unique section id — the class (.section_default) is shared
+   with every other Default-template page, the id is not. If this ever
+   stops applying, the template id changed (e.g. theme was duplicated):
+   re-grab the id from any quiz subpage's main section element.
+   Gradient = the exact .sv-quiz-hero recipe (soft-white base, transparent
+   -> peach fade over the bottom half of the section). */
+#shopify-section-template--28062501470502__default {
+	background:
+		linear-gradient(180deg, rgba(248, 248, 248, 0) 49.52%, #F6D7B9 100%),
+		#F8F8F8;
+}
+#shopify-section-template--28062501470502__default .heading-style-h1 {
+	text-align: center;
+}
+
 @media (max-width: 767px) {
 	.section_rewards-banner { padding-top: 16px; padding-bottom: 16px; }
 	.rewards-banner_text { font-size: 22px; line-height: 26px; }
