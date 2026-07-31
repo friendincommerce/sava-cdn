@@ -346,6 +346,19 @@
 @media (max-width: 767px) {
 	.sava-footer_col-heading::after { display: inline-block; }
 	.sava-footer_col-heading[aria-expanded="true"]::after { transform: rotate(-135deg); }
+
+	/* Footer accordion (2026-07-31) — li-for compiles ONE panel div per
+	   link, so a collapsed column holds N zero-height panels; the column's
+	   16px flex-gap between them was the giant phantom spacing. */
+	.sava-footer_col { gap: 0; }
+	/* open state (sava.js toggles .is-open on the column): each panel
+	   holds a single link, so a small fixed max-height covers it and the
+	   compiled .35s max-height transition animates it */
+	.sava-footer_col.is-open .sava-footer_col-list { max-height: 48px; }
+	.sava-footer_col-link { padding: 7px 0; }
+
+	/* "Connect with Us" was hugging the right edge in the stacked layout */
+	.sava-footer_connect-label { width: 100%; text-align: center; }
 }
 
 /* ===== SAVA Rewards + Promotional Banner ===== */
