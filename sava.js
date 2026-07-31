@@ -1569,3 +1569,35 @@
   window.addEventListener('load', initMarquee);
   document.addEventListener('shopify:section:load', initMarquee);
 })();
+
+
+/* ===== SV Carousel Hero — high-res srcset upgrade (2026-07-30) =====
+   Liquiflow's image_tag caps the hero slides at width=1000 (largest
+   srcset candidate, no sizes attr), which upscales blurry on full-bleed
+   desktop and retina. Rebuild each slide's srcset from the base CDN URL
+   with real width candidates + sizes=100vw. Shopify's CDN generates any
+   requested width on demand and never upscales past the original upload,
+   so oversized candidates are safe. */
+(function(){
+  var WIDTHS = [832, 1200, 1600, 2000, 2600, 3200];
+  function upgradeHeroImages(){
+    var imgs = document.querySelectorAll('[id*="sv_carousel_hero"] img');
+    for (var i = 0; i < imgs.length; i++) (function(img){
+      if (img.dataset.svHiresDone) return;
+      var src = img.getAttribute('src') || '';
+      var base = src.split('&width=')[0].split('?width=')[0];
+      if (!/\/cdn\/shop\//.test(base)) return;
+      img.dataset.svHiresDone = '1';
+      var sep = base.indexOf('?') === -1 ? '?' : '&';
+      var set = [];
+      for (var w = 0; w < WIDTHS.length; w++) set.push(base + sep + 'width=' + WIDTHS[w] + ' ' + WIDTHS[w] + 'w');
+      img.setAttribute('srcset', set.join(', '));
+      img.setAttribute('sizes', '100vw');
+      img.setAttribute('src', base + sep + 'width=2000');
+    })(imgs[i]);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', upgradeHeroImages);
+  else upgradeHeroImages();
+  window.addEventListener('load', upgradeHeroImages);
+  document.addEventListener('shopify:section:load', upgradeHeroImages);
+})();
