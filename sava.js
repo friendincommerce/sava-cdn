@@ -1601,3 +1601,38 @@
   window.addEventListener('load', upgradeHeroImages);
   document.addEventListener('shopify:section:load', upgradeHeroImages);
 })();
+
+
+/* ===== Generic section color painter (2026-07-30) =====
+   Reusable Theme Editor color options without li-attribute hacks:
+   a hidden element (.sv-paint-hex) carries
+     data-sv-paint="<selector>|<css-property>"
+   and its text content is the color value (bound at conversion via
+   li-object to a color setting declared in a li-settings:custom embed).
+   The painter applies the color to every selector match within the same
+   Shopify section. First used on SV Secondary CTA (bg/eyebrow/
+   description/button border/button label); add settings + hidden
+   elements in Webflow to extend — no new JS needed. */
+(function(){
+  function applyPaint(){
+    var nodes = document.querySelectorAll('[data-sv-paint]');
+    for (var i = 0; i < nodes.length; i++) (function(node){
+      var spec = node.getAttribute('data-sv-paint') || '';
+      var idx = spec.lastIndexOf('|');
+      if (idx < 1) return;
+      var selector = spec.slice(0, idx);
+      var prop = spec.slice(idx + 1);
+      var value = (node.textContent || '').trim();
+      if (!value || value.indexOf('{{') !== -1) return;
+      var scope = node.closest('.shopify-section') || node.closest('section') || document;
+      var targets = scope.querySelectorAll(selector);
+      if (scope !== document && scope.matches && scope.matches(selector)) targets = [scope].concat([].slice.call(targets));
+      for (var t = 0; t < targets.length; t++) targets[t].style.setProperty(prop, value, 'important');
+    })(nodes[i]);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', applyPaint);
+  else applyPaint();
+  window.addEventListener('load', applyPaint);
+  document.addEventListener('shopify:section:load', applyPaint);
+  document.addEventListener('shopify:section:select', applyPaint);
+})();
