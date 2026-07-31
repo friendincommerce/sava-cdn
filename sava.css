@@ -3719,7 +3719,7 @@ body:has(section.sv-trust-points) {
    1 column on phones. */
 .partner-perks_grid{ grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
 @media (max-width: 1149px){ .partner-perks_grid{ grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
-@media (max-width: 479px){ .partner-perks_grid{ grid-template-columns: minmax(0, 1fr) !important; } }
+@media (max-width: 580px){ .partner-perks_grid{ grid-template-columns: minmax(0, 1fr) !important; } } /* was 479 — 2-col card titles overflow between 480-580 */
 
 /* Equal-height perk cards: the grid stretches its children (the classless li-block
    wrappers), but the card inside doesn't fill them. Flex the wrapper so the card
@@ -3912,6 +3912,23 @@ body:has(section.sv-trust-points) {
 }
 @media (max-width: 479px) {
 	.wellness-journey_heading { font-size: 30px; line-height: 36px; }
+}
+
+
+/* ===== SV CTA 50-50 (2026-07-30) — responsive =====
+   Judgment build (no Figma): desktop = 50/50 grid, content left / image
+   right. Below 991 the grid stacks with centered content first (mirrors
+   Secondary CTA's centered-mobile treatment + logo swap). */
+@media (max-width: 991px) {
+	.sv-cta-5050_grid { grid-template-columns: 1fr; }
+	.sv-cta-5050_content { max-width: 100%; align-items: center; text-align: center; }
+	.sv-cta-5050_logo { display: none; }
+	.sv-cta-5050_logo-mobile { display: block; }
+	.sv-cta-5050_image { min-height: 0; height: auto; aspect-ratio: 4 / 3; }
+}
+@media (max-width: 767px) {
+	/* parity with padding-section-small's own small-breakpoint value */
+	.sv-cta-5050_padding { padding-top: 2rem; padding-bottom: 2rem; }
 }
 
 @media (max-width: 767px) {
