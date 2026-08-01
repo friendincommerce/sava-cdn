@@ -1636,6 +1636,26 @@
 })();
 
 
+/* ===== Yotpo action delegation (2026-07-31) =====
+   Links carrying data-sv-yotpo-delegate (e.g. SV Wellness Journey's
+   logged-in "Complete program signup" button) forward their click to
+   the Yotpo hero widget's primary action button, which always shows
+   the correct action for the current customer state — so Yotpo's own
+   enrollment JS runs. If the widget isn't found on the page, no
+   preventDefault happens and the link's normal href is the fallback. */
+(function(){
+  document.addEventListener('click', function(e){
+    var link = e.target && e.target.closest ? e.target.closest('[data-sv-yotpo-delegate]') : null;
+    if (!link) return;
+    var btn = document.querySelector('.yotpo-text-on-background .yotpo-widgets-action-button.yotpo-filled-button');
+    if (btn) {
+      e.preventDefault();
+      btn.click();
+    }
+  });
+})();
+
+
 /* ===== Generic section color painter (2026-07-30) =====
    Reusable Theme Editor color options without li-attribute hacks:
    a hidden element (.sv-paint-hex) carries
