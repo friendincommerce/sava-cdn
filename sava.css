@@ -3876,8 +3876,12 @@ body:has(section.sv-trust-points) {
 	.rewards-benefits_head-row,
 	.rewards-benefits_row { grid-template-columns: 20.4% 26.4% 1fr; }
 	.rewards-benefits_head-row { min-height: 70px; padding-bottom: 8px; }
-	.rewards-benefits_col-label { font-size: 11px; letter-spacing: 1.5px; }
-	.rewards-benefits_col-members { font-size: 20px; line-height: 25px; }
+	.rewards-benefits_col-label { font-size: 11px; letter-spacing: 1px; }
+	.rewards-benefits_col-members { font-size: 19px; line-height: 24px; }
+	/* two-line headers (2026-07-31): keep each header inside its own
+	   column — the old single-line strings overlapped at phone widths */
+	.rewards-benefits_col-head { padding: 0 3px; }
+	.rewards-benefits_col-subline { font-size: 9px; letter-spacing: 0.8px; line-height: 1.5; margin-top: 4px; }
 	.rewards-benefits_row { min-height: 53px; }
 	.rewards-benefits_value { font-size: 12px; letter-spacing: 1.5px; }
 	.rewards-benefits_benefit { font-size: 15px; line-height: 19px; padding-left: 14px; }
