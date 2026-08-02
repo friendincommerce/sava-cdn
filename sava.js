@@ -1636,6 +1636,41 @@
 })();
 
 
+/* ===== SV Redeem Products carousel (2026-07-31) =====
+   Static-card Swiper modeled on Best Sellers (minus tags/ATC). The
+   section uses its OWN class names (no shared swiper-wrapper/swiper-
+   slide combos — those can't be applied via the API), so Swiper is
+   pointed at them via its class config. Guards double-init; rebinds
+   for the Theme Editor. */
+(function(){
+  function initRedeemCarousels(){
+    if (typeof Swiper === 'undefined') return;
+    var els = document.querySelectorAll('.sv-redeem-products_carousel');
+    for (var i = 0; i < els.length; i++) (function(carousel){
+      if (carousel.dataset.svSwiperBound) return;
+      var swiperEl = carousel.querySelector('.sv-redeem-products_swiper');
+      if (!swiperEl) return;
+      carousel.dataset.svSwiperBound = '1';
+      new Swiper(swiperEl, {
+        wrapperClass: 'sv-redeem-products_swiper-wrapper',
+        slideClass: 'sv-redeem-products_slide',
+        slidesPerView: 'auto',
+        spaceBetween: 24,
+        followFinger: true,
+        navigation: {
+          prevEl: carousel.querySelector('.sv-redeem-products_btn-prev'),
+          nextEl: carousel.querySelector('.sv-redeem-products_btn-next')
+        }
+      });
+    })(els[i]);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initRedeemCarousels);
+  else initRedeemCarousels();
+  window.addEventListener('load', initRedeemCarousels);
+  document.addEventListener('shopify:section:load', initRedeemCarousels);
+})();
+
+
 /* ===== Yotpo action delegation (2026-07-31) =====
    Links carrying data-sv-yotpo-delegate (e.g. SV Wellness Journey's
    logged-in "Complete program signup" button) forward their click to
