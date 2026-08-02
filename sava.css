@@ -3890,6 +3890,24 @@ body:has(section.sv-trust-points) {
 }
 
 
+/* ===== SV Redeem Products (2026-07-31) — responsive =====
+   Desktop: side arrows, 400px cards. Mobile per Figma: smaller cards,
+   arrows centered BELOW the carousel (repositioned via bottom offsets
+   since they're absolute siblings, not wrapped in a nav row). */
+@media (max-width: 991px) {
+	.sv-redeem-products_slide { width: 320px; }
+	.sv-redeem-products_heading { font-size: 40px; }
+}
+@media (max-width: 767px) {
+	.sv-redeem-products_heading { font-size: 36px; line-height: 40px; margin-bottom: 28px; }
+	.sv-redeem-products_slide { width: 300px; }
+	.sv-redeem-products_title { font-size: 22px; margin: 20px 12px 10px 12px; }
+	.sv-redeem-products_carousel { padding-bottom: 88px; }
+	.sv-redeem-products_btn-prev { top: auto; bottom: 0; left: calc(50% - 60px); transform: none; }
+	.sv-redeem-products_btn-next { top: auto; bottom: 0; right: calc(50% - 60px); transform: none; }
+}
+
+
 /* ===== SV Rewards Banner + SV Wellness Journey (2026-07-28) ===== */
 .wellness-journey_button:hover { background-color: #262524; }
 .wellness-journey_button:hover .wellness-journey_button-label { color: #FFFFFF; }
