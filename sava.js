@@ -1636,6 +1636,32 @@
 })();
 
 
+/* ===== SAVA Rewards cards: linkless = not clickable (2026-08-02) =====
+   A card with no URL set compiles as <a href="">, which "navigates" to
+   the current page (jump to top). Neutralize those: no navigation,
+   default cursor, out of the tab order — but hover styling still works
+   (deliberately NOT pointer-events:none, which would kill :hover). */
+(function(){
+  function neutralizeLinklessCards(){
+    var cards = document.querySelectorAll('a.sava-rewards_card');
+    for (var i = 0; i < cards.length; i++) {
+      var a = cards[i];
+      if (a.dataset.svLinkless) continue;
+      var href = a.getAttribute('href');
+      if (href && href !== '#') continue;
+      a.dataset.svLinkless = '1';
+      a.style.cursor = 'default';
+      a.setAttribute('tabindex', '-1');
+      a.setAttribute('aria-disabled', 'true');
+      a.addEventListener('click', function(e){ e.preventDefault(); });
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', neutralizeLinklessCards);
+  else neutralizeLinklessCards();
+  document.addEventListener('shopify:section:load', neutralizeLinklessCards);
+})();
+
+
 /* ===== SV Redeem Products carousel (2026-07-31) =====
    Static-card Swiper modeled on Best Sellers (minus tags/ATC). The
    section uses its OWN class names (no shared swiper-wrapper/swiper-
