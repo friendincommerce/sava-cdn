@@ -3890,6 +3890,17 @@ body:has(section.sv-trust-points) {
 }
 
 
+/* ===== About Us hero — pin photo crop to the TOP (2026-08-02) =====
+   The Webflow class sets object-position: center right on carousel-hero
+   slide images, which crops heads off on the About page. Scoped by the
+   About template's section instance id (template--28062501339430) so
+   the homepage hero keeps its own framing. */
+#shopify-section-template--28062501339430__sv_carousel_hero .about-hero_image,
+#shopify-section-template--28062501339430__sv_carousel_hero .about-hero_mobile-image {
+	object-position: 50% 0% !important;
+}
+
+
 /* ===== SV Redeem Products (2026-07-31) — responsive =====
    Desktop: side arrows, 400px cards. Mobile per Figma: smaller cards,
    arrows centered BELOW the carousel (repositioned via bottom offsets
