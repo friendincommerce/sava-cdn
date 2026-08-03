@@ -2844,6 +2844,19 @@ body:has(section.sv-trust-points) {
    Reflows the Liquify Pro product gallery (two Swipers). Paired with a swiper.update()
    nudge in sava.js so the main image recomputes its width for the narrower column.
    Desktop only — mobile gallery is left untouched. */
+/* Mobile/tablet gallery (<992px) — same fix as the desktop block below:
+   the Webflow base gives the image a FIXED height (40rem; 22rem <=479px)
+   with object-fit:cover, which crops the ~square product photos top and
+   bottom on phones. Square aspect box scaling with width = no crop, no
+   grey letterbox. (2026-08-03) */
+@media (max-width: 991px){
+  .product-header_gallery-image{
+    object-fit: cover !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1 !important;
+  }
+}
+
 @media (min-width: 992px){
   /* Gallery container: flex row-reverse (thumbnail rail on the left, main image on the right).
      KEEP position:sticky from the Webflow base — overriding it to `relative` made the base
