@@ -1636,6 +1636,37 @@
 })();
 
 
+/* ===== Blog card images — hi-res srcset upgrade (2026-08-03) =====
+   Same image_url width-cap issue as the Carousel Hero: blog collection
+   cards compile at width:450 with no srcset, which upscales blurry at
+   the card's rendered size (~850 CSS px, 2x on retina). Rebuild the
+   srcset from the base CDN URL; Shopify's CDN generates widths on
+   demand and never upscales past the original upload. */
+(function(){
+  var WIDTHS = [450, 700, 900, 1200, 1600];
+  function upgradeBlogImages(){
+    var imgs = document.querySelectorAll('img.blog_img');
+    for (var i = 0; i < imgs.length; i++) (function(img){
+      if (img.dataset.svHiresDone) return;
+      var src = img.getAttribute('src') || '';
+      var base = src.split('&width=')[0].split('?width=')[0];
+      if (!/\/cdn\/shop\//.test(base)) return;
+      img.dataset.svHiresDone = '1';
+      var sep = base.indexOf('?') === -1 ? '?' : '&';
+      var set = [];
+      for (var w = 0; w < WIDTHS.length; w++) set.push(base + sep + 'width=' + WIDTHS[w] + ' ' + WIDTHS[w] + 'w');
+      img.setAttribute('srcset', set.join(', '));
+      img.setAttribute('sizes', '(max-width: 767px) 92vw, 46vw');
+      img.setAttribute('src', base + sep + 'width=1200');
+    })(imgs[i]);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', upgradeBlogImages);
+  else upgradeBlogImages();
+  window.addEventListener('load', upgradeBlogImages);
+  document.addEventListener('shopify:section:load', upgradeBlogImages);
+})();
+
+
 /* ===== SAVA Rewards cards: linkless = not clickable (2026-08-02) =====
    A card with no URL set compiles as <a href="">, which "navigates" to
    the current page (jump to top). Neutralize those: no navigation,
