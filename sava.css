@@ -3883,6 +3883,17 @@ body:has(section.sv-trust-points) {
    kill the divider under the final row. */
 .rewards-benefits_rowwrap:last-child .rewards-benefits_row { border-bottom: none; }
 
+/* Community header matches Inner Circle (Nina, 2026-08-03): same Gelica
+   serif as .rewards-benefits_col-members, replacing the mono caps look */
+.rewards-benefits_col-label {
+	font-family: Gelica, serif;
+	font-size: 24px;
+	font-weight: 300;
+	line-height: 30px;
+	letter-spacing: 0;
+	text-transform: none;
+}
+
 @media (max-width: 767px) {
 	.rewards-benefits_heading { font-size: 36px; line-height: 40px; margin-bottom: 32px; }
 	/* Full-bleed card per the mobile Figma: cancel padding-global, square the sides */
@@ -3891,10 +3902,12 @@ body:has(section.sv-trust-points) {
 		margin-left: -1.25rem; margin-right: -1.25rem;
 		border-left: none; border-right: none; border-radius: 0;
 	}
+	/* equal thirds so the serif Community header fits (2026-08-03);
+	   the highlight band below tracks these same column lines */
 	.rewards-benefits_head-row,
-	.rewards-benefits_row { grid-template-columns: 20.4% 26.4% 1fr; }
+	.rewards-benefits_row { grid-template-columns: 1fr 1fr 1fr; }
 	.rewards-benefits_head-row { min-height: 70px; padding-bottom: 8px; }
-	.rewards-benefits_col-label { font-size: 11px; letter-spacing: 1px; }
+	.rewards-benefits_col-label,
 	.rewards-benefits_col-members { font-size: 19px; line-height: 24px; }
 	/* two-line headers (2026-07-31): keep each header inside its own
 	   column — the old single-line strings overlapped at phone widths */
@@ -3904,7 +3917,7 @@ body:has(section.sv-trust-points) {
 	.rewards-benefits_value { font-size: 12px; letter-spacing: 1.5px; }
 	.rewards-benefits_benefit { font-size: 15px; line-height: 19px; padding-left: 14px; }
 	.rewards-benefits_icon { width: 19px; height: 19px; }
-	.rewards-benefits_highlight { left: 20.4%; width: 26.4%; }
+	.rewards-benefits_highlight { left: 33.333%; width: 33.333%; }
 }
 
 
