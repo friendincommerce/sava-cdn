@@ -2019,6 +2019,11 @@ main.main-wrapper:has(section.section_filter) {
 	inset: auto !important;
 	order: -1;
 	margin: 0 0 10px 0 !important;
+	/* Reserve one pill-height even when a product has NO tag, so
+	   tagless cards keep the same image position as tagged neighbors
+	   (min-height >= pill height → every card reserves the same band;
+	   pill is ~21px at <=991, ~18px at <=767) */
+	min-height: 22px;
   }
   /* the image-wrap's top padding existed only to make room for the
 	 absolute tags — no longer needed (overrides the 48px/36px patches) */
