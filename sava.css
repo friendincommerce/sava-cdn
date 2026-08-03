@@ -3890,6 +3890,12 @@ body:has(section.sv-trust-points) {
 }
 
 
+/* SV Carousel Hero eyebrow only — bumped 14px -> 20px (client, 2026-08-03).
+   .about-hero_eyebrow is exclusive to this section; all other sections'
+   eyebrows use their own classes and are untouched. */
+.about-hero_eyebrow { font-size: 20px; }
+
+
 /* ===== About Us hero — pin photo crop to the TOP (2026-08-02) =====
    The Webflow class sets object-position: center right on carousel-hero
    slide images, which crops heads off on the About page. Scoped by the
