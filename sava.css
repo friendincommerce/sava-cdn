@@ -3938,6 +3938,23 @@ body:has(section.sv-trust-points) {
 }
 
 
+/* ===== SV Announcement Bar — state + polish =====
+   Slides are opacity:0 in the Webflow base; .is-on shows the active
+   one. The :not(--js) fallback keeps the first slide visible before
+   sava.js binds, so the bar never flashes empty. */
+.sv-announce:not(.sv-announce--js) .sv-announce_slide:first-child { opacity: 1; }
+.sv-announce_slide.is-on { opacity: 1; }
+.sv-announce_nav-prev:hover,
+.sv-announce_nav-next:hover { color: #F8F8F8; }
+.sv-announce.is-single .sv-announce_nav-prev,
+.sv-announce.is-single .sv-announce_nav-next { display: none; }
+a.sv-announce_link.is-linkless { cursor: default; }
+@media (max-width: 767px) {
+	.sv-announce_text { font-size: 12px; letter-spacing: 0.5px; }
+	.sv-announce_slide { padding: 0 44px; }
+}
+
+
 /* ===== SV Redeem Products (2026-07-31) — responsive =====
    Desktop: side arrows, 400px cards. Mobile per Figma: smaller cards,
    arrows centered BELOW the carousel (repositioned via bottom offsets
