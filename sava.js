@@ -1636,6 +1636,59 @@
 })();
 
 
+/* ===== SV Announcement Bar rotator =====
+   One visible announcement = static bar, no timers. Two or more =
+   crossfade rotation at the merchant-set interval (hidden "Rotation
+   Speed Seconds" setting), with prev/next arrows. Announcements left
+   without a Link compile as href="" — those get preventDefault + a
+   default cursor so they don't fake-navigate. Rebinds for the Theme
+   Editor. */
+(function(){
+  function initAnnounceBars(){
+    var bars = document.querySelectorAll('.sv-announce');
+    for (var b = 0; b < bars.length; b++) (function(bar){
+      if (bar.dataset.svAnnBound) return;
+      bar.dataset.svAnnBound = '1';
+      bar.classList.add('sv-announce--js');
+      var slides = bar.querySelectorAll('.sv-announce_slide');
+      var links = bar.querySelectorAll('a.sv-announce_link');
+      for (var i = 0; i < links.length; i++) {
+        var href = links[i].getAttribute('href');
+        if (!href || href === '#') {
+          links[i].classList.add('is-linkless');
+          links[i].addEventListener('click', function(e){ e.preventDefault(); });
+        }
+      }
+      if (!slides.length) return;
+      var idx = 0;
+      slides[0].classList.add('is-on');
+      if (slides.length < 2) { bar.classList.add('is-single'); return; }
+      var speedEl = bar.querySelector('.sv-announce_speed');
+      var secs = speedEl ? parseFloat(speedEl.textContent) : 5;
+      if (!secs || secs < 2) secs = 5;
+      function go(n){
+        slides[idx].classList.remove('is-on');
+        idx = (n + slides.length) % slides.length;
+        slides[idx].classList.add('is-on');
+      }
+      var timer = setInterval(function(){ go(idx + 1); }, secs * 1000);
+      function manual(d){
+        clearInterval(timer);
+        go(idx + d);
+        timer = setInterval(function(){ go(idx + 1); }, secs * 1000);
+      }
+      var prev = bar.querySelector('[data-sv-ann-prev]');
+      var next = bar.querySelector('[data-sv-ann-next]');
+      if (prev) prev.addEventListener('click', function(e){ e.preventDefault(); manual(-1); });
+      if (next) next.addEventListener('click', function(e){ e.preventDefault(); manual(1); });
+    })(bars[b]);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initAnnounceBars);
+  else initAnnounceBars();
+  document.addEventListener('shopify:section:load', initAnnounceBars);
+})();
+
+
 /* ===== Blog card images — hi-res srcset upgrade (2026-08-03) =====
    Same image_url width-cap issue as the Carousel Hero: blog collection
    cards compile at width:450 with no srcset, which upscales blurry at
