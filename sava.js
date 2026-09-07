@@ -1636,6 +1636,39 @@
 })();
 
 
+/* ===== Secondary CTA background — hi-res srcset upgrade (2026-09-07) =====
+   Merchant-picked Background Images compile at image_url width:1000
+   (4th width-cap instance); object-fit:scale-down refuses to enlarge
+   past natural size, so the 1000px file (~321px tall) can't fill the
+   450px section. Rebuild the srcset up to 2000w from the CDN base.
+   Only /cdn/shop/files/ uploads are touched — the Webflow-baked
+   default asset (t/NN/assets, not resizable, already 1400w) is
+   deliberately skipped. ROLLBACK: re-pin css@390723e/js@f868538. */
+(function(){
+  var WIDTHS = [800, 1200, 1600, 2000];
+  function upgradeCtaImages(){
+    var imgs = document.querySelectorAll('img.sava-secondary-cta_image');
+    for (var i = 0; i < imgs.length; i++) (function(img){
+      if (img.dataset.svHiresDone) return;
+      var src = img.getAttribute('src') || '';
+      if (src.indexOf('/cdn/shop/files/') === -1) return;
+      img.dataset.svHiresDone = '1';
+      var base = src.split('&width=')[0].split('?width=')[0];
+      var sep = base.indexOf('?') === -1 ? '?' : '&';
+      var set = [];
+      for (var w = 0; w < WIDTHS.length; w++) set.push(base + sep + 'width=' + WIDTHS[w] + ' ' + WIDTHS[w] + 'w');
+      img.setAttribute('srcset', set.join(', '));
+      img.setAttribute('sizes', '100vw');
+      img.setAttribute('src', base + sep + 'width=1600');
+    })(imgs[i]);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', upgradeCtaImages);
+  else upgradeCtaImages();
+  window.addEventListener('load', upgradeCtaImages);
+  document.addEventListener('shopify:section:load', upgradeCtaImages);
+})();
+
+
 /* ===== Purdy's Pick badge colorway (2026-09-07) =====
    The product-badge metaobject renders label text only — no per-value
    class — so tag pills whose text is "Purdy's Pick" (case-insensitive,
