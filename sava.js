@@ -1636,6 +1636,30 @@
 })();
 
 
+/* ===== Purdy's Pick badge colorway (2026-09-07) =====
+   The product-badge metaobject renders label text only — no per-value
+   class — so tag pills whose text is "Purdy's Pick" (case-insensitive,
+   straight or curly apostrophe) get .is-purdys-pick for sava.css to
+   paint soft-black/lemon. Covers collection + carousel cards
+   (.sava-product-card_tag) and the product-header badge
+   (.sv-product-badge). */
+(function(){
+  function tagPurdysBadges(){
+    var els = document.querySelectorAll('.sava-product-card_tag, .sv-product-badge');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      var label = el.querySelector('.sv-product-badge_label') || el;
+      var t = (label.textContent || '').trim().toLowerCase().replace(/’/g, "'");
+      el.classList.toggle('is-purdys-pick', t === "purdy's pick");
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tagPurdysBadges);
+  else tagPurdysBadges();
+  window.addEventListener('load', tagPurdysBadges);
+  document.addEventListener('shopify:section:load', tagPurdysBadges);
+})();
+
+
 /* ===== SV Announcement Bar rotator =====
    One visible announcement = static bar, no timers. Two or more =
    crossfade rotation at the merchant-set interval (hidden "Rotation
