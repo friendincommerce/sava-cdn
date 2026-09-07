@@ -3938,6 +3938,17 @@ body:has(section.sv-trust-points) {
 }
 
 
+/* ===== Purdy's Pick badge colorway (2026-09-07) =====
+   Pills tagged .is-purdys-pick by sava.js (badge text match) flip from
+   the grey default to soft-black bg + light-lemon text. */
+.sava-product-card_tag.is-purdys-pick {
+	background-color: #262524 !important;
+	color: #EDE087 !important;
+}
+.sv-product-badge.is-purdys-pick { background-color: #262524; }
+.sv-product-badge.is-purdys-pick .sv-product-badge_label { color: #EDE087; }
+
+
 /* ===== SV Announcement Bar — state + polish =====
    Slides are opacity:0 in the Webflow base; .is-on shows the active
    one. The :not(--js) fallback keeps the first slide visible before
