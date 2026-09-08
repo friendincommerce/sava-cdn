@@ -1636,6 +1636,49 @@
 })();
 
 
+/* ===== Gift card recipient form (2026-09-08) =====
+   Shopify-native gift card gifting: the reserved properties[...] input
+   names do all the work server-side (card emailed to the recipient,
+   "Send on" schedulable up to 90 days out). This block: toggles the
+   fieldset open, disables the inputs while unchecked (disabled inputs
+   don't serialize, so normal purchases carry no empty gift props),
+   constrains the date range to today..+90d, and fills Shopify's hidden
+   timezone-offset property. */
+(function(){
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+  function isoDate(d){ return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function initGiftForms(){
+    var wraps = document.querySelectorAll('.sv-gift');
+    for (var i = 0; i < wraps.length; i++) (function(wrap){
+      if (wrap.dataset.svGiftBound) return;
+      wrap.dataset.svGiftBound = '1';
+      var cb = wrap.querySelector('[data-sv-gift-toggle]');
+      var fields = wrap.querySelector('[data-sv-gift-fields]');
+      if (!cb || !fields) return;
+      var inputs = fields.querySelectorAll('input, textarea');
+      var date = wrap.querySelector('[data-sv-gift-date]');
+      var offset = wrap.querySelector('[data-sv-gift-offset]');
+      if (date) {
+        var now = new Date();
+        date.setAttribute('min', isoDate(now));
+        date.setAttribute('max', isoDate(new Date(now.getTime() + 90 * 86400000)));
+      }
+      if (offset) offset.value = String(new Date().getTimezoneOffset());
+      function sync(){
+        var on = cb.checked;
+        fields.classList.toggle('is-open', on);
+        for (var j = 0; j < inputs.length; j++) inputs[j].disabled = !on;
+      }
+      cb.addEventListener('change', sync);
+      sync();
+    })(wraps[i]);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initGiftForms);
+  else initGiftForms();
+  document.addEventListener('shopify:section:load', initGiftForms);
+})();
+
+
 /* ===== Secondary CTA background — hi-res srcset upgrade (2026-09-07) =====
    Merchant-picked Background Images compile at image_url width:1000
    (4th width-cap instance); object-fit:scale-down refuses to enlarge
