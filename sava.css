@@ -3956,10 +3956,10 @@ body:has(section.sv-trust-points) {
    the grey default to soft-black bg + light-lemon text. */
 .sava-product-card_tag.is-purdys-pick {
 	background-color: #262524 !important;
-	color: #EDE087 !important;
+	color: #FFFFFF !important;
 }
 .sv-product-badge.is-purdys-pick { background-color: #262524; }
-.sv-product-badge.is-purdys-pick .sv-product-badge_label { color: #EDE087; }
+.sv-product-badge.is-purdys-pick .sv-product-badge_label { color: #FFFFFF; }
 
 
 /* ===== SV Announcement Bar — state + polish =====
