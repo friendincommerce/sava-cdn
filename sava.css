@@ -3938,6 +3938,19 @@ body:has(section.sv-trust-points) {
 }
 
 
+/* ===== Gift card recipient form (2026-09-08) — states ===== */
+.sv-gift_fields.is-open { display: block; }
+.sv-gift input[data-sv-gift-toggle] {
+	width: 18px;
+	height: 18px;
+	margin: 0;
+	accent-color: #262524;
+	cursor: pointer;
+}
+.sv-gift_input:focus,
+.sv-gift_textarea:focus { outline: none; border-color: #262524; }
+
+
 /* ===== Purdy's Pick badge colorway (2026-09-07) =====
    Pills tagged .is-purdys-pick by sava.js (badge text match) flip from
    the grey default to soft-black bg + light-lemon text. */
