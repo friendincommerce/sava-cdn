@@ -3953,13 +3953,24 @@ body:has(section.sv-trust-points) {
 
 /* ===== Purdy's Pick badge colorway (2026-09-07) =====
    Pills tagged .is-purdys-pick by sava.js (badge text match) flip from
-   the grey default to soft-black bg + light-lemon text. */
+   the grey default to soft-black bg + white text. */
 .sava-product-card_tag.is-purdys-pick {
 	background-color: #262524 !important;
 	color: #FFFFFF !important;
 }
 .sv-product-badge.is-purdys-pick { background-color: #262524; }
 .sv-product-badge.is-purdys-pick .sv-product-badge_label { color: #FFFFFF; }
+
+
+/* ===== Seasonal Favorite badge colorway (2026-10-07) =====
+   Pills tagged .is-seasonal-favorite by sava.js (generic badge-label
+   slug tagger) flip to Nina's pumpkin peach + soft-black text. */
+.sava-product-card_tag.is-seasonal-favorite {
+	background-color: #E5885E !important;
+	color: #262524 !important;
+}
+.sv-product-badge.is-seasonal-favorite { background-color: #E5885E; }
+.sv-product-badge.is-seasonal-favorite .sv-product-badge_label { color: #262524; }
 
 
 /* ===== SV Announcement Bar — state + polish =====
