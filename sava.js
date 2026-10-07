@@ -1712,27 +1712,37 @@
 })();
 
 
-/* ===== Purdy's Pick badge colorway (2026-09-07) =====
+/* ===== Product badge label classes (2026-09-07, generalized 2026-10-07) =====
    The product-badge metaobject renders label text only — no per-value
-   class — so tag pills whose text is "Purdy's Pick" (case-insensitive,
-   straight or curly apostrophe) get .is-purdys-pick for sava.css to
-   paint soft-black/lemon. Covers collection + carousel cards
-   (.sava-product-card_tag) and the product-header badge
-   (.sv-product-badge). */
+   class — so every badge pill gets a class slugged from its label
+   ("Purdy's Pick" → .is-purdys-pick, "Seasonal Favorite" →
+   .is-seasonal-favorite) for sava.css to paint per-badge colorways.
+   New badges added by the merchant need only a CSS block, no JS edit.
+   Covers collection + carousel cards (.sava-product-card_tag) and the
+   product-header badge (.sv-product-badge). */
 (function(){
-  function tagPurdysBadges(){
+  function badgeSlug(text){
+    return (text || '').trim().toLowerCase()
+      .replace(/[’']/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+  function tagBadges(){
     var els = document.querySelectorAll('.sava-product-card_tag, .sv-product-badge');
     for (var i = 0; i < els.length; i++) {
       var el = els[i];
       var label = el.querySelector('.sv-product-badge_label') || el;
-      var t = (label.textContent || '').trim().toLowerCase().replace(/’/g, "'");
-      el.classList.toggle('is-purdys-pick', t === "purdy's pick");
+      var slug = badgeSlug(label.textContent);
+      if (el.dataset.svBadgeSlug === slug) continue;
+      if (el.dataset.svBadgeSlug) el.classList.remove('is-' + el.dataset.svBadgeSlug);
+      if (slug) { el.classList.add('is-' + slug); el.dataset.svBadgeSlug = slug; }
+      else delete el.dataset.svBadgeSlug;
     }
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tagPurdysBadges);
-  else tagPurdysBadges();
-  window.addEventListener('load', tagPurdysBadges);
-  document.addEventListener('shopify:section:load', tagPurdysBadges);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tagBadges);
+  else tagBadges();
+  window.addEventListener('load', tagBadges);
+  document.addEventListener('shopify:section:load', tagBadges);
 })();
 
 
