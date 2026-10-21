@@ -4225,3 +4225,25 @@ a.sv-announce_link.is-linkless { cursor: default; }
 	.text-rich-text td,
 	.text-rich-text th { padding: 0.5rem; }
 }
+
+
+/* ===== SV Hero 50-50 (2026-10-20) =====
+   Swiper bullets (the bundle CSS isn't loaded site-wide) and the Fit
+   Entire Image mode: when a slide's hidden .sv-hero5050_fit-flag is
+   rendered (checkbox on), the slide image letterboxes inside its half
+   instead of cover-cropping — for transparent PNGs floating on the
+   slide's background color. */
+.sv-hero5050_bullet {
+	display: inline-block;
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	background-color: rgba(38, 37, 36, 0.3);
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+.sv-hero5050_bullet-active { background-color: #262524; }
+.sv-hero5050_media:has(.sv-hero5050_fit-flag) img {
+	object-fit: contain;
+	padding: 24px;
+}
