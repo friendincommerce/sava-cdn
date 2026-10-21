@@ -1944,3 +1944,81 @@
   document.addEventListener('shopify:section:load', applyPaint);
   document.addEventListener('shopify:section:select', applyPaint);
 })();
+
+
+/* ===== SV Hero 50-50 carousel (2026-10-20) =====
+   Split hero: 50% text column, 50% image column — columns can never
+   overlap at any width (the fix for SV Carousel Hero's overlap issue).
+   Hidden .sv-hero5050_bg-hex / .sv-hero5050_text-hex carry merchant
+   hex values (text settings — native color pickers break the Liquiflow
+   conversion); each slide is painted from its own children so every
+   slide gets its own colors, Swiper clones included. Swiper runs with
+   custom classes (bundle CSS not loaded); autoplay only with 2+
+   slides, delay from the hidden Rotation Speed Seconds setting (min
+   2s). Images get eager loading + a hi-res srcset rebuild (Liquiflow's
+   image_tag caps srcset at 1000w; Shopify CDN never upscales). */
+(function(){
+  function paintSlides(){
+    var slides = document.querySelectorAll('.sv-hero5050_slide');
+    for (var i = 0; i < slides.length; i++) (function(slide){
+      var bg = slide.querySelector('.sv-hero5050_bg-hex');
+      var tx = slide.querySelector('.sv-hero5050_text-hex');
+      var bgv = bg ? (bg.textContent || '').trim() : '';
+      var txv = tx ? (tx.textContent || '').trim() : '';
+      if (bgv && bgv.charAt(0) === '#' && bgv.indexOf('{{') === -1) slide.style.backgroundColor = bgv;
+      if (txv && txv.charAt(0) === '#' && txv.indexOf('{{') === -1) slide.style.color = txv;
+    })(slides[i]);
+  }
+  function upgradeImages(){
+    var imgs = document.querySelectorAll('.sv-hero5050_media img');
+    for (var i = 0; i < imgs.length; i++) (function(img){
+      img.loading = 'eager';
+      if (img.dataset.svHiresDone) return;
+      var src = img.getAttribute('src') || '';
+      if (src.indexOf('/cdn/shop/') === -1 || src.indexOf('width=') === -1) return;
+      img.dataset.svHiresDone = '1';
+      var base = src.split('&width=')[0].split('?width=')[0];
+      var sep = base.indexOf('?') === -1 ? '?' : '&';
+      var widths = [600, 900, 1200, 1600, 2000];
+      var set = [];
+      for (var w = 0; w < widths.length; w++) set.push(base + sep + 'width=' + widths[w] + ' ' + widths[w] + 'w');
+      img.setAttribute('srcset', set.join(', '));
+      img.setAttribute('sizes', '(max-width: 767px) 100vw, 50vw');
+      img.setAttribute('src', base + sep + 'width=1600');
+    })(imgs[i]);
+  }
+  function initHero5050(){
+    paintSlides();
+    upgradeImages();
+    if (typeof Swiper === 'undefined') return;
+    var els = document.querySelectorAll('.sv-hero5050_swiper');
+    for (var i = 0; i < els.length; i++) (function(swEl){
+      if (swEl.dataset.svSwiperBound) return;
+      swEl.dataset.svSwiperBound = '1';
+      var section = swEl.closest('section') || swEl.closest('.shopify-section') || document;
+      var speedEl = section.querySelector('.sv-hero5050_speed');
+      var secs = parseFloat(speedEl ? speedEl.textContent : '') || 5;
+      if (secs < 2) secs = 2;
+      var slides = swEl.querySelectorAll('.sv-hero5050_slide');
+      var cfg = {
+        wrapperClass: 'sv-hero5050_wrapper',
+        slideClass: 'sv-hero5050_slide',
+        slidesPerView: 1,
+        rewind: true,
+        pagination: {
+          el: swEl.querySelector('.sv-hero5050_pagination'),
+          clickable: true,
+          bulletClass: 'sv-hero5050_bullet',
+          bulletActiveClass: 'sv-hero5050_bullet-active'
+        },
+        on: { slideChangeTransitionStart: paintSlides }
+      };
+      if (slides.length > 1) cfg.autoplay = { delay: secs * 1000 };
+      new Swiper(swEl, cfg);
+    })(els[i]);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initHero5050);
+  else initHero5050();
+  window.addEventListener('load', initHero5050);
+  document.addEventListener('shopify:section:load', initHero5050);
+})();
