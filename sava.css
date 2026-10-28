@@ -4247,3 +4247,22 @@ a.sv-announce_link.is-linkless { cursor: default; }
 	object-fit: contain;
 	padding: 24px;
 }
+
+
+/* ===== SV Hero 50-50 — height cap + content alignment (2026-10-28) =====
+   Client fixes: (1) hard 650px section height (the compiled min-height
+   652px let tall images stretch the slide); (2) the left content column
+   aligns with the global page container like every other section — 5vw
+   inset, or the centered 1360px container edge on very wide screens.
+   Also corrected at the Webflow source, so these overrides and future
+   conversions agree. */
+.sv-hero5050_slide { height: 650px; min-height: 0; }
+@media (max-width: 991px) {
+	.sv-hero5050_slide { height: 520px; min-height: 0; }
+}
+@media (max-width: 767px) {
+	.sv-hero5050_slide { height: auto; }
+}
+@media (min-width: 768px) {
+	.sv-hero5050_content { padding-left: max(5vw, calc((100vw - 1360px) / 2)); }
+}
