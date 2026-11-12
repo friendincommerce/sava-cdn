@@ -3973,6 +3973,18 @@ body:has(section.sv-trust-points) {
 .sv-product-badge.is-seasonal-favorite .sv-product-badge_label { color: #FFFFFF; }
 
 
+/* ===== BFCM "25% OFF" badge colorway (2026-11-11) =====
+   Pills tagged .is-25-off by sava.js (generic badge-label slug
+   tagger) flip to Nina's BFCM red + white text. Assigned via the
+   badge metaobject ("25% OFF" entry) in product badge slot 1/2. */
+.sava-product-card_tag.is-25-off {
+	background-color: #D8423B !important;
+	color: #FFFFFF !important;
+}
+.sv-product-badge.is-25-off { background-color: #D8423B; }
+.sv-product-badge.is-25-off .sv-product-badge_label { color: #FFFFFF; }
+
+
 /* ===== SV Announcement Bar — state + polish =====
    Slides are opacity:0 in the Webflow base; .is-on shows the active
    one. The :not(--js) fallback keeps the first slide visible before
