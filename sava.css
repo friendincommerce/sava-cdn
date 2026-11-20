@@ -3962,14 +3962,15 @@ body:has(section.sv-trust-points) {
 .sv-product-badge.is-purdys-pick .sv-product-badge_label { color: #FFFFFF; }
 
 
-/* ===== Seasonal Favorite badge colorway (2026-10-07, white text 2026-10-20) =====
+/* ===== Seasonal Favorite badge colorway (2026-10-07; green 2026-11-20) =====
    Pills tagged .is-seasonal-favorite by sava.js (generic badge-label
-   slug tagger) flip to Nina's pumpkin peach + white text. */
+   slug tagger). Nina's holiday green + white text (was pumpkin peach
+   #E5885E). */
 .sava-product-card_tag.is-seasonal-favorite {
-	background-color: #E5885E !important;
+	background-color: #77BD99 !important;
 	color: #FFFFFF !important;
 }
-.sv-product-badge.is-seasonal-favorite { background-color: #E5885E; }
+.sv-product-badge.is-seasonal-favorite { background-color: #77BD99; }
 .sv-product-badge.is-seasonal-favorite .sv-product-badge_label { color: #FFFFFF; }
 
 
@@ -4255,6 +4256,12 @@ a.sv-announce_link.is-linkless { cursor: default; }
 	transition: background-color 0.2s;
 }
 .sv-hero5050_bullet-active { background-color: #262524; }
+/* Swiper flags the pagination container with swiper-pagination-lock
+   when there is ≤1 slide; its bundle CSS (which hides it) isn't loaded
+   site-wide, so hide it here — dots return automatically with 2+ slides.
+   (Also in the SV Hero 50-50 section Custom CSS box, 2026-11-18 —
+   redundant but harmless.) */
+.sv-hero5050 .swiper-pagination-lock { display: none; }
 .sv-hero5050_media:has(.sv-hero5050_fit-flag) img {
 	object-fit: contain;
 	padding: 24px;
